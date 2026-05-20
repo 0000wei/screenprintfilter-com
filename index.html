@@ -806,6 +806,10 @@
                     <span class="toolbar-label">Color</span>
                     <input type="color" class="color-picker-sm" id="foregroundColor" value="#000000" disabled>
                     <input type="color" class="color-picker-sm" id="backgroundColor" value="#ffffff" disabled>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-sm" id="useOriginalColors" checked disabled>
+                        Original Colors
+                    </label>
                 </div>
 
                 <!-- Size Group -->
@@ -953,6 +957,7 @@
         const dotShapeSelect = document.getElementById('dotShape');
         const foregroundColorInput = document.getElementById('foregroundColor');
         const backgroundColorInput = document.getElementById('backgroundColor');
+        const useOriginalColorsCheckbox = document.getElementById('useOriginalColors');
         const useOriginalSizeCheckbox = document.getElementById('useOriginalSize');
         const outputWidthInput = document.getElementById('outputWidth');
         const outputHeightInput = document.getElementById('outputHeight');
@@ -1055,6 +1060,7 @@
             dotShapeSelect.addEventListener('change', handleControlChange);
             foregroundColorInput.addEventListener('input', handleControlChange);
             backgroundColorInput.addEventListener('input', handleControlChange);
+            useOriginalColorsCheckbox.addEventListener('change', handleControlChange);
             useOriginalSizeCheckbox.addEventListener('change', handleSizeCheckboxChange);
             outputWidthInput.addEventListener('change', handleControlChange);
             outputHeightInput.addEventListener('change', handleControlChange);
@@ -1228,7 +1234,7 @@
             const controls = [
                 dotSizeSlider, spacingSlider, contrastSlider, brightnessSlider,
                 angleSlider, dotShapeSelect, foregroundColorInput, backgroundColorInput,
-                useOriginalSizeCheckbox, outputWidthInput, outputHeightInput,
+                useOriginalColorsCheckbox, useOriginalSizeCheckbox, outputWidthInput, outputHeightInput,
                 downloadBtn, resetBtn
             ];
             controls.forEach(control => control.disabled = !enabled);
@@ -1260,6 +1266,7 @@
             const angle = parseInt(angleSlider.value);
             const foregroundColor = foregroundColorInput.value;
             const backgroundColor = backgroundColorInput.value;
+            const useOriginalColors = useOriginalColorsCheckbox.checked;
 
             let outputWidth = originalCanvas.width;
             let outputHeight = originalCanvas.height;
@@ -1279,7 +1286,7 @@
             resultCtx.fillStyle = backgroundColor;
             resultCtx.fillRect(0, 0, outputWidth, outputHeight);
 
-            // Set foreground color
+            // Set foreground color (will be overridden when using original colors)
             resultCtx.fillStyle = foregroundColor;
 
             // Create temporary canvas for image processing
@@ -1287,6 +1294,13 @@
             tempCanvas.width = originalImageData.width;
             tempCanvas.height = originalImageData.height;
             const tempCtx = tempCanvas.getContext('2d');
+
+            // Store original color data
+            const originalCanvasCopy = document.createElement('canvas');
+            originalCanvasCopy.width = originalImageData.width;
+            originalCanvasCopy.height = originalImageData.height;
+            const originalCtxCopy = originalCanvasCopy.getContext('2d');
+            originalCtxCopy.putImageData(originalImageData, 0, 0);
 
             // Apply brightness and contrast
             tempCtx.putImageData(originalImageData, 0, 0);
@@ -1359,7 +1373,16 @@
 
                         if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
                             centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
-                            drawShape(resultCtx, centerX, centerY, dotRadius, shape);
+
+                            // Get original color if using original colors mode
+                            if (useOriginalColors) {
+                                const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
+                                const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
+                                const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
+                                drawShape(resultCtx, centerX, centerY, dotRadius, shape, originalColor);
+                            } else {
+                                drawShape(resultCtx, centerX, centerY, dotRadius, shape);
+                            }
                         }
                     }
                 }
@@ -1387,8 +1410,13 @@
             return count > 0 ? sum / count : 128;
         }
 
-        function drawShape(ctx, x, y, radius, shape) {
+        function drawShape(ctx, x, y, radius, shape, color = null) {
             ctx.beginPath();
+
+            // Set color if provided
+            if (color) {
+                ctx.fillStyle = color;
+            }
 
             switch (shape) {
                 case 'circle':
@@ -1415,6 +1443,31 @@
             ctx.fill();
         }
 
+        function getPixelColor(ctx, x, y) {
+            // Sample a small area around the point for more stable results
+            const sampleSize = 3;
+            const sx = Math.max(0, Math.min(Math.floor(x - sampleSize/2), ctx.canvas.width - sampleSize));
+            const sy = Math.max(0, Math.min(Math.floor(y - sampleSize/2), ctx.canvas.height - sampleSize));
+            const sw = Math.min(sampleSize, ctx.canvas.width - sx);
+            const sh = Math.min(sampleSize, ctx.canvas.height - sy);
+
+            const imageData = ctx.getImageData(sx, sy, sw, sh);
+            const data = imageData.data;
+            let sumR = 0, sumG = 0, sumB = 0;
+            let count = 0;
+
+            for (let i = 0; i < data.length; i += 4) {
+                sumR += data[i];
+                sumG += data[i + 1];
+                sumB += data[i + 2];
+                count++;
+            }
+
+            return count > 0 ?
+                `rgb(${Math.round(sumR / count)}, ${Math.round(sumG / count)}, ${Math.round(sumB / count)})` :
+                'rgb(128, 128, 128)';
+        }
+
         function downloadImage() {
             try {
                 const link = document.createElement('a');
@@ -1435,6 +1488,7 @@
             angleSlider.value = 0;
             foregroundColorInput.value = '#000000';
             backgroundColorInput.value = '#ffffff';
+            useOriginalColorsCheckbox.checked = true;
             useOriginalSizeCheckbox.checked = true;
             outputWidthInput.disabled = true;
             outputHeightInput.disabled = true;
