@@ -366,6 +366,7 @@
             color: var(--text-disabled);
             text-align: center;
             padding: 2rem;
+            cursor: pointer;
         }
 
         .placeholder-icon {
@@ -1017,6 +1018,7 @@
             // File upload
             loadImageBtn.addEventListener('click', () => fileInput.click());
             fileInput.addEventListener('change', handleFileSelect);
+            canvasPlaceholder.addEventListener('click', () => fileInput.click());
             canvasWrapper.addEventListener('dragover', handleDragOver);
             canvasWrapper.addEventListener('dragleave', handleDragLeave);
             canvasWrapper.addEventListener('drop', handleDrop);
