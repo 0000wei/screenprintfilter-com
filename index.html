@@ -409,10 +409,21 @@
             font-size: 0.9rem;
             display: none;
             z-index: 10;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
         .processing-status.active {
             display: block;
+        }
+
+        .processing-status.loaded {
+            animation: none;
+            background: rgba(76, 175, 80, 0.9);
         }
 
         /* Compare Mode */
@@ -512,6 +523,38 @@
             border-radius: 4px;
             font-size: 0.7rem;
             pointer-events: none;
+        }
+
+        .compare-left,
+        .compare-right {
+            cursor: pointer;
+        }
+
+        .compare-left:hover,
+        .compare-right:hover {
+            background: rgba(255, 69, 0, 0.05);
+        }
+
+        .new-image-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 69, 0, 0.9);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 6;
+        }
+
+        .compare-left:hover .new-image-hint,
+        .compare-right:hover .new-image-hint {
+            opacity: 1;
         }
 
         /* Hidden file input */
@@ -796,6 +839,7 @@
                     <div class="compare-left" id="compareLeft">
                         <div class="compare-label">Original</div>
                         <canvas id="originalCanvas"></canvas>
+                        <div class="new-image-hint">Click to load new image</div>
                     </div>
                     <div class="compare-divider" id="compareDivider">
                         <div class="divider-handle"></div>
@@ -803,6 +847,7 @@
                     <div class="compare-right" id="compareRight">
                         <div class="compare-label">Halftone Result</div>
                         <canvas id="resultCanvas"></canvas>
+                        <div class="new-image-hint">Click to load new image</div>
                     </div>
                 </div>
                 <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
@@ -892,6 +937,8 @@
         const canvasWrapper = document.getElementById('canvasWrapper');
         const canvasPlaceholder = document.getElementById('canvasPlaceholder');
         const compareContainer = document.getElementById('compareContainer');
+        const compareLeft = document.getElementById('compareLeft');
+        const compareRight = document.getElementById('compareRight');
         const compareDivider = document.getElementById('compareDivider');
         const canvasDimensions = document.getElementById('canvasDimensions');
         const processingStatus = document.getElementById('processingStatus');
@@ -947,20 +994,55 @@
 
             // Draggable divider
             let isDragging = false;
-            compareDivider.addEventListener('mousedown', function(e) {
+            let dragStartX = 0;
+            let dragStartPct = 50;
+
+            function startDrag(clientX) {
                 isDragging = true;
+                dragStartX = clientX;
+                // Get current percentage from grid template columns
+                const currentGrid = compareContainer.style.gridTemplateColumns;
+                const match = currentGrid.match(/([\d.]+)%/);
+                dragStartPct = match ? parseFloat(match[1]) : 50;
+            }
+
+            function doDrag(clientX) {
+                if (!isDragging) return;
+                const rect = compareContainer.getBoundingClientRect();
+                const deltaX = clientX - dragStartX;
+                const deltaPct = (deltaX / rect.width) * 100;
+                let pct = dragStartPct + deltaPct;
+                pct = Math.max(20, Math.min(80, pct));
+                compareContainer.style.gridTemplateColumns = pct + '% 4px ' + (100 - pct) + '%';
+            }
+
+            function endDrag() {
+                isDragging = false;
+            }
+
+            // Mouse events
+            compareDivider.addEventListener('mousedown', function(e) {
+                startDrag(e.clientX);
                 e.preventDefault();
             });
             document.addEventListener('mousemove', function(e) {
+                doDrag(e.clientX);
+            });
+            document.addEventListener('mouseup', endDrag);
+
+            // Touch events
+            compareDivider.addEventListener('touchstart', function(e) {
+                const touch = e.touches[0];
+                startDrag(touch.clientX);
+                e.preventDefault();
+            }, { passive: false });
+            document.addEventListener('touchmove', function(e) {
                 if (!isDragging) return;
-                const rect = compareContainer.getBoundingClientRect();
-                let pct = ((e.clientX - rect.left) / rect.width) * 100;
-                pct = Math.max(20, Math.min(80, pct));
-                compareContainer.style.gridTemplateColumns = pct + '% 4px ' + (100 - pct) + '%';
-            });
-            document.addEventListener('mouseup', function() {
-                isDragging = false;
-            });
+                const touch = e.touches[0];
+                doDrag(touch.clientX);
+                e.preventDefault();
+            }, { passive: false });
+            document.addEventListener('touchend', endDrag);
 
             // Controls with debouncing
             dotSizeSlider.addEventListener('input', debounce(handleControlChange, 100));
@@ -980,6 +1062,14 @@
             // Buttons
             downloadBtn.addEventListener('click', downloadImage);
             resetBtn.addEventListener('click', resetParameters);
+
+            // Click on canvas to load new image
+            compareLeft.addEventListener('click', function() {
+                fileInput.click();
+            });
+            compareRight.addEventListener('click', function() {
+                fileInput.click();
+            });
         }
 
         function debounce(func, wait) {
@@ -1098,7 +1188,15 @@
 
                     // Draw original on left canvas
                     originalCtx.drawImage(img, 0, 0, displayWidth, displayHeight);
-                    originalImageData = originalCtx.getImageData(0, 0, displayWidth, displayHeight);
+                    try {
+                        originalImageData = originalCtx.getImageData(0, 0, displayWidth, displayHeight);
+                    } catch (error) {
+                        processingStatus.classList.remove('active');
+                        showNotification('Failed to process image. The image may be from a restricted source.');
+                        canvasPlaceholder.style.display = 'flex';
+                        compareContainer.style.display = 'none';
+                        return;
+                    }
 
                     // Update dimensions
                     canvasDimensions.textContent = `${img.width} × ${img.height}px`;
@@ -1109,7 +1207,13 @@
                     // Apply halftone to right canvas
                     applyHalftone();
 
-                    processingStatus.classList.remove('active');
+                    // Show loaded confirmation
+                    processingStatus.textContent = 'Image loaded!';
+                    processingStatus.classList.add('loaded');
+                    setTimeout(() => {
+                        processingStatus.classList.remove('active', 'loaded');
+                        processingStatus.textContent = 'Processing...';
+                    }, 1500);
                 };
                 img.onerror = function() {
                     processingStatus.classList.remove('active');
@@ -1312,10 +1416,14 @@
         }
 
         function downloadImage() {
-            const link = document.createElement('a');
-            link.download = 'halftone-' + Date.now() + '.png';
-            link.href = resultCanvas.toDataURL('image/png');
-            link.click();
+            try {
+                const link = document.createElement('a');
+                link.download = 'halftone-' + Date.now() + '.png';
+                link.href = resultCanvas.toDataURL('image/png');
+                link.click();
+            } catch (error) {
+                showNotification('Failed to download. The image may be from a restricted source.');
+            }
         }
 
         function resetParameters() {
