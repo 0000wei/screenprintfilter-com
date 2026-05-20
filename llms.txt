@@ -1,0 +1,49 @@
+# ScreenPrintFilter.com
+
+ScreenPrintFilter.com is a free online tool for converting images into halftone dot patterns for screen printing and graphic design.
+
+## Capabilities
+
+- **Image Processing**: Converts any image (JPG, PNG, WebP, GIF) into halftone dot patterns
+- **Client-Side Processing**: All processing happens in the browser using HTML5 Canvas - no server upload required
+- **Customizable Parameters**:
+  - Dot Size: 2-30px
+  - Spacing: 1.0-2.0x
+  - Contrast: 0-100%
+  - Brightness: -50 to +50
+  - Dot Shape: Circle, Square, Diamond, Line
+  - Angle: 0-360°
+  - Custom foreground/background colors
+  - Custom output dimensions
+
+## Use Cases
+
+- Screen print preparation
+- Graphic design and illustration
+- Creating retro/newspaper effects
+- Preparing images for physical printing
+- Artistic halftone effects
+
+## Technical Details
+
+- Built with vanilla JavaScript, HTML5 Canvas, and CSS
+- No external dependencies or frameworks
+- Responsive design for desktop and mobile
+- Dark theme with orange-red accent color (#FF4500)
+- Privacy-focused: images never leave the user's device
+
+## API/Integration
+
+This is a standalone web tool with no API. All functionality is available through the web interface at https://screenprintfilter.com/
+
+## Documentation
+
+See the FAQ section on the website for:
+- What is a halftone effect?
+- How to use for screen printing
+- Supported image formats
+- Commercial use permissions
+
+## Contact
+
+For questions or feedback, visit https://screenprintfilter.com/

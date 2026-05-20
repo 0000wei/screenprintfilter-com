@@ -1,0 +1,47 @@
+{
+  "name": "ScreenPrintFilter",
+  "description": "Free online halftone dot filter for images. Convert any image into screen print-ready halftone patterns directly in your browser.",
+  "version": "1.0.0",
+  "url": "https://screenprintfilter.com",
+  "logo": "https://screenprintfilter.com/logo.png",
+  "capabilities": {
+    "image_processing": true,
+    "client_side_processing": true,
+    "privacy_focused": true
+  },
+  "features": [
+    {
+      "name": "Halftone Conversion",
+      "description": "Convert images to halftone dot patterns with customizable parameters"
+    },
+    {
+      "name": "Multiple Dot Shapes",
+      "description": "Support for circle, square, diamond, and line shapes"
+    },
+    {
+      "name": "Custom Parameters",
+      "description": "Adjustable dot size, spacing, contrast, brightness, and angle"
+    },
+    {
+      "name": "Color Customization",
+      "description": "Custom foreground and background colors"
+    },
+    {
+      "name": "Privacy Focused",
+      "description": "All processing happens locally in the browser - no server upload"
+    }
+  ],
+  "supported_formats": ["JPG", "PNG", "WebP", "GIF", "BMP"],
+  "output_format": "PNG",
+  "authentication": "none",
+  "pricing": {
+    "free": true,
+    "watermark": false,
+    "limits": "none"
+  },
+  "contact": {
+    "web": "https://screenprintfilter.com"
+  },
+  "categories": ["image-processing", "graphic-design", "screen-printing", "halftone"],
+  "languages": ["en"]
+}
