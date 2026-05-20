@@ -1110,8 +1110,12 @@
             });
 
             // Magnifier functionality
+            resultCanvas.addEventListener('mouseenter', function() {
+                if (!currentImage) return;
+            });
+
             resultCanvas.addEventListener('mousemove', function(e) {
-                if (!e.shiftKey || !currentImage) {
+                if (!currentImage) {
                     magnifier.style.display = 'none';
                     return;
                 }
@@ -1156,12 +1160,6 @@
 
             resultCanvas.addEventListener('mouseleave', function() {
                 magnifier.style.display = 'none';
-            });
-
-            document.addEventListener('keyup', function(e) {
-                if (e.key === 'Shift') {
-                    magnifier.style.display = 'none';
-                }
             });
 
             // Click on original canvas to load new image
