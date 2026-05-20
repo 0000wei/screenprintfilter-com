@@ -540,14 +540,16 @@
             pointer-events: none;
         }
 
-        .compare-left,
-        .compare-right {
+        .compare-left {
             cursor: pointer;
         }
 
-        .compare-left:hover,
-        .compare-right:hover {
+        .compare-left:hover {
             background: rgba(255, 69, 0, 0.05);
+        }
+
+        .compare-right {
+            cursor: default;
         }
 
         .new-image-hint {
@@ -868,7 +870,6 @@
                     <div class="compare-right" id="compareRight">
                         <div class="compare-label">Halftone Result</div>
                         <canvas id="resultCanvas"></canvas>
-                        <div class="new-image-hint">Click to load new image</div>
                     </div>
                 </div>
                 <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
@@ -1163,11 +1164,8 @@
                 }
             });
 
-            // Click on canvas to load new image
+            // Click on original canvas to load new image
             compareLeft.addEventListener('click', function() {
-                fileInput.click();
-            });
-            compareRight.addEventListener('click', function() {
                 fileInput.click();
             });
         }
