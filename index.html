@@ -424,8 +424,8 @@
 
         .magnifier {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             border: 2px solid var(--accent);
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -1135,7 +1135,7 @@
                 const canvasY = y * scaleY;
 
                 const zoomLevel = 3;
-                const magnifierSize = 100;
+                const magnifierSize = 80;
                 const sourceSize = magnifierSize / zoomLevel;
 
                 const magnifierCanvas = document.createElement('canvas');
@@ -1152,8 +1152,8 @@
                 );
 
                 magnifier.style.display = 'block';
-                magnifier.style.left = (e.clientX - rect.left - magnifierSize / 2) + 'px';
-                magnifier.style.top = (e.clientY - rect.top - magnifierSize / 2) + 'px';
+                magnifier.style.left = (x + 15) + 'px';
+                magnifier.style.top = (y - 50) + 'px';
                 magnifier.style.backgroundImage = `url(${magnifierCanvas.toDataURL()})`;
                 magnifier.style.backgroundSize = `${magnifierSize}px ${magnifierSize}px`;
             });
