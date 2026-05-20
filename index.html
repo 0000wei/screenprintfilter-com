@@ -421,6 +421,20 @@
             display: block;
         }
 
+        .magnifier {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            pointer-events: none;
+            z-index: 20;
+            display: none;
+            background-repeat: no-repeat;
+            image-rendering: pixelated;
+        }
+
         .processing-status.loaded {
             animation: none;
             background: rgba(76, 175, 80, 0.9);
@@ -754,6 +768,8 @@
                         </svg>
                         Load Image
                     </button>
+                    <button class="btn-sm btn-secondary" id="undoBtn" disabled title="Undo (Ctrl+Z)">↩</button>
+                    <button class="btn-sm btn-secondary" id="redoBtn" disabled title="Redo (Ctrl+Shift+Z)">↪</button>
                     <button class="btn-sm btn-secondary" id="downloadBtn" disabled>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -856,6 +872,7 @@
                 </div>
                 <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
                 <div class="processing-status" id="processingStatus">Processing...</div>
+                <div class="magnifier" id="magnifier"></div>
             </div>
         </div>
     </div>
@@ -934,6 +951,8 @@
         // DOM Elements
         const loadImageBtn = document.getElementById('loadImageBtn');
         const fileInput = document.getElementById('fileInput');
+        const undoBtn = document.getElementById('undoBtn');
+        const redoBtn = document.getElementById('redoBtn');
         const downloadBtn = document.getElementById('downloadBtn');
         const resetBtn = document.getElementById('resetBtn');
         const originalCanvas = document.getElementById('originalCanvas');
@@ -946,6 +965,7 @@
         const compareDivider = document.getElementById('compareDivider');
         const canvasDimensions = document.getElementById('canvasDimensions');
         const processingStatus = document.getElementById('processingStatus');
+        const magnifier = document.getElementById('magnifier');
         const galleryGrid = document.getElementById('galleryGrid');
 
         // Controls
@@ -977,6 +997,10 @@
         let originalHeight = 0;
         let processingTimeout = null;
         let isProcessing = false;
+
+        const MAX_HISTORY = 20;
+        let undoStack = [];
+        let redoStack = [];
 
         const originalCtx = originalCanvas.getContext('2d');
         const resultCtx = resultCanvas.getContext('2d');
@@ -1066,8 +1090,76 @@
             outputHeightInput.addEventListener('change', handleControlChange);
 
             // Buttons
+            undoBtn.addEventListener('click', undo);
+            redoBtn.addEventListener('click', redo);
             downloadBtn.addEventListener('click', downloadImage);
             resetBtn.addEventListener('click', resetParameters);
+
+            // Keyboard shortcuts for undo/redo
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+                    e.preventDefault();
+                    undo();
+                } else if ((e.ctrlKey || e.metaKey) && e.key === 'z' && e.shiftKey) {
+                    e.preventDefault();
+                    redo();
+                }
+            });
+
+            // Magnifier functionality
+            resultCanvas.addEventListener('mousemove', function(e) {
+                if (!e.shiftKey || !currentImage) {
+                    magnifier.style.display = 'none';
+                    return;
+                }
+
+                const rect = resultCanvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+                    magnifier.style.display = 'none';
+                    return;
+                }
+
+                const scaleX = resultCanvas.width / rect.width;
+                const scaleY = resultCanvas.height / rect.height;
+                const canvasX = x * scaleX;
+                const canvasY = y * scaleY;
+
+                const zoomLevel = 3;
+                const magnifierSize = 100;
+                const sourceSize = magnifierSize / zoomLevel;
+
+                const magnifierCanvas = document.createElement('canvas');
+                magnifierCanvas.width = sourceSize;
+                magnifierCanvas.height = sourceSize;
+                const magnifierCtx = magnifierCanvas.getContext('2d');
+
+                const sourceX = Math.max(0, Math.min(canvasX - sourceSize / 2, resultCanvas.width - sourceSize));
+                const sourceY = Math.max(0, Math.min(canvasY - sourceSize / 2, resultCanvas.height - sourceSize));
+
+                magnifierCtx.drawImage(resultCanvas,
+                    sourceX, sourceY, sourceSize, sourceSize,
+                    0, 0, sourceSize, sourceSize
+                );
+
+                magnifier.style.display = 'block';
+                magnifier.style.left = (e.clientX - rect.left - magnifierSize / 2) + 'px';
+                magnifier.style.top = (e.clientY - rect.top - magnifierSize / 2) + 'px';
+                magnifier.style.backgroundImage = `url(${magnifierCanvas.toDataURL()})`;
+                magnifier.style.backgroundSize = `${magnifierSize}px ${magnifierSize}px`;
+            });
+
+            resultCanvas.addEventListener('mouseleave', function() {
+                magnifier.style.display = 'none';
+            });
+
+            document.addEventListener('keyup', function(e) {
+                if (e.key === 'Shift') {
+                    magnifier.style.display = 'none';
+                }
+            });
 
             // Click on canvas to load new image
             compareLeft.addEventListener('click', function() {
@@ -1119,11 +1211,13 @@
         }
 
         function handleControlChange() {
+            saveState();
             updateValueDisplays();
             scheduleProcessing();
         }
 
         function handleSizeCheckboxChange() {
+            saveState();
             if (useOriginalSizeCheckbox.checked) {
                 outputWidthInput.disabled = true;
                 outputHeightInput.disabled = true;
@@ -1235,9 +1329,10 @@
                 dotSizeSlider, spacingSlider, contrastSlider, brightnessSlider,
                 angleSlider, dotShapeSelect, foregroundColorInput, backgroundColorInput,
                 useOriginalColorsCheckbox, useOriginalSizeCheckbox, outputWidthInput, outputHeightInput,
-                downloadBtn, resetBtn
+                undoBtn, redoBtn, downloadBtn, resetBtn
             ];
             controls.forEach(control => control.disabled = !enabled);
+            updateUndoButtons();
         }
 
         function scheduleProcessing() {
@@ -1470,9 +1565,112 @@
 
         function downloadImage() {
             try {
+                let canvasToExport = resultCanvas;
+
+                if (useOriginalSizeCheckbox.checked && originalWidth > 0 && originalHeight > 0) {
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = originalWidth;
+                    tempCanvas.height = originalHeight;
+                    const tempCtx = tempCanvas.getContext('2d');
+
+                    const dotSize = parseInt(dotSizeSlider.value);
+                    const spacing = parseFloat(spacingSlider.value);
+                    const contrast = parseInt(contrastSlider.value) / 100;
+                    const brightness = parseInt(brightnessSlider.value);
+                    const shape = dotShapeSelect.value;
+                    const angle = parseInt(angleSlider.value);
+                    const foregroundColor = foregroundColorInput.value;
+                    const backgroundColor = backgroundColorInput.value;
+                    const useOriginalColors = useOriginalColorsCheckbox.checked;
+
+                    const outputWidth = originalWidth;
+                    const outputHeight = originalHeight;
+
+                    tempCtx.fillStyle = backgroundColor;
+                    tempCtx.fillRect(0, 0, outputWidth, outputHeight);
+                    tempCtx.fillStyle = foregroundColor;
+
+                    const tempCanvas2 = document.createElement('canvas');
+                    tempCanvas2.width = originalCanvas.width;
+                    tempCanvas2.height = originalCanvas.height;
+                    const tempCtx2 = tempCanvas2.getContext('2d');
+
+                    const originalCanvasCopy = document.createElement('canvas');
+                    originalCanvasCopy.width = originalCanvas.width;
+                    originalCanvasCopy.height = originalCanvas.height;
+                    const originalCtxCopy = originalCanvasCopy.getContext('2d');
+                    originalCtxCopy.putImageData(originalImageData, 0, 0);
+
+                    tempCtx2.putImageData(originalImageData, 0, 0);
+                    const imageData = tempCtx2.getImageData(0, 0, tempCanvas2.width, tempCanvas2.height);
+                    const data = imageData.data;
+
+                    for (let i = 0; i < data.length; i += 4) {
+                        let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                        gray += brightness * 2.55;
+                        gray = ((gray / 255 - 0.5) * contrast + 0.5) * 255;
+                        gray = Math.max(0, Math.min(255, gray));
+                        data[i] = data[i + 1] = data[i + 2] = gray;
+                    }
+
+                    tempCtx2.putImageData(imageData, 0, 0);
+
+                    const gridSize = dotSize * spacing;
+                    const angleRad = (angle * Math.PI) / 180;
+                    const cosAngle = Math.cos(angleRad);
+                    const sinAngle = Math.sin(angleRad);
+
+                    const gridWidth = outputWidth * Math.abs(cosAngle) + outputHeight * Math.abs(sinAngle);
+                    const gridHeight = outputWidth * Math.abs(sinAngle) + outputHeight * Math.abs(cosAngle);
+
+                    for (let y = -gridSize; y < gridHeight + gridSize; y += gridSize) {
+                        for (let x = -gridSize; x < gridWidth + gridSize; x += gridSize) {
+                            const rotatedX = x * cosAngle - y * sinAngle;
+                            const rotatedY = x * sinAngle + y * cosAngle;
+
+                            if (rotatedX < -gridSize || rotatedX >= outputWidth + gridSize ||
+                                rotatedY < -gridSize || rotatedY >= outputHeight + gridSize) {
+                                continue;
+                            }
+
+                            const sampleX = (rotatedX / outputWidth) * tempCanvas2.width;
+                            const sampleY = (rotatedY / outputHeight) * tempCanvas2.height;
+
+                            const pixelBrightness = getPixelBrightness(tempCtx2, sampleX, sampleY, tempCanvas2.width, tempCanvas2.height);
+
+                            const normalizedBrightness = pixelBrightness / 255;
+                            const targetCoverage = 1 - normalizedBrightness;
+                            const maxDotArea = Math.PI * Math.pow(dotSize / 2, 2);
+                            const cellArea = gridSize * gridSize;
+                            const coverageRatio = Math.min(targetCoverage * cellArea / maxDotArea, 1);
+                            const dotRadius = Math.sqrt(coverageRatio) * (dotSize / 2);
+
+                            if (dotRadius > 0.5) {
+                                const centerX = rotatedX + gridSize / 2;
+                                const centerY = rotatedY + gridSize / 2;
+
+                                if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
+                                    centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
+
+                                    if (useOriginalColors) {
+                                        const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
+                                        const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
+                                        const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
+                                        drawShape(tempCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                    } else {
+                                        drawShape(tempCtx, centerX, centerY, dotRadius, shape);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    canvasToExport = tempCanvas;
+                }
+
                 const link = document.createElement('a');
                 link.download = 'halftone-' + Date.now() + '.png';
-                link.href = resultCanvas.toDataURL('image/png');
+                link.href = canvasToExport.toDataURL('image/png');
                 link.click();
             } catch (error) {
                 showNotification('Failed to download. The image may be from a restricted source.');
@@ -1497,6 +1695,77 @@
 
             updateValueDisplays();
             scheduleProcessing();
+        }
+
+        function saveState() {
+            undoStack.push(getCurrentParams());
+            if (undoStack.length > MAX_HISTORY) undoStack.shift();
+            redoStack = [];
+            updateUndoButtons();
+        }
+
+        function undo() {
+            if (undoStack.length === 0) return;
+            redoStack.push(getCurrentParams());
+            const state = undoStack.pop();
+            applyState(state);
+            updateUndoButtons();
+        }
+
+        function redo() {
+            if (redoStack.length === 0) return;
+            undoStack.push(getCurrentParams());
+            const state = redoStack.pop();
+            applyState(state);
+            updateUndoButtons();
+        }
+
+        function getCurrentParams() {
+            return {
+                dotSize: dotSizeSlider.value,
+                spacing: spacingSlider.value,
+                contrast: contrastSlider.value,
+                brightness: brightnessSlider.value,
+                angle: angleSlider.value,
+                shape: dotShapeSelect.value,
+                fgColor: foregroundColorInput.value,
+                bgColor: backgroundColorInput.value,
+                useOriginalColors: useOriginalColorsCheckbox.checked,
+                useOriginalSize: useOriginalSizeCheckbox.checked,
+                outputW: outputWidthInput.value,
+                outputH: outputHeightInput.value
+            };
+        }
+
+        function applyState(state) {
+            dotSizeSlider.value = state.dotSize;
+            spacingSlider.value = state.spacing;
+            contrastSlider.value = state.contrast;
+            brightnessSlider.value = state.brightness;
+            angleSlider.value = state.angle;
+            dotShapeSelect.value = state.shape;
+            foregroundColorInput.value = state.fgColor;
+            backgroundColorInput.value = state.bgColor;
+            useOriginalColorsCheckbox.checked = state.useOriginalColors;
+            useOriginalSizeCheckbox.checked = state.useOriginalSize;
+            outputWidthInput.value = state.outputW;
+            outputHeightInput.value = state.outputH;
+
+            if (state.useOriginalSize) {
+                outputWidthInput.disabled = true;
+                outputHeightInput.disabled = true;
+            } else {
+                outputWidthInput.disabled = false;
+                outputHeightInput.disabled = false;
+            }
+
+            updateValueDisplays();
+            scheduleProcessing();
+        }
+
+        function updateUndoButtons() {
+            undoBtn.disabled = undoStack.length === 0;
+            redoBtn.disabled = redoStack.length === 0;
         }
 
         function showNotification(message) {
@@ -1638,7 +1907,13 @@
             dotShapeSelect.value = params.shape;
 
             updateValueDisplays();
-            showNotification('Parameters loaded! Upload an image to try this look.');
+
+            if (currentImage !== null) {
+                applyHalftone();
+                showNotification('Parameters applied!');
+            } else {
+                showNotification('Parameters loaded! Upload an image to try this look.');
+            }
         }
     </script>
 </body>
