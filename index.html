@@ -730,8 +730,8 @@
                         <span class="value-sm" id="dotSizeValue">8px</span>
                     </div>
                     <div class="toolbar-control">
-                        <input type="range" class="slider-sm" id="spacing" min="1.0" max="2.0" step="0.1" value="1.2" disabled>
-                        <span class="value-sm" id="spacingValue">1.2x</span>
+                        <input type="range" class="slider-sm" id="spacing" min="1.0" max="2.0" step="0.1" value="1.0" disabled>
+                        <span class="value-sm" id="spacingValue">1.0x</span>
                     </div>
                     <select class="select-sm" id="dotShape" disabled>
                         <option value="circle">Circle</option>
@@ -753,8 +753,8 @@
                         <span class="value-sm" id="brightnessValue">0</span>
                     </div>
                     <div class="toolbar-control">
-                        <input type="range" class="slider-sm" id="angle" min="0" max="360" value="45" disabled>
-                        <span class="value-sm" id="angleValue">45°</span>
+                        <input type="range" class="slider-sm" id="angle" min="0" max="360" value="0" disabled>
+                        <span class="value-sm" id="angleValue">0°</span>
                     </div>
                 </div>
 
@@ -1237,7 +1237,17 @@
                     const pixelBrightness = getPixelBrightness(tempCtx, sampleX, sampleY, tempCanvas.width, tempCanvas.height);
 
                     // Calculate dot size based on brightness (darker = bigger)
-                    const dotRadius = (1 - pixelBrightness / 255) * (dotSize / 2);
+                    // Area-compensated: dot covers (1-brightness) fraction of the cell area
+                    // dotArea = π*r² and cellArea = gridSize²
+                    // So r = sqrt((1-brightness) * cellArea / π)
+                    // This gives proper visual density: 50% gray → 50% dot coverage
+                    const normalizedBrightness = pixelBrightness / 255;
+                    const targetCoverage = 1 - normalizedBrightness;
+                    const maxDotArea = Math.PI * Math.pow(dotSize / 2, 2);
+                    const cellArea = gridSize * gridSize;
+                    // Scale coverage to dot size, capping at full cell coverage
+                    const coverageRatio = Math.min(targetCoverage * cellArea / maxDotArea, 1);
+                    const dotRadius = Math.sqrt(coverageRatio) * (dotSize / 2);
 
                     if (dotRadius > 0.5) {
                         const centerX = rotatedX + gridSize / 2;
@@ -1255,11 +1265,22 @@
         }
 
         function getPixelBrightness(ctx, x, y, width, height) {
-            const sampleX = Math.max(0, Math.min(Math.floor(x), width - 1));
-            const sampleY = Math.max(0, Math.min(Math.floor(y), height - 1));
-
-            const imageData = ctx.getImageData(sampleX, sampleY, 1, 1);
-            return imageData.data[0]; // Red channel (grayscale)
+            // Sample a small area around the point for more stable results
+            const sampleSize = 3;
+            const sx = Math.max(0, Math.min(Math.floor(x - sampleSize/2), width - sampleSize));
+            const sy = Math.max(0, Math.min(Math.floor(y - sampleSize/2), height - sampleSize));
+            const sw = Math.min(sampleSize, width - sx);
+            const sh = Math.min(sampleSize, height - sy);
+            
+            const imageData = ctx.getImageData(sx, sy, sw, sh);
+            const data = imageData.data;
+            let sum = 0;
+            let count = 0;
+            for (let i = 0; i < data.length; i += 4) {
+                sum += data[i];
+                count++;
+            }
+            return count > 0 ? sum / count : 128;
         }
 
         function drawShape(ctx, x, y, radius, shape) {
@@ -1299,11 +1320,11 @@
 
         function resetParameters() {
             dotSizeSlider.value = 8;
-            spacingSlider.value = 1.2;
+            spacingSlider.value = 1.0;
             contrastSlider.value = 50;
             brightnessSlider.value = 0;
             dotShapeSelect.value = 'circle';
-            angleSlider.value = 45;
+            angleSlider.value = 0;
             foregroundColorInput.value = '#000000';
             backgroundColorInput.value = '#ffffff';
             useOriginalSizeCheckbox.checked = true;
