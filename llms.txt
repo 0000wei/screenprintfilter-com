@@ -34,7 +34,7 @@ ScreenPrintFilter.com is a free online tool for converting images into halftone 
 
 ## API/Integration
 
-This is a standalone web tool with no API. All functionality is available through the web interface at https://screenprintfilter.com/
+This is a standalone web tool with no API. All functionality is available through the web interface at https://screenprintfilter.online/
 
 ## Documentation
 
@@ -46,4 +46,4 @@ See the FAQ section on the website for:
 
 ## Contact
 
-For questions or feedback, visit https://screenprintfilter.com/
+For questions or feedback, visit https://screenprintfilter.online/
