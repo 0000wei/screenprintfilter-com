@@ -157,21 +157,49 @@
             margin: 0 auto;
         }
 
-        /* Main Content */
+        /* Main Content - Two Column Layout */
         .main-content {
-            padding: 2rem 0;
+            padding: 1rem 0;
+        }
+
+        .tool-layout {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .tool-layout .left-col {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tool-layout .right-col {
+            width: 340px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+        }
+
+        @media (max-width: 1100px) {
+            .tool-layout {
+                flex-direction: column;
+            }
+            .tool-layout .right-col {
+                width: 100%;
+                position: static;
+            }
         }
 
         /* Upload Section */
         .upload-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .upload-area {
             background: var(--bg-secondary);
             border: 3px dashed var(--border);
             border-radius: var(--radius);
-            padding: 3rem 2rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
@@ -192,9 +220,9 @@
         }
 
         .upload-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 0.75rem;
             color: var(--accent);
             transition: var(--transition);
         }
@@ -249,20 +277,20 @@
 
         /* Preview Area */
         .preview-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 0;
         }
 
         .image-panel {
             background: var(--bg-secondary);
             border-radius: var(--radius);
-            padding: 1.5rem;
+            padding: 1rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
@@ -296,7 +324,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 400px;
+            min-height: 250px;
+            max-height: 400px;
             position: relative;
         }
 
@@ -355,7 +384,7 @@
 
         /* Controls Section */
         .controls-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .controls-section.disabled {
@@ -364,31 +393,31 @@
         }
 
         .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .control-section {
             background: var(--bg-secondary);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 1rem 1.25rem;
             box-shadow: var(--shadow);
+            margin-bottom: 0;
         }
 
         .section-subtitle {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--accent);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
             border-bottom: 2px solid var(--border);
         }
 
         .control-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .control-group:last-child {
@@ -400,8 +429,9 @@
             align-items: center;
             justify-content: space-between;
             font-weight: 500;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-primary);
+            font-size: 0.875rem;
         }
 
         .control-row {
@@ -571,9 +601,9 @@
         /* Action Buttons */
         .actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
-            justify-content: center;
+            margin-top: 0.75rem;
         }
 
         .btn {
@@ -902,6 +932,9 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
+            <div class="tool-layout">
+                <div class="left-col">
+
             <!-- Upload Section -->
             <section class="upload-section" id="upload">
                 <div class="upload-area" id="uploadArea">
@@ -971,6 +1004,9 @@
                     </div>
                 </div>
             </section>
+
+                </div>
+                <div class="right-col">
 
             <!-- Controls Section -->
             <section class="controls-section disabled" id="controls">
@@ -1045,64 +1081,72 @@
                                 <input type="range" class="slider" id="brightness" min="-50" max="50" value="0">
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Colors -->
+                    <div class="control-section">
+                        <div class="section-subtitle">Colors</div>
 
                         <div class="control-group">
-                            <label class="control-label">Colors</label>
-                            <div class="color-row">
-                                <div class="color-group">
-                                    <div class="color-preview" id="foregroundPreview" style="background: #000000;"></div>
-                                    <input type="color" class="color-input" id="foregroundColor" value="#000000">
-                                </div>
-                                <div class="color-group">
-                                    <div class="color-preview" id="backgroundPreview" style="background: #FFFFFF;"></div>
-                                    <input type="color" class="color-input" id="backgroundColor" value="#FFFFFF">
-                                </div>
-                            </div>
+                            <label class="control-label">
+                                Foreground
+                                <span class="color-preview" id="foregroundPreview" style="background:#000000"></span>
+                            </label>
+                            <input type="color" class="color-input" id="foregroundColor" value="#000000">
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">Output Size</label>
-                            <div class="size-row">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="useOriginalSize" checked>
-                                    Original
-                                </label>
+                            <label class="control-label">
+                                Background
+                                <span class="color-preview" id="backgroundPreview" style="background:#ffffff"></span>
+                            </label>
+                            <input type="color" class="color-input" id="backgroundColor" value="#FFFFFF">
+                        </div>
+                    </div>
+
+                    <!-- Output Size -->
+                    <div class="control-section">
+                        <div class="section-subtitle">Output Size</div>
+
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span>Use original size</span>
+                            </label>
+                            <input type="checkbox" class="checkbox" id="useOriginalSize" checked>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Custom Dimensions</label>
+                            <div class="input-row">
                                 <div class="input-group">
-                                    <input type="number" class="text-input" id="outputWidth" placeholder="Width" disabled>
-                                    <label>W</label>
+                                    <input type="number" class="text-input" id="outputWidth" placeholder="W" disabled>
                                 </div>
                                 <div class="input-group">
-                                    <input type="number" class="text-input" id="outputHeight" placeholder="Height" disabled>
-                                    <label>H</label>
+                                    <input type="number" class="text-input" id="outputHeight" placeholder="H" disabled>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Action Buttons -->
-                <div class="actions">
-                    <button class="btn btn-primary" id="downloadBtn" disabled>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                        Download PNG
-                    </button>
-                    <button class="btn btn-secondary" id="resetBtn" disabled>Reset Parameters</button>
+                    <!-- Actions -->
+                    <div class="actions">
+                        <button class="btn btn-primary" id="downloadBtn" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Download PNG
+                        </button>
+                        <button class="btn btn-secondary" id="resetBtn" disabled>Reset Parameters</button>
+                    </div>
                 </div>
             </section>
+
+                </div>
+            </div>
         </div>
     </main>
-
-    <!-- Loading Spinner -->
-    <div class="spinner-overlay" id="spinnerOverlay">
-        <div class="spinner-content">
-            <div class="spinner"></div>
-            <div class="spinner-text">Processing your image...</div>
-        </div>
-    </div>
 
     <!-- Example Gallery -->
     <section class="gallery-section" id="examples">
