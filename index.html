@@ -341,7 +341,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 500px;
+            min-height: 450px;
         }
 
         .canvas-wrapper {
@@ -354,8 +354,8 @@
             align-items: center;
             justify-content: center;
             min-width: 600px;
-            min-height: 400px;
-            max-width: 90%;
+            min-height: 350px;
+            max-width: 100%;
         }
 
         .canvas-placeholder {
@@ -382,17 +382,6 @@
         .placeholder-hint {
             font-size: 0.85rem;
             color: var(--text-disabled);
-        }
-
-        #mainCanvas {
-            display: none;
-            max-width: 100%;
-            height: auto;
-            cursor: crosshair;
-        }
-
-        #mainCanvas.active {
-            display: block;
         }
 
         .canvas-dimensions {
@@ -424,6 +413,93 @@
 
         .processing-status.active {
             display: block;
+        }
+
+        /* Compare Mode */
+        .compare-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 4px 1fr;
+        }
+
+        .compare-left,
+        .compare-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
+        }
+
+        .compare-left canvas,
+        .compare-right canvas {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .compare-label {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: rgba(0, 0, 0, 0.75);
+            color: var(--text-primary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .compare-right .compare-label {
+            left: auto;
+            right: 0.5rem;
+        }
+
+        .compare-divider {
+            width: 4px;
+            background: var(--accent);
+            cursor: col-resize;
+            position: relative;
+            flex-shrink: 0;
+            z-index: 10;
+            transition: background 0.15s;
+        }
+
+        .compare-divider:hover {
+            background: var(--accent-hover);
+        }
+
+        .divider-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .divider-handle::before,
+        .divider-handle::after {
+            content: '';
+            display: block;
+            width: 2px;
+            height: 16px;
+            background: white;
+            border-radius: 1px;
         }
 
         .canvas-hint {
@@ -716,10 +792,21 @@
                     <div class="placeholder-text">Drop image here or click Load Image</div>
                     <div class="placeholder-hint">Supports JPG, PNG, WebP • Max 10MB</div>
                 </div>
-                <canvas id="mainCanvas"></canvas>
+                <div class="compare-container" id="compareContainer" style="display:none">
+                    <div class="compare-left" id="compareLeft">
+                        <div class="compare-label">Original</div>
+                        <canvas id="originalCanvas"></canvas>
+                    </div>
+                    <div class="compare-divider" id="compareDivider">
+                        <div class="divider-handle"></div>
+                    </div>
+                    <div class="compare-right" id="compareRight">
+                        <div class="compare-label">Halftone Result</div>
+                        <canvas id="resultCanvas"></canvas>
+                    </div>
+                </div>
                 <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
                 <div class="processing-status" id="processingStatus">Processing...</div>
-                <div class="canvas-hint" id="canvasHint" style="display:none">Hover to see original</div>
             </div>
         </div>
     </div>
@@ -800,11 +887,13 @@
         const fileInput = document.getElementById('fileInput');
         const downloadBtn = document.getElementById('downloadBtn');
         const resetBtn = document.getElementById('resetBtn');
-        const mainCanvas = document.getElementById('mainCanvas');
+        const originalCanvas = document.getElementById('originalCanvas');
+        const resultCanvas = document.getElementById('resultCanvas');
         const canvasWrapper = document.getElementById('canvasWrapper');
         const canvasPlaceholder = document.getElementById('canvasPlaceholder');
+        const compareContainer = document.getElementById('compareContainer');
+        const compareDivider = document.getElementById('compareDivider');
         const canvasDimensions = document.getElementById('canvasDimensions');
-        const canvasHint = document.getElementById('canvasHint');
         const processingStatus = document.getElementById('processingStatus');
         const galleryGrid = document.getElementById('galleryGrid');
 
@@ -831,13 +920,14 @@
         // State
         let currentImage = null;
         let originalImageData = null;
+        let resultImageData = null;
         let originalWidth = 0;
         let originalHeight = 0;
         let processingTimeout = null;
         let isProcessing = false;
-        let showingOriginal = false;
 
-        const ctx = mainCanvas.getContext('2d');
+        const originalCtx = originalCanvas.getContext('2d');
+        const resultCtx = resultCanvas.getContext('2d');
 
         // Initialize
         init();
@@ -855,9 +945,22 @@
             canvasWrapper.addEventListener('dragleave', handleDragLeave);
             canvasWrapper.addEventListener('drop', handleDrop);
 
-            // Canvas hover
-            mainCanvas.addEventListener('mouseenter', showOriginal);
-            mainCanvas.addEventListener('mouseleave', showHalftone);
+            // Draggable divider
+            let isDragging = false;
+            compareDivider.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                e.preventDefault();
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                const rect = compareContainer.getBoundingClientRect();
+                let pct = ((e.clientX - rect.left) / rect.width) * 100;
+                pct = Math.max(20, Math.min(80, pct));
+                compareContainer.style.gridTemplateColumns = pct + '% 4px ' + (100 - pct) + '%';
+            });
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
 
             // Controls with debouncing
             dotSizeSlider.addEventListener('input', debounce(handleControlChange, 100));
@@ -963,15 +1066,15 @@
                     originalWidth = img.width;
                     originalHeight = img.height;
 
-                    // Hide placeholder, show canvas
+                    // Hide placeholder, show compare
                     canvasPlaceholder.style.display = 'none';
-                    mainCanvas.classList.add('active');
+                    compareContainer.style.display = 'flex';
+                    compareContainer.style.gridTemplateColumns = '1fr 4px 1fr';
                     canvasDimensions.style.display = 'block';
-                    canvasHint.style.display = 'block';
 
                     // Set canvas size
-                    const maxWidth = 1000;
-                    const maxHeight = 700;
+                    const maxWidth = 500;
+                    const maxHeight = 400;
                     let displayWidth = img.width;
                     let displayHeight = img.height;
 
@@ -984,12 +1087,18 @@
                         displayHeight = maxHeight;
                     }
 
-                    mainCanvas.width = displayWidth;
-                    mainCanvas.height = displayHeight;
+                    // Round to integers
+                    displayWidth = Math.round(displayWidth);
+                    displayHeight = Math.round(displayHeight);
 
-                    // Draw original
-                    ctx.drawImage(img, 0, 0, displayWidth, displayHeight);
-                    originalImageData = ctx.getImageData(0, 0, displayWidth, displayHeight);
+                    originalCanvas.width = displayWidth;
+                    originalCanvas.height = displayHeight;
+                    resultCanvas.width = displayWidth;
+                    resultCanvas.height = displayHeight;
+
+                    // Draw original on left canvas
+                    originalCtx.drawImage(img, 0, 0, displayWidth, displayHeight);
+                    originalImageData = originalCtx.getImageData(0, 0, displayWidth, displayHeight);
 
                     // Update dimensions
                     canvasDimensions.textContent = `${img.width} × ${img.height}px`;
@@ -997,7 +1106,7 @@
                     // Enable controls
                     enableControls(true);
 
-                    // Apply halftone effect
+                    // Apply halftone to right canvas
                     applyHalftone();
 
                     processingStatus.classList.remove('active');
@@ -1019,18 +1128,6 @@
                 downloadBtn, resetBtn
             ];
             controls.forEach(control => control.disabled = !enabled);
-        }
-
-        function showOriginal() {
-            if (!originalImageData || isProcessing) return;
-            ctx.putImageData(originalImageData, 0, 0);
-            showingOriginal = true;
-        }
-
-        function showHalftone() {
-            if (!originalImageData || isProcessing || !showingOriginal) return;
-            applyHalftone();
-            showingOriginal = false;
         }
 
         function scheduleProcessing() {
@@ -1060,23 +1157,26 @@
             const foregroundColor = foregroundColorInput.value;
             const backgroundColor = backgroundColorInput.value;
 
-            let outputWidth = mainCanvas.width;
-            let outputHeight = mainCanvas.height;
+            let outputWidth = originalCanvas.width;
+            let outputHeight = originalCanvas.height;
 
             // Handle custom output size
             if (!useOriginalSizeCheckbox.checked && outputWidthInput.value && outputHeightInput.value) {
                 outputWidth = parseInt(outputWidthInput.value);
                 outputHeight = parseInt(outputHeightInput.value);
-                mainCanvas.width = outputWidth;
-                mainCanvas.height = outputHeight;
+                resultCanvas.width = outputWidth;
+                resultCanvas.height = outputHeight;
+            } else {
+                resultCanvas.width = outputWidth;
+                resultCanvas.height = outputHeight;
             }
 
             // Fill background
-            ctx.fillStyle = backgroundColor;
-            ctx.fillRect(0, 0, outputWidth, outputHeight);
+            resultCtx.fillStyle = backgroundColor;
+            resultCtx.fillRect(0, 0, outputWidth, outputHeight);
 
             // Set foreground color
-            ctx.fillStyle = foregroundColor;
+            resultCtx.fillStyle = foregroundColor;
 
             // Create temporary canvas for image processing
             const tempCanvas = document.createElement('canvas');
@@ -1124,7 +1224,6 @@
                     const rotatedX = x * cosAngle - y * sinAngle;
                     const rotatedY = x * sinAngle + y * cosAngle;
 
-                    // Check if rotated position is within canvas bounds
                     if (rotatedX < -gridSize || rotatedX >= outputWidth + gridSize ||
                         rotatedY < -gridSize || rotatedY >= outputHeight + gridSize) {
                         continue;
@@ -1144,10 +1243,9 @@
                         const centerX = rotatedX + gridSize / 2;
                         const centerY = rotatedY + gridSize / 2;
 
-                        // Only draw if within canvas bounds
                         if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
                             centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
-                            drawShape(ctx, centerX, centerY, dotRadius, shape);
+                            drawShape(resultCtx, centerX, centerY, dotRadius, shape);
                         }
                     }
                 }
@@ -1195,7 +1293,7 @@
         function downloadImage() {
             const link = document.createElement('a');
             link.download = 'halftone-' + Date.now() + '.png';
-            link.href = mainCanvas.toDataURL('image/png');
+            link.href = resultCanvas.toDataURL('image/png');
             link.click();
         }
 
