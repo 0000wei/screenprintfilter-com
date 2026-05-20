@@ -1291,14 +1291,14 @@
 
             // Create temporary canvas for image processing
             const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = originalImageData.width;
-            tempCanvas.height = originalImageData.height;
+            tempCanvas.width = originalCanvas.width;
+            tempCanvas.height = originalCanvas.height;
             const tempCtx = tempCanvas.getContext('2d');
 
             // Store original color data
             const originalCanvasCopy = document.createElement('canvas');
-            originalCanvasCopy.width = originalImageData.width;
-            originalCanvasCopy.height = originalImageData.height;
+            originalCanvasCopy.width = originalCanvas.width;
+            originalCanvasCopy.height = originalCanvas.height;
             const originalCtxCopy = originalCanvasCopy.getContext('2d');
             originalCtxCopy.putImageData(originalImageData, 0, 0);
 
