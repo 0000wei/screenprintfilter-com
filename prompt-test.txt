@@ -1,0 +1,130 @@
+You are working on /home/wu/screenprintfilter-com/index.html — a halftone dot filter web app.
+
+## YOUR MISSION
+First read the entire index.html. Then systematically test EVERY function by injecting test images via JavaScript (since we're in a headless browser where file input click doesn't work). Fix all bugs you find. Test again to confirm fixes.
+
+## TEST SETUP
+After reading the code, run this in the browser console to inject a test image:
+
+```js
+// Create a test image with black, gray, and colored areas
+var testCanvas = document.createElement('canvas');
+testCanvas.width = 300; testCanvas.height = 300;
+var tc = testCanvas.getContext('2d');
+// White background
+tc.fillStyle = 'white'; tc.fillRect(0,0,300,300);
+// Black square (top-left)
+tc.fillStyle = 'black'; tc.fillRect(0,0,100,100);
+// Gray square (center)
+tc.fillStyle = '#808080'; tc.fillRect(100,100,100,100);
+// Red circle
+tc.fillStyle = '#ff0000'; tc.beginPath(); tc.arc(250, 50, 40, 0, Math.PI*2); tc.fill();
+// Green stripe
+tc.fillStyle = '#00ff00'; tc.fillRect(0, 250, 300, 50);
+// Blue gradient
+var grad = tc.createLinearGradient(200,150,300,250);
+grad.addColorStop(0,'blue'); grad.addColorStop(1,'cyan');
+tc.fillStyle = grad; tc.fillRect(200,150,100,100);
+
+testCanvas.toBlob(function(blob) {
+  var f = new File([blob], 'test.png', {type:'image/png'});
+  // Call the app's loadImage function
+  if (typeof loadImage === 'function') loadImage(f);
+  else console.error('loadImage not found');
+});
+```
+
+After injection, check:
+1. Does the placeholder disappear and compare container appear?
+2. Is the original image shown on the left canvas?
+3. Is the halftone result shown on the right canvas?
+4. Are controls enabled?
+
+## TEST LIST (run each one, report pass/fail, fix if fail)
+
+### Test 1: Basic load and render
+- Inject test image
+- Verify originalCanvas has content (not all white)
+- Verify resultCanvas has content (has black dots = halftone applied)
+- Verify controls are enabled
+
+### Test 2: Original Colors mode (default)
+- With test image loaded, check `useOriginalColorsCheckbox.checked` === true
+- Call applyHalftone() 
+- Check resultCanvas has NON-GRAYSCALE colors (sample the red circle area - should have red dots, not gray)
+- Check getPixelColor function works correctly
+
+### Test 3: Toggle Original Colors off
+- Uncheck useOriginalColorsCheckbox
+- Call applyHalftone()
+- Verify result is now grayscale/black dots on white (foreground/background colors)
+
+### Test 4: Slider controls work
+- Change dotSizeSlider to 20, call applyHalftone()
+- Check more black pixels in result (larger dots = darker image)
+- Change contrastSlider to 90, call applyHalftone()
+- Verify result changed (more extreme black/white)
+- Change angleSlider to 45, call applyHalftone()
+- Verify result changed (dots rotated)
+- Change dotShapeSelect to 'square', call applyHalftone()
+- Verify result changed
+
+### Test 5: Reset button
+- Change several sliders
+- Call resetParameters()
+- Verify all sliders back to defaults: dotSize=8, spacing=1.0, contrast=50, brightness=0, angle=0, shape='circle'
+- Verify useOriginalColorsCheckbox.checked === true
+- Verify useOriginalSizeCheckbox.checked === true
+
+### Test 6: Output size
+- Uncheck useOriginalSizeCheckbox
+- Set outputWidthInput.value=100, outputHeightInput.value=100
+- Call applyHalftone()
+- Verify resultCanvas.width === 100 && resultCanvas.height === 100
+
+### Test 7: Draggable divider touch/mouse
+- Verify compareDivider element exists
+- Verify touchstart/touchmove/touchend listeners exist on it
+- Verify mousedown listener exists on it
+
+### Test 8: Gallery
+- Check galleryGrid has 8 child elements
+- Click one gallery item, verify sliders update
+- Verify notification shows
+
+### Test 9: SVG error handling
+- Try to load an SVG image, verify it doesn't crash (try/catch should handle tainted canvas)
+
+### Test 10: Download button
+- After image loaded, verify downloadBtn is not disabled
+- Check downloadBtn click creates a download link with result canvas data
+
+### Test 11: Brightness/contrast with original colors
+- With original colors ON, change brightness to +30
+- Call applyHalftone()
+- Verify result is brighter (more white/less saturated)
+
+## BUG FIXING PROTOCOL
+- For each failing test, identify the root cause in the code
+- Use Edit tool to make targeted fixes (NEVER rewrite entire file)
+- Re-run the test after fixing
+- Log: `[FIX] Test N: problem description → fix applied → verified`
+
+## CRITICAL: DO NOT MODIFY
+- Google Analytics G-H72N80TEBW
+- SEO meta tags
+- AI agent files (llms.txt, .well-known/)
+- The core halftone algorithm structure
+- Gallery generation code
+
+## OUTPUT FORMAT
+At the end, print a clear summary table:
+
+```
+| Test | Result |
+|------|--------|
+| 1    | ✅/❌  |
+| ...  |        |
+```
+
+For any ❌, explain what was broken and what fix was applied.

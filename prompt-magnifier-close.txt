@@ -1,0 +1,11 @@
+EDIT: /home/wu/screenprintfilter-com/index.html
+
+## Change the magnifier position to be AT the cursor
+
+Find where magnifier position is set. Change the offset from `x + 15, y - 50` to `x + 5, y - 85` (slightly right and above, much closer).
+
+Also add a `pointer-events: none` to the magnifier CSS so it doesn't interfere with mouse events on the canvas.
+
+If you find the current positioning uses `e.clientX - rect.left` for x and `e.clientY - rect.top` for y, keep that base calculation but use offset `+ 5` for x and `- 85` for y.
+
+CRITICAL: Do NOT modify GA, SEO meta, AI agent files, or core halftone algorithm.

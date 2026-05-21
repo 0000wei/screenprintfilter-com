@@ -1,0 +1,48 @@
+You are working on /home/wu/screenprintfilter-com/index.html — a single-page HTML tool for applying halftone dot (screen print) effects to images.
+
+## Development workflow
+1. Read the current index.html fully to understand the existing code
+2. NEVER rewrite the entire file. Make targeted edits with the Edit tool.
+3. After each change, verify the file is still valid HTML.
+
+## Current state of the code
+The file has:
+- Header with logo and nav
+- Sticky toolbar (horizontal) with all controls: Load Image, Download PNG, Reset, plus parameter sliders/selectors
+- Canvas area with side-by-side comparison: left = Original, right = Halftone Result
+- Draggable divider between the two canvases
+- Below: Example Gallery, FAQ, Footer
+- Google Analytics, AI agent files, SEO meta tags
+
+## Bugs and improvements needed (FIX THESE IN ORDER)
+
+### Bug 1: Draggable divider mouse position wrong
+The divider dragging uses `mousedown` on the divider element, but the `mousemove` is on `document`. This means the divider can "jump" when you start dragging. Fix: save the initial mouse X and divider width when mousedown fires, then during mousemove calculate the delta from initial position, not from the divider's left edge.
+
+### Bug 2: applyHalftone should draw both left/right canvases
+Currently `applyHalftone()` only draws to `resultCanvas` (the right side). It should also ensure the left side (`originalCanvas`) still shows the original. But actually the left canvas already has the original from `loadImage()`. The issue is if the user resizes (custom output width), the original canvas should NOT be resized — only the result canvas. Verify this behavior.
+
+### Bug 3: SVG test image fails to load
+When users upload an SVG image, `img.onload` should still work, but the Canvas may taint. Add a try/catch around `getImageData` and `toDataURL` and show an error notification if the canvas becomes tainted.
+
+### Improvement 1: Better processing feedback
+Currently `scheduleProcessing()` shows a "Processing..." overlay that stays visible too briefly. Add a brief animation (pulse opacity) to the status text. Also show a subtle "image loaded" confirmation after upload.
+
+### Improvement 2: Touch support for divider
+Add touch events (`touchstart`, `touchmove`, `touchend`) for the draggable divider so it works on mobile.
+
+### Improvement 3: Image fit in canvas
+The original and result canvases should fit within their containers with proper aspect ratio. Currently they have fixed pixel sizes. Change the CSS so the canvases scale to fit their container while maintaining aspect ratio, using `max-width: 100%; max-height: 100%; width: auto; height: auto` on the canvas elements, and set the container `.compare-left, .compare-right` to use `overflow: hidden`.
+
+### Improvement 4: Canvas placeholder vs compare toggle
+Currently the `canvasPlaceholder` is shown/hidden with `display:none`. When an image is loaded, `compareContainer` is shown. When "New Image" is clicked, they should toggle back. Ensure there's a "New Image" action (either a button in toolbar or a click on the canvas itself).
+
+### Important: DO NOT remove or modify
+- Google Analytics (G-H72N80TEBW)
+- SEO meta tags
+- AI agent links (llms.txt, .well-known/)
+- The core halftone algorithm (applyHalftone, getPixelBrightness, drawShape, getCellBrightness)
+- Gallery generation code
+
+### Export format
+Export the final file using the Write tool — overwrite the existing index.html.

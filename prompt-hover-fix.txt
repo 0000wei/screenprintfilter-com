@@ -1,0 +1,13 @@
+BUG FIX: /home/wu/screenprintfilter-com/index.html
+
+## Bug: Result canvas shows wrong hover text
+After an image is loaded, hovering over the result canvas shows "Click to load new image" or similar text. This is wrong — the result canvas should NOT suggest loading a new image on hover/click.
+
+The magnifier feature (Shift+hover to zoom) should be the ONLY hover behavior on the result canvas.
+
+Fix:
+1. Find and remove any event listener on the result canvas or canvas wrapper that shows "load new image" text on hover.
+2. The result canvas should only respond to Shift+move (magnifier zoom). A plain hover or click should do nothing.
+3. Remove any CSS that adds a hover effect suggesting clickability on the result area.
+
+CRITICAL: Do NOT modify GA, SEO meta, AI agent files, or core halftone algorithm.
