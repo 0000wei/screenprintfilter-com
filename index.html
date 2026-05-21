@@ -472,7 +472,7 @@
 
         .canvas-dimensions {
             position: absolute;
-            top: 0.5rem;
+            bottom: 0.5rem;
             left: 0.5rem;
             background: rgba(0, 0, 0, 0.8);
             color: var(--text-secondary);
@@ -480,7 +480,35 @@
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 500;
-            z-index: 5;
+        }
+
+        .canvas-download-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 0.3rem;
+            z-index: 10;
+            transition: var(--transition);
+            opacity: 0.9;
+        }
+
+        .canvas-download-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .canvas-wrapper:hover .canvas-download-btn {
+            display: flex;
         }
 
         .processing-status {
@@ -869,6 +897,14 @@
                             <canvas id="mainCanvas" style="display:none"></canvas>
                             <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
                             <div class="processing-status" id="processingStatus">Processing...</div>
+                            <button class="canvas-download-btn" id="canvasDownloadBtn" title="Download PNG" style="display:none">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Download
+                            </button>
                         </div>
                         <div class="zoom-controls" id="zoomControls" style="display:none">
                             <button class="zoom-btn" data-zoom="0.25">25%</button>
@@ -966,6 +1002,7 @@
         const processingStatus = document.getElementById('processingStatus');
         const zoomControls = document.getElementById('zoomControls');
         const zoomLabel = document.getElementById('zoomLabel');
+        const canvasDownloadBtn = document.getElementById('canvasDownloadBtn');
         const galleryGrid = document.getElementById('galleryGrid');
 
         // Create offscreen canvas for original image data
@@ -1082,6 +1119,9 @@
                     setZoom(zoomValue);
                 });
             });
+
+            // Canvas download button
+            canvasDownloadBtn.addEventListener('click', downloadImage);
 
             // Pan functionality
             canvasWrapper.addEventListener('mousedown', handlePanStart);
@@ -1273,6 +1313,7 @@
                     mainCanvas.style.display = 'block';
                     canvasDimensions.style.display = 'block';
                     zoomControls.style.display = 'flex';
+                    canvasDownloadBtn.style.display = 'block';
 
                     // Set canvas size - use larger size for better quality
                     const maxWidth = 800;
