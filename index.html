@@ -1093,8 +1093,28 @@
             backgroundColorInput.addEventListener('change', handleControlChange);
             useOriginalColorsCheckbox.addEventListener('change', handleOriginalColorsChange);
             useOriginalSizeCheckbox.addEventListener('change', handleSizeCheckboxChange);
-            outputWidthInput.addEventListener('change', handleControlChange);
-            outputHeightInput.addEventListener('change', handleControlChange);
+            outputWidthInput.addEventListener('input', function() {
+                // Trigger processing when custom width changes
+                if (!useOriginalSizeCheckbox.checked) {
+                    handleControlInput.call(this);
+                }
+            });
+            outputWidthInput.addEventListener('change', function() {
+                if (!useOriginalSizeCheckbox.checked) {
+                    handleControlChange.call(this);
+                }
+            });
+            outputHeightInput.addEventListener('input', function() {
+                // Trigger processing when custom height changes
+                if (!useOriginalSizeCheckbox.checked) {
+                    handleControlInput.call(this);
+                }
+            });
+            outputHeightInput.addEventListener('change', function() {
+                if (!useOriginalSizeCheckbox.checked) {
+                    handleControlChange.call(this);
+                }
+            });
 
             // Buttons
             undoBtn.addEventListener('click', undo);
@@ -1214,6 +1234,7 @@
             e.preventDefault();
             canvasWrapper.style.borderColor = '';
             canvasWrapper.style.background = '';
+            canvasWrapper.style.boxShadow = '';
         }
 
         function handleDrop(e) {
@@ -1234,6 +1255,9 @@
         }
 
         function handleControlChange() {
+            // Save state on change (released slider/select change)
+            // The input handler also saves state once, but change captures
+            // single-interaction controls (select, color, checkbox, etc.)
             saveState();
             updateValueDisplays();
 
@@ -1254,9 +1278,23 @@
         }
 
         function handleControlInput() {
+            // Save state on first input interaction (before the value actually changes much)
+            // This captures the state before the user makes significant changes
+            const target = this;
+            if (!target.dataset.undoStateSaved) {
+                target.dataset.undoStateSaved = 'true';
+                saveState();
+            }
             updateValueDisplays();
             scheduleProcessing();
         }
+
+        // Clear the undo state flag when user stops interacting
+        document.addEventListener('mouseup', function() {
+            document.querySelectorAll('[data-undo-state-saved]').forEach(el => {
+                delete el.dataset.undoStateSaved;
+            });
+        });
 
         function handleOriginalColorsChange() {
             saveState();
@@ -1277,6 +1315,9 @@
             } else {
                 outputWidthInput.disabled = false;
                 outputHeightInput.disabled = false;
+                // Set default values to current dimensions
+                outputWidthInput.value = originalWidth;
+                outputHeightInput.value = originalHeight;
                 outputWidthInput.placeholder = originalWidth;
                 outputHeightInput.placeholder = originalHeight;
             }
@@ -1369,6 +1410,14 @@
                     // Enable controls
                     enableControls(true);
 
+                    // Save initial state for undo (so user can undo back to defaults)
+                    // Use setTimeout to ensure this is the first state in the undo stack
+                    setTimeout(() => {
+                        if (undoStack.length === 0) {
+                            saveState();
+                        }
+                    }, 100);
+
                     // Apply halftone
                     applyHalftone();
 
@@ -1443,15 +1492,13 @@
             let outputHeight = originalCanvas.height;
 
             // Handle custom output size
-            if (!useOriginalSizeCheckbox.checked && outputWidthInput.value && outputHeightInput.value) {
-                outputWidth = parseInt(outputWidthInput.value);
-                outputHeight = parseInt(outputHeightInput.value);
-                mainCanvas.width = outputWidth;
-                mainCanvas.height = outputHeight;
-            } else {
-                mainCanvas.width = outputWidth;
-                mainCanvas.height = outputHeight;
+            if (!useOriginalSizeCheckbox.checked) {
+                // Use custom dimensions if provided, otherwise fall back to original dimensions
+                outputWidth = outputWidthInput.value ? parseInt(outputWidthInput.value) : originalWidth;
+                outputHeight = outputHeightInput.value ? parseInt(outputHeightInput.value) : originalHeight;
             }
+            mainCanvas.width = outputWidth;
+            mainCanvas.height = outputHeight;
 
             // Fill background
             mainCtx.fillStyle = backgroundColor;
