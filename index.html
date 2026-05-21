@@ -1904,6 +1904,17 @@
             }, 3000);
         }
 
+        const GALLERY_SVGS = {
+            'Classic Dots': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd0"><stop offset="0" stop-color="#666"/><stop offset="1" stop-color="#ccc"/></radialGradient><pattern id="pt0" x="0" y="0" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="4" fill="currentColor"/></pattern></defs><rect fill="url(#gd0)" width="300" height="200"/><rect fill="url(#pt0)" width="300" height="200" color="#fff"/></svg>`,
+            'Bold Dots': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd1"><stop offset="0" stop-color="#666"/><stop offset="1" stop-color="#ccc"/></radialGradient><pattern id="pt1" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="7.5" fill="currentColor"/></pattern></defs><rect fill="url(#gd1)" width="300" height="200"/><rect fill="url(#pt1)" width="300" height="200" color="#fff"/></svg>`,
+            'Screen Print': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd2"><stop offset="0" stop-color="#555"/><stop offset="1" stop-color="#aaa"/></radialGradient><pattern id="pt2" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="5.5" cy="5.5" r="5" fill="currentColor"/></pattern></defs><rect fill="url(#gd2)" width="300" height="200"/><rect fill="url(#pt2)" width="300" height="200" color="#fff"/></svg>`,
+            'Square Dots': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd3"><stop offset="0" stop-color="#555"/><stop offset="1" stop-color="#999"/></radialGradient><pattern id="pt3" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="10" height="10" fill="currentColor" rx="1"/></pattern></defs><rect fill="url(#gd3)" width="300" height="200"/><rect fill="url(#pt3)" width="300" height="200" color="#fff"/></svg>`,
+            'Diamond Pattern': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd4"><stop offset="0" stop-color="#555"/><stop offset="1" stop-color="#aaa"/></radialGradient><pattern id="pt4" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><polygon points="5,0 10,5 5,10 0,5" fill="currentColor"/></pattern></defs><rect fill="url(#gd4)" width="300" height="200"/><rect fill="url(#pt4)" width="300" height="200" color="#fff"/></svg>`,
+            'Line Screen': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd5"><stop offset="0" stop-color="#666"/><stop offset="1" stop-color="#bbb"/></radialGradient><pattern id="pt5" x="0" y="0" width="6" height="12" patternUnits="userSpaceOnUse"><path d="M3 0v12" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></pattern></defs><rect fill="url(#gd5)" width="300" height="200"/><rect fill="url(#pt5)" width="300" height="200" color="#fff"/></svg>`,
+            'Fine Detail': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd6"><stop offset="0" stop-color="#555"/><stop offset="1" stop-color="#999"/></radialGradient><pattern id="pt6" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="currentColor"/></pattern></defs><rect fill="url(#gd6)" width="300" height="200"/><rect fill="url(#pt6)" width="300" height="200" color="#fff"/></svg>`,
+            'High Contrast': `<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gd7"><stop offset="0" stop-color="#444"/><stop offset="1" stop-color="#bbb"/></radialGradient><pattern id="pt7" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse"><circle cx="7.5" cy="7.5" r="7" fill="currentColor"/></pattern></defs><rect fill="url(#gd7)" width="300" height="200"/><rect fill="url(#pt7)" width="300" height="200" color="#fff"/></svg>`
+        };
+
         function generateGallery() {
             const examples = [
                 { name: 'Classic Dots', params: { dotSize: 6, spacing: 1.5, contrast: 60, shape: 'circle' }, desc: 'Traditional newspaper look' },
@@ -1920,7 +1931,7 @@
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 item.innerHTML = `
-                    <canvas class="gallery-image" id="gallery-${example.name.replace(/\s+/g, '-')}"></canvas>
+                    <img class="gallery-image" src="data:image/svg+xml,${encodeURIComponent(GALLERY_SVGS[example.name])}" alt="${example.name}" loading="lazy">
                     <div class="gallery-info">
                         <div class="gallery-title">${example.name}</div>
                         <div class="gallery-params">${example.desc}</div>
@@ -1929,87 +1940,9 @@
 
                 item.addEventListener('click', () => loadGalleryExample(example.params));
                 galleryGrid.appendChild(item);
-
-                setTimeout(() => generateExampleImage(example, example.name), 100);
             });
         }
 
-        function generateExampleImage(example, name) {
-            const canvas = document.getElementById(`gallery-${name.replace(/\s+/g, '-')}`);
-            if (!canvas) return;
-
-            canvas.width = 300;
-            canvas.height = 200;
-            const ctx = canvas.getContext('2d');
-
-            // Create gradient background
-            const gradient = ctx.createLinearGradient(0, 0, 300, 200);
-            gradient.addColorStop(0, '#333');
-            gradient.addColorStop(1, '#888');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 300, 200);
-
-            // Add some shapes
-            ctx.fillStyle = '#555';
-            ctx.fillRect(50, 30, 80, 80);
-            ctx.beginPath();
-            ctx.arc(180, 70, 50, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Store original
-            const imageData = ctx.getImageData(0, 0, 300, 200);
-
-            // Apply halftone effect
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(0, 0, 300, 200);
-            ctx.fillStyle = '#000000';
-
-            const dotSize = example.params.dotSize;
-            const spacing = example.params.spacing;
-            const contrast = example.params.contrast / 100;
-            const shape = example.params.shape;
-            const gridSize = dotSize * spacing;
-
-            for (let y = 0; y < 200; y += gridSize) {
-                for (let x = 0; x < 300; x += gridSize) {
-                    const brightness = getCellBrightness(imageData, x, y, gridSize, 300, 200);
-                    const adjustedBrightness = ((brightness / 255 - 0.5) * contrast + 0.5) * 255;
-                    const dotRadius = (1 - adjustedBrightness / 255) * (dotSize / 2);
-
-                    if (dotRadius > 0.5) {
-                        const centerX = x + gridSize / 2;
-                        const centerY = y + gridSize / 2;
-                        drawShape(ctx, centerX, centerY, dotRadius, shape);
-                    }
-                }
-            }
-        }
-
-        function getCellBrightness(imageData, x, y, size, width, height) {
-            const sampleSize = Math.min(size, 10);
-            const startX = Math.min(x, width - sampleSize);
-            const startY = Math.min(y, height - sampleSize);
-            const sampleWidth = Math.min(sampleSize, width - startX);
-            const sampleHeight = Math.min(sampleSize, height - startY);
-
-            const tempCanvas = document.createElement('canvas');
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCanvas.width = sampleWidth;
-            tempCanvas.height = sampleHeight;
-
-            tempCtx.putImageData(imageData, -startX, -startY);
-            const pixelData = tempCtx.getImageData(0, 0, sampleWidth, sampleHeight).data;
-
-            let sum = 0;
-            let count = 0;
-
-            for (let i = 0; i < pixelData.length; i += 4) {
-                sum += pixelData[i];
-                count++;
-            }
-
-            return count > 0 ? sum / count : 128;
-        }
 
         function loadGalleryExample(params) {
             dotSizeSlider.value = params.dotSize;
