@@ -417,7 +417,7 @@
             max-width: 100%;
             height: auto;
             display: block;
-            transform-origin: 0 0;
+            transform-origin: center center;
         }
 
         .canvas-wrapper {
@@ -438,7 +438,7 @@
         }
 
         .canvas-wrapper canvas {
-            transform-origin: 0 0;
+            transform-origin: center center;
             transition: transform 0.1s ease-out;
             max-width: none;
         }
@@ -1199,7 +1199,7 @@
                 canvasWrapper.style.cursor = 'default';
             }
             if (currentZoom > 1) {
-                mainCanvas.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+                mainCanvas.style.transform = `translate(${panX / currentZoom}px, ${panY / currentZoom}px) scale(${currentZoom})`;
                 canvasWrapper.style.cursor = isPanning ? 'grabbing' : 'grab';
             }
         }
