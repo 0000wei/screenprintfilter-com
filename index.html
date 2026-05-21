@@ -335,27 +335,96 @@
             white-space: nowrap;
         }
 
+        /* Main Content Layout */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .content-layout {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .canvas-column {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+        }
+
+        .sidebar h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .sidebar .gallery-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .sidebar .gallery-item {
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar .gallery-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar .gallery-image {
+            height: 80px;
+        }
+
+        .sidebar .gallery-info {
+            padding: 0.75rem;
+        }
+
+        .sidebar .gallery-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar .gallery-params {
+            font-size: 0.75rem;
+        }
+
         /* Canvas Area */
         .canvas-area {
-            padding: 2rem 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 450px;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .canvas-wrapper {
             background: repeating-conic-gradient(#222 0% 25%, #2a2a2a 0% 50%) 50% / 20px 20px;
             border-radius: var(--radius);
             box-shadow: var(--shadow-lg);
-            overflow: hidden;
+            overflow: auto;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 600px;
-            min-height: 350px;
+            min-height: 400px;
             max-width: 100%;
+            cursor: grab;
+        }
+
+        .canvas-wrapper.grabbing {
+            cursor: grabbing;
+        }
+
+        .canvas-wrapper canvas {
+            transform-origin: 0 0;
+            transition: transform 0.1s ease-out;
+            max-width: none;
         }
 
         .canvas-placeholder {
@@ -387,7 +456,7 @@
 
         .canvas-dimensions {
             position: absolute;
-            bottom: 0.5rem;
+            top: 0.5rem;
             left: 0.5rem;
             background: rgba(0, 0, 0, 0.8);
             color: var(--text-secondary);
@@ -395,6 +464,7 @@
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 500;
+            z-index: 5;
         }
 
         .processing-status {
@@ -422,82 +492,52 @@
             display: block;
         }
 
-        .magnifier {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            pointer-events: none;
-            z-index: 20;
-            display: none;
-            background-repeat: no-repeat;
-            image-rendering: pixelated;
-        }
-
         .processing-status.loaded {
             animation: none;
             background: rgba(76, 175, 80, 0.9);
         }
 
-        /* Compare Mode */
-        .compare-container {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 4px 1fr;
-        }
-
-        .compare-left,
-        .compare-right {
-            flex: 1;
+        /* Zoom Controls */
+        .zoom-controls {
             display: flex;
             align-items: center;
+            gap: 0.5rem;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 350px;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
 
-        .compare-left canvas,
-        .compare-right canvas {
-            max-width: 100%;
-            max-height: 100%;
-            display: block;
-            object-fit: contain;
-        }
-
-        .compare-label {
-            position: absolute;
-            top: 0.5rem;
-            left: 0.5rem;
-            background: rgba(0, 0, 0, 0.75);
-            color: var(--text-primary);
-            padding: 0.25rem 0.6rem;
+        .zoom-btn {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
             border-radius: 4px;
-            font-size: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.8rem;
             font-weight: 600;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .compare-right .compare-label {
-            left: auto;
-            right: 0.5rem;
-        }
-
-        .compare-divider {
-            width: 4px;
-            background: var(--accent);
-            flex-shrink: 0;
-            z-index: 10;
-        }
-
-        .compare-left {
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .zoom-btn:hover {
+            background: var(--border);
+            border-color: var(--text-secondary);
+        }
+
+        .zoom-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .zoom-label {
+            min-width: 45px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
         }
 
         /* Hidden file input */
@@ -633,11 +673,26 @@
                 border-right: none;
                 padding-right: 0;
             }
+
+            .content-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .sidebar .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .sidebar .gallery-image {
+                height: 120px;
+            }
         }
 
         @media (max-width: 768px) {
             .canvas-wrapper {
-                min-width: 100%;
                 min-height: 300px;
             }
 
@@ -656,6 +711,14 @@
 
             .logo-text {
                 font-size: 1rem;
+            }
+
+            .zoom-controls {
+                flex-wrap: wrap;
+            }
+
+            .sidebar .gallery-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -771,49 +834,49 @@
         </div>
     </div>
 
-    <!-- Canvas Area -->
-    <div class="canvas-area">
+    <!-- Main Content -->
+    <main class="main-content">
         <div class="container">
-            <div class="canvas-wrapper" id="canvasWrapper">
-                <div class="canvas-placeholder" id="canvasPlaceholder">
-                    <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/>
-                        <line x1="12" y1="3" x2="12" y2="15"/>
-                    </svg>
-                    <div class="placeholder-text">Drop image here or click Load Image</div>
-                    <div class="placeholder-hint">Supports JPG, PNG, WebP • Max 10MB</div>
-                </div>
-                <div class="compare-container" id="compareContainer" style="display:none">
-                    <div class="compare-left" id="compareLeft">
-                        <div class="compare-label">Original</div>
-                        <canvas id="originalCanvas"></canvas>
+            <div class="content-layout">
+                <div class="canvas-column">
+                    <div class="canvas-area">
+                        <div class="canvas-wrapper" id="canvasWrapper">
+                            <div class="canvas-placeholder" id="canvasPlaceholder">
+                                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                <div class="placeholder-text">Drop image here or click Load Image</div>
+                                <div class="placeholder-hint">Supports JPG, PNG, WebP • Max 10MB</div>
+                            </div>
+                            <canvas id="mainCanvas" style="display:none"></canvas>
+                            <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
+                            <div class="processing-status" id="processingStatus">Processing...</div>
+                        </div>
+                        <div class="zoom-controls" id="zoomControls" style="display:none">
+                            <button class="zoom-btn" data-zoom="0.25">25%</button>
+                            <button class="zoom-btn" data-zoom="0.5">50%</button>
+                            <button class="zoom-btn active" data-zoom="1">100%</button>
+                            <button class="zoom-btn" data-zoom="1.5">150%</button>
+                            <button class="zoom-btn" data-zoom="2">200%</button>
+                            <button class="zoom-btn" data-zoom="fit">Fit</button>
+                            <span class="zoom-label" id="zoomLabel">100%</span>
+                        </div>
                     </div>
-                    <div class="compare-divider" id="compareDivider"></div>
-                    <div class="compare-right" id="compareRight">
-                        <div class="compare-label">Halftone Result</div>
-                        <canvas id="resultCanvas"></canvas>
-                    </div>
                 </div>
-                <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
-                <div class="processing-status" id="processingStatus">Processing...</div>
-                <div class="magnifier" id="magnifier"></div>
+                <aside class="sidebar">
+                    <h3>Example Gallery</h3>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Gallery items will be generated by JS -->
+                    </div>
+                </aside>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Hidden file input -->
     <input type="file" id="fileInput" accept="image/*">
-
-    <!-- Example Gallery -->
-    <section class="gallery-section" id="examples">
-        <div class="container">
-            <h2 class="section-title">Example Gallery</h2>
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be generated by JS -->
-            </div>
-        </div>
-    </section>
 
     <!-- FAQ Section -->
     <section class="faq-section" id="faq">
@@ -880,18 +943,19 @@
         const redoBtn = document.getElementById('redoBtn');
         const downloadBtn = document.getElementById('downloadBtn');
         const resetBtn = document.getElementById('resetBtn');
-        const originalCanvas = document.getElementById('originalCanvas');
-        const resultCanvas = document.getElementById('resultCanvas');
+        const mainCanvas = document.getElementById('mainCanvas');
         const canvasWrapper = document.getElementById('canvasWrapper');
         const canvasPlaceholder = document.getElementById('canvasPlaceholder');
-        const compareContainer = document.getElementById('compareContainer');
-        const compareLeft = document.getElementById('compareLeft');
-        const compareRight = document.getElementById('compareRight');
-        const compareDivider = document.getElementById('compareDivider');
         const canvasDimensions = document.getElementById('canvasDimensions');
         const processingStatus = document.getElementById('processingStatus');
-        const magnifier = document.getElementById('magnifier');
+        const zoomControls = document.getElementById('zoomControls');
+        const zoomLabel = document.getElementById('zoomLabel');
         const galleryGrid = document.getElementById('galleryGrid');
+
+        // Create offscreen canvas for original image data
+        const originalCanvas = document.createElement('canvas');
+        const originalCtx = originalCanvas.getContext('2d');
+        const mainCtx = mainCanvas.getContext('2d');
 
         // Controls
         const dotSizeSlider = document.getElementById('dotSize');
@@ -928,8 +992,15 @@
         let undoStack = [];
         let redoStack = [];
 
-        const originalCtx = originalCanvas.getContext('2d');
-        const resultCtx = resultCanvas.getContext('2d');
+        // Zoom and pan state
+        let currentZoom = 1;
+        let isPanning = false;
+        let panStartX = 0, panStartY = 0;
+        let panX = 0, panY = 0;
+
+        // Result canvas references for compatibility
+        const resultCanvas = mainCanvas;
+        const resultCtx = mainCtx;
 
         // Initialize
         init();
@@ -947,7 +1018,6 @@
             canvasWrapper.addEventListener('dragover', handleDragOver);
             canvasWrapper.addEventListener('dragleave', handleDragLeave);
             canvasWrapper.addEventListener('drop', handleDrop);
-
 
             // Controls - input for display/processing, change for undo state
             dotSizeSlider.addEventListener('input', handleControlInput);
@@ -989,66 +1059,87 @@
                 }
             });
 
-            // Magnifier functionality
-            resultCanvas.addEventListener('mouseenter', function() {
-                if (!currentImage) return;
+            // Zoom controls
+            document.querySelectorAll('.zoom-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const zoomValue = this.getAttribute('data-zoom');
+                    setZoom(zoomValue);
+                });
             });
 
-            resultCanvas.addEventListener('mousemove', function(e) {
-                if (!currentImage) {
-                    magnifier.style.display = 'none';
-                    return;
-                }
+            // Pan functionality
+            canvasWrapper.addEventListener('mousedown', handlePanStart);
+            canvasWrapper.addEventListener('mousemove', handlePanMove);
+            canvasWrapper.addEventListener('mouseup', handlePanEnd);
+            canvasWrapper.addEventListener('mouseleave', handlePanEnd);
+        }
 
-                const rect = resultCanvas.getBoundingClientRect();
+        function handlePanStart(e) {
+            if (currentZoom <= 1) return;
+            isPanning = true;
+            panStartX = e.clientX - panX;
+            panStartY = e.clientY - panY;
+            canvasWrapper.classList.add('grabbing');
+        }
+
+        function handlePanMove(e) {
+            if (!isPanning || currentZoom <= 1) return;
+            e.preventDefault();
+            panX = e.clientX - panStartX;
+            panY = e.clientY - panStartY;
+            applyTransform();
+        }
+
+        function handlePanEnd() {
+            isPanning = false;
+            canvasWrapper.classList.remove('grabbing');
+        }
+
+        function setZoom(value) {
+            // Reset pan when changing zoom
+            panX = 0;
+            panY = 0;
+
+            if (value === 'fit') {
+                // Calculate fit zoom
                 const wrapperRect = canvasWrapper.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                const canvasWidth = mainCanvas.width || 0;
+                const canvasHeight = mainCanvas.height || 0;
 
-                if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
-                    magnifier.style.display = 'none';
-                    return;
+                if (canvasWidth > 0 && canvasHeight > 0) {
+                    const zoomX = (wrapperRect.width - 40) / canvasWidth;
+                    const zoomY = (wrapperRect.height - 40) / canvasHeight;
+                    currentZoom = Math.min(zoomX, zoomY, 1);
+                } else {
+                    currentZoom = 1;
                 }
+            } else {
+                currentZoom = parseFloat(value);
+            }
 
-                const scaleX = resultCanvas.width / rect.width;
-                const scaleY = resultCanvas.height / rect.height;
-                const canvasX = x * scaleX;
-                const canvasY = y * scaleY;
-
-                const zoomLevel = 3;
-                const magnifierSize = 80;
-                const sourceSize = magnifierSize / zoomLevel;
-
-                const magnifierCanvas = document.createElement('canvas');
-                magnifierCanvas.width = magnifierSize;
-                magnifierCanvas.height = magnifierSize;
-                const magCtx = magnifierCanvas.getContext('2d');
-
-                const sx = Math.max(0, Math.min(canvasX - sourceSize / 2, resultCanvas.width - sourceSize));
-                const sy = Math.max(0, Math.min(canvasY - sourceSize / 2, resultCanvas.height - sourceSize));
-
-                magCtx.imageSmoothingEnabled = false;
-                magCtx.drawImage(
-                    resultCanvas,
-                    sx, sy, sourceSize, sourceSize,
-                    0, 0, magnifierSize, magnifierSize
-                );
-
-                magnifier.style.display = 'block';
-                magnifier.style.left = (e.clientX - wrapperRect.left - magnifierSize / 2) + 'px';
-                magnifier.style.top = (e.clientY - wrapperRect.top - magnifierSize - 10) + 'px';
-                magnifier.style.backgroundImage = `url(${magnifierCanvas.toDataURL()})`;
-                magnifier.style.backgroundSize = `${magnifierSize}px ${magnifierSize}px`;
+            // Update active button
+            document.querySelectorAll('.zoom-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-zoom') === value.toString() ||
+                    (value === 'fit' && btn.getAttribute('data-zoom') === 'fit')) {
+                    btn.classList.add('active');
+                }
             });
 
-            resultCanvas.addEventListener('mouseleave', function() {
-                magnifier.style.display = 'none';
-            });
+            // Update label
+            zoomLabel.textContent = Math.round(currentZoom * 100) + '%';
 
-            // Click on original canvas to load new image
-            compareLeft.addEventListener('click', function() {
-                fileInput.click();
-            });
+            applyTransform();
+        }
+
+        function applyTransform() {
+            if (currentZoom <= 1) {
+                mainCanvas.style.transform = 'scale(1)';
+                canvasWrapper.style.cursor = 'default';
+            } else {
+                mainCanvas.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+                canvasWrapper.style.cursor = isPanning ? 'grabbing' : 'grab';
+            }
         }
 
         function debounce(func, wait) {
@@ -1156,15 +1247,15 @@
                     originalWidth = img.width;
                     originalHeight = img.height;
 
-                    // Hide placeholder, show compare
+                    // Hide placeholder, show canvas
                     canvasPlaceholder.style.display = 'none';
-                    compareContainer.style.display = 'flex';
-                    compareContainer.style.gridTemplateColumns = '1fr 4px 1fr';
+                    mainCanvas.style.display = 'block';
                     canvasDimensions.style.display = 'block';
+                    zoomControls.style.display = 'flex';
 
-                    // Set canvas size
-                    const maxWidth = 500;
-                    const maxHeight = 400;
+                    // Set canvas size - use larger size for better quality
+                    const maxWidth = 800;
+                    const maxHeight = 600;
                     let displayWidth = img.width;
                     let displayHeight = img.height;
 
@@ -1181,12 +1272,13 @@
                     displayWidth = Math.round(displayWidth);
                     displayHeight = Math.round(displayHeight);
 
+                    // Set up the canvases
                     originalCanvas.width = displayWidth;
                     originalCanvas.height = displayHeight;
-                    resultCanvas.width = displayWidth;
-                    resultCanvas.height = displayHeight;
+                    mainCanvas.width = displayWidth;
+                    mainCanvas.height = displayHeight;
 
-                    // Draw original on left canvas
+                    // Draw original on offscreen canvas
                     originalCtx.drawImage(img, 0, 0, displayWidth, displayHeight);
                     try {
                         originalImageData = originalCtx.getImageData(0, 0, displayWidth, displayHeight);
@@ -1194,17 +1286,24 @@
                         processingStatus.classList.remove('active');
                         showNotification('Failed to process image. The image may be from a restricted source.');
                         canvasPlaceholder.style.display = 'flex';
-                        compareContainer.style.display = 'none';
+                        mainCanvas.style.display = 'none';
+                        zoomControls.style.display = 'none';
                         return;
                     }
 
                     // Update dimensions
                     canvasDimensions.textContent = `${img.width} × ${img.height}px`;
 
+                    // Reset zoom
+                    currentZoom = 1;
+                    panX = 0;
+                    panY = 0;
+                    setZoom(1);
+
                     // Enable controls
                     enableControls(true);
 
-                    // Apply halftone to right canvas
+                    // Apply halftone
                     applyHalftone();
 
                     // Show loaded confirmation
@@ -1633,6 +1732,9 @@
             outputHeightInput.disabled = true;
             outputWidthInput.value = '';
             outputHeightInput.value = '';
+
+            // Reset zoom
+            setZoom(1);
 
             updateColorPickerStates();
             updateValueDisplays();
