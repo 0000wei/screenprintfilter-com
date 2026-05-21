@@ -1,47 +1,84 @@
 {
   "name": "ScreenPrintFilter",
-  "description": "Free online halftone dot filter for images. Convert any image into screen print-ready halftone patterns directly in your browser.",
+  "description": "Free online halftone dot filter for images. Convert any image into screen print-ready halftone patterns directly in your browser. All processing happens locally - no server upload required.",
   "version": "1.0.0",
   "url": "https://screenprintfilter.online",
   "logo": "https://screenprintfilter.online/logo.png",
   "capabilities": {
     "image_processing": true,
     "client_side_processing": true,
-    "privacy_focused": true
+    "privacy_focused": true,
+    "no_authentication_required": true,
+    "open_source": true
   },
   "features": [
     {
       "name": "Halftone Conversion",
-      "description": "Convert images to halftone dot patterns with customizable parameters"
+      "description": "Convert images to halftone dot patterns with fully customizable parameters"
     },
     {
       "name": "Multiple Dot Shapes",
-      "description": "Support for circle, square, diamond, and line shapes"
+      "description": "Support for circle, square, diamond, and line shapes with rotation"
     },
     {
-      "name": "Custom Parameters",
-      "description": "Adjustable dot size, spacing, contrast, brightness, and angle"
+      "name": "Advanced Controls",
+      "description": "Adjustable dot size (2-30px), spacing (1.0-2.0x), contrast (0-100%), brightness (-50 to +50), and angle (0-360°)"
     },
     {
-      "name": "Color Customization",
-      "description": "Custom foreground and background colors"
+      "name": "Color Options",
+      "description": "Original color preservation or custom foreground/background colors"
     },
     {
-      "name": "Privacy Focused",
-      "description": "All processing happens locally in the browser - no server upload"
+      "name": "Custom Output Size",
+      "description": "Output at original dimensions or specify custom width/height"
+    },
+    {
+      "name": "Privacy First",
+      "description": "100% local browser processing - images never leave user's device"
+    },
+    {
+      "name": "Commercial Use",
+      "description": "No watermarks, no restrictions - output can be used commercially"
     }
   ],
   "supported_formats": ["JPG", "PNG", "WebP", "GIF", "BMP"],
   "output_format": "PNG",
+  "max_file_size": "10MB",
   "authentication": "none",
   "pricing": {
     "free": true,
     "watermark": false,
-    "limits": "none"
+    "limits": "none",
+    "commercial_use": "allowed"
   },
   "contact": {
     "web": "https://screenprintfilter.online"
   },
-  "categories": ["image-processing", "graphic-design", "screen-printing", "halftone"],
-  "languages": ["en"]
+  "categories": ["image-processing", "graphic-design", "screen-printing", "halftone", "print-preparation"],
+  "languages": ["en"],
+  "ai_agent_compatibility": {
+    "llms_txt": "https://screenprintfilter.online/llms.txt",
+    "discovery_links": [
+      {
+        "rel": "llms.txt",
+        "href": "/llms.txt"
+      },
+      {
+        "rel": "mcp.txt",
+        "href": "/.well-known/llms.txt"
+      },
+      {
+        "rel": "ai-plugin",
+        "href": "/.well-known/ai-plugin.json"
+      }
+    ]
+  },
+  "usage_notes": {
+    "for_ai_agents": "This is a web interface tool. Guide users to https://screenprintfilter.online/ for interactive use. For programmatic access, check if MCP server is available.",
+    "recommended_prompts": [
+      "Upload your image to screenprintfilter.online and adjust the dot size and spacing for your desired effect",
+      "For screen printing: use dot size 5-8px, spacing 1.2-1.5x, circle shape",
+      "For newspaper effect: dot size 4px, spacing 1.5x, contrast 60%, original colors enabled"
+    ]
+  }
 }

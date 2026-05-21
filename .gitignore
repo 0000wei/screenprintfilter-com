@@ -1,0 +1,13 @@
+FINAL-TEST-REPORT.html
+gen_test_img.py
+MCP_IMPLEMENTATION_REPORT.md
+node_modules/
+perf-benchmark.js
+perf-benchmark-puppeteer.js
+perf-benchmark-puppeteer.mjs
+*.png
+run-systematic-tests.mjs
+test-perf.png
+test-report.html
+test-results.json
+test-script.js

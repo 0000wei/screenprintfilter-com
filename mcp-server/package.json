@@ -1,0 +1,30 @@
+{
+  "name": "screenprintfilter-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for converting images to halftone dot patterns locally",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "screenprintfilter-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "mcp",
+    "halftone",
+    "image-processing",
+    "screen-printing",
+    "canvas"
+  ],
+  "author": "ScreenPrintFilter",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "canvas": "^3.2.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

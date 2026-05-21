@@ -1,49 +1,143 @@
-# ScreenPrintFilter.com
+# ScreenPrintFilter.com - AI Agent Guide
 
 ScreenPrintFilter.com is a free online tool for converting images into halftone dot patterns for screen printing and graphic design.
 
-## Capabilities
+## Website Purpose
 
-- **Image Processing**: Converts any image (JPG, PNG, WebP, GIF) into halftone dot patterns
-- **Client-Side Processing**: All processing happens in the browser using HTML5 Canvas - no server upload required
-- **Customizable Parameters**:
-  - Dot Size: 2-30px
-  - Spacing: 1.0-2.0x
-  - Contrast: 0-100%
-  - Brightness: -50 to +50
-  - Dot Shape: Circle, Square, Diamond, Line
-  - Angle: 0-360°
-  - Custom foreground/background colors
-  - Custom output dimensions
-
-## Use Cases
-
-- Screen print preparation
+This tool converts any image into a halftone dot pattern - a reprographic technique that simulates continuous tone imagery through dots varying in size or spacing. It's commonly used for:
+- Screen print preparation and film output
 - Graphic design and illustration
-- Creating retro/newspaper effects
+- Creating retro/newspaper/comic book effects
 - Preparing images for physical printing
 - Artistic halftone effects
 
-## Technical Details
+## Key Features for AI Agents
 
-- Built with vanilla JavaScript, HTML5 Canvas, and CSS
-- No external dependencies or frameworks
-- Responsive design for desktop and mobile
-- Dark theme with orange-red accent color (#FF4500)
-- Privacy-focused: images never leave the user's device
+**Client-Side Processing**: All image processing happens locally in the user's browser using HTML5 Canvas. Images are NEVER uploaded to any server, ensuring complete privacy and security.
 
-## API/Integration
+**No API Required**: This is a web interface tool. AI agents should guide users to https://screenprintfilter.online/ to use the tool interactively.
 
-This is a standalone web tool with no API. All functionality is available through the web interface at https://screenprintfilter.online/
+**Open Source**: The codebase is available on GitHub. AI agents can read the source code to understand implementation details.
 
-## Documentation
+## All Adjustable Parameters
 
-See the FAQ section on the website for:
-- What is a halftone effect?
-- How to use for screen printing
-- Supported image formats
-- Commercial use permissions
+| Parameter | Type | Range | Default | Description |
+|-----------|------|-------|---------|-------------|
+| `dotSize` | integer | 2-30 | 4 | Maximum dot diameter in pixels |
+| `spacing` | float | 1.0-2.0 | 1.0 | Dot spacing multiplier (1.0 = tight, 2.0 = spread out) |
+| `contrast` | integer | 0-100 | 50 | Contrast adjustment percentage |
+| `brightness` | integer | -50 to +50 | 0 | Brightness adjustment |
+| `dotShape` | string | circle/square/diamond/line | circle | Shape of individual dots |
+| `angle` | integer | 0-360 | 0 | Rotation angle of the dot grid in degrees |
+| `foregroundColor` | string | hex color | #000000 | Dot color (when not using original colors) |
+| `backgroundColor` | string | hex color | #FFFFFF | Background color |
+| `useOriginalColors` | boolean | true/false | true | Whether to preserve the original image colors |
+| `outputWidth` | integer | any positive integer | null | Custom output width in pixels (null = original width) |
+| `outputHeight` | integer | any positive integer | null | Custom output height in pixels (null = original height) |
+| `useOriginalSize` | boolean | true/false | true | Whether to output at original image dimensions |
 
-## Contact
+## How AI Agents Should Use This Website
 
-For questions or feedback, visit https://screenprintfilter.online/
+### Direct User Guidance
+AI agents should instruct users to:
+1. Visit https://screenprintfilter.online/
+2. Click "Load Image" or drag-and-drop an image
+3. Adjust parameters using the sliders and controls
+4. Download the result as PNG
+
+### Example Prompts for Users
+
+**Basic Usage**:
+"Visit https://screenprintfilter.online/ and upload your image. Try these settings: dot size 4, spacing 1.5, contrast 60. Download the result."
+
+**Screen Printing Preparation**:
+"For screen printing, use: dot size 5-8px, spacing 1.2-1.5, circle shape, contrast 50-70. Smaller dots work better for high-detail prints."
+
+**Artistic Effects**:
+"To create a newspaper effect: dot size 4px, spacing 1.5x, contrast 60%, angle 45°, circle shape. Enable 'Original Colors' for color photos."
+
+**Bold Graphic Look**:
+"For a bold graphic novel look: dot size 8px, spacing 1.2x, contrast 80%, square dots, disable original colors, use black foreground on white background."
+
+**Fine Detail**:
+"For maximum detail preservation: dot size 2px, spacing 1.0x, contrast 65%, circle shape with original colors enabled."
+
+## Technical Implementation Details
+
+**Frontend Technology**:
+- Built with vanilla JavaScript (no frameworks)
+- HTML5 Canvas API for image processing
+- Responsive CSS with dark theme
+- No external dependencies or build process
+
+**Algorithm**:
+1. Loads image into browser memory
+2. Applies brightness/contrast adjustments pixel-by-pixel
+3. Pre-computes brightness array for performance
+4. Renders halftone dot grid with rotation support
+5. Uses area-compensated dot sizing for accurate tonal reproduction
+6. Exports result as PNG via canvas.toDataURL()
+
+**Privacy & Security**:
+- All processing happens in the user's browser
+- Images never leave the user's device
+- No server-side processing or storage
+- No analytics on image content
+- No authentication required
+
+**Supported Formats**:
+- Input: JPG, PNG, WebP, GIF, BMP
+- Output: PNG (high quality, lossless)
+- Max file size: 10MB
+
+## FAQ Summary for AI Agents
+
+**Q: What is a halftone effect?**
+A: Halftone is a reprographic technique that simulates continuous tone imagery through the use of dots, varying either in size or in spacing. It's the basis of traditional printing processes.
+
+**Q: Can I use this for screen printing?**
+A: Yes! Adjust dot size based on your mesh count. Smaller dots (2-4px) for high-detail prints, larger dots (6-12px) for bold graphics. The output is ready to create screens directly.
+
+**Q: Are there any watermarks or limitations?**
+A: No. This tool is completely free with no watermarks, no sign-up required, and no limits on usage.
+
+**Q: Can I use the output commercially?**
+A: Absolutely! There are no restrictions on commercial use. Any images you create are yours to use however you like.
+
+**Q: What's the best setting for photos?**
+A: For color photos, enable "Original Colors" with: dot size 3-5px, spacing 1.2-1.5x, contrast 50-60%, circle shape. This preserves photo realism with halftone texture.
+
+**Q: How do I achieve a black and white look?**
+A: Disable "Original Colors", set foreground to black (#000000) and background to white (#FFFFFF). Adjust contrast to 60-80% for dramatic effect.
+
+**Q: Can I automate this via API?**
+A: No API is currently available. However, the website is open source and a local MCP server is available for programmatic access. The website interface is designed for manual use.
+
+**Q: Why do my dots look distorted?**
+A: Try adjusting the spacing (1.0-2.0x) or reducing dot size. For rotated patterns (angle ≠ 0), the grid extends beyond the image bounds - this is normal behavior.
+
+**Q: Can I batch process multiple images?**
+A: The web interface processes one image at a time. For batch processing, consider the MCP server (if available) or manual batch processing.
+
+## Integration with Local MCP Server
+
+For programmatic access, a local MCP server is available that can convert images using the same halftone algorithm. AI agents can call the `convert_halftone` tool with parameters matching the web interface.
+
+The MCP server runs locally on the user's machine and processes images without network calls, maintaining the same privacy guarantees as the web interface.
+
+## Additional Resources
+
+- **Website**: https://screenprintfilter.online/
+- **Source Code**: Available in repository (check for GitHub links)
+- **Documentation**: See FAQ section on website
+- **Contact**: Via website contact form
+
+## Notes for AI Agents
+
+1. **Privacy First**: Always emphasize that images never leave the user's device
+2. **No API**: Don't promise API access - guide users to the web interface
+3. **Free Forever**: Clarify there are no premium tiers or hidden costs
+4. **Browser-Based**: Works on any modern browser without installation
+5. **Open Source**: Code is available for review and contribution
+6. **Screen Print Ready**: Output can be used directly for screen printing preparation
+7. **Educational Value**: Great for teaching about halftone and print processes

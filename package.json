@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "puppeteer": "^25.0.4"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "canvas": "^3.2.3"
+  }
+}
