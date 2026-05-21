@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is a Halftone Filter? A Complete Guide for Screen Printing - ScreenPrintFilter.online</title>
+    <meta name="description" content="Learn what halftone filters are, how they work for screen printing, and how to create halftone dot effects online for free. Complete guide with examples and tips.">
+    <meta name="keywords" content="halftone filter, what is halftone, screen printing halftone, halftone dots, halftone pattern, create halftone online">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="What is a Halftone Filter? A Complete Guide for Screen Printing">
+    <meta property="og:description" content="Learn what halftone filters are, how they work for screen printing, and how to create halftone dot effects online for free.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/guides/what-is-halftone-filter/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .breadcrumb a { color: #888; text-decoration: none; }
+        .breadcrumb a:hover { color: #FF4500; }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .example-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .example-card .dot-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            background: radial-gradient(circle at 30% 30%, #FF4500, #000);
+        }
+        .example-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .example-card .desc { color: #666; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/">Try the Tool</a>
+        </header>
+
+        <main>
+            <div class="breadcrumb"><a href="/">Home</a> &rsaquo; Guides &rsaquo; What is a Halftone Filter?</div>
+
+            <h1>What is a Halftone Filter? A Complete Guide for Screen Printing</h1>
+            <p class="byline">Published: May 21, 2026 &bull; 6 min read</p>
+
+            <p>If you have ever looked closely at a printed t-shirt, a newspaper photo, or a comic book, you have probably seen halftone dots without realizing it. Those tiny dots are what make continuous-tone images printable using just a few solid ink colors. In this guide, we will explain what a halftone filter is, how it works, and how you can create stunning halftone effects online for free.</p>
+
+            <div class="highlight-box">
+                <p><strong>TL;DR:</strong> A halftone filter converts an image into a pattern of dots of varying sizes. The dots simulate different shades and tones, making it possible to print detailed images using screen printing or offset printing. <strong><a href="/" style="color:#FF4500;">Try our free online halftone tool</a></strong> to create halftone effects instantly in your browser.</p>
+            </div>
+
+            <h2>What is a Halftone?</h2>
+            <p>Halftone is a printing technique that simulates continuous-tone imagery through the use of dots. By varying the size and spacing of these dots, halftone creates the optical illusion of gradients and shades from a single ink color. Larger dots appear darker; smaller dots appear lighter.</p>
+            <p>The concept dates back to the late 19th century and was a revolutionary breakthrough in the printing industry. Before halftone, printing photographs was nearly impossible without expensive engraving techniques.</p>
+
+            <h2>What is a Halftone Filter?</h2>
+            <p>A halftone filter is a digital tool — often found in graphic design software or available as an online tool — that applies the halftone dot effect to a digital image. Instead of manually placing dots, the filter algorithm automatically:</p>
+            <ul>
+                <li><strong>Analyzes</strong> the brightness and contrast of each part of the image</li>
+                <li><strong>Converts</strong> those values into dots of corresponding sizes</li>
+                <li><strong>Arranges</strong> the dots in a grid pattern (circles, squares, diamonds, or lines)</li>
+            </ul>
+            <p>The result is a stylized, screen-print-ready version of your original image.</p>
+
+            <h2>How Does a Halftone Filter Work?</h2>
+            <p>Understanding the mechanics helps you get better results. Here is how a typical halftone filter processes your image:</p>
+
+            <h3>1. Grayscale Conversion</h3>
+            <p>First, the image is converted to grayscale. Each pixel gets a brightness value from 0 (black) to 255 (white). This determines the size of the corresponding dot.</p>
+
+            <h3>2. Grid Overlay</h3>
+            <p>A grid is overlaid on the image. Each grid cell will contain one dot. The grid resolution (or frequency) is measured in <strong>Lines Per Inch (LPI)</strong> — a higher LPI means smaller, tighter dots and more detail.</p>
+
+            <h3>3. Dot Size Calculation</h3>
+            <p>For each grid cell, the filter calculates the average brightness. Darker areas get larger dots; lighter areas get smaller dots. This is controlled by the <strong>contrast</strong> and <strong>dot size</strong> settings.</p>
+
+            <div class="highlight-box">
+                <p><strong>Pro Tip:</strong> For screen printing, use a lower dot density (larger dots) on fabric and a higher density on paper. Our tool at <a href="/" style="color:#FF4500;">ScreenPrintFilter.online</a> lets you tune all these parameters in real time.</p>
+            </div>
+
+            <h2>Halftone vs. Dithering vs. Stippling</h2>
+            <p>These terms are often confused. Here is the difference:</p>
+            <ul>
+                <li><strong>Halftone:</strong> Uses a fixed grid of varying-size dots. Best for screen printing and offset printing.</li>
+                <li><strong>Dithering:</strong> Uses fixed-size dots at varying positions to simulate shades. Common in early computer graphics.</li>
+                <li><strong>Stippling:</strong> Dots are placed randomly and manually — artistic, not algorithmic.</li>
+            </ul>
+
+            <h2>Common Halftone Dot Shapes</h2>
+            <div class="example-grid">
+                <div class="example-card">
+                    <div class="dot-preview" style="background: radial-gradient(circle, #FF4500 40%, #000 60%);"></div>
+                    <div class="label">Circle</div>
+                    <div class="desc">Classic and most common</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="background: linear-gradient(135deg, #FF4500 50%, #000 50%);"></div>
+                    <div class="label">Square</div>
+                    <div class="desc">Bold, graphic look</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); background: #FF4500;"></div>
+                    <div class="label">Diamond</div>
+                    <div class="desc">Vintage print feel</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="background: repeating-linear-gradient(90deg, #FF4500 0px, #FF4500 4px, #000 4px, #000 8px);"></div>
+                    <div class="label">Line</div>
+                    <div class="desc">Special effect</div>
+                </div>
+            </div>
+
+            <h2>Why Use Halftone Filters?</h2>
+            <ul>
+                <li><strong>Screen Printing:</strong> Halftone is essential for printing photo-like images on t-shirts, posters, and merchandise with limited ink colors.</li>
+                <li><strong>Retro Aesthetic:</strong> Halftone effects give designs a vintage comic book or pop-art look that is very popular in modern design.</li>
+                <li><strong>Merchandise Design:</strong> If you are designing for print-on-demand, halftone filters help you create production-ready artwork.</li>
+                <li><strong>No Special Software Needed:</strong> Online tools like ScreenPrintFilter.online let you create halftone effects without Photoshop or expensive RIP software.</li>
+            </ul>
+
+            <h2>How to Create Halftone Effects Online (Step by Step)</h2>
+            <ol>
+                <li><strong>Go to</strong> <a href="/" style="color:#FF4500;">ScreenPrintFilter.online</a></li>
+                <li><strong>Upload</strong> your image (supports JPG, PNG, WebP, up to 10MB)</li>
+                <li><strong>Adjust</strong> the settings: dot size, spacing, contrast, brightness, and shape</li>
+                <li><strong>Toggle</strong> "Original Colors" to keep your image colors or switch to grayscale</li>
+                <li><strong>Preview</strong> the result in real-time with zoom controls</li>
+                <li><strong>Download</strong> the final image as PNG at original resolution</li>
+            </ol>
+            <p>That is it! No account required, no uploads to any server — everything runs locally in your browser.</p>
+
+            <div class="cta-box">
+                <h3>Try It Now</h3>
+                <p>Create professional halftone effects instantly, right in your browser. Free and no sign-up required.</p>
+                <a href="/" class="cta-button">Open Halftone Tool →</a>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What LPI should I use for screen printing?</h3>
+            <p>For t-shirt printing, 35-55 LPI is recommended. For paper printing, 55-85 LPI works well. Higher LPI (85+) is better for fine art prints but requires finer mesh screens.</p>
+
+            <h3>Can I use halftone filters for digital design?</h3>
+            <p>Absolutely! Halftone effects are popular in digital design for creating retro posters, social media graphics, album covers, and more.</p>
+
+            <h3>Does ScreenPrintFilter.online upload my images to a server?</h3>
+            <p>No. All image processing happens locally in your browser using HTML5 Canvas. Your images never leave your device. See our <a href="/privacy-policy.html" style="color:#888;">Privacy Policy</a> for details.</p>
+
+            <h3>What image formats are supported?</h3>
+            <p>JPG, PNG, and WebP. Maximum file size is 10MB. The output is always a high-quality PNG at your chosen resolution.</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/">Back to Tool</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>
