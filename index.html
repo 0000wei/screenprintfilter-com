@@ -993,6 +993,7 @@
                 }
 
                 const rect = resultCanvas.getBoundingClientRect();
+                const wrapperRect = canvasWrapper.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
 
@@ -1011,21 +1012,23 @@
                 const sourceSize = magnifierSize / zoomLevel;
 
                 const magnifierCanvas = document.createElement('canvas');
-                magnifierCanvas.width = sourceSize;
-                magnifierCanvas.height = sourceSize;
-                const magnifierCtx = magnifierCanvas.getContext('2d');
+                magnifierCanvas.width = magnifierSize;
+                magnifierCanvas.height = magnifierSize;
+                const magCtx = magnifierCanvas.getContext('2d');
 
-                const sourceX = Math.max(0, Math.min(canvasX - sourceSize / 2, resultCanvas.width - sourceSize));
-                const sourceY = Math.max(0, Math.min(canvasY - sourceSize / 2, resultCanvas.height - sourceSize));
+                const sx = Math.max(0, Math.min(canvasX - sourceSize / 2, resultCanvas.width - sourceSize));
+                const sy = Math.max(0, Math.min(canvasY - sourceSize / 2, resultCanvas.height - sourceSize));
 
-                magnifierCtx.drawImage(resultCanvas,
-                    sourceX, sourceY, sourceSize, sourceSize,
-                    0, 0, sourceSize, sourceSize
+                magCtx.imageSmoothingEnabled = false;
+                magCtx.drawImage(
+                    resultCanvas,
+                    sx, sy, sourceSize, sourceSize,
+                    0, 0, magnifierSize, magnifierSize
                 );
 
                 magnifier.style.display = 'block';
-                magnifier.style.left = (x - magnifierSize / 2) + 'px';
-                magnifier.style.top = (y - magnifierSize - 10) + 'px';
+                magnifier.style.left = (e.clientX - wrapperRect.left - magnifierSize / 2) + 'px';
+                magnifier.style.top = (e.clientY - wrapperRect.top - magnifierSize - 10) + 'px';
                 magnifier.style.backgroundImage = `url(${magnifierCanvas.toDataURL()})`;
                 magnifier.style.backgroundSize = `${magnifierSize}px ${magnifierSize}px`;
             });
