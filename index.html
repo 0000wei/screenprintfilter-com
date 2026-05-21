@@ -1954,7 +1954,15 @@
 
             updateColorPickerStates();
             updateValueDisplays();
-            scheduleProcessing();
+
+            // Clear any pending processing to avoid unwanted state saves
+            if (processingTimeout) {
+                clearTimeout(processingTimeout);
+                processingTimeout = null;
+            }
+
+            // Apply halftone directly without triggering state save
+            applyHalftone();
         }
 
         function updateUndoButtons() {
