@@ -1044,6 +1044,7 @@
         let processingTimeout = null;
         let isProcessing = false;
         let processingId = 0;
+        let cancelCurrentRender = false;
 
         const MAX_HISTORY = 20;
         let undoStack = [];
@@ -1054,10 +1055,6 @@
         let isPanning = false;
         let panStartX = 0, panStartY = 0;
         let panX = 0, panY = 0;
-
-        // Result canvas references for compatibility
-        const resultCanvas = mainCanvas;
-        const resultCtx = mainCtx;
 
         // Initialize
         init();
@@ -1207,17 +1204,6 @@
             }
         }
 
-        function debounce(func, wait) {
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(processingTimeout);
-                    func(...args);
-                };
-                clearTimeout(processingTimeout);
-                processingTimeout = setTimeout(later, wait);
-            };
-        }
-
         function handleDragOver(e) {
             e.preventDefault();
             canvasWrapper.style.borderColor = 'var(--accent)';
@@ -1250,7 +1236,21 @@
         function handleControlChange() {
             saveState();
             updateValueDisplays();
-            scheduleProcessing();
+
+            // Clear any pending debounced render
+            if (processingTimeout) {
+                clearTimeout(processingTimeout);
+                processingTimeout = null;
+            }
+
+            // Cancel current render if running
+            if (isProcessing) {
+                cancelCurrentRender = true;
+            }
+
+            // Render immediately on change (user released slider)
+            processingStatus.classList.add('active');
+            applyHalftone();
         }
 
         function handleControlInput() {
@@ -1404,16 +1404,22 @@
         }
 
         function scheduleProcessing() {
-            if (isProcessing) return;
+            // Clear existing timeout
+            if (processingTimeout) {
+                clearTimeout(processingTimeout);
+            }
+
+            // Cancel current render if running
+            if (isProcessing) {
+                cancelCurrentRender = true;
+            }
 
             processingStatus.classList.add('active');
 
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    applyHalftone();
-                    processingStatus.classList.remove('active');
-                }, 50);
-            });
+            // Debounce: wait 300ms after user stops adjusting
+            processingTimeout = setTimeout(() => {
+                applyHalftone();
+            }, 300);
         }
 
         function applyHalftone() {
@@ -1421,6 +1427,7 @@
 
             const currentId = ++processingId;
             isProcessing = true;
+            cancelCurrentRender = false;
 
             const dotSize = parseInt(dotSizeSlider.value);
             const spacing = parseFloat(spacingSlider.value);
@@ -1439,19 +1446,19 @@
             if (!useOriginalSizeCheckbox.checked && outputWidthInput.value && outputHeightInput.value) {
                 outputWidth = parseInt(outputWidthInput.value);
                 outputHeight = parseInt(outputHeightInput.value);
-                resultCanvas.width = outputWidth;
-                resultCanvas.height = outputHeight;
+                mainCanvas.width = outputWidth;
+                mainCanvas.height = outputHeight;
             } else {
-                resultCanvas.width = outputWidth;
-                resultCanvas.height = outputHeight;
+                mainCanvas.width = outputWidth;
+                mainCanvas.height = outputHeight;
             }
 
             // Fill background
-            resultCtx.fillStyle = backgroundColor;
-            resultCtx.fillRect(0, 0, outputWidth, outputHeight);
+            mainCtx.fillStyle = backgroundColor;
+            mainCtx.fillRect(0, 0, outputWidth, outputHeight);
 
             // Set foreground color (will be overridden when using original colors)
-            resultCtx.fillStyle = foregroundColor;
+            mainCtx.fillStyle = foregroundColor;
 
             // Create temporary canvas for image processing
             const tempCanvas = document.createElement('canvas');
@@ -1502,6 +1509,9 @@
 
             tempCtx.putImageData(imageData, 0, 0);
 
+            // Pre-compute brightness array for performance
+            const brightnessArray = precomputeBrightness(imageData);
+
             // Calculate grid parameters with rotation
             const gridSize = dotSize * spacing;
             const angleRad = (angle * Math.PI) / 180;
@@ -1512,94 +1522,115 @@
             const gridWidth = outputWidth * Math.abs(cosAngle) + outputHeight * Math.abs(sinAngle);
             const gridHeight = outputWidth * Math.abs(sinAngle) + outputHeight * Math.abs(cosAngle);
 
-            // Draw halftone dots with rotation - use chunked processing
-            const rows = [];
+            // Draw halftone dots with rotation - single synchronous pass
             for (let y = -gridSize; y < gridHeight + gridSize; y += gridSize) {
-                rows.push(y);
-            }
-
-            let rowIndex = 0;
-            const CHUNK_SIZE = 20;
-
-            function processChunk() {
-                if (currentId !== processingId) {
-                    return; // cancelled by new change
-                }
-
-                if (rowIndex >= rows.length) {
+                // Check for cancellation
+                if (cancelCurrentRender && currentId !== processingId) {
                     isProcessing = false;
                     processingStatus.classList.remove('active');
                     return;
                 }
 
-                const endRow = Math.min(rowIndex + CHUNK_SIZE, rows.length);
-                for (let ri = rowIndex; ri < endRow; ri++) {
-                    const y = rows[ri];
-                    for (let x = -gridSize; x < gridWidth + gridSize; x += gridSize) {
-                        // Apply rotation to grid position
-                        const rotatedX = x * cosAngle - y * sinAngle;
-                        const rotatedY = x * sinAngle + y * cosAngle;
+                for (let x = -gridSize; x < gridWidth + gridSize; x += gridSize) {
+                    // Apply rotation to grid position
+                    const rotatedX = x * cosAngle - y * sinAngle;
+                    const rotatedY = x * sinAngle + y * cosAngle;
 
-                        if (rotatedX < -gridSize || rotatedX >= outputWidth + gridSize ||
-                            rotatedY < -gridSize || rotatedY >= outputHeight + gridSize) {
-                            continue;
-                        }
+                    if (rotatedX < -gridSize || rotatedX >= outputWidth + gridSize ||
+                        rotatedY < -gridSize || rotatedY >= outputHeight + gridSize) {
+                        continue;
+                    }
 
-                        // Sample from the original canvas (mapped to output coordinates)
-                        const sampleX = (rotatedX / outputWidth) * tempCanvas.width;
-                        const sampleY = (rotatedY / outputHeight) * tempCanvas.height;
+                    // Sample from the original canvas (mapped to output coordinates)
+                    const sampleX = (rotatedX / outputWidth) * tempCanvas.width;
+                    const sampleY = (rotatedY / outputHeight) * tempCanvas.height;
 
-                        // Get brightness at this position
-                        const pixelBrightness = getPixelBrightness(tempCtx, sampleX, sampleY, tempCanvas.width, tempCanvas.height);
+                    // Get brightness at this position using pre-computed array
+                    const pixelBrightness = getPixelBrightness(brightnessArray, sampleX, sampleY, tempCanvas.width, tempCanvas.height);
 
-                        // Calculate dot size based on brightness (darker = bigger)
-                        // Area-compensated: dot covers (1-brightness) fraction of the cell area
-                        // dotArea = π*r² and cellArea = gridSize²
-                        // So r = sqrt((1-brightness) * cellArea / π)
-                        // This gives proper visual density: 50% gray → 50% dot coverage
-                        const normalizedBrightness = pixelBrightness / 255;
-                        const targetCoverage = 1 - normalizedBrightness;
-                        const maxDotArea = Math.PI * Math.pow(dotSize / 2, 2);
-                        const cellArea = gridSize * gridSize;
-                        // Scale coverage to dot size, capping at full cell coverage
-                        const coverageRatio = Math.min(targetCoverage * cellArea / maxDotArea, 1);
-                        const dotRadius = Math.sqrt(coverageRatio) * (dotSize / 2);
+                    // Calculate dot size based on brightness (darker = bigger)
+                    // Area-compensated: dot covers (1-brightness) fraction of the cell area
+                    // dotArea = π*r² and cellArea = gridSize²
+                    // So r = sqrt((1-brightness) * cellArea / π)
+                    // This gives proper visual density: 50% gray → 50% dot coverage
+                    const normalizedBrightness = pixelBrightness / 255;
+                    const targetCoverage = 1 - normalizedBrightness;
+                    const maxDotArea = Math.PI * Math.pow(dotSize / 2, 2);
+                    const cellArea = gridSize * gridSize;
+                    // Scale coverage to dot size, capping at full cell coverage
+                    const coverageRatio = Math.min(targetCoverage * cellArea / maxDotArea, 1);
+                    const dotRadius = Math.sqrt(coverageRatio) * (dotSize / 2);
 
-                        if (dotRadius > 0.5) {
-                            const centerX = rotatedX + gridSize / 2;
-                            const centerY = rotatedY + gridSize / 2;
+                    if (dotRadius > 0.5) {
+                        const centerX = rotatedX + gridSize / 2;
+                        const centerY = rotatedY + gridSize / 2;
 
-                            if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
-                                centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
+                        if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
+                            centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
 
-                                // Get original color if using original colors mode
-                                if (useOriginalColors) {
-                                    const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
-                                    const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
-                                    const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
-                                    drawShape(resultCtx, centerX, centerY, dotRadius, shape, originalColor);
-                                } else {
-                                    drawShape(resultCtx, centerX, centerY, dotRadius, shape);
-                                }
+                            // Get original color if using original colors mode
+                            if (useOriginalColors) {
+                                const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
+                                const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
+                                const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
+                                drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
+                            } else {
+                                drawShape(mainCtx, centerX, centerY, dotRadius, shape);
                             }
                         }
                     }
                 }
-                rowIndex = endRow;
-                requestAnimationFrame(processChunk);
             }
 
-            requestAnimationFrame(processChunk);
+            isProcessing = false;
+            processingStatus.classList.remove('active');
         }
 
-        function getPixelBrightness(ctx, x, y, width, height) {
+        function precomputeBrightness(imageData) {
+            const data = imageData.data;
+            const width = imageData.width;
+            const height = imageData.height;
+            const brightness = new Uint8Array(width * height);
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const i = (y * width + x) * 4;
+                    // Use grayscale value for brightness
+                    brightness[y * width + x] = Math.round(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+                }
+            }
+
+            return brightness;
+        }
+
+        function getPixelBrightness(brightnessArray, x, y, width, height) {
             // Sample a small area around the point for more stable results
             const sampleSize = 3;
             const sx = Math.max(0, Math.min(Math.floor(x - sampleSize/2), width - sampleSize));
             const sy = Math.max(0, Math.min(Math.floor(y - sampleSize/2), height - sampleSize));
             const sw = Math.min(sampleSize, width - sx);
             const sh = Math.min(sampleSize, height - sy);
-            
+
+            let sum = 0;
+            let count = 0;
+            for (let dy = 0; dy < sh; dy++) {
+                for (let dx = 0; dx < sw; dx++) {
+                    const idx = (sy + dy) * width + (sx + dx);
+                    sum += brightnessArray[idx];
+                    count++;
+                }
+            }
+            return count > 0 ? sum / count : 128;
+        }
+
+        function getPixelBrightnessFromContext(ctx, x, y, width, height) {
+            // Fallback for color sampling when using original colors
+            const sampleSize = 3;
+            const sx = Math.max(0, Math.min(Math.floor(x - sampleSize/2), width - sampleSize));
+            const sy = Math.max(0, Math.min(Math.floor(y - sampleSize/2), height - sampleSize));
+            const sw = Math.min(sampleSize, width - sx);
+            const sh = Math.min(sampleSize, height - sy);
+
             const imageData = ctx.getImageData(sx, sy, sw, sh);
             const data = imageData.data;
             let sum = 0;
@@ -1671,9 +1702,11 @@
 
         function downloadImage() {
             try {
-                let canvasToExport = resultCanvas;
+                let canvasToExport = mainCanvas;
 
-                if (useOriginalSizeCheckbox.checked && originalWidth > 0 && originalHeight > 0) {
+                // If output size equals preview size, export existing canvas directly
+                if (useOriginalSizeCheckbox.checked && originalWidth > 0 && originalHeight > 0 &&
+                    (originalWidth !== mainCanvas.width || originalHeight !== mainCanvas.height)) {
                     const tempCanvas = document.createElement('canvas');
                     tempCanvas.width = originalWidth;
                     tempCanvas.height = originalHeight;
@@ -1711,6 +1744,9 @@
                     const imageData = tempCtx2.getImageData(0, 0, tempCanvas2.width, tempCanvas2.height);
                     const data = imageData.data;
 
+                    // Pre-compute brightness array for performance
+                    const brightnessArray = precomputeBrightness(imageData);
+
                     for (let i = 0; i < data.length; i += 4) {
                         let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
                         gray += brightness * 2.55;
@@ -1742,7 +1778,7 @@
                             const sampleX = (rotatedX / outputWidth) * tempCanvas2.width;
                             const sampleY = (rotatedY / outputHeight) * tempCanvas2.height;
 
-                            const pixelBrightness = getPixelBrightness(tempCtx2, sampleX, sampleY, tempCanvas2.width, tempCanvas2.height);
+                            const pixelBrightness = getPixelBrightness(brightnessArray, sampleX, sampleY, tempCanvas2.width, tempCanvas2.height);
 
                             const normalizedBrightness = pixelBrightness / 255;
                             const targetCoverage = 1 - normalizedBrightness;
