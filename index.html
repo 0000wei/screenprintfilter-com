@@ -1056,8 +1056,8 @@
         let panStartX = 0, panStartY = 0;
         let panX = 0, panY = 0;
 
-        // Initialize
-        init();
+        // Initialize is called at the end of the script
+
 
         function init() {
             setupEventListeners();
@@ -1995,6 +1995,9 @@
                 showNotification('Parameters loaded! Upload an image to try this look.');
             }
         }
+
+        // Initialize (must be at end after all const values like GALLERY_SVGS)
+        init();
     </script>
 </body>
 </html>
