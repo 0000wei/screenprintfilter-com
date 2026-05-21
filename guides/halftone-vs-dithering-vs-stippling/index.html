@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halftone vs Dithering vs Stippling vs Mezzotint - What's the Difference? - ScreenPrintFilter.online</title>
+    <meta name="description" content="Halftone, dithering, stippling, and mezzotint all create tone using dots. Here is how they differ, when to use each, and which one works for screen printing.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Halftone vs Dithering vs Stippling vs Mezzotint - What's the Difference?">
+    <meta property="og:description" content="Halftone, dithering, stippling, and mezzotint all create tone using dots. Here is how they differ and when to use each.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/guides/halftone-vs-dithering-vs-stippling/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H72N80TEBW');</script>
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.8;}
+        .container{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+        .header{padding:1.5rem 0;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;}
+        .header a{color:#a0a0a0;text-decoration:none;font-size:.9rem;}
+        .header a:hover{color:#FF4500;}
+        .header .logo{font-size:1.1rem;font-weight:700;color:#e0e0e0;}
+        .header .logo span{color:#FF4500;}
+        main{padding:3rem 0;}
+        .breadcrumb{color:#666;font-size:.85rem;margin-bottom:1.5rem;}
+        .breadcrumb a{color:#888;text-decoration:none;}
+        .breadcrumb a:hover{color:#FF4500;}
+        h1{font-size:2rem;margin-bottom:1rem;color:#f1f5f9;line-height:1.3;}
+        .byline{color:#666;font-size:.85rem;margin-bottom:2rem;}
+        h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:#e0e0e0;}
+        h3{font-size:1.1rem;margin:1.5rem 0 .5rem;color:#c0c0c0;}
+        p{color:#a0a0a0;margin-bottom:1.2rem;}
+        ul,ol{color:#a0a0a0;margin-left:1.5rem;margin-bottom:1.2rem;}
+        li{margin-bottom:.5rem;}
+        .method-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:1.5rem;margin:1.5rem 0;}
+        .method-box h3{margin:0 0 .5rem;color:#f1f5f9;}
+        .method-box .tag{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:1rem;font-weight:600;margin-bottom:.75rem;}
+        .tag-green{background:#065f46;color:#6ee7b7;}
+        .tag-blue{background:#1e3a5f;color:#93c5fd;}
+        .tag-purple{background:#3b1f5c;color:#d8b4fe;}
+        .tag-amber{background:#5c3800;color:#fcd34d;}
+        .verdict-box{background:#1a1a1a;border-left:4px solid #FF4500;padding:1.25rem;border-radius:0 8px 8px 0;margin:2rem 0;}
+        .verdict-box p{color:#c0c0c0;margin-bottom:0;}
+        .verdict-box strong{color:#FF4500;}
+        .cta-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+        .cta-box h3{color:#f1f5f9;margin:0 0 .5rem;}
+        .cta-box p{color:#999;margin-bottom:1.5rem;}
+        .cta-button{display:inline-block;background:#FF4500;color:#fff;padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:background .2s;}
+        .cta-button:hover{background:#FF5722;}
+        .footer{border-top:1px solid #222;padding:2rem 0;text-align:center;color:#555;font-size:.85rem;}
+        .footer a{color:#777;text-decoration:none;}
+        .footer a:hover{color:#FF4500;}
+        table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem;}
+        th{background:#2a2a2a;color:#e0e0e0;padding:.75rem 1rem;text-align:left;border-bottom:2px solid #444;}
+        td{padding:.75rem 1rem;border-bottom:1px solid #2a2a2a;color:#a0a0a0;}
+    </style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+    <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+    <a href="/">Try the Tool</a>
+</header>
+<main>
+<div class="breadcrumb"><a href="/">Home</a> &rsaquo; Guides &rsaquo; Halftone vs Dithering vs Stippling</div>
+
+<h1>Halftone vs Dithering vs Stippling vs Mezzotint: What's the Difference?</h1>
+<p class="byline">Published: May 21, 2026 &bull; 6 min read</p>
+
+<p>If you have been looking into ways to turn images into dot patterns, you have probably seen these four terms thrown around. They sound similar, they all involve dots, but they work in very different ways. And if you pick the wrong one for your project, the result will look off.</p>
+
+<p>Here is a no-nonsense breakdown of each technique, when to use them, and the practical differences that matter.</p>
+
+<table>
+    <tr><th>Method</th><th>Dot Size</th><th>Dot Position</th><th>Best For</th><th>Can You Do It Online?</th></tr>
+    <tr><td><strong>Halftone</strong></td><td>Varies</td><td>Fixed grid</td><td>Screen printing, offset printing</td><td>Yes (our tool)</td></tr>
+    <tr><td><strong>Dithering</strong></td><td>Fixed</td><td>Varied</td><td>Low-color displays, pixel art</td><td>Yes</td></tr>
+    <tr><td><strong>Stippling</strong></td><td>Fixed</td><td>Random (hand-drawn)</td><td>Art, illustration</td><td>Sort of (AI-assisted)</td></tr>
+    <tr><td><strong>Mezzotint</strong></td><td>N/A (roughened texture)</td><td>N/A</td><td>Fine art prints</td><td>Not really</td></tr>
+</table>
+
+<div class="method-box">
+    <span class="tag tag-green">Most Practical</span>
+    <h3>Halftone</h3>
+    <p>Halftone is the standard for screen printing and commercial printing. It works by laying down a uniform grid and varying the size of each dot. Dark parts of the image get big dots, light parts get small ones. Because the dots are on a grid, they print predictably and consistently.</p>
+    <p>The grid can be rotated (called the screen angle) to avoid moire patterns when printing multiple colors. In screen printing, different angles are used for each ink color so the dots do not clash. That is getting into advanced territory, but it is good to know the system is built for this.</p>
+    <p><strong>Key advantage:</strong> It works. Screen printers have been using halftones for decades. The technique is proven, the tools are mature, and the results are repeatable.</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-blue">Best for Pixel Art</span>
+    <h3>Dithering</h3>
+    <p>Dithering uses fixed-size dots placed at varying positions to create the illusion of shades. Think of old-school video games — the checkerboard patterns in Super Nintendo games, the grainy look of early computer graphics. That is dithering.</p>
+    <p>The dots are the same size everywhere. To make a darker area, you cram more dots closer together. To make it lighter, you spread them out. There are various algorithms for this — Floyd-Steinberg, Bayer, Atkinson — each producing a different pattern.</p>
+    <p>Dithering is making a comeback in pixel art and retro-style design. But for actual screen printing, it is rarely the right choice. The inconsistent dot placement makes it harder to burn clean screens, and the results are less predictable on fabric.</p>
+    <p><strong>Key advantage:</strong> Great for digital art and low-color environments. Not ideal for production printing.</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-purple">Most Artistic</span>
+    <h3>Stippling</h3>
+    <p>Stippling is a hand-drawn technique where an artist creates an image by placing thousands of individual dots. Each dot is the same size — the darkness comes from how densely the dots are placed. It is incredibly time-consuming but produces beautiful, organic results.</p>
+    <p>There are digital tools that try to automate stippling, but they rarely look as good as the real thing. The problem is that human-made stippling has intentional irregularity — the artist instinctively varies density based on what looks right, not what an algorithm calculates.</p>
+    <p>For screen printing, stippling is impractical unless you are doing a small run of highly artistic prints. The irregular spacing can cause issues with screen burning and ink flow.</p>
+    <p><strong>Key advantage:</strong> Gorgeous hand-crafted look. Impractical for production work.</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-amber">Fine Art Only</span>
+    <h3>Mezzotint</h3>
+    <p>Mezzotint is an engraving technique from the 17th century. Instead of dots, the artist roughens the surface of a metal plate with a tool called a rocker, creating a textured surface that holds ink. Smoother areas print lighter, rougher areas print darker.</p>
+    <p>Modern digital mezzotint filters try to simulate this by adding random noise and texture to an image. They rarely look convincing. Real mezzotint has a depth and richness that digital filters cannot quite replicate.</p>
+    <p>Unless you are making fine art prints, you probably do not need mezzotint. It is more of a historical technique that occasionally gets referenced in modern design.</p>
+    <p><strong>Key advantage:</strong> Rich, deep tones. Niche use case in the digital age.</p>
+</div>
+
+<h2>Quick Comparison Chart</h2>
+
+<table>
+    <tr><th></th><th>Halftone</th><th>Dithering</th><th>Stippling</th><th>Mezzotint</th></tr>
+    <tr><td>Easy to do?</td><td>Yes — online tools exist</td><td>Yes — built into most image editors</td><td>No — takes hours by hand</td><td>No — needs specialized engraving</td></tr>
+    <tr><td>Good for screen printing?</td><td>Yes</td><td>Not really</td><td>Rarely</td><td>No</td></tr>
+    <tr><td>Good for digital design?</td><td>Yes</td><td>Yes (retro style)</td><td>Sometimes</td><td>Rarely</td></tr>
+    <tr><td>Good for fine art?</td><td>Sometimes</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Predictable output?</td><td>Highly</td><td>Moderate</td><td>Low</td><td>Low (digital sim)</td></tr>
+</table>
+
+<h2>Which One Should You Use?</h2>
+<p>Here is the short version:</p>
+<ul>
+    <li>If you are <strong>screen printing t-shirts or posters</strong>, use halftone. It is the tool built for the job.</li>
+    <li>If you are <strong>making pixel art or retro game graphics</strong>, use dithering. It fits the aesthetic.</li>
+    <li>If you are <strong>creating hand-drawn illustrations</strong>, try stippling. But clear your schedule.</li>
+    <li>If you are <strong>making fine art prints</strong>, mezzotint is an option. But you probably already know that.</li>
+</ul>
+
+<div class="verdict-box">
+    <p><strong>Bottom line:</strong> For 90% of what people need — turning a photo into a printable dot pattern — halftone is the answer. It is not the fanciest technique, but it is the one that actually works in production. If you want to try it, <a href="/" style="color:#FF4500;">ScreenPrintFilter.online</a> does halftone conversion for free with no signup.</p>
+</div>
+
+<h2>Can You Combine Them?</h2>
+<p>Sometimes. Designers occasionally mix halftone with dithering for experimental effects. Some T-shirt designs use a halftone base with stippled hand-drawn elements overlaid. But generally, pick one technique and do it well. Combining them usually looks messy unless you have a clear artistic reason.</p>
+
+<div class="cta-box">
+    <h3>Try Halftone for Free</h3>
+    <p>See how halftone conversion works on your own images. No upload, no signup, no catch.</p>
+    <a href="/" class="cta-button">Open Halftone Tool →</a>
+</div>
+</main>
+
+<footer class="footer">
+    <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/">Back to Tool</a></p>
+    <p style="margin-top:.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+</footer>
+</div>
+</body>
+</html>
