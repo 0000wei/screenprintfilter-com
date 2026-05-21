@@ -922,6 +922,7 @@
         let originalHeight = 0;
         let processingTimeout = null;
         let isProcessing = false;
+        let processingId = 0;
 
         const MAX_HISTORY = 20;
         let undoStack = [];
@@ -948,18 +949,25 @@
             canvasWrapper.addEventListener('drop', handleDrop);
 
 
-            // Controls with debouncing
-            dotSizeSlider.addEventListener('input', debounce(handleControlChange, 100));
-            spacingSlider.addEventListener('input', debounce(handleControlChange, 100));
-            contrastSlider.addEventListener('input', debounce(handleControlChange, 100));
-            brightnessSlider.addEventListener('input', debounce(handleControlChange, 100));
-            angleSlider.addEventListener('input', debounce(handleControlChange, 100));
+            // Controls - input for display/processing, change for undo state
+            dotSizeSlider.addEventListener('input', handleControlInput);
+            dotSizeSlider.addEventListener('change', handleControlChange);
+            spacingSlider.addEventListener('input', handleControlInput);
+            spacingSlider.addEventListener('change', handleControlChange);
+            contrastSlider.addEventListener('input', handleControlInput);
+            contrastSlider.addEventListener('change', handleControlChange);
+            brightnessSlider.addEventListener('input', handleControlInput);
+            brightnessSlider.addEventListener('change', handleControlChange);
+            angleSlider.addEventListener('input', handleControlInput);
+            angleSlider.addEventListener('change', handleControlChange);
 
             // Immediate changes
             dotShapeSelect.addEventListener('change', handleControlChange);
-            foregroundColorInput.addEventListener('input', handleControlChange);
-            backgroundColorInput.addEventListener('input', handleControlChange);
-            useOriginalColorsCheckbox.addEventListener('change', handleControlChange);
+            foregroundColorInput.addEventListener('input', handleControlInput);
+            foregroundColorInput.addEventListener('change', handleControlChange);
+            backgroundColorInput.addEventListener('input', handleControlInput);
+            backgroundColorInput.addEventListener('change', handleControlChange);
+            useOriginalColorsCheckbox.addEventListener('change', handleOriginalColorsChange);
             useOriginalSizeCheckbox.addEventListener('change', handleSizeCheckboxChange);
             outputWidthInput.addEventListener('change', handleControlChange);
             outputHeightInput.addEventListener('change', handleControlChange);
@@ -1089,6 +1097,20 @@
             scheduleProcessing();
         }
 
+        function handleControlInput() {
+            updateValueDisplays();
+            scheduleProcessing();
+        }
+
+        function handleOriginalColorsChange() {
+            saveState();
+            // Update color picker disabled states
+            foregroundColorInput.disabled = useOriginalColorsCheckbox.checked;
+            backgroundColorInput.disabled = useOriginalColorsCheckbox.checked;
+            updateValueDisplays();
+            scheduleProcessing();
+        }
+
         function handleSizeCheckboxChange() {
             saveState();
             if (useOriginalSizeCheckbox.checked) {
@@ -1103,6 +1125,11 @@
                 outputHeightInput.placeholder = originalHeight;
             }
             scheduleProcessing();
+        }
+
+        function updateColorPickerStates() {
+            foregroundColorInput.disabled = useOriginalColorsCheckbox.checked;
+            backgroundColorInput.disabled = useOriginalColorsCheckbox.checked;
         }
 
         function updateValueDisplays() {
@@ -1205,6 +1232,9 @@
                 undoBtn, redoBtn, downloadBtn, resetBtn
             ];
             controls.forEach(control => control.disabled = !enabled);
+            if (enabled) {
+                updateColorPickerStates();
+            }
             updateUndoButtons();
         }
 
@@ -1224,6 +1254,7 @@
         function applyHalftone() {
             if (!originalImageData) return;
 
+            const currentId = ++processingId;
             isProcessing = true;
 
             const dotSize = parseInt(dotSizeSlider.value);
@@ -1276,19 +1307,32 @@
             const data = imageData.data;
 
             for (let i = 0; i < data.length; i += 4) {
-                // Convert to grayscale
-                let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                if (useOriginalColors) {
+                    // Apply brightness/contrast to RGB channels directly for original colors
+                    for (let channel = 0; channel < 3; channel++) {
+                        let value = data[i + channel];
+                        // Apply brightness
+                        value += brightness * 2.55;
+                        // Apply contrast
+                        value = ((value / 255 - 0.5) * contrast + 0.5) * 255;
+                        // Clamp values
+                        data[i + channel] = Math.max(0, Math.min(255, value));
+                    }
+                } else {
+                    // Convert to grayscale for monochrome mode
+                    let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
 
-                // Apply brightness
-                gray += brightness * 2.55;
+                    // Apply brightness
+                    gray += brightness * 2.55;
 
-                // Apply contrast
-                gray = ((gray / 255 - 0.5) * contrast + 0.5) * 255;
+                    // Apply contrast
+                    gray = ((gray / 255 - 0.5) * contrast + 0.5) * 255;
 
-                // Clamp values
-                gray = Math.max(0, Math.min(255, gray));
+                    // Clamp values
+                    gray = Math.max(0, Math.min(255, gray));
 
-                data[i] = data[i + 1] = data[i + 2] = gray;
+                    data[i] = data[i + 1] = data[i + 2] = gray;
+                }
             }
 
             tempCtx.putImageData(imageData, 0, 0);
@@ -1303,60 +1347,84 @@
             const gridWidth = outputWidth * Math.abs(cosAngle) + outputHeight * Math.abs(sinAngle);
             const gridHeight = outputWidth * Math.abs(sinAngle) + outputHeight * Math.abs(cosAngle);
 
-            // Draw halftone dots with rotation
+            // Draw halftone dots with rotation - use chunked processing
+            const rows = [];
             for (let y = -gridSize; y < gridHeight + gridSize; y += gridSize) {
-                for (let x = -gridSize; x < gridWidth + gridSize; x += gridSize) {
-                    // Apply rotation to grid position
-                    const rotatedX = x * cosAngle - y * sinAngle;
-                    const rotatedY = x * sinAngle + y * cosAngle;
+                rows.push(y);
+            }
 
-                    if (rotatedX < -gridSize || rotatedX >= outputWidth + gridSize ||
-                        rotatedY < -gridSize || rotatedY >= outputHeight + gridSize) {
-                        continue;
-                    }
+            let rowIndex = 0;
+            const CHUNK_SIZE = 20;
 
-                    // Sample from the original canvas (mapped to output coordinates)
-                    const sampleX = (rotatedX / outputWidth) * tempCanvas.width;
-                    const sampleY = (rotatedY / outputHeight) * tempCanvas.height;
+            function processChunk() {
+                if (currentId !== processingId) {
+                    return; // cancelled by new change
+                }
 
-                    // Get brightness at this position
-                    const pixelBrightness = getPixelBrightness(tempCtx, sampleX, sampleY, tempCanvas.width, tempCanvas.height);
+                if (rowIndex >= rows.length) {
+                    isProcessing = false;
+                    processingStatus.classList.remove('active');
+                    return;
+                }
 
-                    // Calculate dot size based on brightness (darker = bigger)
-                    // Area-compensated: dot covers (1-brightness) fraction of the cell area
-                    // dotArea = π*r² and cellArea = gridSize²
-                    // So r = sqrt((1-brightness) * cellArea / π)
-                    // This gives proper visual density: 50% gray → 50% dot coverage
-                    const normalizedBrightness = pixelBrightness / 255;
-                    const targetCoverage = 1 - normalizedBrightness;
-                    const maxDotArea = Math.PI * Math.pow(dotSize / 2, 2);
-                    const cellArea = gridSize * gridSize;
-                    // Scale coverage to dot size, capping at full cell coverage
-                    const coverageRatio = Math.min(targetCoverage * cellArea / maxDotArea, 1);
-                    const dotRadius = Math.sqrt(coverageRatio) * (dotSize / 2);
+                const endRow = Math.min(rowIndex + CHUNK_SIZE, rows.length);
+                for (let ri = rowIndex; ri < endRow; ri++) {
+                    const y = rows[ri];
+                    for (let x = -gridSize; x < gridWidth + gridSize; x += gridSize) {
+                        // Apply rotation to grid position
+                        const rotatedX = x * cosAngle - y * sinAngle;
+                        const rotatedY = x * sinAngle + y * cosAngle;
 
-                    if (dotRadius > 0.5) {
-                        const centerX = rotatedX + gridSize / 2;
-                        const centerY = rotatedY + gridSize / 2;
+                        if (rotatedX < -gridSize || rotatedX >= outputWidth + gridSize ||
+                            rotatedY < -gridSize || rotatedY >= outputHeight + gridSize) {
+                            continue;
+                        }
 
-                        if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
-                            centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
+                        // Sample from the original canvas (mapped to output coordinates)
+                        const sampleX = (rotatedX / outputWidth) * tempCanvas.width;
+                        const sampleY = (rotatedY / outputHeight) * tempCanvas.height;
 
-                            // Get original color if using original colors mode
-                            if (useOriginalColors) {
-                                const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
-                                const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
-                                const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
-                                drawShape(resultCtx, centerX, centerY, dotRadius, shape, originalColor);
-                            } else {
-                                drawShape(resultCtx, centerX, centerY, dotRadius, shape);
+                        // Get brightness at this position
+                        const pixelBrightness = getPixelBrightness(tempCtx, sampleX, sampleY, tempCanvas.width, tempCanvas.height);
+
+                        // Calculate dot size based on brightness (darker = bigger)
+                        // Area-compensated: dot covers (1-brightness) fraction of the cell area
+                        // dotArea = π*r² and cellArea = gridSize²
+                        // So r = sqrt((1-brightness) * cellArea / π)
+                        // This gives proper visual density: 50% gray → 50% dot coverage
+                        const normalizedBrightness = pixelBrightness / 255;
+                        const targetCoverage = 1 - normalizedBrightness;
+                        const maxDotArea = Math.PI * Math.pow(dotSize / 2, 2);
+                        const cellArea = gridSize * gridSize;
+                        // Scale coverage to dot size, capping at full cell coverage
+                        const coverageRatio = Math.min(targetCoverage * cellArea / maxDotArea, 1);
+                        const dotRadius = Math.sqrt(coverageRatio) * (dotSize / 2);
+
+                        if (dotRadius > 0.5) {
+                            const centerX = rotatedX + gridSize / 2;
+                            const centerY = rotatedY + gridSize / 2;
+
+                            if (centerX >= -dotRadius && centerX <= outputWidth + dotRadius &&
+                                centerY >= -dotRadius && centerY <= outputHeight + dotRadius) {
+
+                                // Get original color if using original colors mode
+                                if (useOriginalColors) {
+                                    const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
+                                    const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
+                                    const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
+                                    drawShape(resultCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                } else {
+                                    drawShape(resultCtx, centerX, centerY, dotRadius, shape);
+                                }
                             }
                         }
                     }
                 }
+                rowIndex = endRow;
+                requestAnimationFrame(processChunk);
             }
 
-            isProcessing = false;
+            requestAnimationFrame(processChunk);
         }
 
         function getPixelBrightness(ctx, x, y, width, height) {
@@ -1566,6 +1634,7 @@
             outputWidthInput.value = '';
             outputHeightInput.value = '';
 
+            updateColorPickerStates();
             updateValueDisplays();
             scheduleProcessing();
         }
@@ -1632,6 +1701,7 @@
                 outputHeightInput.disabled = false;
             }
 
+            updateColorPickerStates();
             updateValueDisplays();
             scheduleProcessing();
         }
