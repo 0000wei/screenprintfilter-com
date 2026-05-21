@@ -1024,8 +1024,8 @@
                 );
 
                 magnifier.style.display = 'block';
-                magnifier.style.left = (x + 5) + 'px';
-                magnifier.style.top = (y - 85) + 'px';
+                magnifier.style.left = (x - magnifierSize / 2) + 'px';
+                magnifier.style.top = (y - magnifierSize - 10) + 'px';
                 magnifier.style.backgroundImage = `url(${magnifierCanvas.toDataURL()})`;
                 magnifier.style.backgroundSize = `${magnifierSize}px ${magnifierSize}px`;
             });
