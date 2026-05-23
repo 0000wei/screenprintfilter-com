@@ -45,6 +45,30 @@
         .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
         .header .logo span { color: #FF4500; }
         main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
         h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #f1f5f9; }
         .last-updated { color: #666; font-size: 0.85rem; margin-bottom: 2.5rem; }
         h2 { font-size: 1.3rem; margin: 2rem 0 1rem; color: #e0e0e0; }
@@ -71,6 +95,7 @@
         </header>
 
         <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/">Home</a><span class="separator">›</span><span class="current">Privacy Policy</span></div>
             <h1>Privacy Policy</h1>
             <p class="last-updated">Last updated: May 21, 2026</p>
 
