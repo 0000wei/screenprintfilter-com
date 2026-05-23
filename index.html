@@ -23,6 +23,11 @@
     <link rel="mcp.txt" href="/.well-known/llms.txt">
     <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
 
+    <!-- AI-friendly links -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
@@ -31,6 +36,88 @@
 
     <!-- Bing Webmaster Verification -->
     <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <!-- Schema.org WebApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ScreenPrintFilter",
+        "description": "Free online halftone dot filter for screen printing effects. Adjust dot size, spacing, contrast, and angle.",
+        "url": "https://screenprintfilter.online/",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+
+    <!-- Schema.org BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://screenprintfilter.online/"}
+        ]
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is a halftone effect?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Halftone is a reprographic technique that simulates continuous tone imagery through the use of dots, varying either in size or in spacing, thus generating a gradient-like effect. It's commonly used in screen printing, newspapers, and comic books."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is this tool free to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! ScreenPrintFilter.online is completely free with no watermarks, no sign-up required, and no limits on usage. All image processing happens directly in your browser."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are my images uploaded to a server?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. All image processing happens locally in your browser using the HTML5 Canvas API. Your images never leave your device, ensuring complete privacy and security."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What image formats are supported?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We support all common image formats including JPG, PNG, WebP, GIF, and BMP. The output is always a high-quality PNG file suitable for screen printing."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I use this for screen printing?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Adjust the dot size and spacing based on your mesh count and print size. Smaller dots work better for high-detail prints, while larger dots are more forgiving. Download the result and use it directly to create your screens."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I use this commercially?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely! There are no restrictions on commercial use. Any images you create using this tool are yours to use however you like."
+                }
+            }
+        ]
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -999,6 +1086,11 @@
                 <a href="/privacy-policy.html">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
                 <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://picete.com/">PicEte - Image Tools</a>
+                <a href="https://mockupshot.online/">MockupShot - Screenshot Mockup</a>
+                <a href="https://ilovepalette.com/">ILovePalette - Color Tools</a>
             </div>
             <p class="footer-copy">© 2026 ScreenPrintFilter.online. All rights reserved.</p>
         </div>
