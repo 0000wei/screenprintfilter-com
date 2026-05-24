@@ -1,0 +1,88 @@
+# Bug: 非 English 版本缺少暗色模式 CSS 规则
+
+## 问题描述
+只有 index.html（英文版）有完整的暗色模式 CSS。其他 7 个语言版本缺少暗色模式的 CSS 变量覆盖和组件样式规则，导致暗色模式下页面显示混乱。
+
+## 缺失的 CSS 代码块
+
+以下这段 CSS 需要添加到所有 7 个非英文版本中。插入位置：在 `/* Theme Toggle */` 注释之前。
+
+```css
+        html[data-theme="dark"] {
+            --bg-primary: #0D0D0D;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #2A2A2A;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --text-disabled: #666;
+            --accent: #FF5722;
+            --accent-hover: #FF7043;
+            --border: #2A2A2A;
+            --border-hover: #555;
+            --success: #4CAF50;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html[data-theme="dark"] nav a:hover {
+            color: var(--accent-hover);
+        }
+
+        html[data-theme="dark"] .footer-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        html[data-theme="dark"] .canvas-placeholder {
+            color: var(--text-disabled);
+        }
+
+        html[data-theme="dark"] .placeholder-hint {
+            color: var(--text-disabled);
+        }
+
+        html[data-theme="dark"] header {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        html[data-theme="dark"] a {
+            color: #FF7043;
+        }
+
+        html[data-theme="dark"] nav a {
+            color: var(--text-secondary);
+        }
+
+        html[data-theme="dark"] nav a:hover {
+            color: var(--accent);
+        }
+
+        html[data-theme="dark"] .footer-links a {
+            color: var(--text-secondary);
+        }
+
+        html[data-theme="dark"] .footer-links a:hover {
+            color: var(--accent);
+        }
+```
+
+## 需要修改的文件
+- `zh/index.html`
+- `ja/index.html`
+- `de/index.html`
+- `fr/index.html`
+- `es/index.html`
+- `pt/index.html`
+- `ar/index.html`
+
+## 插入位置
+在每个文件的 `/* Theme Toggle */` 注释行之前插入上面的 CSS 代码块。
+
+## 验证
+修改后确认：
+1. 每个非英文文件都包含 `html[data-theme="dark"] {` 变量块
+2. 每个非英文文件都有 `html[data-theme="dark"] header` 规则
+3. 不要修改英文版 index.html（它已经是正确的）
+4. 不要修改任何 HTML 结构或翻译文本，只插入 CSS
