@@ -1030,11 +1030,6 @@
             background-repeat: no-repeat; background-position: right 0.5rem center;
             background-size: 12px; min-width: 120px;
         }
-        @media (prefers-color-scheme: dark) {
-            .lang-switcher select {
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            }
-        }
         [data-theme="dark"] .lang-switcher select {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
         }
@@ -2338,22 +2333,22 @@
         }
 
         // Theme Toggle
-        (function() {
-            var toggle = document.getElementById('themeToggle');
-            if (!toggle) return;
-            var stored = localStorage.getItem('spf_theme');
-            if (stored) {
-                document.documentElement.setAttribute('data-theme', stored);
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        (function(){
+            var btn = document.getElementById('themeToggle');
+            if(!btn) return;
+            var t = localStorage.getItem('spf_theme');
+            if(t) {
+                document.documentElement.setAttribute('data-theme', t);
+            } else if(window.matchMedia('(prefers-color-scheme: dark)').matches){
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('spf_theme', 'dark');
             }
-            toggle.addEventListener('click', function() {
+            btn.onclick = function(){
                 var cur = document.documentElement.getAttribute('data-theme');
-                var next = cur === 'dark' ? 'light' : 'dark';
+                var next = cur === 'dark' ? '' : 'dark';
                 document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('spf_theme', next);
-            });
+                localStorage.setItem('spf_theme', next || 'light');
+            };
         })();
 
         // Initialize (must be at end after all const values like GALLERY_SVGS)
