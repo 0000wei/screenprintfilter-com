@@ -141,20 +141,21 @@
         }
 
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2a2a2a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --text-disabled: #666;
+            /* Light mode (default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-disabled: #9ca3af;
             --accent: #FF4500;
             --accent-hover: #FF5722;
-            --border: #333;
-            --border-hover: #555;
+            --border: #e5e7eb;
+            --border-hover: #d1d5db;
             --success: #4CAF50;
             --radius: 8px;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
             --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -867,6 +868,70 @@
 
             .sidebar .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #e0e0e0;
+                --text-secondary: #a0a0a0;
+                --text-disabled: #666;
+                --accent: #FF4500;
+                --accent-hover: #FF5722;
+                --border: #333;
+                --border-hover: #555;
+                --success: #4CAF50;
+                --radius: 8px;
+                --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+                --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* Additional dark mode specific adjustments */
+            nav a:hover {
+                color: #ff6b35;
+            }
+
+            .footer-links a:hover {
+                color: #ff6b35;
+            }
+
+            .canvas-placeholder {
+                color: var(--text-disabled);
+            }
+
+            .placeholder-hint {
+                color: var(--text-disabled);
+            }
+
+            /* Dark mode transparency adjustments */
+            header {
+                background: rgba(26, 26, 26, 0.98);
+            }
+
+            /* Dark mode link colors */
+            a {
+                color: #60a5fa;
+            }
+
+            nav a {
+                color: var(--text-secondary);
+            }
+
+            nav a:hover {
+                color: var(--accent);
+            }
+
+            .footer-links a {
+                color: var(--text-secondary);
+            }
+
+            .footer-links a:hover {
+                color: var(--accent);
             }
         }
     </style>
