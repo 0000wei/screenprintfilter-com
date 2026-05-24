@@ -1,0 +1,59 @@
+# Bug: Header 亮色模式背景色错误
+
+## 问题描述
+所有 8 个 index.html 文件中，`header` 的默认 CSS（亮色模式）背景色写成了 `rgba(26, 26, 26, 0.95)`，这是深色背景。导致亮色模式下 header 显示为黑色背景，与页面整体白色风格不一致。
+
+## 当前错误代码
+```css
+header {
+    background: rgba(26, 26, 26, 0.95);  /* ← 这是 #1a1a1a 深色，不应该作为亮色模式默认 */
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0;
+}
+```
+
+暗色模式的代码是对的：
+```css
+html[data-theme="dark"] header {
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(12px);
+}
+```
+
+## 修复方案
+把 header 默认背景色改为浅色半透明白色，让亮色模式正常显示。
+
+### 修改内容
+对所有 8 个文件都做同样的修改：
+- `index.html`
+- `ar/index.html`
+- `zh/index.html`
+- `ja/index.html`
+- `de/index.html`
+- `fr/index.html`
+- `es/index.html`
+- `pt/index.html`
+
+将：
+```css
+header {
+    background: rgba(26, 26, 26, 0.95);
+```
+
+改为：
+```css
+header {
+    background: rgba(255, 255, 255, 0.95);
+```
+
+就是把 `26, 26, 26` 改成 `255, 255, 255`。其他属性（border-bottom, padding）不要动。
+
+### 不要修改的部分
+- `html[data-theme="dark"] header` 的样式保持不变
+- 其他任何 CSS 规则不动
+
+## 验证
+修改完成后，在浏览器中检查：
+1. 打开 index.html（亮色模式，即不设置 data-theme），header 背景应为白色半透明
+2. 切换到暗色模式，header 背景应保持深色
+3. 对 ar/index.html 也检查一下 RTL 布局是否正常
