@@ -868,6 +868,30 @@
                 grid-template-columns: 1fr;
             }
         }
+    
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            padding: 0.375rem 0.5rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            line-height: 1;
+            font-size: 1rem;
+        }
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .sun-icon { display: inline; }
+        .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: inline; }
     </style>
     <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/" />
     <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/" />
@@ -927,6 +951,30 @@
             background-position: left 0.5rem center;
             padding: 0.375rem 0.75rem 0.375rem 2rem;
         }
+    
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            padding: 0.375rem 0.5rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            line-height: 1;
+            font-size: 1rem;
+        }
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .sun-icon { display: inline; }
+        .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: inline; }
     </style>
     <div class="lang-switcher">
         <select onchange="switchLanguage(this.value)" aria-label="Switch language">
@@ -954,7 +1002,11 @@
         }
     }
     </script>
-            </nav>
+                                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="sun-icon">☀️</span>
+                        <span class="moon-icon">🌙</span>
+                    </button>
+                </nav>
             </div>
         </div>
     </header>
@@ -2223,6 +2275,25 @@
 
         // Initialize (must be at end after all const values like GALLERY_SVGS)
         init();
-    </script>
+    
+        // Theme Toggle
+        (function() {
+            var toggle = document.getElementById('themeToggle');
+            if (!toggle) return;
+            var stored = localStorage.getItem('spf_theme');
+            if (stored) {
+                document.documentElement.setAttribute('data-theme', stored);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('spf_theme', 'dark');
+            }
+            toggle.addEventListener('click', function() {
+                var cur = document.documentElement.getAttribute('data-theme');
+                var next = cur === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('spf_theme', next);
+            });
+        })();
+</script>
 </body>
 </html>
