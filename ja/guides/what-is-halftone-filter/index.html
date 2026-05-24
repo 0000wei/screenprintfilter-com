@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網点フィルターとは？スクリーン印刷のための完全ガイド - ScreenPrintFilter.online</title>
+    <meta name="description" content="網点フィルターとは何か、スクリーン印刷でどのように機能するか、オンラインで無料で網点ドットエフェクトを作成する方法を学ぶ。例とヒントを含む完全ガイド。">
+    <meta name="keywords" content="網点フィルター, 網点とは, スクリーン印刷網点, 網点ドット, 網点パターン, オンラインで網点作成">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="網点フィルターとは？スクリーン印刷のための完全ガイド">
+    <meta property="og:description" content="網点フィルターとは何か、スクリーン印刷でどのように機能するか、オンラインで無料で網点ドットエフェクトを作成する方法を学ぶ。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/ja/guides/what-is-halftone-filter/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .example-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .example-card .dot-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            background: radial-gradient(circle at 30% 30%, #FF4500, #000);
+        }
+        .example-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .example-card .desc { color: #666; font-size: 0.75rem; }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/what-is-halftone-filter/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/ja/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/ja/">ツールを試す</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja" selected>日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/ja/">ホーム</a><span class="separator">›</span><span class="current">網点フィルターとは</span></div>
+
+            <h1>網点フィルターとは？スクリーン印刷のための完全ガイド</h1>
+            <p class="byline">公開日: 2026年5月21日 &bull; 6分で読める</p>
+
+            <p>印刷されたTシャツ、新聞の写真、漫画をよく見たことがあれば、気づかずに網点（ハーフトーンドット）を見たことがあるはずです。それらの小さなドットは、わずか数色の固形インクを使用して連続階調の画像を印刷可能にするものです。このガイドでは、網点フィルターとは何か、どのように機能するか、オンラインで無料で素晴らしい網点エフェクトを作成する方法について説明します。</p>
+
+            <div class="highlight-box">
+                <p><strong>要約:</strong> 網点フィルターは画像を様々なサイズのドットパターンに変換します。ドットは異なる階調や色調をシミュレートし、スクリーン印刷やオフセット印刷を使用して詳細な画像を印刷可能にします。<strong><a href="/ja/" style="color:#FF4500;">無料のオンライン網点ツールを試す</a></strong>と、ブラウザで即座に網点エフェクトを作成できます。</p>
+            </div>
+
+            <h2>網点（ハーフトーン）とは</h2>
+            <p>網点は、ドットの使用を通じて連続階調の画像をシミュレートする印刷技術です。これらのドットのサイズと間隔を変えることで、網点は単一のインク色からグラデーションや階調の視覚的錯覚を作り出します。大きなドットは暗く見え、小さなドットは明るく見えます。</p>
+            <p>この概念は19世紀末にまで遡り、印刷業界では革命的なブレークスルーでした。網点以前は、高価な彫刻技術なしに写真を印刷することはほぼ不可能でした。</p>
+
+            <h2>網点フィルターとは</h2>
+            <p>網点フィルターはデジタルツールで、グラフィックデザインソフトウェアやオンラインツールでよく見られます。デジタル画像に網点ドットエフェクトを適用します。手動でドットを配置する代わりに、フィルターアルゴリズムは自動的に以下を行います：</p>
+            <ul>
+                <li><strong>分析</strong> — 画像の各部分の明るさとコントラスト</li>
+                <li><strong>変換</strong> — それらの値を対応するサイズのドットに</li>
+                <li><strong>配置</strong> — グリッドパターン内のドット（円、四角、菱形、線）</li>
+            </ul>
+            <p>結果は、元の画像のスタイル化されたスクリーン印刷対応バージョンです。</p>
+
+            <h2>網点フィルターはどのように機能しますか？</h2>
+            <p>メカニズムを理解すると、より良い結果が得られます。典型的な網点フィルターが画像を処理する方法は次のとおりです：</p>
+
+            <h3>1. グレースケール変換</h3>
+            <p>まず、画像がグレースケールに変換されます。各ピクセルは0（黒）から255（白）の明るさの値を取得します。これが対応するドットのサイズを決定します。</p>
+
+            <h3>2. グリッドオーバーレイ</h3>
+            <p>画像にグリッドがオーバーレイされます。各グリッドセルに1つのドットが含まれます。グリッド解像度（または周波数）は<strong>1インチあたりの線数（LPI）</strong>で測定されます — 高いLPI means 小さく、密接なドットとより詳細です。</p>
+
+            <h3>3. ドットサイズの計算</h3>
+            <p>各グリッドセルについて、フィルターは平均明るさを計算します。暗い領域は大きなドットを取得し、明るい領域は小さなドットを取得します。これは<strong>コントラスト</strong>と<strong>ドットサイズ</strong>設定によって制御されます。</p>
+
+            <div class="highlight-box">
+                <p><strong>プロのヒント:</strong> スクリーン印刷では、布地では低いドット密度（大きなドット）を使用し、紙では高い密度を使用します。<a href="/ja/" style="color:#FF4500;">ScreenPrintFilter.online</a>のツールでは、これらすべてのパラメータをリアルタイムで調整できます。</p>
+            </div>
+
+            <h2>網点 vs. ディザリング vs. スティプリング</h2>
+            <p>これらの用語は混同されることがよくあります。違いは次のとおりです：</p>
+            <ul>
+                <li><strong>網点:</strong> 様々なサイズのドットの固定グリッドを使用。スクリーン印刷とオフセット印刷に最適。</li>
+                <li><strong>ディザリング:</strong> 階調をシミュレートするために様々な位置に固定サイズのドットを使用。初期のコンピュータグラフィックスで一般的。</li>
+                <li><strong>スティプリング:</strong> ドットはランダムに手動で配置 — 芸術的、非アルゴリズム的。</li>
+            </ul>
+
+            <h2>一般的な網点ドットシェイプ</h2>
+            <div class="example-grid">
+                <div class="example-card">
+                    <div class="dot-preview" style="background: radial-gradient(circle, #FF4500 40%, #000 60%);"></div>
+                    <div class="label">円</div>
+                    <div class="desc">クラシックで最も一般的</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="background: linear-gradient(135deg, #FF4500 50%, #000 50%);"></div>
+                    <div class="label">四角</div>
+                    <div class="desc">大胆でグラフィックなルック</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); background: #FF4500;"></div>
+                    <div class="label">菱形</div>
+                    <div class="desc">ビンテージプリントの雰囲気</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="background: repeating-linear-gradient(90deg, #FF4500 0px, #FF4500 4px, #000 4px, #000 8px);"></div>
+                    <div class="label">線</div>
+                    <div class="desc">特殊エフェクト</div>
+                </div>
+            </div>
+
+            <h2>網点フィルターを使用する理由</h2>
+            <ul>
+                <li><strong>スクリーン印刷:</strong> 網点は、Tシャツ、ポスター、商品に写真のような画像を印刷するために不可欠です。</li>
+                <li><strong>レトロな美学:</strong> 網点エフェクトは、ビンテージ漫画やポップアートのルックをデザインに与え、現代のデザインで非常に人気があります。</li>
+                <li><strong>商品デザイン:</strong> オンデマンド印刷をデザインしている場合、網点フィルターは制作対応のアートワークを作成するのに役立ちます。</li>
+                <li><strong>特別なソフトウェアは不要:</strong> ScreenPrintFilter.online などのオンラインツールを使用すると、Photoshop や高価な RIP ソフトウェアなしで網点エフェクトを作成できます。</li>
+            </ul>
+
+            <h2>オンラインで網点エフェクトを作成する方法（ステップバイステップ）</h2>
+            <ol>
+                <li><strong>アクセス:</strong> <a href="/ja/" style="color:#FF4500;">ScreenPrintFilter.online</a></li>
+                <li><strong>アップロード:</strong> 画像（JPG、PNG、WebP、最大10MB対応）</li>
+                <li><strong>調整:</strong> 設定：ドットサイズ、間隔、コントラスト、明るさ、シェイプ</li>
+                <li><strong>切り替え:</strong> 画像の色を保持するには「元の色を使用」をオン、グレースケールに切り替えるにはオフ</li>
+                <li><strong>プレビュー:</strong> ズームコントロールでリアルタイムプレビュー</li>
+                <li><strong>ダウンロード:</strong> 最終画像を元の解像度で PNG として</li>
+            </ol>
+            <p>これだけです！アカウント不要、サーバーへのアップロードなし — すべてブラウザ内でローカルに実行されます。</p>
+
+            <div class="cta-box">
+                <h3>今すぐ試す</h3>
+                <p>プロフェッショナルな網点エフェクトを即座に作成、ブラウザで直接。無料、サインアップ不要。</p>
+                <a href="/ja/" class="cta-button">網点ツールを開く →</a>
+            </div>
+
+            <h2>よくある質問</h2>
+
+            <h3>スクリーン印刷にはどの LPI を使用すればよいですか？</h3>
+            <p>Tシャツ印刷では、35-55 LPI が推奨されます。紙印刷では、55-85 LPI が適しています。高いLPI（85+）はファインアートプリントに適していますが、より細かいメッシュスクリーンが必要です。</p>
+
+            <h3>デジタルデザインに網点フィルターを使用できますか？</h3>
+            <p>もちろんです！網点エフェクトは、レトロなポスターやソーシャルメディアグラフィック、アルバムカバーなどを作成するためにデジタルデザインで人気があります。</p>
+
+            <h3>ScreenPrintFilter.online は画像をサーバーにアップロードしますか？</h3>
+            <p>いいえ。すべての画像処理は HTML5 Canvas を使用してブラウザ内でローカルに行われます。画像はデバイスから離れることはありません。詳細については<a href="/ja/privacy-policy.html" style="color:#888;">プライバシーポリシー</a>をご覧ください。</p>
+
+            <h3>対応している画像形式は何ですか？</h3>
+            <p>JPG、PNG、WebP。最大ファイルサイズは10MBです。出力は常に選択した解像度の高品質 PNG です。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/ja/privacy-policy.html">プライバシーポリシー</a> | <a href="/ja/">ツールに戻る</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>

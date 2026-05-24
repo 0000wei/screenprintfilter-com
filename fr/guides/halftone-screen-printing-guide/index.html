@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Créer des Effets Halftone pour la Sérigraphie - Guide Étape par Étape - ScreenPrintFilter.online</title>
+    <meta name="description" content="Apprenez à créer des effets halftone pour la sérigraphie. Guide étape par étape du téléchargement de votre image à l'ajustement de la taille des points, de l'espacement et du contraste. Outil en ligne gratuit.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Comment Créer des Effets Halftone pour la Sérigraphie - Guide Étape par Étape">
+    <meta property="og:description" content="Apprenez à créer des effets halftone pour la sérigraphie. Guide étape par étape du téléchargement de votre image à l'ajustement de la taille des points, de l'espacement et du contraste.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/fr/guides/halftone-screen-printing-guide/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H72N80TEBW');</script>
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.8;}
+        .container{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+        .header{padding:1.5rem 0;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;}
+        .header a{color:#a0a0a0;text-decoration:none;font-size:.9rem;}
+        .header a:hover{color:#FF4500;}
+        .header .logo{font-size:1.1rem;font-weight:700;color:#e0e0e0;}
+        .header .logo span{color:#FF4500;}
+        main{padding:3rem 0;}
+        .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#6b7280;margin-bottom:1.5rem;padding:.5rem 0;}
+        .breadcrumb a{color:#6b7280;text-decoration:none;}
+        .breadcrumb a:hover{color:#FF4500;}
+        .breadcrumb .separator{color:#d1d5db;user-select:none;}
+        .breadcrumb .current{color:#1f2937;font-weight:600;}
+        h1{font-size:2rem;margin-bottom:1rem;color:#f1f5f9;line-height:1.3;}
+        .byline{color:#666;font-size:.85rem;margin-bottom:2rem;}
+        h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:#e0e0e0;}
+        h3{font-size:1.1rem;margin:1.5rem 0 .75rem;color:#c0c0c0;}
+        p{color:#a0a0a0;margin-bottom:1.2rem;}
+        ul,ol{color:#a0a0a0;margin-left:1.5rem;margin-bottom:1.2rem;}
+        li{margin-bottom:.5rem;}
+        .tip{background:#1a1a1a;border-left:4px solid #FF4500;padding:1.25rem;border-radius:0 8px 8px 0;margin:2rem 0;}
+        .tip p{color:#c0c0c0;margin-bottom:0;}
+        .tip strong{color:#FF4500;}
+        .step{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:1.5rem;margin:1.5rem 0;}
+        .step-num{display:inline-block;background:#FF4500;color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.8rem;font-weight:700;margin-bottom:.5rem;}
+        .step h3{margin:0 0 .5rem;color:#f1f5f9;}
+        .step p{margin-bottom:0;}
+        .cta-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+        .cta-box h3{color:#f1f5f9;margin:0 0 .5rem;}
+        .cta-box p{color:#999;margin-bottom:1.5rem;}
+        .cta-button{display:inline-block;background:#FF4500;color:#fff;padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:background .2s;}
+        .cta-button:hover{background:#FF5722;}
+        .footer{border-top:1px solid #222;padding:2rem 0;text-align:center;color:#555;font-size:.85rem;}
+        .footer a{color:#777;text-decoration:none;}
+        .footer a:hover{color:#FF4500;}
+        table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem;}
+        th{background:#2a2a2a;color:#e0e0e0;padding:.75rem 1rem;text-align:left;border-bottom:2px solid #444;}
+        td{padding:.75rem 1rem;border-bottom:1px solid #2a2a2a;color:#a0a0a0;}
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/halftone-screen-printing-guide/" />
+</head>
+<body>
+<div class="container">
+<header class="header">
+    <a href="/fr/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+    <a href="/fr/">Essayer l'Outil</a>
+    <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr" selected>Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+<main>
+<div class="breadcrumb"><a href="https://screenprintfilter.online/fr/">Accueil</a><span class="separator">›</span><span class="current">Guide de Sérigraphie Halftone</span></div>
+
+<h1>Comment Créer des Effets Halftone pour la Sérigraphie : Un Guide Pratique</h1>
+<p class="byline">Publié : 21 mai 2026 &bull; 7 min de lecture</p>
+
+<p>Si vous débutez dans la sérigraphie, l'une des premières choses que vous rencontrerez sont les halftones. Que vous vouliez imprimer une photo sur un t-shirt ou créer des affiches avec un aspect vintage, vous devez savoir comment convertir vos images en motifs halftone. La bonne nouvelle est que vous n'avez plus besoin d'Adobe Photoshop ou de logiciels RIP coûteux.</p>
+
+<p>Voici un guide simple pour créer des effets halftone en utilisant un outil en ligne gratuit. Pas de jargon, juste les étapes qui fonctionnent vraiment.</p>
+
+<h2>Ce Dont Vous Aurez Besoin</h2>
+<ul>
+    <li>Une image que vous souhaitez convertir (JPG, PNG ou WebP fonctionnent bien)</li>
+    <li>Un navigateur — Chrome, Firefox, Safari, n'importe lequel moderne</li>
+    <li>Environ 2 minutes</li>
+</ul>
+<p>C'est littéralement tout. Tout s'exécute dans votre navigateur, aucun fichier n'est téléchargé n'importe où.</p>
+
+<h2>Le Workflow en 5 Minutes</h2>
+
+<div class="step">
+    <div class="step-num">1</div>
+    <h3>Ouvrir l'Outil</h3>
+    <p>Allez sur <a href="/fr/" style="color:#FF4500;">ScreenPrintFilter.online</a>. Vous verrez une interface sombre avec une grande zone de téléchargement au centre. Cliquez sur "Charger l'image" ou faites simplement glisser-déposer votre fichier sur la toile. L'outil accepte JPG, PNG et WebP jusqu'à 10 Mo. La plupart des photos de votre téléphone seront bien en dessous de cette limite.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">2</div>
+    <h3>Définir la Taille des Points</h3>
+    <p>C'est le paramètre le plus important. La taille des points contrôle la taille de chaque point halftone. Pour la sérigraphie sur t-shirts, commencez avec 4-6px. Pour les affiches ou les impressions sur papier, allez plus petit — 2-4px donne plus de détails. Si vous allez trop grand, l'image paraît pixelisée. Trop petit, et les points pourraient ne pas imprimer proprement sur le tissu grossier. Jouez avec, c'est tout l'intérêt d'un aperçu en temps réel.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">3</div>
+    <h3>Ajuster l'Espacement</h3>
+    <p>L'espacement détermine la distance entre les points. Un espacement de 1 signifie des points serrés (plus de détails, mais remplit plus vite à l'impression). Des valeurs plus élevées donnent un aspect plus lâché et aéré. Pour un premier essai, laissez-le à 1 et ajustez à partir de là.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">4</div>
+    <h3>Choisir une Forme de Point</h3>
+    <p>Vous avez quatre options : Cercle, Carré, Losange et Ligne. Cercle est le choix standard pour la plupart des travaux de sérigraphie. Carré donne un aspect plus agressif. Losange fonctionne bien pour les impressions de style vintage. Ligne est plus un effet spécial — bon pour certains projets artistiques mais pas typique pour le travail de production.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">5</div>
+    <h3>Définir le Contraste et la Luminosité</h3>
+    <p>Ceux-ci contrôlent la conversion de l'image en points. Un contraste plus élevé signifie que les zones plus sombres obtiennent des points plus grands et les zones plus claires des points plus petits — plus dramatique, meilleur pour la sérigraphie. Si votre image paraît délavée, augmentez le contraste. Si les ombres sont trop sombres, diminuez légèrement la luminosité. Il n'y a pas de paramètre parfait ici, cela dépend de votre image source.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">6</div>
+    <h3>Décider des Couleurs</h3>
+    <p>Laissez "Couleurs d'Origine" ACTIVÉ si vous voulez que la sortie finale garde les couleurs de votre image (avec des points halftone appliqués par-dessus). Désactivez-le pour obtenir un halftone noir et blanc pur. Pour la sérigraphie réelle avec une couleur d'encre, vous voudrez désactiver la couleur — juste des points noirs sur un fond blanc. Cela facilite beaucoup le brûlage de vos écrans.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">7</div>
+    <h3>Taille de Sortie</h3>
+    <p>L'outil vous permet de définir la largeur et la hauteur de sortie. Par défaut, il garde la taille de l'image originale, ce qui est généralement ce que vous voulez. Si vous imprimez à une taille spécifique — disons 12x16 pouces à 150 DPI — vous pouvez entrer ces nombres ici. Ou laissez simplement "Original" coché et téléchargez à pleine résolution.</p>
+</div>
+
+<div class="step">
+    <div class="step-num">8</div>
+    <h3>Télécharger</h3>
+    <p>Cliquez sur le bouton Télécharger. L'outil rend votre image à pleine résolution et l'enregistre en PNG. Vous pouvez ensuite prendre ce fichier directement vers votre configuration de brûlage d'écran. Pas de filigrane, pas d'inscription, pas de frais cachés.</p>
+</div>
+
+<div class="tip">
+    <p><strong>Une chose que les gens gâchent :</strong> Si votre téléchargement ressort plus petit que prévu, assurez-vous que la case "Original" est cochée sous la taille de sortie. L'aperçu montre une version réduite pour les performances, mais le téléchargement devrait être à pleine résolution.</p>
+</div>
+
+<h2>Référence Rapide des Paramètres</h2>
+
+<table>
+    <tr><th>Cas d'Usage</th><th>Taille des Points</th><th>Espacement</th><th>Forme</th><th>Contraste</th></tr>
+    <tr><td>Impression t-shirt (maille grossière)</td><td>5-7px</td><td>1-1.5</td><td>Cercle</td><td>60-80</td></tr>
+    <tr><td>Impression t-shirt (détail fin)</td><td>3-4px</td><td>1</td><td>Cercle</td><td>50-70</td></tr>
+    <tr><td>Affiche / impression papier</td><td>2-3px</td><td>1</td><td>Cercle/Losange</td><td>40-60</td></tr>
+    <tr><td>Vintage / aspect rétro</td><td>6-10px</td><td>1.5-2</td><td>Losange</td><td>70-90</td></tr>
+    <tr><td>Art / expérimental</td><td>8-12px</td><td>2-3</td><td>Carré/Ligne</td><td>60-80</td></tr>
+</table>
+
+<p>Ce sont des points de départ, pas des règles. Chaque image est différente, et une partie du savoir-faire consiste à savoir quand s'écarter des valeurs par défaut.</p>
+
+<h2>Erreurs Courantes et Comment les Éviter</h2>
+
+<h3>Les Points sont Pâteux et Mélangés</h3>
+<p>Votre taille de points est trop grande pour votre maille d'écran. Si vous utilisez un écran de maille 110, gardez les points à 4px ou moins. Pour la maille 60, vous pouvez aller un peu plus grand mais testez d'abord.</p>
+
+<h3>L'Image Paraît Plate</h3>
+<p>Augmentez le contraste. Les halftones fonctionnent en exagérant la différence entre les zones claires et sombres. Si votre image originale est déjà à faible contraste, la version halftone ressemblera à une bouillie grise. Essayez un contraste à 70 ou plus.</p>
+
+<h3>Les Zones Blanches ont des Points Aléatoires</h3>
+<p>Diminuez un peu la luminosité ou augmentez le contraste. L'outil a un seuil — les pixels au-dessus d'une certaine luminosité deviennent blanc pur (pas de point). Ajustez jusqu'à ce que vos hautes lumières soient propres.</p>
+
+<h3>Le Téléchargement est Faible Résolution</h3>
+<p>Assurez-vous que vous ne regardez pas l'aperçu. L'aperçu est mis à l'échelle pour les performances. Le téléchargement réel utilise la taille de l'image originale. Vérifiez également que "Original" est coché dans la section de taille de sortie.</p>
+
+<h2>Préparer Votre Image Avant la Conversion</h2>
+<p>Un peu de préparation aide beaucoup. Si possible, nettoyez d'abord votre image source :</p>
+<ul>
+    <li><strong>Coupez les arrière-plans inutiles.</strong> Moins de bruit visuel signifie des halftones plus propres.</li>
+    <li><strong>Augmentez le contraste.</strong> Même +20% dans n'importe quel éditeur photo de base avant d'importer vous donnera de meilleurs résultats.</li>
+    <li><strong>Redimensionnez à votre taille d'impression cible.</strong> Pas besoin de générer un halftone de 6000px de large si vous imprimez en 4x6 pouces.</li>
+    <li><strong>Convertissez d'abord en niveaux de gris</strong> si vous faites une impression monochrome. L'outil peut le faire pour vous (désactivez "Couleurs d'Origine"), mais le faire à l'avance vous donne plus de contrôle.</li>
+</ul>
+
+<div class="tip">
+    <p><strong>Honnêtement :</strong> Le halftone n'est pas magique. Si votre image originale est un selfie mal éclairé pris avec un téléphone de 2015, la version halftone paraîtra aussi mauvaise. Commencez avec une image décente et l'outil fera le reste.</p>
+</div>
+
+<h2>Pouvez-vous le Faire dans Photoshop à la Place ?</h2>
+<p>Sûrement, vous pouvez. Photoshop a un filtre halftone sous Filtre &gt; Pixeliser &gt; Halftone Couleur. Mais honnêtement, pour la plupart des travaux de sérigraphie, l'outil en ligne est plus rapide. Vous n'avez pas à vous soucier des angles de canaux, vous obtenez un aperçu en temps réel, et il n'y a pas d'abonnement. À moins que vous n'ayez déjà Photoshop et que vous sachiez exactement ce que vous faites, épargnez-vous la peine.</p>
+
+<div class="cta-box">
+    <h3>Essayez-le Vous-Même</h3>
+    <p>Pas de compte, pas de téléchargement, pas de limites. Faites simplement glisser votre image et commencez à jouer avec les paramètres.</p>
+    <a href="/fr/" class="cta-button">Ouvrir l'Outil Halftone →</a>
+</div>
+
+<h2>FAQ</h2>
+
+<h3>Puis-je utiliser le PNG téléchargé directement pour le brûlage d'écran ?</h3>
+<p>Oui. La sortie PNG est prête à l'emploi. Imprimez-la sur votre film transparent avec n'importe quelle imprimante standard. Assurez-vous simplement que votre imprimante peut gérer une sortie noire dense.</p>
+
+<h3>Quel nombre de mailles dois-je utiliser ?</h3>
+<p>Pour les t-shirts avec des halftones, 110-160 mailles est standard. Une maille plus élevée (200+) fonctionne pour des points plus fins sur papier. Une maille plus basse (60-86) ne fonctionne qu'avec des points très grands.</p>
+
+<h3>Cela fonctionne-t-il pour la sérigraphie multi-couleurs ?</h3>
+<p>L'outil produit une image à la fois. Pour les impressions multi-couleurs, vous devrez d'abord séparer vos couleurs (dans Photoshop ou similaire) et faire passer chaque canal de couleur à travers l'outil halftone séparément. Cela dépasse le cadre de cet outil gratuit, mais c'est possible si vous connaissez le workflow.</p>
+</main>
+
+<footer class="footer">
+    <p><a href="/fr/privacy-policy.html">Politique de Confidentialité</a> | <a href="/fr/">Retour à l'Outil</a></p>
+    <p style="margin-top:.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+</footer>
+</div>
+</body>
+</html>

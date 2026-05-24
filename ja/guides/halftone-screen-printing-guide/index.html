@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スクリーン印刷のための網点エフェクトの作り方 - ステップバイステップガイド - ScreenPrintFilter.online</title>
+    <meta name="description" content="スクリーン印刷のための網点エフェクトの作り方を学ぶ。画像のアップロードからドットサイズ、間隔、コントラストの調整までのステップバイステップガイド。無料オンラインツール。">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="スクリーン印刷のための網点エフェクトの作り方 - ステップバイステップガイド">
+    <meta property="og:description" content="スクリーン印刷のための網点エフェクトの作り方を学ぶ。画像のアップロードからドットサイズ、間隔、コントラストの調整までのステップバイステップガイド。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/ja/guides/halftone-screen-printing-guide/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H72N80TEBW');</script>
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.8;}
+        .container{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+        .header{padding:1.5rem 0;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;}
+        .header a{color:#a0a0a0;text-decoration:none;font-size:.9rem;}
+        .header a:hover{color:#FF4500;}
+        .header .logo{font-size:1.1rem;font-weight:700;color:#e0e0e0;}
+        .header .logo span{color:#FF4500;}
+        main{padding:3rem 0;}
+        .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#6b7280;margin-bottom:1.5rem;padding:.5rem 0;}
+        .breadcrumb a{color:#6b7280;text-decoration:none;}
+        .breadcrumb a:hover{color:#FF4500;}
+        .breadcrumb .separator{color:#d1d5db;user-select:none;}
+        .breadcrumb .current{color:#1f2937;font-weight:600;}
+        h1{font-size:2rem;margin-bottom:1rem;color:#f1f5f9;line-height:1.3;}
+        .byline{color:#666;font-size:.85rem;margin-bottom:2rem;}
+        h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:#e0e0e0;}
+        h3{font-size:1.1rem;margin:1.5rem 0 .75rem;color:#c0c0c0;}
+        p{color:#a0a0a0;margin-bottom:1.2rem;}
+        ul,ol{color:#a0a0a0;margin-left:1.5rem;margin-bottom:1.2rem;}
+        li{margin-bottom:.5rem;}
+        .tip{background:#1a1a1a;border-left:4px solid #FF4500;padding:1.25rem;border-radius:0 8px 8px 0;margin:2rem 0;}
+        .tip p{color:#c0c0c0;margin-bottom:0;}
+        .tip strong{color:#FF4500;}
+        .step{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:1.5rem;margin:1.5rem 0;}
+        .step-num{display:inline-block;background:#FF4500;color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.8rem;font-weight:700;margin-bottom:.5rem;}
+        .step h3{margin:0 0 .5rem;color:#f1f5f9;}
+        .step p{margin-bottom:0;}
+        .cta-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+        .cta-box h3{color:#f1f5f9;margin:0 0 .5rem;}
+        .cta-box p{color:#999;margin-bottom:1.5rem;}
+        .cta-button{display:inline-block;background:#FF4500;color:#fff;padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:background .2s;}
+        .cta-button:hover{background:#FF5722;}
+        .footer{border-top:1px solid #222;padding:2rem 0;text-align:center;color:#555;font-size:.85rem;}
+        .footer a{color:#777;text-decoration:none;}
+        .footer a:hover{color:#FF4500;}
+        table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem;}
+        th{background:#2a2a2a;color:#e0e0e0;padding:.75rem 1rem;text-align:left;border-bottom:2px solid #444;}
+        td{padding:.75rem 1rem;border-bottom:1px solid #2a2a2a;color:#a0a0a0;}
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/halftone-screen-printing-guide/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/halftone-screen-printing-guide/" />
+</head>
+<body>
+<div class="container">
+<header class="header">
+    <a href="/ja/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+    <a href="/ja/">ツールを試す</a>
+    <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja" selected>日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+<main>
+<div class="breadcrumb"><a href="https://screenprintfilter.online/ja/">ホーム</a><span class="separator">›</span><span class="current">網点スクリーン印刷ガイド</span></div>
+
+<h1>スクリーン印刷のための網点エフェクトの作り方：実用的なガイド</h1>
+<p class="byline">公開日: 2026年5月21日 &bull; 7分で読める</p>
+
+<p>スクリーン印刷を始めると、最初に出会うのが網点（ハーフトーン）です。Tシャツに写真を印刷したい場合や、ビンテージ風のポスターを作成したい場合、画像を網点パターンに変換する方法を知る必要があります。良いニュースは、もう Adobe Photoshop や高価な RIP ソフトウェアは必要ないということです。</p>
+
+<p>無料のオンラインツールを使用して網点エフェクトを作成するためのストレートなガイドです。無駄なものはなく、実際に機能するステップのみです。</p>
+
+<h2>必要なもの</h2>
+<ul>
+    <li>変換したい画像（JPG、PNG、WebPでOK）</li>
+    <li>ブラウザ — Chrome、Firefox、Safari、モダンなら何でも</li>
+    <li>約2分</li>
+</ul>
+<p>これだけです。すべてブラウザで実行され、どこにもファイルはアップロードされません。</p>
+
+<h2>5分で完了するワークフロー</h2>
+
+<div class="step">
+    <div class="step-num">1</div>
+    <h3>ツールを開く</h3>
+    <p><a href="/ja/" style="color:#FF4500;">ScreenPrintFilter.online</a>にアクセスします。ダークテーマのインターフェイスと中央に大きなアップロードエリアが表示されます。「画像を読み込む」をクリックするか、ファイルをキャンバスにドラッグアンドドロップします。ツールは最大10MBのJPG、PNG、WebPを受け付けます。ほとんどのスマートフォン写真はこの制限を下回っています。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">2</div>
+    <h3>ドットサイズを設定</h3>
+    <p>これが最も重要な設定です。ドットサイズは各網点ドットの大きさを制御します。Tシャツのスクリーン印刷では、4-6pxから始めます。ポスターや紙印刷では、もっと小さく — 2-4pxでより詳細になります。大きすぎると画像はブロック状に見えます。小さすぎると、粗い布地ではドットがきれいに印刷されない場合があります。試してみてください。これがリアルタイムプレビューの要点です。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">3</div>
+    <h3>間隔を調整</h3>
+    <p>間隔はドット同士の距離を決定します。間隔1は密接なドット（より詳細ですが、印刷時に埋まりやすい）を意味します。高い値は、より緩く、空気のようなルックを与えます。最初の試行では1にして、そこから調整してください。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">4</div>
+    <h3>ドットシェイプを選択</h3>
+    <p>4つのオプションがあります：円、四角、菱形、線。円はほとんどのスクリーン印刷作業の標準的な選択です。四角はより攻撃的なルックを与えます。菱形はビンテージ風のプリントに適しています。線は特殊エフェクト — 特定の芸術的なプロジェクトに適していますが、典型的な生産作業ではありません。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">5</div>
+    <h3>コントラストと明るさを設定</h3>
+    <p>これらは画像をドットに変換する方法を制御します。高いコントラストは、暗い領域が大きなドットを取得し、明るい領域が小さなドットを取得することを意味します — より劇的で、スクリーン印刷に適しています。画像が淡色に見える場合は、コントラストを上げてください。影が暗すぎる場合は、明るさを少し下げてください。ここで完璧な設定はなく、元の画像に依存します。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">6</div>
+    <h3>色を決定</h3>
+    <p>最終出力で画像の色を保持する場合は、「元の色を使用」をオンのままにします（網点ドットが上に適用されます）。純粋な白黒の網点を取得するにはオフにします。1色のインクで実際のスクリーン印刷をする場合は、色をオフにする必要があります — 白背景に黒いドットだけです。これにより、スクリーン焼きがはるかに容易になります。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">7</div>
+    <h3>出力サイズ</h3>
+    <p>ツールでは出力幅と高さを設定できます。デフォルトでは元の画像サイズを維持します。これは通常望むものです。特定のサイズ、例えば150 DPIで12x16インチ印刷する場合は、ここでそれらの数字を入力できます。または、「元のサイズ」をチェックしたままにして、フル解像度でダウンロードします。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">8</div>
+    <h3>ダウンロード</h3>
+    <p>ダウンロードボタンを押します。ツールはフル解像度で画像をレンダリングし、PNGとして保存します。このファイルをスクリーン焼きセットアップに直接持っていくことができます。透かしなし、サインアップなし、隠れた料金なし。</p>
+</div>
+
+<div class="tip">
+    <p><strong>人がよく間違えること:</strong> ダウンロードが期待より小さい場合、出力サイズで「元のサイズ」チェックボックスがチェックされていることを確認してください。プレビューはパフォーマンスのために縮小されたバージョンを表示しますが、ダウンロードはフル解像度であるはずです。</p>
+</div>
+
+<h2>クイック設定リファレンス</h2>
+
+<table>
+    <tr><th>使用例</th><th>ドットサイズ</th><th>間隔</th><th>シェイプ</th><th>コントラスト</th></tr>
+    <tr><td>Tシャツ印刷（粗いメッシュ）</td><td>5-7px</td><td>1-1.5</td><td>円</td><td>60-80</td></tr>
+    <tr><td>Tシャツ印刷（細かい詳細）</td><td>3-4px</td><td>1</td><td>円</td><td>50-70</td></tr>
+    <tr><td>ポスター/紙印刷</td><td>2-3px</td><td>1</td><td>円/菱形</td><td>40-60</td></tr>
+    <tr><td>ビンテージ/レトロ風</td><td>6-10px</td><td>1.5-2</td><td>菱形</td><td>70-90</td></tr>
+    <tr><td>アート/実験的</td><td>8-12px</td><td>2-3</td><td>四角/線</td><td>60-80</td></tr>
+</table>
+
+<p>これらは出発点であり、ルールではありません。画像はそれぞれ異なり、熟練の一部はデフォルトをいつ破るかを知ることです。</p>
+
+<h2>よくある間違いと回避方法</h2>
+
+<h3>ドットがブロブ状で混ざり合っている</h3>
+<p>ドットサイズがスクリーンメッシュに対して大きすぎます。110メッシュスクリーンを使用している場合、ドットを4px以下に保ってください。60メッシュでは、少し大きくできますが、最初にテストしてください。</p>
+
+<h3>画像が平らに見える</h3>
+<p>コントラストを上げてください。網点は明暗の領域の差を誇張することで機能します。元の画像がすでに低コントラストの場合、網点バージョンは灰色の塊に見えます。コントラストを70以上で試してください。</p>
+
+<h3>白い領域にランダムなドットがある</h3>
+<p>明るさを少し下げるか、コントラストを上げてください。ツールにはしきい値があります — 特定の明るさを超えるピクセルは純粋な白（ドットなし）になります。ハイライトがきれいになるまで調整してください。</p>
+
+<h3>ダウンロードが低解像度</h3>
+<p>プレビューを見ていないことを確認してください。プレビューはパフォーマンスのために縮尺されています。実際のダウンロードは元の画像サイズを使用します。また、出力サイズセクションで「元のサイズ」がチェックされていることも確認してください。</p>
+
+<h2>変換前の画像準備</h2>
+<p>少しの準備作業が大きな効果をもたらします。可能であれば、最初にソース画像をクリーンアップしてください：</p>
+<ul>
+    <li><strong>不要な背景を切り取る。</strong> 視覚的ノイズが少ない = きれいな網点。</li>
+    <li><strong>コントラストを上げる。</strong> インポート前に基本的なフォトエディタで+20%でも、より良い結果が得られます。</li>
+    <li><strong>ターゲット印刷サイズにサイズ変更。</strong> 4x6インチ印刷するのに6000px幅の網点を生成する意味はありません。</li>
+    <li><strong>単色印刷の場合、最初にグレースケールに変換する。</strong> ツールで可能ですが（「元の色を使用」をオフ）、最初に行うとよりコントロールできます。</li>
+</ul>
+
+<div class="tip">
+    <p><strong>正直な話:</strong> 網点は魔法ではありません。元の画像が2015年の携帯電話で撮影された悪い照明の自撮りの場合、網点バージョンも悪く見えます。適切な画像から始めて、ツールが残りを行います。</p>
+</div>
+
+<h2>代わりにPhotoshopでできますか？</h3>
+<p>もちろん、できます。Photoshopには「フィルター &gt; ピクセル化 &gt; カラーハーフトーン」の下に網点フィルターがあります。しかし正直なところ、ほとんどのスクリーン印刷作業では、オンラインツールの方が高速です。チャンネル角度をいじる必要がなく、リアルタイムプレビューがあり、サブスクリプションもありません。すでにPhotoshopを持っていて、正確に何をしているかを知っている場合を除いて、手間を省けます。</p>
+
+<div class="cta-box">
+    <h3>自分で試す</h3>
+    <p>アカウント不要、アップロード不要、制限なし。画像をドラッグして、設定をいじり始めるだけです。</p>
+    <a href="/ja/" class="cta-button">網点ツールを開く →</a>
+</div>
+
+<h2>よくある質問</h2>
+
+<h3>ダウンロードしたPNGをスクリーン焼きに直接使用できますか？</h3>
+<p>はい。PNG出力は使用可能です。標準的なプリンターで透明フィルムに印刷してください。濃い黒出力が可能なプリンターであることを確認してください。</p>
+
+<h3>どのメッシュカウントを使用すればよいですか？</h3>
+<p>網点付きTシャツでは、110-160メッシュが標準です。高いメッシュ（200+）は紙の細かいドットに適しています。低いメッシュ（60-86）は非常に大きなドットでのみ機能します。</p>
+
+<h3>これはマルチカラースクリーン印刷で機能しますか？</h3>
+<p>ツールは一度に1つの画像を生成します。マルチカラープリントの場合、最初に色を分離して（Photoshopなどで）、各色チャンネルを網点ツールで個別に実行する必要があります。これはこの無料ツールの範囲を超えていますが、ワークフローを知っていれば可能です。</p>
+</main>
+
+<footer class="footer">
+    <p><a href="/ja/privacy-policy.html">プライバシーポリシー</a> | <a href="/ja/">ツールに戻る</a></p>
+    <p style="margin-top:.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+</footer>
+</div>
+</body>
+</html>

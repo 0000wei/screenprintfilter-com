@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halftone vs Dithering vs Stippling vs Mezzotint - Qual é a Diferença? - ScreenPrintFilter.online</title>
+    <meta name="description" content="Halftone, dithering, stippling e mezzotint todos criam tom usando pontos. Aqui está como eles diferem, quando usar cada um, e qual funciona para serigrafia.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Halftone vs Dithering vs Stippling vs Mezzotint - Qual é a Diferença?">
+    <meta property="og:description" content="Halftone, dithering, stippling e mezzotint todos criam tom usando pontos. Aqui está como eles diferem e quando usar cada um.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/pt/guides/halftone-vs-dithering-vs-stippling/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H72N80TEBW');</script>
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.8;}
+        .container{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+        .header{padding:1.5rem 0;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;}
+        .header a{color:#a0a0a0;text-decoration:none;font-size:.9rem;}
+        .header a:hover{color:#FF4500;}
+        .header .logo{font-size:1.1rem;font-weight:700;color:#e0e0e0;}
+        .header .logo span{color:#FF4500;}
+        main{padding:3rem 0;}
+        .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#6b7280;margin-bottom:1.5rem;padding:.5rem 0;}
+        .breadcrumb a{color:#6b7280;text-decoration:none;}
+        .breadcrumb a:hover{color:#FF4500;}
+        .breadcrumb .separator{color:#d1d5db;user-select:none;}
+        .breadcrumb .current{color:#1f2937;font-weight:600;}
+        h1{font-size:2rem;margin-bottom:1rem;color:#f1f5f9;line-height:1.3;}
+        .byline{color:#666;font-size:.85rem;margin-bottom:2rem;}
+        h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:#e0e0e0;}
+        h3{font-size:1.1rem;margin:1.5rem 0 .5rem;color:#c0c0c0;}
+        p{color:#a0a0a0;margin-bottom:1.2rem;}
+        ul,ol{color:#a0a0a0;margin-left:1.5rem;margin-bottom:1.2rem;}
+        li{margin-bottom:.5rem;}
+        .method-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:1.5rem;margin:1.5rem 0;}
+        .method-box h3{margin:0 0 .5rem;color:#f1f5f9;}
+        .method-box .tag{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:1rem;font-weight:600;margin-bottom:.75rem;}
+        .tag-green{background:#065f46;color:#6ee7b7;}
+        .tag-blue{background:#1e3a5f;color:#93c5fd;}
+        .tag-purple{background:#3b1f5c;color:#d8b4fe;}
+        .tag-amber{background:#5c3800;color:#fcd34d;}
+        .verdict-box{background:#1a1a1a;border-left:4px solid #FF4500;padding:1.25rem;border-radius:0 8px 8px 0;margin:2rem 0;}
+        .verdict-box p{color:#c0c0c0;margin-bottom:0;}
+        .verdict-box strong{color:#FF4500;}
+        .cta-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+        .cta-box h3{color:#f1f5f9;margin:0 0 .5rem;}
+        .cta-box p{color:#999;margin-bottom:1.5rem;}
+        .cta-button{display:inline-block;background:#FF4500;color:#fff;padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:background .2s;}
+        .cta-button:hover{background:#FF5722;}
+        .footer{border-top:1px solid #222;padding:2rem 0;text-align:center;color:#555;font-size:.85rem;}
+        .footer a{color:#777;text-decoration:none;}
+        .footer a:hover{color:#FF4500;}
+        table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem;}
+        th{background:#2a2a2a;color:#e0e0e0;padding:.75rem 1rem;text-align:left;border-bottom:2px solid #444;}
+        td{padding:.75rem 1rem;border-bottom:1px solid #2a2a2a;color:#a0a0a0;}
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/halftone-vs-dithering-vs-stippling/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/halftone-vs-dithering-vs-stippling/" />
+</head>
+<body>
+<div class="container">
+<header class="header">
+    <a href="/pt/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+    <a href="/pt/">Experimente a Ferramenta</a>
+    <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt" selected>Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+<main>
+<div class="breadcrumb"><a href="https://screenprintfilter.online/pt/">Início</a><span class="separator">›</span><span class="current">Halftone vs Dithering vs Stippling</span></div>
+
+<h1>Halftone vs Dithering vs Stippling vs Mezzotint: Qual é a Diferença?</h1>
+<p class="byline">Publicado: 21 de maio de 2026 • 6 min de leitura</p>
+
+<p>Se você tem procurado maneiras de transformar imagens em padrões de pontos, você provavelmente viu esses quatro termos sendo usados. Eles soam parecidos, todos envolvem pontos, mas funcionam de maneiras muito diferentes. E se você escolher o errado para seu projeto, o resultado ficará estranho.</p>
+
+<p>Aqui está uma análise direta de cada técnica, quando usá-las, e as diferenças práticas que importam.</p>
+
+<table>
+    <tr><th>Método</th><th>Tamanho do Ponto</th><th>Posição do Ponto</th><th>Melhor Para</th><th>Pode Fazer Online?</th></tr>
+    <tr><td><strong>Halftone</strong></td><td>Varia</td><td>Grade fixa</td><td>Serigrafia, impressão offset</td><td>Sim (nossa ferramenta)</td></tr>
+    <tr><td><strong>Dithering</strong></td><td>Fixo</td><td>Variada</td><td>Displays de baixa cor, pixel art</td><td>Sim</td></tr>
+    <tr><td><strong>Stippling</strong></td><td>Fixo</td><td>Aleatória (desenhado à mão)</td><td>Arte, ilustração</td><td>Sorte de (com IA)</td></tr>
+    <tr><td><strong>Mezzotint</strong></td><td>N/A (textura áspera)</td><td>N/A</td><td>Impressões de arte fina</td><td>Não realmente</td></tr>
+</table>
+
+<div class="method-box">
+    <span class="tag tag-green">Mais Prático</span>
+    <h3>Halftone</h3>
+    <p>Halftone é o padrão para serigrafia e impressão comercial. Funciona colocando uma grade uniforme e variando o tamanho de cada ponto. Partes escuras da imagem recebem pontos grandes, partes claras recebem pequenos. Porque os pontos estão em uma grade, eles imprimem de forma previsível e consistente.</p>
+    <p>A grade pode ser rotacionada (chamada de ângulo de tela) para evitar padrões de moiré ao imprimir múltiplas cores. Na serigrafia, diferentes ângulos são usados para cada cor de tinta para que os pontos não colidam. Isso está entrando em território avançado, mas é bom saber que o sistema foi construído para isso.</p>
+    <p><strong>Vantagem chave:</strong> Funciona. Serígrafos têm usado halftones por décadas. A técnica é comprovada, as ferramentas são maduras, e os resultados são repetíveis.</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-blue">Melhor para Pixel Art</span>
+    <h3>Dithering</h3>
+    <p>Dithering usa pontos de tamanho fixo colocados em posições variadas para criar a ilusão de tons. Pense em jogos de vídeo antigos — os padrões de xadrez em jogos de Super Nintendo, o visual granulado dos primeiros gráficos de computador. Isso é dithering.</p>
+    <p>Os pontos são do mesmo tamanho em todos os lugares. Para fazer uma área mais escura, você amontoa mais pontos mais próximos. Para fazer mais clara, você os espalha. Existem vários algoritmos para isso — Floyd-Steinberg, Bayer, Atkinson — cada um produzindo um padrão diferente.</p>
+    <p>Dithering está fazendo um comeback na pixel art e design retro. Mas para serigrafia real, raramente é a escolha certa. A colocação de pontos inconsistente torna mais difícil queimar telas limpas, e os resultados são menos previsíveis em tecido.</p>
+    <p><strong>Vantagem chave:</strong> Ótimo para arte digital e ambientes de baixa cor. Não ideal para impressão de produção.</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-purple">Mais Artístico</span>
+    <h3>Stippling</h3>
+    <p>Stippling é uma técnica desenhada à mão onde um artista cria uma imagem colocando milhares de pontos individuais. Cada ponto é do mesmo tamanho — a escuridão vem de quão densamente os pontos são colocados. É incrivelmente demorado, mas produz resultados lindos e orgânicos.</p>
+    <p>Existem ferramentas digitais que tentam automatizar stippling, mas raramente parecem tão bons quanto a coisa real. O problema é que stippling feito por humanos tem irregularidade intencional — o artista instintivamente varia a densidade baseado no que parece certo, não no que um algoritmo calcula.</p>
+    <p>Para serigrafia, stippling é impraticável a menos que você esteja fazendo uma corrida pequena de impressões altamente artísticas. O espaçamento irregular pode causar problemas com queima de tela e fluxo de tinta.</p>
+    <p><strong>Vantagem chave:</strong> Visual artesanal deslumbrante. Impraticável para trabalho de produção.</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-amber">Apenas Arte Fina</span>
+    <h3>Mezzotint</h3>
+    <p>Mezzotint é uma técnica de gravação do século 17. Em vez de pontos, o artista áspera a superfície de uma placa de metal com uma ferramenta chamada rocker, criando uma superfície texturizada que segura tinta. Áreas mais suaves imprimem mais claras, áreas mais ásperas imprimem mais escuras.</p>
+    <p>Filtros modernos de mezzotint digital tentam simular isso adicionando ruído aleatório e textura a uma imagem. Raramente parecem convincentes. Mezzotint real tem profundidade e riqueza que filtros digitais não conseguem replicar totalmente.</p>
+    <p>A menos que você esteja fazendo impressões de arte fina, você provavelmente não precisa de mezzotint. É mais uma técnica histórica que ocasionalmente é referenciada no design moderno.</p>
+    <p><strong>Vantagem chave:</strong> Tons profundos e ricos. Caso de uso nicho na era digital.</p>
+</div>
+
+<h2>Gráfico de Comparação Rápida</h2>
+
+<table>
+    <tr><th></th><th>Halftone</th><th>Dithering</th><th>Stippling</th><th>Mezzotint</th></tr>
+    <tr><td>Fácil de fazer?</td><td>Sim — ferramentas online existem</td><td>Sim — integrado na maioria dos editores de imagem</td><td>Não — leva horas à mão</td><td>Não — precisa gravação especializada</td></tr>
+    <tr><td>Bom para serigrafia?</td><td>Sim</td><td>Não realmente</td><td>Raramente</td><td>Não</td></tr>
+    <tr><td>Bom para design digital?</td><td>Sim</td><td>Sim (estilo retro)</td><td>Às vezes</td><td>Raramente</td></tr>
+    <tr><td>Bom para arte fina?</td><td>Às vezes</td><td>Não</td><td>Sim</td><td>Sim</td></tr>
+    <tr><td>Saída previsível?</td><td>Altamente</td><td>Moderadamente</td><td>Baixo</td><td>Baixo (sim digital)</td></tr>
+</table>
+
+<h2>Qual Deve Usar?</h2>
+<p>Aqui está a versão curta:</p>
+<ul>
+    <li>Se você está <strong>fazendo serigrafia de camisetas ou pôsteres</strong>, use halftone. É a ferramenta feita para o trabalho.</li>
+    <li>Se você está <strong>fazendo pixel art ou gráficos de jogos retro</strong>, use dithering. Encaixa na estética.</li>
+    <li>Se você está <strong>criando ilustrações desenhadas à mão</strong>, tente stippling. Mas limpe sua agenda.</li>
+    <li>Se você está <strong>fazendo impressões de arte fina</strong>, mezzotint é uma opção. Mas você provavelmente já sabe disso.</li>
+</ul>
+
+<div class="verdict-box">
+    <p><strong>Linha de fundo:</strong> Para 90% do que as pessoas precisam — transformar uma foto em um padrão de pontos imprimível — halftone é a resposta. Não é a técnica mais chique, mas é a que realmente funciona em produção. Se você quer experimentar, <a href="/pt/" style="color:#FF4500;">ScreenPrintFilter.online</a> faz conversão halftone gratuitamente sem cadastro.</p>
+</div>
+
+<h2>Posso Combiná-los?</h2>
+<p>Às vezes. Designers ocasionalmente misturam halftone com dithering para efeitos experimentais. Alguns designs de camiseta usam uma base halftone com elementos desenhados à mão stippling sobrepostos. Mas geralmente, escolha uma técnica e faça bem. Combiná-los geralmente parece bagunçado a menos que você tenha uma razão artística clara.</p>
+
+<div class="cta-box">
+    <h3>Experimente Halftone Gratuitamente</h3>
+    <p>Veja como a conversão halftone funciona em suas próprias imagens. Sem upload, sem cadastro, sem pegadinhas.</p>
+    <a href="/pt/" class="cta-button">Abrir Ferramenta Halftone →</a>
+</div>
+</main>
+
+<footer class="footer">
+    <p><a href="/pt/privacy-policy.html">Política de Privacidade</a> | <a href="/pt/">Voltar à Ferramenta</a></p>
+    <p style="margin-top:.5rem;">© 2026 ScreenPrintFilter.online</p>
+</footer>
+</div>
+</body>
+</html>

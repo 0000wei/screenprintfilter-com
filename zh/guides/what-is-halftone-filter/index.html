@@ -147,13 +147,78 @@
         .example-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
         .example-card .desc { color: #666; font-size: 0.75rem; }
     </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/what-is-halftone-filter/" />
 </head>
 <body>
     <div class="container">
         <header class="header">
             <a href="/zh/" class="logo">ScreenPrint<span>Filter</span>.online</a>
             <a href="/zh/">试用工具</a>
-        </header>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh" selected>中文</option>
+            <option value="ja">日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
 
         <main>
             <div class="breadcrumb"><a href="https://screenprintfilter.online/zh/">首页</a><span class="separator">›</span><span class="current">什么是半色调滤镜</span></div>

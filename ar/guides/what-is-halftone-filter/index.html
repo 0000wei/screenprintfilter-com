@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ما هو فلتر halftone؟ دليل شامل للطباعة بالشاشة - ScreenPrintFilter.online</title>
+    <meta name="description" content="تعرف على ما هي فلاتر halftone، كيف تعمل للطباعة بالشاشة، وكيفية إنشاء تأثيرات نقاط halftone عبر الإنترنت مجانًا. دليل شامل مع أمثلة ونصائح.">
+    <meta name="keywords" content="فلتر halftone، ما هو halftone، halftone للطباعة بالشاشة، نقاط halftone، نمط halftone، إنشاء halftone عبر الإنترنت">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ما هو فلتر halftone؟ دليل شامل للطباعة بالشاشة">
+    <meta property="og:description" content="تعرف على ما هي فلاتر halftone، كيف تعمل للطباعة بالشاشة، وكيفية إنشاء تأثيرات نقاط halftone عبر الإنترنت مجانًا.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/ar/guides/what-is-halftone-filter/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-right: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-right: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .example-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .example-card .dot-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            background: radial-gradient(circle at 30% 30%, #FF4500, #000);
+        }
+        .example-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .example-card .desc { color: #666; font-size: 0.75rem; }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/what-is-halftone-filter/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/what-is-halftone-filter/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/ar/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/ar/">جرب الأداة</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar" selected>العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/ar/">الرئيسية</a><span class="separator">›</span><span class="current">ما هو فلتر Halftone</span></div>
+
+            <h1>ما هو فلتر Halftone؟ دليل شامل للطباعة بالشاشة</h1>
+            <p class="byline">نُشر: 21 مايو 2026 • 6 دقائق قراءة</p>
+
+            <p>إذا كنت قد نظرت يومًا إلى قميص مطبوع أو صورة صحفية أو كتاب مصور، فربما تكون رأيت نقاط halftone دون أن تدركها. هذه النقاط الصغيرة هي ما تجعل الصور المستمرة النغمات قابلة للطباعة باستخدام عدد قليل من ألوان الحبر الصلبة. في هذا الدليل، سنشرح ما هو فلتر halftone، وكيف يعمل، وكيف يمكنك إنشاء تأثيرات halftone مذهلة عبر الإنترنت مجانًا.</p>
+
+            <div class="highlight-box">
+                <p><strong>ملخص سريع:</strong> فلتر halftone يحول الصورة إلى نمط من نقاط بأحجام مختلفة. تحاكي النقاط درجات ونغمات مختلفة، مما يجعل من الممكن طباعة صور تفصيلية باستخدام الطباعة بالشاشة أو الطباعة أوفست. <strong><a href="/ar/" style="color:#FF4500;">جرب أداة halftone المجانية عبر الإنترنت</a></strong> لإنشاء تأثيرات halftون فورًا في متصفحك.</p>
+            </div>
+
+            <h2>ما هو halftone؟</h2>
+            <p>halftone هي تقنية طباعة تحاكي صور النغمات المستمرة من خلال استخدام النقاط. من خلال تغيير حجم ومسافة هذه النقاط، ينشئ halftون وهمًا بصريًا للتدرجات والدرجات من لون حبر واحد. النقاط الأكبر تظهر أغمق؛ النقاط الأصغر تظهر فاتحة.</p>
+            <p>يعود المفهوم أواخر القرن التاسع عشر وكان اختراقًا ثوريًا في صناعة الطباعة. قبل halftone، كانت طباعة الصور شبه مستحيلة بدون تقنيات النقش باهظة الثمن.</p>
+
+            <h2>ما هو فلتر halftone؟</h2>
+            <p>فلتر halftone هو أداة رقمية — توجد غالبًا في برامج التصميم الجرافي أو متاحة كأداة عبر الإنترنت — تطبق تأثير نقاط halftone على صورة رقمية. بدلاً من وضع النقاط يدويًا، تقوم خوارزمية الفلتر تلقائيًا بـ:</p>
+            <ul>
+                <li><strong>تحليل</strong> السطوع والتباين لكل جزء من الصورة</li>
+                <li><strong>تحويل</strong> هذه القيم إلى نقاط بالأحجام المقابلة</li>
+                <li><strong>ترتيب</strong> النقاط في نمط الشبكة (دوائر، مربعات، معينات، أو خطوط)</li>
+            </ul>
+            <p>النتيجة هي نسخة منسقة وجاهزة للطباعة بالشاشة من صورتك الأصلية.</p>
+
+            <h2>كيف يعمل فلتر halftone؟</h2>
+            <p>فهم الميكانيكا يساعدك على الحصول على نتائج أفضل. إليك كيف تعالج أداة الفلتر النموذجية صورتك:</p>
+
+            <h3>1. التحويل إلى التدرج الرمادي</h3>
+            <p>أولاً، تُحول الصورة إلى التدرج الرمادي. كل بكسل يحصل على قيمة سطوع من 0 (أسود) إلى 255 (أبيض). هذا يحدد حجم النقطة المقابلة.</p>
+
+            <h3>2. تراكب الشبكة</h3>
+            <p>يتم تراكب شبكة على الصورة. كل خلية شبكة ستحتوي على نقطة واحدة. يُقاس دقة الشبكة (أو التردد) بـ <strong>خطوط في البوصة (LPI)</strong> — LPI أعلى يعني نقاطًا أصغر وأكثر إحكامًا وتفاصيل أكثر.</p>
+
+            <h3>3. حساب حجم النقطة</h3>
+            <p>لكل خلية شبكة، يحسب الفلتر متوسط السطوع. المناطق الأغمق تحصل على نقاط أكبر؛ المناطق الفاتحة تحصل على نقاط أصغر. هذا يتحكم فيه إعدادات <strong>التباين</strong> و<strong>حجم النقطة</strong>.</p>
+
+            <div class="highlight-box">
+                <p><strong>نصيحة محترف:</strong> للطباعة بالشاشة، استخدم كثافة نقاط أقل (نقاط أكبر) على القماش وكثافة أعلى على الورق. تتيح لك أداةنا في <a href="/ar/" style="color:#FF4500;">ScreenPrintFilter.online</a> ضبط جميع هذه المعلمات في الوقت الفعلي.</p>
+            </div>
+
+            <h2>halftone مقابل dithering مقابل stippling</h2>
+            <p>غالبًا ما تُخلط هذه المصطلحات. إليك الفرق:</p>
+            <ul>
+                <li><strong>Halftone:</strong> يستخدم شبكة ثابتة من نقاط بأحجام مختلفة. الأفضل للطباعة بالشاشة والطباعة أوفست.</li>
+                <li><strong>Dithering:</strong> يستخدم نقاطًا بحجم ثابت في مواضع متغيرة لمحاكاة الظلال. شائع في رسومات الكمبيوتر المبكرة.</li>
+                <li><strong>Stippling:</strong> توضع النقاط عشوائيًا يدويًا — فني، وليس خوارزميًا.</li>
+            </ul>
+
+            <h2>أشكال نقاط halftone الشائعة</h2>
+            <div class="example-grid">
+                <div class="example-card">
+                    <div class="dot-preview" style="background: radial-gradient(circle, #FF4500 40%, #000 60%);"></div>
+                    <div class="label">دائرة</div>
+                    <div class="desc">كلاسيكي والأكثر شيوعًا</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="background: linear-gradient(135deg, #FF4500 50%, #000 50%);"></div>
+                    <div class="label">مربع</div>
+                    <div class="desc">مظهر جرافي جريء</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); background: #FF4500;"></div>
+                    <div class="label">معين</div>
+                    <div class="desc">شعور طباعة قديم</div>
+                </div>
+                <div class="example-card">
+                    <div class="dot-preview" style="background: repeating-linear-gradient(90deg, #FF4500 0px, #FF4500 4px, #000 4px, #000 8px);"></div>
+                    <div class="label">خط</div>
+                    <div class="desc">تأثير خاص</div>
+                </div>
+            </div>
+
+            <h2>لماذا تستخدم فلاتر halftone؟</h2>
+            <ul>
+                <li><strong>الطباعة بالشاشة:</strong> halftone ضروري لطباعة صور تشبه الصور على القمصان والبوسترات والبضائع بألوان حبر محدودة.</li>
+                <li><strong>الجماليات القديمة:</strong> تأثيرات halftone تمنح التصاميم مظهرًا قديمًا للكتب المصورة أو pop-art وهو شائع جدًا في التصميم الحديث.</li>
+                <li><strong>تصميم البضائع:</strong> إذا كنت تصمم للطباعة عند الطلب، تساعدك فلاتر halftone على إنشاء فن جاهز للإنتاج.</li>
+                <li><strong>لا حاجة لبرامج خاصة:</strong> الأدوات عبر الإنترنت مثل ScreenPrintFilter.online تتيح لك إنشاء تأثيرات halftone بدون Photoshop أو برامج RIP باهظة الثمن.</li>
+            </ul>
+
+            <h2>كيفية إنشاء تأثيرات halftone عبر الإنترنت (خطوة بخطوة)</h2>
+            <ol>
+                <li><strong>اذهب إلى</strong> <a href="/ar/" style="color:#FF4500;">ScreenPrintFilter.online</a></li>
+                <li><strong>ارفع</strong> صورتك (تدعم JPG و PNG و WebP حتى 10MB)</li>
+                <li><strong>اضبط</strong> الإعدادات: حجم النقطة والمسافة والتباين والسطوع والشكل</li>
+                <li><strong>بدّل</strong> "الألوان الأصلية" للحفاظ على ألوان صورتك أو التبديل إلى التدرج الرمادي</li>
+                <li><strong>عاين</strong> النتيجة في الوقت الفعلي مع أدوات التكبير</li>
+                <li><strong>حمّل</strong> الصورة النهائية كـ PNG بالدقة الأصلية</li>
+            </ol>
+            <p>هذا كل شيء! لا حاجة لحساب، لا رفع إلى أي خادم — كل شيء يعمل محليًا في متصفحك.</p>
+
+            <div class="cta-box">
+                <h3>جرب الآن</h3>
+                <p>أنشئ تأثيرات halftone احترافية فورًا، مباشرة في متصفحك. مجاني ولا يتطلب اشتراكًا.</p>
+                <a href="/ar/" class="cta-button">افتح أداة Halftone →</a>
+            </div>
+
+            <h2>الأسئلة الشائعة</h2>
+
+            <h3>ما هو LPI الذي يجب استخدامه للطباعة بالشاشة؟</h3>
+            <p>لطباعة القمصان، يُوصى بـ 35-55 LPI. للطباعة على الورق، يعمل 55-85 LPI بشكل جيد. LPI الأعلى (85+) أفضل لطباعات الفنون الجميلة لكنه يتطلب شاشات شبكة أدق.</p>
+
+            <h3>هل يمكنني استخدام فلاتر halftone للتصميم الرقمي؟</h3>
+            <p>بالتأكيد! تأثيرات halftone شائعة في التصميم الرقمي لإنشاء بوستات قديمة ورسومات وسائل التواصل الاجتماعي وأغلفة الألبومات والمزيد.</p>
+
+            <h3>هل يرفع ScreenPrintFilter.online صوري إلى خادم؟</h3>
+            <p>لا. جميع معالجات الصور تحدث محليًا في متصفحك باستخدام HTML5 Canvas. صورك لا تغادر جهازك أبدًا. راجع <a href="/ar/privacy-policy.html" style="color:#888;">سياسة الخصوصية</a> الخاصة بنا للتفاصيل.</p>
+
+            <h3>ما هي تنسيقات الصور المدعومة؟</h3>
+            <p>JPG و PNG و WebP. الحد الأقصى لحجم الملف هو 10MB. المخرجات تكون دائمًا ملف PNG عالي الجودة بالدقة التي تختارها.</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/ar/privacy-policy.html">سياسة الخصوصية</a> | <a href="/ar/">العودة إلى الأداة</a></p>
+            <p style="margin-top: 0.5rem;">© 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>
