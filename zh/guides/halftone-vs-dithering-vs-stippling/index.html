@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>半色调 vs. 抖动 vs. 点描 vs. 铜版画 - 有什么区别？ - ScreenPrintFilter.online</title>
+    <meta name="description" content="半色调、抖动、点描和铜版画都使用网点创建色调。这里解释它们的区别、何时使用，以及哪种适合丝网印刷。">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="半色调 vs. 抖动 vs. 点描 vs. 铜版画 - 有什么区别？">
+    <meta property="og:description" content="半色调、抖动、点描和铜版画都使用网点创建色调。这里解释它们的区别以及何时使用。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/zh/guides/halftone-vs-dithering-vs-stippling/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H72N80TEBW');</script>
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.8;}
+        .container{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+        .header{padding:1.5rem 0;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;}
+        .header a{color:#a0a0a0;text-decoration:none;font-size:.9rem;}
+        .header a:hover{color:#FF4500;}
+        .header .logo{font-size:1.1rem;font-weight:700;color:#e0e0e0;}
+        .header .logo span{color:#FF4500;}
+        main{padding:3rem 0;}
+        .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#6b7280;margin-bottom:1.5rem;padding:.5rem 0;}
+        .breadcrumb a{color:#6b7280;text-decoration:none;}
+        .breadcrumb a:hover{color:#FF4500;}
+        .breadcrumb .separator{color:#d1d5db;user-select:none;}
+        .breadcrumb .current{color:#1f2937;font-weight:600;}
+        h1{font-size:2rem;margin-bottom:1rem;color:#f1f5f9;line-height:1.3;}
+        .byline{color:#666;font-size:.85rem;margin-bottom:2rem;}
+        h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:#e0e0e0;}
+        h3{font-size:1.1rem;margin:1.5rem 0 .5rem;color:#c0c0c0;}
+        p{color:#a0a0a0;margin-bottom:1.2rem;}
+        ul,ol{color:#a0a0a0;margin-left:1.5rem;margin-bottom:1.2rem;}
+        li{margin-bottom:.5rem;}
+        .method-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:1.5rem;margin:1.5rem 0;}
+        .method-box h3{margin:0 0 .5rem;color:#f1f5f9;}
+        .method-box .tag{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:1rem;font-weight:600;margin-bottom:.75rem;}
+        .tag-green{background:#065f46;color:#6ee7b7;}
+        .tag-blue{background:#1e3a5f;color:#93c5fd;}
+        .tag-purple{background:#3b1f5c;color:#d8b4fe;}
+        .tag-amber{background:#5c3800;color:#fcd34d;}
+        .verdict-box{background:#1a1a1a;border-left:4px solid #FF4500;padding:1.25rem;border-radius:0 8px 8px 0;margin:2rem 0;}
+        .verdict-box p{color:#c0c0c0;margin-bottom:0;}
+        .verdict-box strong{color:#FF4500;}
+        .cta-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+        .cta-box h3{color:#f1f5f9;margin:0 0 .5rem;}
+        .cta-box p{color:#999;margin-bottom:1.5rem;}
+        .cta-button{display:inline-block;background:#FF4500;color:#fff;padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:background .2s;}
+        .cta-button:hover{background:#FF5722;}
+        .footer{border-top:1px solid #222;padding:2rem 0;text-align:center;color:#555;font-size:.85rem;}
+        .footer a{color:#777;text-decoration:none;}
+        .footer a:hover{color:#FF4500;}
+        table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem;}
+        th{background:#2a2a2a;color:#e0e0e0;padding:.75rem 1rem;text-align:left;border-bottom:2px solid #444;}
+        td{padding:.75rem 1rem;border-bottom:1px solid #2a2a2a;color:#a0a0a0;}
+    </style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+    <a href="/zh/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+    <a href="/zh/">试用工具</a>
+</header>
+<main>
+<div class="breadcrumb"><a href="https://screenprintfilter.online/zh/">首页</a><span class="separator">›</span><span class="current">半色调 vs. 抖动 vs. 点描</span></div>
+
+<h1>半色调 vs. 抖动 vs. 点描 vs. 铜版画：有什么区别？</h1>
+<p class="byline">发布时间：2026年5月21日 &bull; 阅读时间 6 分钟</p>
+
+<p>如果您一直在研究将图像转换为网点图案的方法，您可能已经看到这四个术语被抛来抛去。它们听起来很相似，都涉及网点，但它们的工作方式非常不同。如果您为项目选择了错误的方法，结果看起来会很奇怪。</p>
+
+<p>以下是每种技术的直接分解，何时使用它们，以及重要的实际差异。</p>
+
+<table>
+    <tr><th>方法</th><th>网点大小</th><th>网点位置</th><th>最适合</th><th>可以在线做吗？</th></tr>
+    <tr><td><strong>半色调</strong></td><td>变化</td><td>固定网格</td><td>丝网印刷，胶印</td><td>可以（我们的工具）</td></tr>
+    <tr><td><strong>抖动</strong></td><td>固定</td><td>变化</td><td>低颜色显示器，像素艺术</td><td>可以</td></tr>
+    <tr><td><strong>点描</strong></td><td>固定</td><td>随机（手绘）</td><td>艺术，插图</td><td>勉强可以（AI 辅助）</td></tr>
+    <tr><td><strong>铜版画</strong></td><td>不适用（粗糙纹理）</td><td>不适用</td><td>艺术品印刷</td><td>不太可以</td></tr>
+</table>
+
+<div class="method-box">
+    <span class="tag tag-green">最实用</span>
+    <h3>半色调</h3>
+    <p>半色调是丝网印刷和商业印刷的标准。它通过铺设均匀的网格并改变每个网点的大小来工作。图像的较暗部分获得大网点，较亮部分获得小网点。因为网点在网格上，所以它们可以预测且一致地印刷。</p>
+    <p>网格可以旋转（称为网屏角度）以避免在印刷多种颜色时出现摩尔纹图案。在丝网印刷中，每种油墨颜色使用不同的角度，这样网点就不会冲突。这已经进入了高级领域，但很高兴知道系统为此而设计。</p>
+    <p><strong>关键优势：</strong> 它有效。丝网印刷商使用半色调已经几十年了。该技术经过验证，工具成熟，结果可重复。</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-blue">最适合像素艺术</span>
+    <h3>抖动</h3>
+    <p>抖动使用放置在不同位置的固定大小网点来创建阴影错觉。想想老式电子游戏——超级任天堂游戏中的棋盘图案，早期计算机图形的颗粒状外观。这就是抖动。</p>
+    <p>各地的网点大小相同。要使区域更暗，您将更多网点挤得更近。要使它更亮，您将它们分散开。有各种算法——Floyd-Steinberg、Bayer、Atkinson——每种都产生不同的图案。</p>
+    <p>抖动在像素艺术和复古风格设计中卷土重来。但对于实际的丝网印刷，它很少是正确的选择。不一致的网点放置使得烧制干净的网屏更困难，在面料上的结果也不太可预测。</p>
+    <p><strong>关键优势：</strong> 非常适合数字艺术和低颜色环境。不太适合生产印刷。</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-purple">最具艺术性</span>
+    <h3>点描</h3>
+    <p>点描是一种手工绘制技术，艺术家通过放置数千个单独的网点来创建图像。每个网点大小相同——黑暗来自网点放置的密度。这非常耗时，但产生美丽的有机结果。</p>
+    <p>有一些数字工具试图自动点描，但它们看起来很少像真实的那样好。问题是人类制作的点描有故意的不规则性——艺术家本能地根据看起来正确的情况改变密度，而不是根据算法计算的内容。</p>
+    <p>对于丝网印刷，除非您做小批量的高度艺术印刷，否则点描是不切实际的。不规则的间距可能导致网屏烧制和油墨流动的问题。</p>
+    <p><strong>关键优势：</strong> 美丽的手工外观。对于生产工作不切实际。</p>
+</div>
+
+<div class="method-box">
+    <span class="tag tag-amber">仅限艺术品</span>
+    <h3>铜版画</h3>
+    <p>铜版画是一种来自 17 世纪的雕刻技术。艺术家不是使用网点，而是使用称为摇刀的工具粗糙化金属板的表面，创造保持油墨的纹理表面。较光滑的区域印刷较亮，较粗糙的区域印刷较暗。</p>
+    <p>现代数字铜版画滤镜试图通过向图像添加随机噪声和纹理来模拟这一点。它们看起来很少令人信服。真正的铜版画具有深度和丰富性，数字滤镜无法完全复制。</p>
+    <p>除非您制作艺术品印刷，否则您可能不需要铜版画。这更多是一种历史技术，偶尔在现代设计中被引用。</p>
+    <p><strong>关键优势：</strong> 丰富、深沉的色调。数字时代的细分用例。</p>
+</div>
+
+<h2>快速比较图表</h2>
+
+<table>
+    <tr><th></th><th>半色调</th><th>抖动</th><th>点描</th><th>铜版画</th></tr>
+    <tr><td>容易做吗？</td><td>可以——存在在线工具</td><td>可以——内置到大多数图像编辑器</td><td>不——手工需要数小时</td><td>不——需要专业雕刻</td></tr>
+    <tr><td>适合丝网印刷吗？</td><td>适合</td><td>不太适合</td><td>很少</td><td>不适合</td></tr>
+    <tr><td>适合数字设计吗？</td><td>适合</td><td>适合（复古风格）</td><td>有时</td><td>很少</td></tr>
+    <tr><td>适合艺术品吗？</td><td>有时</td><td>不适合</td><td>适合</td><td>适合</td></tr>
+    <tr><td>输出可预测吗？</td><td>高度</td><td>中等</td><td>低</td><td>低（数字模拟）</td></tr>
+</table>
+
+<h2>您应该使用哪种？</h2>
+<p>简短版本：</p>
+<ul>
+    <li>如果您正在<strong>丝网印刷 T 恤或海报</strong>，请使用半色调。它是为这项工作而生的工具。</li>
+    <li>如果您正在<strong>制作像素艺术或复古游戏图形</strong>，请使用抖动。它符合美学。</li>
+    <li>如果您正在<strong>创建手绘插图</strong>，请尝试点描。但要清空您的日程安排。</li>
+    <li>如果您正在<strong>制作艺术品印刷</strong>，铜版画是一个选择。但您可能已经知道这一点。</li>
+</ul>
+
+<div class="verdict-box">
+    <p><strong>底线：</strong> 对于 90% 的人们需要的——将照片转换为可印刷的网点图案——半色调是答案。它不是最花哨的技术，但它是在生产中实际有效的技术。如果您想尝试，<a href="/zh/" style="color:#FF4500;">ScreenPrintFilter.online</a> 免费进行半色调转换，无需注册。</p>
+</div>
+
+<h2>可以结合使用它们吗？</h2>
+<p>有时可以。设计师偶尔将半色调与抖动混合以获得实验效果。一些 T 恤设计使用半色调基础，叠加点描的手绘元素。但通常，选择一种技术并做好。结合使用通常看起来很乱，除非您有明确的艺术原因。</p>
+
+<div class="cta-box">
+    <h3>免费试用半色调</h3>
+    <p>看看半色调转换如何在您自己的图像上工作。无需上传，无需注册，没有陷阱。</p>
+    <a href="/zh/" class="cta-button">打开半色调工具 →</a>
+</div>
+</main>
+
+<footer class="footer">
+    <p><a href="/zh/privacy-policy.html">隐私政策</a> | <a href="/zh/">返回工具</a></p>
+    <p style="margin-top:.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+</footer>
+</div>
+</body>
+</html>

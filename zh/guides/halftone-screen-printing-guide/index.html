@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何制作丝网印刷半色调效果 - 分步指南 - ScreenPrintFilter.online</title>
+    <meta name="description" content="学习如何为丝网印刷创建半色调效果。从上传图片到调整网点大小、间距和对比度的分步指南。免费在线工具。">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="如何制作丝网印刷半色调效果 - 分步指南">
+    <meta property="og:description" content="学习如何为丝网印刷创建半色调效果。从上传图片到调整网点大小、间距和对比度的分步指南。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/zh/guides/halftone-screen-printing-guide/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H72N80TEBW');</script>
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.8;}
+        .container{max-width:800px;margin:0 auto;padding:0 1.5rem;}
+        .header{padding:1.5rem 0;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;}
+        .header a{color:#a0a0a0;text-decoration:none;font-size:.9rem;}
+        .header a:hover{color:#FF4500;}
+        .header .logo{font-size:1.1rem;font-weight:700;color:#e0e0e0;}
+        .header .logo span{color:#FF4500;}
+        main{padding:3rem 0;}
+        .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#6b7280;margin-bottom:1.5rem;padding:.5rem 0;}
+        .breadcrumb a{color:#6b7280;text-decoration:none;}
+        .breadcrumb a:hover{color:#FF4500;}
+        .breadcrumb .separator{color:#d1d5db;user-select:none;}
+        .breadcrumb .current{color:#1f2937;font-weight:600;}
+        h1{font-size:2rem;margin-bottom:1rem;color:#f1f5f9;line-height:1.3;}
+        .byline{color:#666;font-size:.85rem;margin-bottom:2rem;}
+        h2{font-size:1.3rem;margin:2.5rem 0 1rem;color:#e0e0e0;}
+        h3{font-size:1.1rem;margin:1.5rem 0 .75rem;color:#c0c0c0;}
+        p{color:#a0a0a0;margin-bottom:1.2rem;}
+        ul,ol{color:#a0a0a0;margin-left:1.5rem;margin-bottom:1.2rem;}
+        li{margin-bottom:.5rem;}
+        .tip{background:#1a1a1a;border-left:4px solid #FF4500;padding:1.25rem;border-radius:0 8px 8px 0;margin:2rem 0;}
+        .tip p{color:#c0c0c0;margin-bottom:0;}
+        .tip strong{color:#FF4500;}
+        .step{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:1.5rem;margin:1.5rem 0;}
+        .step-num{display:inline-block;background:#FF4500;color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.8rem;font-weight:700;margin-bottom:.5rem;}
+        .step h3{margin:0 0 .5rem;color:#f1f5f9;}
+        .step p{margin-bottom:0;}
+        .cta-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:2rem;margin:2.5rem 0;text-align:center;}
+        .cta-box h3{color:#f1f5f9;margin:0 0 .5rem;}
+        .cta-box p{color:#999;margin-bottom:1.5rem;}
+        .cta-button{display:inline-block;background:#FF4500;color:#fff;padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:1rem;transition:background .2s;}
+        .cta-button:hover{background:#FF5722;}
+        .footer{border-top:1px solid #222;padding:2rem 0;text-align:center;color:#555;font-size:.85rem;}
+        .footer a{color:#777;text-decoration:none;}
+        .footer a:hover{color:#FF4500;}
+        table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.9rem;}
+        th{background:#2a2a2a;color:#e0e0e0;padding:.75rem 1rem;text-align:left;border-bottom:2px solid #444;}
+        td{padding:.75rem 1rem;border-bottom:1px solid #2a2a2a;color:#a0a0a0;}
+    </style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+    <a href="/zh/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+    <a href="/zh/">试用工具</a>
+</header>
+<main>
+<div class="breadcrumb"><a href="https://screenprintfilter.online/zh/">首页</a><span class="separator">›</span><span class="current">半色调丝网印刷指南</span></div>
+
+<h1>如何制作丝网印刷半色调效果：实用指南</h1>
+<p class="byline">发布时间：2026年5月21日 &bull; 阅读时间 7 分钟</p>
+
+<p>如果您开始接触丝网印刷，首先遇到的事情之一就是半色调。无论您是想在 T 恤上印刷照片，还是制作复古外观的海报，您都需要知道如何将图像转换为半色调图案。好消息是，您不再需要 Adobe Photoshop 或昂贵的 RIP 软件了。</p>
+
+<p>以下是使用免费在线工具制作半色调效果的简单指南。没有废话，只有真正有效的步骤。</p>
+
+<h2>您需要的准备</h2>
+<ul>
+    <li>想要转换的图片（JPG、PNG 或 WebP 都可以）</li>
+    <li>浏览器——Chrome、Firefox、Safari，任何现代浏览器都可以</li>
+    <li>大约 2 分钟时间</li>
+</ul>
+<p>就这样。一切都在您的浏览器中运行，不会上传任何文件。</p>
+
+<h2>5 分钟工作流程</h2>
+
+<div class="step">
+    <div class="step-num">1</div>
+    <h3>打开工具</h3>
+    <p>访问 <a href="/zh/" style="color:#FF4500;">ScreenPrintFilter.online</a>。您将看到一个深色主题的界面，中央有一个大的上传区域。点击"加载图片"或直接将文件拖放到画布上。该工具接受最大 10MB 的 JPG、PNG 和 WebP 文件。手机中的大多数照片都远低于这个限制。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">2</div>
+    <h3>设置网点大小</h3>
+    <p>这是最重要的设置。网点大小控制每个半色调网点的大小。对于 T 恤丝网印刷，从 4-6px 开始。对于海报或纸质印刷，选择更小的——2-4px 提供更多细节。如果设置太大，图像看起来会块状化。太小的话，网点可能无法在粗糙的面料上清晰印刷。多尝试一下，这就是实时预览的全部意义。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">3</div>
+    <h3>调整间距</h3>
+    <p>间距决定网点之间的距离。间距为 1 意味着紧密的网点（更多细节，但在印刷时更容易填充）。较高的值提供更松散、更通风的外观。第一次尝试时，保持为 1，然后从那里调整。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">4</div>
+    <h3>选择网点形状</h3>
+    <p>您有四个选项：圆形、方形、菱形和线条。圆形是大多数丝网印刷工作的标准选择。方形提供更激进的外观。菱形适合复古风格的印刷。线条更像是一种特殊效果——适合某些艺术项目，但不适合典型的生产工作。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">5</div>
+    <h3>设置对比度和亮度</h3>
+    <p>这些控制图像如何转换为网点。较高的对比度意味着较暗的区域获得更大的网点，较亮的区域获得更小的网点——更戏剧化，更适合丝网印刷。如果您的图像看起来褪色，提高对比度。如果阴影太暗，稍微降低亮度。这里没有完美的设置，取决于您的源图像。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">6</div>
+    <h3>决定颜色</h3>
+    <p>如果您希望最终输出保持图像的颜色（在上面应用半色调网点），请保持"原始颜色"开启。关闭它以获得纯黑白半色调。对于使用一种油墨颜色的实际丝网印刷，您需要关闭颜色——只有白色背景上的黑色网点。这使得烧制网屏更容易。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">7</div>
+    <h3>输出尺寸</h3>
+    <p>该工具允许您设置输出宽度和高度。默认情况下，它保持原始图像大小，这通常是您想要的。如果您要印刷特定尺寸——比如 12x16 英寸 150 DPI——可以在这里输入这些数字。或者只需保持"原始"选中并以全分辨率下载。</p>
+</div>
+
+<div class="step">
+    <div class="step-num">8</div>
+    <h3>下载</h3>
+    <p>点击下载按钮。该工具以全分辨率渲染您的图像并将其保存为 PNG。然后您可以将此文件直接带到丝网烧制设置。没有水印，无需注册，没有隐藏费用。</p>
+</div>
+
+<div class="tip">
+    <p><strong>人们容易搞错的一点：</strong> 如果您的下载文件小于预期，请确保在输出尺寸下选中了"原始"复选框。预览为了性能显示缩小版本，但下载应该是全分辨率的。</p>
+</div>
+
+<h2>快速设置参考</h2>
+
+<table>
+    <tr><th>使用场景</th><th>网点大小</th><th>间距</th><th>形状</th><th>对比度</th></tr>
+    <tr><td>T 恤印刷（粗网屏）</td><td>5-7px</td><td>1-1.5</td><td>圆形</td><td>60-80</td></tr>
+    <tr><td>T 恤印刷（精细细节）</td><td>3-4px</td><td>1</td><td>圆形</td><td>50-70</td></tr>
+    <tr><td>海报/纸质印刷</td><td>2-3px</td><td>1</td><td>圆形/菱形</td><td>40-60</td></tr>
+    <tr><td>复古/复古外观</td><td>6-10px</td><td>1.5-2</td><td>菱形</td><td>70-90</td></tr>
+    <tr><td>艺术/实验性</td><td>8-12px</td><td>2-3</td><td>方形/线条</td><td>60-80</td></tr>
+</table>
+
+<p>这些是起点，而不是规则。每张图像都不同，手艺的一部分就是知道何时打破默认设置。</p>
+
+<h2>常见错误及如何避免</h2>
+
+<h3>网点模糊并融合在一起</h3>
+<p>您的网点大小对网屏来说太大了。如果您使用 110 目网屏，请将网点保持在 4px 或更小。对于 60 目，您可以稍微大一点，但先测试。</p>
+
+<h3>图像看起来扁平</h3>
+<p>提高对比度。半色调通过夸大明暗区域之间的差异来工作。如果您的原始图像已经是低对比度，半色调版本将看起来像灰色的糊状物。尝试对比度设置为 70 或更高。</p>
+
+<h3>白色区域有随机网点</h3>
+<p>稍微降低亮度或增加对比度。该工具有一个阈值——高于一定亮度的像素变成纯白色（无网点）。调整直到您的高光干净。</p>
+
+<h3>下载分辨率低</h3>
+<p>确保您不是在看预览。预览是为了性能缩放的。实际下载使用原始图像大小。还要检查输出尺寸部分是否选中了"原始"。</p>
+
+<h2>转换前准备图像</h2>
+<p>一点准备工作会有很大帮助。如果可以，首先清理您的源图像：</p>
+<ul>
+    <li><strong>裁剪不必要的背景。</strong> 较少的视觉噪音意味着更干净的半色调。</li>
+    <li><strong>提高对比度。</strong> 在导入前在任何基本照片编辑器中增加 +20% 会给您更好的结果。</li>
+    <li><strong>调整到目标印刷尺寸。</strong> 如果您印刷 4x6 英寸，就没有必要生成 6000px 宽的半色调。</li>
+    <li><strong>首先转换为灰度</strong> 如果您进行单色印刷。工具可以为您做这件事（关闭"原始颜色"），但提前做会给你更多控制。</li>
+</ul>
+
+<div class="tip">
+    <p><strong>实话实说：</strong> 半色调不是魔法。如果您的原始图像是用 2015 年手机拍摄的照明不良的自拍，半色调版本也会看起来不好。从一张好的图像开始，工具会完成剩下的工作。</p>
+</div>
+
+<h2>可以用 Photoshop 做这个吗？</h2>
+<p>当然可以。Photoshop 在 滤镜 > 像素化 > 彩色半色调 下有一个半色调滤镜。但老实说，对于大多数丝网印刷工作，在线工具更快。您不必处理通道角度，您获得实时预览，并且没有订阅费。除非您已经有 Photoshop 并且确切知道您在做什么，否则省去麻烦。</p>
+
+<div class="cta-box">
+    <h3>亲自试试</h3>
+    <p>无需帐户，无需上传，没有限制。只需拖入您的图像并开始玩转设置。</p>
+    <a href="/zh/" class="cta-button">打开半色调工具 →</a>
+</div>
+
+<h2>常见问题</h2>
+
+<h3>我可以直接使用下载的 PNG 进行网屏烧制吗？</h3>
+<p>可以。PNG 输出可直接使用。使用任何标准打印机将其印刷到您的透明胶片上。只需确保您的打印机可以处理密集的黑色输出。</p>
+
+<h3>我应该使用什么目数？</h3>
+<p>对于带有半色调的 T 恤，110-160 目是标准的。更高的目数（200+）适合纸张上更细的网点。更低的目数（60-86）只适用于非常大的网点。</p>
+
+<h3>这适用于多色丝网印刷吗？</h3>
+<p>该工具一次生成一张图像。对于多色印刷，您需要先分离颜色（在 Photoshop 或类似软件中），然后分别通过半色调工具运行每个颜色通道。这超出了这个免费工具的范围，但如果您知道工作流程，是可能的。</p>
+</main>
+
+<footer class="footer">
+    <p><a href="/zh/privacy-policy.html">隐私政策</a> | <a href="/zh/">返回工具</a></p>
+    <p style="margin-top:.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+</footer>
+</div>
+</body>
+</html>
