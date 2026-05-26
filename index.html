@@ -1013,16 +1013,16 @@
         if (localStorage.getItem('spf_lang')) return;
         var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
         var target = 'en';
-            if (lang.startsWith("zh")) return "zh";
-            if (lang.startsWith("ja")) return "ja";
-            if (lang.startsWith("de")) return "de";
-            if (lang.startsWith("fr")) return "fr";
-            if (lang.startsWith("es")) return "es";
-            if (lang.startsWith("pt")) return "pt";
-            if (lang.startsWith("ar")) return "ar";
+        if (lang.startsWith("zh")) target = "zh";
+        else if (lang.startsWith("ja")) target = "ja";
+        else if (lang.startsWith("de")) target = "de";
+        else if (lang.startsWith("fr")) target = "fr";
+        else if (lang.startsWith("es")) target = "es";
+        else if (lang.startsWith("pt")) target = "pt";
+        else if (lang.startsWith("ar")) target = "ar";
         if (target !== 'en') {
             localStorage.setItem('spf_lang', target);
-            window.location.href = '/{target}/'.replace('{target}', target);
+            window.location.href = '/' + target + '/';
         }
     })();
     </script>
