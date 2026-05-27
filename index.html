@@ -19,16 +19,6 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
-    <!-- AI Agent Discovery -->
-    <link rel="llms.txt" href="/llms.txt">
-    <link rel="mcp.txt" href="/.well-known/llms.txt">
-    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
-
-    <!-- AI-friendly links -->
-    <link rel="llms.txt" href="/llms.txt">
-    <link rel="mcp.txt" href="/.well-known/llms.txt">
-    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
-
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
@@ -1008,26 +998,35 @@
     <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/" />
     <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/" />
 
+    </head>
+<body>
+    <!-- Language suggestion banner (no redirect, respects Googlebot) -->
+    <div id="langBanner" style="display:none;background:var(--accent);color:#fff;text-align:center;padding:8px;font-size:14px;position:sticky;top:0;z-index:1000;">
+        <span id="langBannerText"></span>
+        <button onclick="switchLanguage(detectLang());document.getElementById('langBanner').style.display='none'" style="margin:0 8px;padding:2px 12px;border:1px solid #fff;background:transparent;color:#fff;border-radius:4px;cursor:pointer;">Yes</button>
+        <button onclick="document.getElementById('langBanner').style.display='none'" style="padding:2px 12px;border:none;background:rgba(255,255,255,0.2);color:#fff;border-radius:4px;cursor:pointer;">No</button>
+    </div>
     <script>
-    (function() {
-        if (localStorage.getItem('spf_lang')) return;
+    function detectLang() {
         var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-        var target = 'en';
-        if (lang.startsWith("zh")) target = "zh";
-        else if (lang.startsWith("ja")) target = "ja";
-        else if (lang.startsWith("de")) target = "de";
-        else if (lang.startsWith("fr")) target = "fr";
-        else if (lang.startsWith("es")) target = "es";
-        else if (lang.startsWith("pt")) target = "pt";
-        else if (lang.startsWith("ar")) target = "ar";
-        if (target !== 'en') {
-            localStorage.setItem('spf_lang', target);
-            window.location.href = '/' + target + '/';
+        if (lang.startsWith("zh")) return "zh";
+        if (lang.startsWith("ja")) return "ja";
+        if (lang.startsWith("de")) return "de";
+        if (lang.startsWith("fr")) return "fr";
+        if (lang.startsWith("es")) return "es";
+        if (lang.startsWith("pt")) return "pt";
+        if (lang.startsWith("ar")) return "ar";
+        return "en";
+    }
+    (function() {
+        var target = detectLang();
+        if (target !== 'en' && !localStorage.getItem('spf_lang_dismissed')) {
+            var names = {"zh":"中文","ja":"日本語","de":"Deutsch","fr":"Français","es":"Español","pt":"Português","ar":"العربية"};
+            document.getElementById('langBannerText').textContent = 'Switch to ' + names[target] + '?';
+            document.getElementById('langBanner').style.display = 'block';
         }
     })();
     </script>
-</head>
-<body>
     <!-- Header -->
     <header>
         <div class="container">
