@@ -22,13 +22,13 @@ async function test() {
     ctx.fillRect(0, 0, 200, 200);
 
     // Save test image
-    const testImagePath = '/tmp/test-input.png';
+    const testImagePath = './test-input.png';
     const buffer = canvas.toBuffer('image/png');
     await fs.writeFile(testImagePath, buffer);
     console.log('✓ Test image created:', testImagePath);
 
     // Test halftone conversion
-    const outputPath = '/tmp/test-halftone.png';
+    const outputPath = './test-halftone.png';
     await convertToHalftone(testImagePath, outputPath, {
       dotSize: 4,
       spacing: 1.5,

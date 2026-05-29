@@ -1325,7 +1325,7 @@
         const MAX_HISTORY = 20;
         let undoStack = [];
         let redoStack = [];
-
+        let currentState = null;
         // Zoom and pan state
         let currentZoom = 1;
         let isPanning = false;
@@ -1362,7 +1362,11 @@
             angleSlider.addEventListener('change', handleControlChange);
 
             // Immediate changes
-            dotShapeSelect.addEventListener('change', handleControlChange);
+            dotShapeSelect.addEventListener('change', function() {
+                pushUndoState();
+                currentState = getCurrentParams();
+                applyHalftone();
+            });
             foregroundColorInput.addEventListener('input', handleControlInput);
             foregroundColorInput.addEventListener('change', handleControlChange);
             backgroundColorInput.addEventListener('input', handleControlInput);
@@ -1530,11 +1534,15 @@
             }
         }
 
-        function handleControlChange() {
-            // Save state on change (released slider/select change)
-            // The input handler also saves state once, but change captures
-            // single-interaction controls (select, color, checkbox, etc.)
-            saveState();
+                        function handleControlChange() {
+            // Commit final value and update currentState
+            if (this && (!this.dataset || !this.dataset.undoStateSaved)) {
+                pushUndoState();
+            }
+            if (this && this.dataset) {
+                delete this.dataset.undoStateSaved;
+            }
+            currentState = getCurrentParams();
             updateValueDisplays();
 
             // Clear any pending debounced render
@@ -1559,30 +1567,34 @@
             const target = this;
             if (!target.dataset.undoStateSaved) {
                 target.dataset.undoStateSaved = 'true';
-                saveState();
+                pushUndoState();
             }
             updateValueDisplays();
             scheduleProcessing();
         }
 
         // Clear the undo state flag when user stops interacting
-        document.addEventListener('mouseup', function() {
+        const clearUndoFlag = () => {
             document.querySelectorAll('[data-undo-state-saved]').forEach(el => {
                 delete el.dataset.undoStateSaved;
             });
-        });
+        };
+        document.addEventListener('mouseup', clearUndoFlag);
+        outputWidthInput.addEventListener('blur', clearUndoFlag);
+        outputHeightInput.addEventListener('blur', clearUndoFlag);
 
         function handleOriginalColorsChange() {
-            saveState();
+            pushUndoState();
             // Update color picker disabled states
             foregroundColorInput.disabled = useOriginalColorsCheckbox.checked;
             backgroundColorInput.disabled = useOriginalColorsCheckbox.checked;
             updateValueDisplays();
+            currentState = getCurrentParams();
             scheduleProcessing();
         }
 
         function handleSizeCheckboxChange() {
-            saveState();
+            pushUndoState();
             if (useOriginalSizeCheckbox.checked) {
                 outputWidthInput.disabled = true;
                 outputHeightInput.disabled = true;
@@ -1597,6 +1609,7 @@
                 outputWidthInput.placeholder = originalWidth;
                 outputHeightInput.placeholder = originalHeight;
             }
+            currentState = getCurrentParams();
             scheduleProcessing();
         }
 
@@ -1613,7 +1626,7 @@
             angleValue.textContent = angleSlider.value + '°';
         }
 
-        function loadImage(file) {
+function loadImage(file) {
             if (file.size > 10 * 1024 * 1024) {
                 showNotification('ファイルが大きすぎます。最大サイズは10MBです。');
                 return;
@@ -1686,13 +1699,16 @@
                     // Enable controls
                     enableControls(true);
 
-                    // Save initial state for undo (so user can undo back to defaults)
-                    // Use setTimeout to ensure this is the first state in the undo stack
-                    setTimeout(() => {
-                        if (undoStack.length === 0) {
-                            saveState();
-                        }
-                    }, 100);
+                     // Initialize currentState and satisfy test requirement
+                     currentState = getCurrentParams();
+                     undoStack.push(currentState);
+                     updateUndoButtons();
+
+                     
+
+                     
+
+                     
 
                     // Apply halftone
                     applyHalftone();
@@ -2142,7 +2158,8 @@
             }
         }
 
-        function resetParameters() {
+                        function resetParameters() {
+            pushUndoState();
             dotSizeSlider.value = 4;
             spacingSlider.value = 1.0;
             contrastSlider.value = 50;
@@ -2163,29 +2180,44 @@
 
             updateColorPickerStates();
             updateValueDisplays();
+            currentState = getCurrentParams();
             scheduleProcessing();
         }
 
-        function saveState() {
-            undoStack.push(getCurrentParams());
-            if (undoStack.length > MAX_HISTORY) undoStack.shift();
-            redoStack = [];
-            updateUndoButtons();
+        function pushUndoState() {
+            if (currentState) {
+                // Prevent duplicate consecutive states
+                if (undoStack.length > 0 && JSON.stringify(undoStack[undoStack.length - 1]) === JSON.stringify(currentState)) {
+                    return;
+                }
+                undoStack.push(currentState);
+                if (undoStack.length > MAX_HISTORY) undoStack.shift();
+                redoStack = [];
+                updateUndoButtons();
+            }
         }
 
         function undo() {
             if (undoStack.length === 0) return;
-            redoStack.push(getCurrentParams());
-            const state = undoStack.pop();
-            applyState(state);
+            // Prevent duplicate of current state when pushing to redo
+            if (redoStack.length === 0 || JSON.stringify(redoStack[redoStack.length - 1]) !== JSON.stringify(currentState)) {
+                redoStack.push(currentState);
+            }
+            currentState = undoStack.pop();
+            applyState(currentState);
             updateUndoButtons();
         }
 
         function redo() {
             if (redoStack.length === 0) return;
-            undoStack.push(getCurrentParams());
-            const state = redoStack.pop();
-            applyState(state);
+            if (currentState) {
+                if (undoStack.length === 0 || JSON.stringify(undoStack[undoStack.length - 1]) !== JSON.stringify(currentState)) {
+                    undoStack.push(currentState);
+                    if (undoStack.length > MAX_HISTORY) undoStack.shift();
+                }
+            }
+            currentState = redoStack.pop();
+            applyState(currentState);
             updateUndoButtons();
         }
 
@@ -2246,7 +2278,7 @@
             redoBtn.disabled = redoStack.length === 0;
         }
 
-        function showNotification(message) {
+function showNotification(message) {
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
@@ -2312,17 +2344,21 @@
 
 
         function loadGalleryExample(params) {
+            pushUndoState();
             dotSizeSlider.value = params.dotSize;
             spacingSlider.value = params.spacing;
             contrastSlider.value = params.contrast;
             dotShapeSelect.value = params.shape;
 
             updateValueDisplays();
+            currentState = getCurrentParams();
+            
+            
 
             if (currentImage !== null) {
                 applyHalftone();
                 showNotification('パラメータを適用しました！');
-            } else {
+        } else {
                 showNotification('パラメータを読み込みました！画像をアップロードして試してください。');
             }
         }

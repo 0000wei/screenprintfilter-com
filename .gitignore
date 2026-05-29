@@ -11,3 +11,5 @@ test-perf.png
 test-report.html
 test-results.json
 test-script.js
+server.js
+mcp-server/package-lock.json
