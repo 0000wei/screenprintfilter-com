@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义半色调图案——超越基本网点的形状、纹理与创意效果 - ScreenPrintFilter.online</title>
+    <meta name="description" content="探索超越基本网点的自定义半色调图案。了解如何创建线条半色调、圆形图案、波浪纹理和艺术效果，打造独特的丝网印刷设计。">
+    <meta name="keywords" content="自定义半色调图案, 线条半色调, 圆形半色调, 波浪半色调纹理, 半色调形状, 创意半色调, 丝网印刷图案">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="自定义半色调图案——超越基本网点">
+    <meta property="og:description" content="探索超越基本网点的自定义半色调图案。了解如何创建线条半色调、圆形图案、波浪纹理和艺术效果，打造独特的丝网印刷设计。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/zh/guides/custom-halftone-patterns/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .pattern-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .pattern-card .pattern-preview {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 0.75rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .pattern-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .pattern-card .desc { color: #666; font-size: 0.75rem; }
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/custom-halftone-patterns/" />
+    <link rel="canonical" href="https://screenprintfilter.online/zh/guides/custom-halftone-patterns/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/">试用工具</a>
+            <div class="lang-switcher">
+                <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+                    <option value="en">English</option>
+                    <option value="zh" selected>中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="pt">Português</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
+            <script>
+            function switchLanguage(code) {
+                var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+                var path = window.location.pathname;
+                var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+                if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+                var baseUrl = paths[code];
+                if (cleanPath === '/' || cleanPath === '/index.html') {
+                    window.location.href = baseUrl;
+                } else {
+                    window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+                }
+            }
+            </script>
+        </header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/">首页</a><span class="separator">›</span><a href="/guides/">指南</a><span class="separator">›</span><span class="current">自定义半色调图案</span></div>
+
+            <h1>自定义半色调图案——超越基本网点</h1>
+            <p class="byline">发布日期：2026年7月15日 &bull; 阅读时间：7分钟</p>
+
+            <p>传统的半色调一直以网点为主——以网格排列的大小不一的圆形来模拟色调和阴影。这是丝网印刷的行业标准，并且有充分的理由：它效果出色。但现代数字工具和富有创造力的丝网印刷从业者已经远远超越了简单的网点。如今，你可以使用线条、同心圆环、波浪扭曲和混合纹理来打造令人惊叹的视觉效果，从任何简单的网点网格中脱颖而出。</p>
+
+            <p>本指南将探索自定义半色调图案的世界——它们是什么、如何工作，以及如何利用它们为您的丝网印刷项目带来新鲜、独特的外观。</p>
+
+            <div class="highlight-box">
+                <p><strong>概要：</strong>自定义半色调图案用替代形状和纹理替换或增强经典的网点网格：线条、径向圆形、波浪以及多图案混合。它们为品牌设计、海报和艺术印刷品提供了更多创作自由。<strong><a href="/" style="color:#FF4500;">试用我们的免费在线半色调工具</a></strong>，内置4种网点形状，助您快速入门。</p>
+            </div>
+
+            <h2>什么使半色调图案成为"自定义"的？</h2>
+            <p>标准的半色调使用简单的重复圆形网点网格。而<em>自定义</em>半色调图案则改变了表现色调的基本构建单元——即标记。标记不再是圆形，而可以是线条、月牙形、环形或波浪笔触。同样的核心数学原理仍然适用：较大的标记表示较暗的区域，较小的标记表示较亮的区域。但标记的<em>形状</em>彻底改变了输出的视觉效果。</p>
+
+            <p>一些自定义图案还会改变标记的<em>排列方式</em>——例如从中心点向外辐射，或沿着正弦曲线排列。这些结构上的变化创造了传统网格无法实现的崭新纹理。</p>
+
+            <div class="pattern-grid">
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-linear-gradient(90deg, #FF4500 0px, #FF4500 3px, #000 3px, #000 6px);"></div>
+                    <div class="label">线条半色调</div>
+                    <div class="desc">细垂直条纹</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: radial-gradient(circle at 50% 50%, #FF4500 0%, #000 40%, #FF4500 40%, #000 60%, #FF4500 60%, #000 80%, #FF4500 80%, #000 100%);"></div>
+                    <div class="label">径向图案</div>
+                    <div class="desc">同心圆环</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-linear-gradient(45deg, #FF4500 0px, #FF4500 4px, #000 4px, #000 8px);"></div>
+                    <div class="label">斜线</div>
+                    <div class="desc">角度纹理</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-radial-gradient(circle at 30% 30%, #FF4500 0%, #000 20%, #FF4500 20%, #000 40%);"></div>
+                    <div class="label">径向爆发</div>
+                    <div class="desc">星形纹理</div>
+                </div>
+            </div>
+
+            <h2>1. 线条半色调图案</h2>
+            <p>线条半色调是经典网点最流行的替代方案。图像不再由圆形渲染，而是呈现为一组平行线，其<strong>粗细</strong>随底层图像的亮度而变化。暗色区域变为粗线；亮色区域变为细线——甚至完全消失，留下空白空间。</p>
+
+            <h3>线条半色调的工作原理</h3>
+            <p>与网点半色调一样，线条半色调首先将图像转换为灰度图。然后应用水平（或垂直、或倾斜）的扫描线网格。对于每条扫描线，滤镜沿其路径采样亮度，并成比例调整线条描边宽度：信号越强（像素越暗），描边越宽；信号越弱，描边越窄。</p>
+
+            <p>最终效果类似于蚀刻版画或线框绘图。它特别适合肖像、建筑摄影和文字较多的设计，在这些场景中，线条方向可以增强构图。</p>
+
+            <h3>方向很重要</h3>
+            <p>线条的朝向会极大地改变输出的感觉：</p>
+            <ul>
+                <li><strong>水平线条</strong>营造出平静、宽银幕电影般的氛围。适合风景和全景图。</li>
+                <li><strong>垂直线条</strong>暗示高度、结构和正式感。非常适合人物立姿肖像和建筑题材。</li>
+                <li><strong>斜线条</strong>增添能量、动感和张力。用于动作镜头、运动图像和动态构图。</li>
+                <li><strong>曲线线条</strong>——沿微妙弧线或波浪延伸的线条——可以呼应流水或起伏山丘等自然形态。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>专业提示：</strong>在织物丝网印刷中使用线条半色调时，确保线条厚度至少为0.5pt，以保证油墨能干净地透过网版转移。较细的线条在压力下容易断裂，尤其是在有纹理的服装上。</p>
+            </div>
+
+            <h2>2. 圆形和径向图案</h2>
+            <p>圆形和径向半色调图案将网格的中心移至焦点位置。标记不再呈矩形阵列排列，而是从选定的中心向外辐射——就像池塘中的涟漪或靶心上的圆环。</p>
+
+            <h3>同心圆环半色调</h3>
+            <p>在同心圆环图案中，标记是以单一中心点为圆心的环形带。随着图像亮度的变化，圆环的厚度和间距也会发生变化。这会产生一种催眠般的靶心效果，将观者的视线吸引到中心。它是品牌设计、徽标以及任何希望强调焦点元素的强大工具。</p>
+
+            <h3>径向线条半色调</h3>
+            <p>与圆环不同，径向线条半色调使用从中心辐射出的辐条，类似于自行车轮或旭日形。辐条的粗细随图像亮度而变化。这种图案非常适合圆形构图——如唱片标签、徽章和圆形徽标——以及具有天然径向对称性的图像，例如特写花朵或从中心透视拍摄的建筑。</p>
+
+            <h3>偏移/多中心图案</h3>
+            <p>更高级的实现允许你放置<em>多个</em>径向中心。图像的每个区域都可以拥有自己的焦点，从而形成由辐射纹理拼接而成的效果。这对于抽象艺术和海报设计尤其有效，可以在构图的不同区域之间营造视觉张力。</p>
+
+            <div class="highlight-box">
+                <p><strong>专业提示：</strong>径向图案最适合高对比度且主体清晰的图像。简单的剪影或形状大胆的徽标效果远好于杂乱、低对比度的照片，后者容易变成重叠圆环的混乱泥潭。</p>
+            </div>
+
+            <h2>3. 波浪和扭曲纹理</h2>
+            <p>波浪和扭曲半色调纹理采用传统的网点网格并应用<strong>位移</strong>——每个网点的位置根据数学函数（正弦、余弦或更复杂的波形）进行偏移。网点本身也可能改变形状，拉伸或压缩以跟随波浪。</p>
+
+            <h3>正弦波半色调</h3>
+            <p>正弦波半色调将每个网点沿正弦曲线位移。网点不再排列在整齐的行和列上，而是在图像中起伏波动。这营造出一种流动、有机的感觉。它是自然主题设计——海洋场景、织物纹理、植物——或任何希望柔化标准半色调刚性机械感时的绝佳选择。</p>
+
+            <h3>涟漪和漩涡效果</h3>
+            <p>更强烈的扭曲包括圆形涟漪（网点沿从某点向外扩散的波进行位移）和漩涡（网点围绕中心旋转，旋转角度与距离成正比）。涟漪效果模仿水滴扰动的水面；漩涡效果则像把图像向内吸入的漩涡。这两种都是专辑封面、演唱会海报和实验性印刷中令人瞩目的视觉技法。</p>
+
+            <h3>基于噪声的纹理</h3>
+            <p>不使用干净的数学波形，你可以使用Perlin噪声或类似的随机但平滑的函数来位移网点。结果是半色调看起来像手工制作——如同艺术家的点画，或照片打印在纹理纸上的自然颗粒。基于噪声的位移非常适合艺术微喷和追求有机、不完美质感的作品。</p>
+
+            <div class="highlight-box">
+                <p><strong>专业提示：</strong>印刷扭曲半色调时，请先测试小面积区域。过度位移可能造成间隙或重叠，导致印刷不干净。以网点间距的10%-20%作为位移幅度是安全的起点。</p>
+            </div>
+
+            <h2>4. 组合多种图案</h2>
+            <p>当你在同一幅图像中开始混合图案时，最令人兴奋的创意领域就打开了。不需要只使用网点或只使用线条，你可以为不同区域使用不同的半色调图案，创造出对比和多样性，让设计的每个部分都感觉独一无二。</p>
+
+            <h3>区域混合</h3>
+            <p>在区域混合中，你根据颜色、亮度或绘制的蒙版将图像划分为区域，并为每个区域分配不同的半色调图案。例如：</p>
+            <ul>
+                <li>风景中的<strong>天空</strong>可以使用以太阳为中心的径向图案。</li>
+                <li>中景的<strong>山脉</strong>可以使用斜线半色调。</li>
+                <li><strong>前景</strong>植物可以使用带有波浪位移的标准网点半色调。</li>
+            </ul>
+            <p>区域之间的过渡可以是硬边缘的（拼贴效果），也可以是柔和混合的（更无缝的外观）。</p>
+
+            <h3>图案之间的交叉淡变</h3>
+            <p>更微妙的处理方式是交叉淡变：一种图案在整个图像中逐渐变形为另一种。左上角可能以网点开始，到右下角逐渐拉伸成线条。这种技法营造出动感和流动感。它特别适合横幅、页眉以及任何希望暗示旅程或进展的设计。</p>
+
+            <h3>叠加和正片叠底</h3>
+            <p>你还可以将两种半色调图案相互叠放——例如，粗网点图案叠加细线图案。使用正片叠底或滤色混合模式让两种图案都显现出来。两种网格的相互作用会产生莫列波纹干涉图案，在有意识使用时视觉效果惊人，但在无意中则显得混乱。有意图地运用这一技法，并事先在目标承印物上进行测试。</p>
+
+            <div class="highlight-box">
+                <p><strong>专业提示：</strong>组合图案时，确保每个图案的LPI（每英寸线数）相差至少20%，以避免产生意外的莫列波纹。例如，基础图案使用40 LPI，叠加图案使用55 LPI。</p>
+            </div>
+
+            <h2>5. 何时使用自定义图案</h2>
+            <p>自定义半色调图案并非在所有情况下都能替代经典网点——它们是一种有意的艺术选择。以下是它们最能大放异彩的场景：</p>
+
+            <h3>品牌和徽标</h3>
+            <p>希望在商品上脱颖而出的品牌可以将自定义半色调图案作为其标志性纹理。想象一个咖啡品牌，其徽标总是配有径向旭日半色调；或者一个音乐厂牌，在所有专辑封面中使用波浪扭曲纹理。独特的半色调成为视觉识别的一部分。</p>
+
+            <h3>艺术微喷和限量版</h3>
+            <p>限量版丝网印刷品的买家追求独特的东西。自定义半色调图案——尤其是多图案混合或基于噪声的纹理——给每幅印刷品带来标准机械半色调无法企及的手工艺感。画廊和收藏家对有可见、深思熟虑技法的作品反应热烈。</p>
+
+            <h3>海报和活动宣传</h3>
+            <p>演唱会海报、音乐节公告和电影海报都是竞争激烈的视觉空间。引人注目的自定义半色调可能决定一张海报是被忽略还是被装裱。尤其是线条半色调，赋予海报一种既复古又现代的经典丝网印刷美学。</p>
+
+            <h3>时尚与服装</h3>
+            <p>T恤和卫衣上的自定义半色调图案可以让简单的图形显得丰富而细致。带垂直线条半色调的肖像与标准网点的完全不同。时尚品牌使用这些技法打造一眼可识别的标志性外观。</p>
+
+            <h3>何时坚持使用经典网点</h3>
+            <p>自定义图案虽然强大，但并非总是最佳选择。在以下情况下，坚持使用经典圆形网点半色调：</p>
+            <ul>
+                <li>你需要最准确的色调还原（例如摄影写实）</li>
+                <li>你在光滑纸张上以非常高的LPI印刷</li>
+                <li>你的客户明确期望传统的印刷外观</li>
+                <li>你正在印刷非常小的细节，自定义形状会损失清晰度</li>
+            </ul>
+
+            <h2>开始使用自定义半色调图案</h2>
+            <p>你不需要昂贵的软件来尝试自定义半色调图案。许多现代在线工具和矢量编辑器都提供超越基本圆形的图案预设。以下是入门方法：</p>
+
+            <ol>
+                <li><strong>选择图案类型</strong>——从一种开始：线条、径向或波浪。掌握一种后再叠加。</li>
+                <li><strong>选择高对比度图像</strong>——自定义图案会放大边缘和纹理。从简单的主题开始（剪影、徽标、大胆的肖像）。</li>
+                <li><strong>调整LPI和粗细</strong>——较低的LPI（30-50）呈现更明显的图案纹理；较高的LPI（55-80）提供更精细的细节但图案特征较弱。</li>
+                <li><strong>以实际印刷尺寸预览</strong>——在屏幕上看起来很棒的照片在缩印后可能令人失望。始终模拟最终的印刷尺寸。</li>
+                <li><strong>打印测试样张</strong>——在投入批量生产之前，先通过丝网印刷设备运行一个小样张。检查所有细节能否转印，以及是否出现莫列波纹。</li>
+            </ol>
+
+            <div class="cta-box">
+                <h3>免费尝试自定义半色调图案</h3>
+                <p>我们的免费在线半色调滤镜支持4种网点形状，包括圆形、方形、菱形和线条——非常适合直接在浏览器中尝试不同的半色调效果。</p>
+                <a href="/" class="cta-button">打开半色调工具 →</a>
+            </div>
+
+            <h2>常见问题解答</h2>
+
+            <h3>我可以用 ScreenPrintFilter.online 创建线条半色调图案吗？</h3>
+            <p>是的！我们的工具包含一个<strong>线条</strong>网点形状选项，可以产生平行线半色调效果。你可以调整间距、粗细和角度以获得所需的外观。未来的更新将增加径向和波浪图案。</p>
+
+            <h3>在T恤上使用线条半色调应该选什么LPI？</h3>
+            <p>对于织物上的线条半色调，使用比网点稍低的LPI——大约25-40 LPI。线条之间需要更多空间以避免油墨相互渗入，尤其是在使用白色油墨印刷深色服装时。</p>
+
+            <h3>可以在一个设计中组合多种半色调图案吗？</h3>
+            <p>可以，但你需要使用图像编辑软件来遮罩不同区域。先对一层应用一种半色调效果，再对另一层应用另一种，然后合成。我们的工具一次应用一种图案，但你可以在同一图像上使用不同蒙版多次运行。</p>
+
+            <h3>自定义半色调图案比网点更难印刷吗？</h3>
+            <p>不一定。相同的丝网印刷原理仍然适用：网目数、油墨粘度和刮刀压力。然而，某些图案（如非常细的线条或极端的波浪扭曲）需要更细致的设置。在批量生产前务必进行测试印刷。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/privacy-policy.html">隐私政策</a> | <a href="/">返回工具</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>

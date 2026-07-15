@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不同丝网目数的最佳半色调网点尺寸 - ScreenPrintFilter.online</title>
+    <meta name="description" content="了解不同丝网印刷目数对应的最佳半色调网点尺寸。包含110、156、200、230、305和355目丝网的完整网点尺寸对照表。">
+    <meta name="keywords" content="半色调网点尺寸, 丝网印刷目数, 目数指南, 半色调丝网印刷, 网目尺寸表, 丝网印刷半色调网点">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="不同丝网目数的最佳半色调网点尺寸">
+    <meta property="og:description" content="了解不同丝网印刷目数对应的最佳半色调网点尺寸。包含110、156、200、230、305和355目丝网的完整网点尺寸对照表。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/zh/guides/halftone-mesh-count/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .mesh-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .mesh-table th {
+            background: #222;
+            color: #e0e0e0;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 2px solid #FF4500;
+            font-weight: 600;
+        }
+        .mesh-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #2a2a2a;
+            color: #a0a0a0;
+        }
+        .mesh-table tr:hover td {
+            background: #1a1a1a;
+        }
+        .mesh-table .dot-range {
+            color: #FF4500;
+            font-weight: 600;
+        }
+        .mesh-table .mesh-name {
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .example-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .example-card .dot-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            background: radial-gradient(circle at 30% 30%, #FF4500, #000);
+        }
+        .example-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .example-card .desc { color: #666; font-size: 0.75rem; }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/halftone-mesh-count/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/">试用工具</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+            <option value="en">English</option>
+            <option value="zh" selected>中文</option>
+            <option value="ja">日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/">首页</a><span class="separator">›</span><a href="https://screenprintfilter.online/guides/">指南</a><span class="separator">›</span><span class="current">按网目选择半色调网点尺寸</span></div>
+
+            <h1>不同网目数的网点尺寸指南</h1>
+            <p class="byline">发布日期：2026年7月15日 &bull; 阅读时间：7分钟</p>
+
+            <p>在丝网印刷中正确制作半色调网点的关键在于一个关键的匹配关系：网点尺寸与丝网目数的对应。使用过大的网点会丢失细节，使用过小的网点则油墨会从网孔中渗出，破坏印刷效果。正确匹配两者是获得专业印刷效果与浪费网版和油墨之间的分水岭。</p>
+
+            <p>本指南将详细解析每种常见丝网目数适合的半色调网点尺寸，教你如何测试自己的设置，以及需要避免的常见错误。</p>
+
+            <div class="highlight-box">
+                <p><strong>快速总结：</strong>丝网目数越高，能使用的半色调网点就越小越精细。110目丝网需要8-12像素的网点，而355目丝网可以处理小至1-3像素的网点。使用我们的<strong><a href="/" style="color:#FF4500;">免费在线半色调工具</a></strong>为您的特定网目生成精确尺寸的网点。</p>
+            </div>
+
+            <h2>什么是网目数？</h2>
+            <p>网目数指的是丝网印刷网布每英寸线径内的丝线数量。110目丝网每英寸有110根丝线，而305目丝网每英寸有305根丝线。网目数越高，网孔越细密，网版能保留的细节就越多。</p>
+
+            <p>不同网目数适用于不同的用途：</p>
+            <ul>
+                <li><strong>低目数（40-86目）：</strong>用于金粉、发泡等高厚度特殊油墨的厚墨层印刷。不适用于半色调。</li>
+                <li><strong>中目数（110-156目）：</strong>标准纺织品印刷。适用于粗犷设计和深色织物上的基础半色调。</li>
+                <li><strong>高目数（200-230目）：</strong>精细设计、浅色织物和精细半色调作业。</li>
+                <li><strong>超高目数（305-355目）：</strong>CMYK四色印刷、美术复制品和超精细半色调网点。</li>
+            </ul>
+
+            <p>在印刷半色调时，网孔的尺寸必须足够大，以便最小的网点能够干净地通过。如果网点小于网孔尺寸，它就可能从网孔中掉落或变形——导致边缘模糊、渗墨。</p>
+
+            <div class="highlight-box">
+                <p><strong>关键规则：</strong>作为一般准则，最小的半色调网点应至少是网孔宽度的2-3倍。这确保网点能够稳固地坐落在网丝的交叉点上，并干净地转移到承印物上。</p>
+            </div>
+
+            <h2>按网目数选择网点尺寸</h2>
+            <p>下表显示了每种常见丝网印刷目数的推荐半色调网点尺寸范围（以300 DPI下的像素为单位）。这些是起点——您的最终网点尺寸可能因油墨粘度、刮刀压力和承印物表面纹理而有所不同。</p>
+
+            <table class="mesh-table">
+                <thead>
+                    <tr>
+                        <th>网目数</th>
+                        <th>最佳网点尺寸（300 DPI下像素）</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="mesh-name">110目</td>
+                        <td class="dot-range">8 - 12 px</td>
+                        <td>厚织物、深色油墨、卫衣和重磅棉布上的粗犷半色调</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">156目</td>
+                        <td class="dot-range">6 - 9 px</td>
+                        <td>通用标准印刷、中间调半色调、普通纺织品作业</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">200目</td>
+                        <td class="dot-range">4 - 7 px</td>
+                        <td>精细设计、浅色织物、良好油墨流动性的精细半色调</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">230目</td>
+                        <td class="dot-range">3 - 5 px</td>
+                        <td>精细细节作业、半色调照片、渐变丰富的设计</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">305目</td>
+                        <td class="dot-range">2 - 4 px</td>
+                        <td>高细节印刷、CMYK四色印刷、平滑的色调过渡</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">355目</td>
+                        <td class="dot-range">1 - 3 px</td>
+                        <td>超精细细节、美术复制、博物馆级艺术微喷风格</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>如何阅读该图表</h3>
+            <p>如果您使用110目丝网在深色T恤上印刷，请使用8到12像素（300 DPI）之间的半色调网点。较粗的网目允许更多油墨通过，因此需要更大的网点来保持形状并防止渗墨。随着您转向更细的网目，网点会按比例缩小。</p>
+
+            <p>对于CMYK四色印刷，305目是行业标准。每个颜色通道（青、品、黄、黑）都有各自的半色调网屏，网点为2-4像素，并以适当的角度排列以避免龟纹。</p>
+
+            <h2>如何测试您的网点尺寸</h2>
+            <p>在投入正式批量生产之前，始终要进行阶梯测试。以下是一个可靠的方法：</p>
+            <ol>
+                <li><strong>制作测试条</strong>：包含从1像素到15像素的半色调网点，以1像素为增量，并排排列。</li>
+                <li><strong>晒版曝光</strong>：使用正常的曝光时间将测试条曝光到网版上。</li>
+                <li><strong>冲洗显影</strong>：冲洗网版，在充足光线下检查。寻找能够完全冲洗出来且没有任何变形的最小网点。</li>
+                <li><strong>试印测试</strong>：使用实际油墨和承印物进行印刷。检查边缘是否锐利、有无渗墨和网点扩大的情况。</li>
+                <li><strong>用放大镜对比</strong>：使用10倍或20倍的放大镜可以精确观察每种网点尺寸在印刷中的表现。</li>
+            </ol>
+            <p>记录您使用的每种网目数和油墨组合的结果。随着时间的推移，您将建立一份个性化的参考图表，涵盖您特定的感光胶、曝光设备和印刷设置。</p>
+
+            <div class="highlight-box">
+                <p><strong>专业技巧：</strong>许多印刷商发现，由于曝光过程中的网点扩大和印刷时油墨的铺展，实际可使用的网点尺寸比理论图表建议的大1-2像素。始终从推荐范围的上限开始尝试，再逐步缩小。</p>
+            </div>
+
+            <h2>需要避免的常见错误</h2>
+            <p>即使是有经验的印刷商也会犯这些错误。以下是一些需要注意的问题：</p>
+            <ul>
+                <li><strong>网点对于网目来说太小：</strong>这是最常见的错误。在110目丝网上的2像素网点会从网孔中漏下去，导致油墨渗色、边缘模糊和印刷品报废。始终首先检查网目与网点的比例。</li>
+                <li><strong>所有网目使用相同的网点尺寸：</strong>每种网目数需要不同的网点范围。在230目丝网上效果完美的网点，在110目丝网上要么堵版要么渗墨。</li>
+                <li><strong>忽略油墨粘度：</strong>较稠的油墨（白墨、不透明、特种）无论网目数如何都需要更大的网点。稀薄、透明的油墨可以保留更精细的网点。</li>
+                <li><strong>过度曝光网版：</strong>过长的曝光时间会使感光胶硬化超出预期的网点边界，从而缩小半色调网点或完全封堵。使用阶梯曝光条精细调整曝光时间。</li>
+                <li><strong>未考虑网点扩大：</strong>数字文件中的4像素网点在织物上印刷时可能变成6像素网点，这是由于机械网点扩大造成的。应通过将设计尺寸设计得比目标稍小来进行补偿。</li>
+            </ul>
+
+            <h2>从理论到实践</h2>
+            <p>每家印刷厂的情况都不尽相同。您的油墨品牌、感光胶类型、曝光设备、刮刀硬度甚至车间的湿度都会影响最佳网点尺寸。将本指南中的图表作为起点，然后通过测试进行调整。</p>
+
+            <p>开始尝试正确半色调网点尺寸的最快方法是使用能完全控制网点尺寸的工具，从源图片生成网点。ScreenPrintFilter.online让您设置精确的像素尺寸、实时预览效果并以任意分辨率导出——无需猜测。</p>
+
+            <div class="cta-box">
+                <h3>创建完美尺寸的半色调网点</h3>
+                <p>使用我们的免费在线半色调滤镜生成任意尺寸的网点——从1像素的超精细到15像素的粗犷效果。即时预览并以全分辨率下载。无需注册。</p>
+                <a href="/" class="cta-button">试用半色调工具 →</a>
+            </div>
+
+            <h2>常见问题解答</h2>
+
+            <h3>我可以使用110目丝网进行半色调印刷吗？</h3>
+            <p>可以，但只能使用较大的网点（8-12像素）。110目丝网非常适合在深色或有纹理的织物上制作粗犷的半色调效果，需要较厚的墨层。但不适合精细的摄影细节。</p>
+
+            <h3>哪种通用型丝网最适合半色调？</h3>
+            <p>156目丝网用途最广泛。它能轻松处理6到9像素的网点尺寸，适用于大多数油墨类型，并在浅色和深色织物上都能产生干净的效果。许多印刷厂将156目作为首选标准。</p>
+
+            <h3>CMYK半色调印刷是否需要不同的丝网？</h3>
+            <p>是的。CMYK四色印刷通常需要为每个颜色通道配备305目丝网。精细的网孔（约48微米）允许2-4像素的小网点再现平滑的摄影色调，且当网屏以正确的角度排列时不会产生龟纹。</p>
+
+            <h3>如何将网点尺寸从像素转换为微米？</h3>
+            <p>在300 DPI下，1像素约等于85微米。因此4像素的半色调网点大约为340微米。将其与您的网孔尺寸比较：对于305目丝网（48微米网孔），340微米的网点大约是网孔尺寸的7倍——完全在安全范围内。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/privacy-policy.html">隐私政策</a> | <a href="/">返回工具</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>

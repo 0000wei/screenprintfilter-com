@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カスタムハーフトーンパターン — ドットを超える図形・テクスチャ・クリエイティブ表現 - ScreenPrintFilter.online</title>
+    <meta name="description" content="基本的なドットを超えるカスタムハーフトーンパターンを探求。ラインハーフトーン、円形パターン、ウェーブテクスチャ、アーティスティックエフェクトで独自のスクリーン印刷デザインを実現する方法を解説。">
+    <meta name="keywords" content="カスタムハーフトーンパターン, ラインハーフトーン, サーキュラーハーフトーン, ウェーブハーフトーンテクスチャ, ハーフトーン図形, クリエイティブハーフトーン, スクリーン印刷パターン">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="カスタムハーフトーンパターン — 基本的なドットを超えて">
+    <meta property="og:description" content="基本的なドットを超えるカスタムハーフトーンパターンを探求。ラインハーフトーン、円形パターン、ウェーブテクスチャ、アーティスティックエフェクトで独自のスクリーン印刷デザインを実現する方法を解説。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/ja/guides/custom-halftone-patterns/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .pattern-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .pattern-card .pattern-preview {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 0.75rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .pattern-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .pattern-card .desc { color: #666; font-size: 0.75rem; }
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <link rel="canonical" href="https://screenprintfilter.online/ja/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/custom-halftone-patterns/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/custom-halftone-patterns/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/ja/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/ja/">ツールを試す</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="言語を切り替え">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja" selected>日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/ja/">ホーム</a><span class="separator">›</span><a href="https://screenprintfilter.online/ja/guides/">ガイド</a><span class="separator">›</span><span class="current">カスタムハーフトーンパターン</span></div>
+
+            <h1>カスタムハーフトーンパターン — ドットを超える表現</h1>
+            <p class="byline">公開日: 2026年7月15日 &bull; 読了時間: 7分</p>
+
+            <p>従来のハーフトーンといえば、グリッド状に配置された大小さまざまな円形ドットでトーンや陰影を表現するのが一般的でした。これはスクリーン印刷の業界標準であり、それには十分な理由があります——美しく機能するからです。しかし、現代のデジタルツールと創造的なスクリーン印刷技術者は、シンプルなドットをはるかに超えた表現を追求しています。現在では、線、同心円、ウェーブ歪み、ブレンドテクスチャを使って、単純なドットグリッドでは決して生み出せない印象的なビジュアル効果を作り出すことができます。</p>
+
+            <p>このガイドでは、カスタムハーフトーンパターンの世界——その仕組み、活用法、そしてスクリーン印刷プロジェクトに新鮮で個性的な表情をもたらす方法を探求します。</p>
+
+            <div class="highlight-box">
+                <p><strong>ポイント:</strong> カスタムハーフトーンパターンは、従来のドットグリッドを代替または拡張し、線、放射状円、波、マルチパターンブレンドなどの形状やテクスチャを使用します。ブランディング、ポスター、アートプリントにおいて、より自由なクリエイティブ表現を可能にします。 <strong><a href="/ja/" style="color:#FF4500;">無料のオンラインハーフトーンツール</a></strong>では4種類のドット形状を搭載。ぜひお試しください。</p>
+            </div>
+
+            <h2>カスタムハーフトーンパターンとは？</h2>
+            <p>標準的なハーフトーンは、円形ドットの単純な繰り返しグリッドを使用します。<em>カスタム</em>ハーフトーンパターンは、トーンを表現する基本要素——マーク——そのものを変更します。円の代わりに、線、三日月、リング、波線などのマークを使用します。基本的な計算は同じです：大きなマークは暗い領域を、小さなマークは明るい領域を表現します。しかし、マークの<em>形状</em>が出力のビジュアル特性を根本的に変えます。</p>
+
+            <p>一部のカスタムパターンは、マークの<em>配置</em>も変更します——例えば、中心点から放射状に配置したり、サイン波のカーブに沿わせたりします。これらの構造的な変化により、従来のグリッドでは不可能なまったく新しいテクスチャが生まれます。</p>
+
+            <div class="pattern-grid">
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-linear-gradient(90deg, #FF4500 0px, #FF4500 3px, #000 3px, #000 6px);"></div>
+                    <div class="label">ラインハーフトーン</div>
+                    <div class="desc">細い縦ストライプ</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: radial-gradient(circle at 50% 50%, #FF4500 0%, #000 40%, #FF4500 40%, #000 60%, #FF4500 60%, #000 80%, #FF4500 80%, #000 100%);"></div>
+                    <div class="label">放射状パターン</div>
+                    <div class="desc">同心円リング</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-linear-gradient(45deg, #FF4500 0px, #FF4500 4px, #000 4px, #000 8px);"></div>
+                    <div class="label">斜線パターン</div>
+                    <div class="desc">斜めテクスチャ</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-radial-gradient(circle at 30% 30%, #FF4500 0%, #000 20%, #FF4500 20%, #000 40%);"></div>
+                    <div class="label">放射状バースト</div>
+                    <div class="desc">スター状テクスチャ</div>
+                </div>
+            </div>
+
+            <h2>1. ラインハーフトーンパターン</h2>
+            <p>ラインハーフトーンは、従来のドットに代わる最も人気のある選択肢です。円の代わりに、画像は一連の平行線としてレンダリングされ、その<strong>太さ</strong>が元の画像の明るさに応じて変化します。暗い領域は太い線に、明るい領域は細い線——あるいは完全に消えて白いスペースになります。</p>
+
+            <h3>ラインハーフトーンの仕組み</h3>
+            <p>ドットハーフトーンと同様に、ラインハーフトーンは画像をグレースケールに変換することから始まります。次に、水平（または垂直、斜め）のスキャンラインのグリッドが適用されます。各スキャンラインに対して、フィルターはその経路上の明るさをサンプリングし、線のストローク幅を比例的に調整します：より強い信号（暗いピクセル）は太いストロークを、弱い信号は細いストロークを生成します。</p>
+
+            <p>結果は、彫刻やワイヤーフレームの描画のような仕上がりになります。ポートレート、建築写真、テキスト主体のデザインにおいて特に印象的で、線の方向が構図を強化します。</p>
+
+            <h3>方向性の重要性</h3>
+            <p>線の向きによって出力の印象は劇的に変化します：</p>
+            <ul>
+                <li><strong>水平線</strong>——穏やかでワイドスクリーン的な映画のような印象を与えます。風景やパノラマに適しています。</li>
+                <li><strong>垂直線</strong>——高さ、構造、フォーマルさを感じさせます。立ち姿のポートレートや建築物に最適です。</li>
+                <li><strong>斜線</strong>——エネルギー、動き、緊張感を加えます。アクションショットやスポーツ画像、ダイナミックな構図に効果的です。</li>
+                <li><strong>曲線</strong>——微妙な弧や波に沿った線は、流れる水や起伏のある丘など自然の形状を思わせます。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>プロのコツ:</strong> 布地用のスクリーン印刷でラインハーフトーンを使用する場合、インクがメッシュをきれいに通るよう、線の太さは最低0.5pt以上に保ちましょう。特にテクスチャのある衣類では、細すぎる線は圧力で途切れることがあります。</p>
+            </div>
+
+            <h2>2. 円形および放射状パターン</h2>
+            <p>円形および放射状のハーフトーンパターンは、グリッドの中心を一点に移動させます。長方形のマーク配列の代わりに、パターンは選択した中心から外側に向かって放射状に広がります——まるで池の波紋や的のリングのように。</p>
+
+            <h3>同心円リングハーフトーン</h3>
+            <p>同心円パターンでは、マークは一点を中心とした円形の帯です。画像の明るさに応じて、リングの太さと間隔が変化します。これにより、催眠的なターゲットのような効果が生まれ、見る者の目を中心に引き寄せます。ブランディング、ロゴ、焦点となる要素を強調したいデザインに強力なツールです。</p>
+
+            <h3>放射状ラインハーフトーン</h3>
+            <p>リングの代わりに、放射状ラインハーフトーンは自転車の車輪やサンバーストのように、中心から放射状に伸びるスポークを使用します。スポークの太さは画像の明るさに応じて変化します。このパターンは、レコードレーベル、バッジ、円形ロゴなどの円形構図や、接写した花や中心から撮影した建築物など、自然な放射対称性を持つ画像に美しく機能します。</p>
+
+            <h3>オフセット／マルチセンターパターン</h3>
+            <p>より高度な実装では、複数の放射中心を配置することができます。画像の領域ごとに異なる焦点を持たせ、パッチワーク状の放射テクスチャを創り出します。これは、構図の異なるエリア間に視覚的な緊張感を持たせたい抽象アートやポスターデザインに特に効果的です。</p>
+
+            <div class="highlight-box">
+                <p><strong>プロのコツ:</strong> 放射状パターンは、被写体が明確なハイコントラスト画像で最も効果を発揮します。シンプルなシルエットや大胆な形状のロゴは、複雑で低コントラストの写真よりもはるかに優れた結果をもたらします——後者は重なり合うリングで乱雑になりがちです。</p>
+            </div>
+
+            <h2>3. ウェーブ（波状）および歪みテクスチャ</h2>
+            <p>ウェーブ（波状）および歪みハーフトーンテクスチャは、従来のドットグリッドに<strong>ディスプレースメント（変位）</strong>を適用します——各ドットの位置が数学的関数（サイン、コサイン、またはより複雑な波形）に基づいて移動します。ドット自体も波に沿って伸縮・変形することがあります。</p>
+
+            <h3>サイン波ハーフトーン</h3>
+            <p>サイン波ハーフトーンは、各ドットを正弦曲線に沿って変位させます。ドットは整然とした行と列に並ぶのではなく、画像全体にうねるように配置されます。これにより、流動的で有機的な印象が生まれます。海のシーン、布地のテクスチャ、葉などの自然をテーマにしたデザインや、標準的なハーフトーンの硬く機械的な見た目を和らげたい場合に最適です。</p>
+
+            <h3>波紋と渦のエフェクト</h3>
+            <p>より劇的な歪みとして、円形の波紋（水滴が落ちた水面のように、一点から外側に広がる波）や渦巻き（中心からの距離に比例した角度でドットが回転する）があります。波紋効果は水滴が落ちた水面を思わせ、渦効果は画像を内側に引き込むような印象を与えます。どちらもアルバムカバー、コンサートポスター、実験的なプリントで際立つビジュアル手法です。</p>
+
+            <h3>ノイズベースのテクスチャ</h3>
+            <p>整然とした数学的な波ではなく、パーリンノイズや類似のランダムだが滑らかな関数を使用してドットを変位させることもできます。結果は手作り感のあるハーフトーン——まるでアーティストが施したステイプル（点描）や、テクスチャ紙に印刷した写真の自然な粒子のような仕上がりになります。ノイズベースの変位は、ファインアートプリントや有機的で不完全な質感を目指すデザインに最適です。</p>
+
+            <div class="highlight-box">
+                <p><strong>プロのコツ:</strong> 歪みハーフトーンを印刷する際は、最初に小さな領域でテストしてください。極端な変位は隙間や重なりを生み、きれいに印刷できないことがあります。ドット間隔に対する変位の振幅は10～20%が安全な出発点です。</p>
+            </div>
+
+            <h2>4. 複数パターンの組み合わせ</h2>
+            <p>最もエキサイティングなクリエイティブ領域は、単一の画像内でパターンを混在させるときに開かれます。ドットだけ、線だけに固執するのではなく、異なる領域に異なるハーフトーンパターンを使用することで、デザインの各セクションに独自性を与えるコントラストとバリエーションを生み出せます。</p>
+
+            <h3>領域ベースのブレンディング</h3>
+            <p>領域ベースのブレンディングでは、画像を色、明るさ、または描画マスクによっていくつかのゾーンに分割し、各ゾーンに異なるハーフトーンパターンを割り当てます。例えば：</p>
+            <ul>
+                <li>風景の<strong>空</strong>——太陽を中心とした放射状パターン。</li>
+                <li>中景の<strong>山々</strong>——斜線のラインハーフトーン。</li>
+                <li>前景の<strong>草木</strong>——ウェーブ変位を加えた標準的なドットハーフトーン。</li>
+            </ul>
+            <p>ゾーン間の遷移は、ハードエッジ（コラージュ風）にも、ソフトブレンド（シームレスな外観）にもできます。</p>
+
+            <h3>パターン間のクロスフェード</h3>
+            <p>より繊細なアプローチとしてクロスフェードがあります：一つのパターンが画像全体で徐々に別のパターンに変化します。左上隅はドットで始まり、右下隅に向かってゆっくりと線に伸びていきます。この技法は動きと流れを生み出します。バナー、ヘッダー、旅や進歩を示唆したいデザインに特に効果的です。</p>
+
+            <h3>オーバーレイと乗算</h3>
+            <p>2つのハーフトーンパターンを重ねることもできます——例えば、粗いドットパターンに細かいラインパターンを重ねます。乗算（Multiply）やスクリーン（Screen）のブレンドモードを使用して、両方のパターンを透けて見せます。2つのグリッドの相互作用はモアレ干渉パターンを生み出し、意図的に使えば視覚的に見事ですが、偶発的だと混沌とします。この技法は意図を持って適用し、事前に使用する基材でテストしてください。</p>
+
+            <div class="highlight-box">
+                <p><strong>プロのコツ:</strong> パターンを組み合わせる際は、各パターンのLPI（1インチあたりの線数）を少なくとも20%以上変えて、意図しないモアレを防ぎましょう。例えば、ベースパターンに40 LPI、オーバーレイに55 LPIを使用します。</p>
+            </div>
+
+            <h2>5. カスタムパターンを使うべきタイミング</h2>
+            <p>カスタムハーフトーンパターンは、あらゆる状況でクラシックなドットの代替となるものではなく、意図的なアーティスティックな選択です。以下が最も効果的な場面です：</p>
+
+            <h3>ブランディングとロゴ</h3>
+            <p>商品で目立ちたいブランドは、カスタムハーフトーンパターンをシグネチャーテクスチャとして使用できます。ロゴが常に放射状のサンバーストハーフトーンで表示されるコーヒーブランドや、全アルバムアートにウェーブ歪みテクスチャを使用する音楽レーベルを想像してみてください。特徴的なハーフトーンはビジュアルアイデンティティの一部となります。</p>
+
+            <h3>アートプリントと限定版</h3>
+            <p>限定版のスクリーンプリントの購入者は、何かユニークなものを求めています。カスタムハーフトーンパターン——特にマルチパターンブレンドやノイズベースのテクスチャ——は、標準的な機械的ハーフトーンにはない職人技と手作りの温かみを各プリントに与えます。ギャラリーやコレクターは、目に見える思慮深い技法に好意的に反応します。</p>
+
+            <h3>ポスターとイベントプロモーション</h3>
+            <p>コンサートポスター、フェスティバルの告知、映画ポスターは競争の激しいビジュアル領域です。印象的なカスタムハーフトーンは、無視されるポスターと額装されるポスターの分かれ目になり得ます。特にラインハーフトーンは、ポスターにクラシックなスクリーン印刷の美学を与え、レトロでありながら現代的な印象を兼ね備えています。</p>
+
+            <h3>ファッションとアパレル</h3>
+            <p>Tシャツやパーカーにカスタムハーフトーンパターンを使用すると、シンプルなグラフィックが豊かで詳細な印象になります。垂直ラインハーフトーンのポートレートは、標準的なドットのものとはまったく異なるエネルギーを持ちます。ファッションブランドはこれらの技法を使って、顧客が一目で識別できるシグネチャールックを創り出しています。</p>
+
+            <h3>クラシックドットを使うべき場面</h3>
+            <p>カスタムパターンは強力ですが、常に最適な選択とは限りません。以下の場合は、従来の円形ドットハーフトーンを使用しましょう：</p>
+            <ul>
+                <li>最も正確な階調再現が必要な場合（例：写真のようなリアリズム）</li>
+                <li>滑らかな紙に非常に高いLPIで印刷する場合</li>
+                <li>クライアントが特に伝統的な印刷ルックを期待している場合</li>
+                <li>カスタム形状では鮮明さを保てない非常に小さなディテールを印刷する場合</li>
+            </ul>
+
+            <h2>カスタムハーフトーンパターンを始めるには</h2>
+            <p>カスタムハーフトーンパターンを試すのに高価なソフトウェアは必要ありません。最近のオンラインツールやベクターエディターの多くは、基本的な円を超えたパターンプリセットを提供しています。始め方の手順は以下の通りです：</p>
+
+            <ol>
+                <li><strong>パターンタイプを選ぶ</strong>——まずは線、放射状、波のいずれか一つから始めましょう。一つを習得してから重ねていきます。</li>
+                <li><strong>ハイコントラストな画像を選ぶ</strong>——カスタムパターンはエッジやテクスチャを強調します。シンプルな被写体（シルエット、ロゴ、大胆なポートレート）から始めましょう。</li>
+                <li><strong>LPIと太さを調整する</strong>——低いLPI（30～50）はパターンテクスチャをより目立たせ、高いLPI（55～80）はより細かなディテールを提供しますが、パターンの個性は弱まります。</li>
+                <li><strong>実際の印刷サイズでプレビューする</strong>——画面上で素晴らしく見えるパターンも、小さく印刷すると期待外れになることがあります。必ず最終的な印刷寸法でシミュレーションしてください。</li>
+                <li><strong>テスト印刷をする</strong>——本番前に小さなサンプルをスクリーン印刷して、すべてのディテールが転写されること、モアレ模様が発生しないことを確認しましょう。</li>
+            </ol>
+
+            <div class="cta-box">
+                <h3>カスタムハーフトーンパターンを無料で試す</h3>
+                <p>無料のオンラインハーフトーンフィルターは、円、正方形、ひし形、ラインの4種類のドット形状に対応。ブラウザ上でさまざまなハーフトーン表現を自由に実験できます。</p>
+                <a href="/ja/" class="cta-button">ハーフトーンツールを開く →</a>
+            </div>
+
+            <h2>よくある質問（FAQ）</h2>
+
+            <h3>ScreenPrintFilter.onlineでラインハーフトーンパターンを作成できますか？</h3>
+            <p>はい！ 当ツールには<strong>ライン</strong>ドット形状オプションが含まれており、平行線のハーフトーン効果を生成できます。間隔、太さ、角度を調整してお好みのルックに仕上げられます。今後のアップデートでは放射状やウェーブパターンも追加予定です。</p>
+
+            <h3>Tシャツのラインハーフトーンに適したLPIは？</h3>
+            <p>布地用のラインハーフトーンでは、ドットの場合よりもやや低めのLPI——25～40 LPI程度を使用してください。線は互いの間に十分なスペースが必要で、特に暗い衣類に白インクで印刷する場合は、インクがにじみ合うのを防ぐために低めのLPIが適しています。</p>
+
+            <h3>一つのデザインに複数のハーフトーンパターンを組み合わせられますか？</h3>
+            <p>はい。ただし、画像編集ソフトウェアを使用して異なる領域をマスクする必要があります。一つのレイヤーに一つのハーフトーン効果を適用し、別のレイヤーに別の効果を適用してから合成します。当ツールは一度に一つのパターンを適用しますが、異なるマスクを使用して同じ画像を複数回処理することは可能です。</p>
+
+            <h3>カスタムハーフトーンパターンはドットよりも印刷が難しいですか？</h3>
+            <p>必ずしもそうとは限りません。メッシュ数、インク粘度、スキージ圧力など、同じスクリーン印刷の原則が適用されます。ただし、一部のパターン（非常に細い線や極端なウェーブ歪みなど）はより注意深いセットアップを必要とします。量産前に必ずテスト印刷を行ってください。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/ja/privacy-policy.html">プライバシーポリシー</a> | <a href="/ja/">ツールに戻る</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>

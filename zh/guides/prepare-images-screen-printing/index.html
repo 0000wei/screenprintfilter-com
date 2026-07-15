@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何准备丝网印刷图像 - 完整指南 - ScreenPrintFilter.online</title>
+    <meta name="description" content="学习如何准备丝网印刷图像。分步指南涵盖图像分辨率、对比度调整、颜色分色和半色调转换，助您获得完美的印刷效果。">
+    <meta name="keywords" content="准备丝网印刷图像, 丝网印刷图像准备, 图像分辨率丝网印刷, 颜色分色丝网印刷, 半色调转换, 丝网印刷就绪图像">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="如何准备丝网印刷图像 - 完整指南">
+    <meta property="og:description" content="学习如何准备丝网印刷图像。分步指南涵盖图像分辨率、对比度调整、颜色分色和半色调转换，助您获得完美的印刷效果。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/zh/guides/prepare-images-screen-printing/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .resolution-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .resolution-table th,
+        .resolution-table td {
+            border: 1px solid #333;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+        .resolution-table th {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+        .resolution-table td {
+            color: #a0a0a0;
+        }
+        .resolution-table tr:nth-child(even) td {
+            background: #111;
+        }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/prepare-images-screen-printing/" />
+    <link rel="canonical" href="https://screenprintfilter.online/zh/guides/prepare-images-screen-printing/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/">使用工具</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="切换语言">
+            <option value="en">English</option>
+            <option value="zh" selected>中文</option>
+            <option value="ja">日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/">首页</a><span class="separator">›</span><a href="https://screenprintfilter.online/zh/guides/">指南</a><span class="separator">›</span><span class="current">准备丝网印刷图像</span></div>
+
+            <h1>如何准备丝网印刷图像</h1>
+            <p class="byline">发布日期：2026年7月15日 &bull; 阅读时间：8分钟</p>
+
+            <p>图像准备是丝网印刷流程中最关键的一步。无论你的网版制作多么精良、印刷机设置多么精准，准备不当的图像始终会带来令人失望的结果。边缘模糊、色调浑浊、网版堵塞——这些常见问题都可以追溯到你在晒版前如何准备图像。</p>
+
+            <p>在这份完整指南中，我们将带你逐步了解丝网印刷图像准备的每一个环节：从选择合适的分辨率和调整对比度，到应用半色调效果以及为多色印刷进行颜色分色。遵循这些步骤，你的印刷品每一次都将清晰、鲜艳且专业。</p>
+
+            <div class="highlight-box">
+                <p><strong>快速总结：</strong>从一张至少 <strong>300 DPI</strong>（600 DPI 为理想）的图像开始。调整对比度，压暗接近白色的区域并加深接近黑色的区域。单色印刷转换为灰度图，然后应用半色调滤镜。对于多色设计，先将每种颜色分离到单独的图层。<strong><a href="/" style="color:#FF4500;">试试我们的免费半色调工具</a></strong>，立即准备你的图像。</p>
+            </div>
+
+            <h2>从合适的分辨率开始</h2>
+            <p>分辨率以印刷用的 <strong>DPI</strong>（每英寸点数）或数字图像的 <strong>PPI</strong>（每英寸像素数）来衡量。对于丝网印刷，你需要比屏幕显示效果所需高得多的分辨率。</p>
+
+            <p>以下是丝网印刷推荐的分辨率指南：</p>
+
+            <table class="resolution-table">
+                <thead>
+                    <tr>
+                        <th>DPI / PPI</th>
+                        <th>质量等级</th>
+                        <th>最佳用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>150 DPI</td>
+                        <td>最低可接受</td>
+                        <td>大幅海报、简单粗体设计</td>
+                    </tr>
+                    <tr>
+                        <td>300 DPI</td>
+                        <td>良好</td>
+                        <td>标准 T 恤印刷、大多数丝网印刷任务</td>
+                    </tr>
+                    <tr>
+                        <td>600 DPI+</td>
+                        <td>理想</td>
+                        <td>精细细节、小文字、高质量艺术印刷品</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>为什么分辨率如此重要？</strong>当你对低分辨率图像应用半色调滤镜时，单个像素会变成块状伪影。半色调网点本身需要足够的源细节才能看起来光滑圆润，而不是锯齿状。一张 72 DPI 的网络图像放大到印刷尺寸，总会产生糟糕的效果。</p>
+
+            <h3>如何检查和调整图像分辨率</h3>
+            <ul>
+                <li>在 <strong>Photoshop</strong> 中：进入 <em>图像 &gt; 图像大小</em>，查看分辨率字段。放大时取消勾选“重新采样”以保持质量。</li>
+                <li>在 <strong>GIMP</strong>（免费）中：进入 <em>图像 &gt; 打印尺寸</em> 查看有效 DPI。使用 <em>图像 &gt; 缩放图像</em> 进行调整。</li>
+                <li>在 <strong>Photopea</strong>（在线、免费）中：打开图像，进入 <em>图像 &gt; 图像大小</em>，将分辨率设置为 300+ PPI。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>专业提示：</strong>如果源图像太小，切勿简单地拉伸像素强行放大。应使用 AI 放大工具（如 Real-ESRGAN 或 Topaz Gigapixel）来增加真实细节，或者保持印刷尺寸足够小，使图像自然维持在 300 DPI。</p>
+            </div>
+
+            <h2>调整对比度和亮度</h2>
+            <p>丝网印刷油墨不像喷墨或激光印刷那样可以混合。每个网版只沉积一种纯色。为了营造色调和层次的错觉，我们依靠半色调网点。从实心油墨区域到承印物（织物/纸张）的过渡必须清晰而有意为之。</p>
+
+            <p>这就是对比度调整至关重要的原因。以下是正确的操作方式：</p>
+
+            <h3>步骤 1：压暗白色区域</h3>
+            <p>在图像编辑器中，将白场滑块向内拖动，直到最浅的灰色区域变为纯白色。任何纯白色区域将不印刷油墨——露出承印物本身。这可以防止高光区域出现不必要的淡色网点，避免鬼影或浑浊的高光。</p>
+
+            <h3>步骤 2：加深黑色区域</h3>
+            <p>将黑场滑块向内推，使最深的中间色调变为纯黑色。纯黑区域将印刷为全油墨覆盖。这确保你的阴影部分具有深度和丰富度，而不是显得褪色。</p>
+
+            <h3>步骤 3：调整中间调对比度</h3>
+            <p>在色阶或曲线工具中使用微妙的 S 形曲线：稍微压暗阴影，稍微提亮高光。这会夸大色调之间的差异，产生更清晰的半色调网点，并防止印刷时出现浑浊的过渡。</p>
+
+            <h2>转换为灰度图（单色印刷）</h2>
+            <p>如果你只使用一种油墨颜色印刷，则必须在应用半色调滤镜之前将图像转换为灰度图。半色调网点基于亮度——每个像素的明度——因此不需要颜色信息，而且颜色信息实际上可能会干扰转换。</p>
+
+            <p><strong>如何正确转换：</strong></p>
+            <ul>
+                <li><strong>不要</strong>简单地让你的图像编辑器切换到灰度模式——这会使用一个可能不适合你图像的通用公式来丢弃颜色数据。</li>
+                <li><strong>应该</strong>使用黑白调整图层（Photoshop）或通道混合器（GIMP）来控制每个颜色通道对灰度结果的贡献。这使你可以精细控制哪些色调被强调。</li>
+                <li><strong>或者</strong>，使用我们的<a href="/" style="color:#FF4500;">免费半色调工具</a>——灰度转换已集成到滤镜流程中，并针对丝网印刷进行了优化。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>经验法则：</strong>适合丝网印刷的良好灰度转换不应有纯白像素（0% 油墨），并且在最深的阴影中应有健康的深中间调范围以达到纯黑。如果直方图集中在中间区域，你的半色调网点大小将全部相似，印刷效果会显得平淡。</p>
+            </div>
+
+            <h2>应用半色调效果</h2>
+            <p>一旦你的图像具有高分辨率、良好的对比度并且是灰度图，就可以应用半色调滤镜了。半色调效果将灰色调转换为不同大小的网点——这是丝网印刷艺术品的基础。</p>
+
+            <h3>关键半色调设置参数</h3>
+            <ul>
+                <li><strong>网点大小：</strong>控制最大网点直径。对于织物，从中大型网点开始（织物吸收油墨，较小的网点会模糊）。对于纸张，较小的网点效果很好。</li>
+                <li><strong>网点间距/频率（LPI）：</strong>以每英寸线数衡量。织物使用较低的 LPI（35-55），纸张使用较高的 LPI（55-85）。LPI 越高 = 细节越多，但需要更细的网版。</li>
+                <li><strong>对比度：</strong>在生成网点之前放大明暗区域之间的差异。此处增加一点额外对比度有助于提高可读性。</li>
+                <li><strong>网点形状：</strong>圆形最常见，再现性可靠。方形和菱形可营造更具风格化的复古外观。</li>
+            </ul>
+
+            <p><strong>推荐工作流程：</strong></p>
+            <ol>
+                <li>从 <strong>低 LPI</strong>（T 恤大约 45）和适中的网点大小开始。</li>
+                <li>预览结果，检查最亮的高光区域是否有非常小的网点（或完全空白）。</li>
+                <li>逐渐增加 LPI，直到找到细节与可印刷性之间的最佳平衡点。</li>
+                <li>在进行大批量印刷之前，先测试一个小样。</li>
+            </ol>
+
+            <h2>多色印刷的颜色分色</h2>
+            <p>对于多色丝网印刷，每种颜色需要自己的网版。颜色分色是将全彩图像分解为单独通道的过程——每种油墨颜色一个通道。</p>
+
+            <h3>模拟分色 vs. 专色分色</h3>
+            <p>主要有两种方法：</p>
+            <ul>
+                <li><strong>模拟分色：</strong>使用有限的调色板（通常 4-6 种颜色，如浅灰、白、黄、红、蓝、黑），将每种颜色的半色调网点并排放置，以营造全彩图像的错觉。最适合深色衣物上的照片级写实设计。</li>
+                <li><strong>专色分色：</strong>每个颜色区域是实心、平坦的形状，没有重叠的半色调。最适合标志设计、矢量艺术和具有定义颜色区域的插图。</li>
+            </ul>
+
+            <h3>如何进行颜色分色（分步指南）</h3>
+            <ol>
+                <li><strong>复制</strong>你的图像，为计划使用的每种油墨颜色创建一个单独的图层。</li>
+                <li>使用色阶或曲线<strong>分离</strong>该颜色的色调范围。例如，在“黑色”图层上，只保留最深的阴影；在“高光”图层上，只保留最亮的区域。</li>
+                <li>对每个图层<strong>独立应用半色调滤镜</strong>。每个图层成为自己的网版。</li>
+                <li><strong>检查重叠：</strong>两个颜色图层重叠的地方，半色调网点会在视觉上混合。确保组合效果产生你想要的颜色。</li>
+                <li>将每个图层<strong>输出</strong>为独立的黑白图像（每个网版一张）。</li>
+            </ol>
+
+            <div class="highlight-box">
+                <p><strong>专业提示：</strong>对于深色 T 恤上的模拟分色，始终包含一个<strong>白色底色</strong>图层。白色底色先印刷，提供不透明的基础。彩色半色调图层印刷在白色之上——这可以防止深色 T 恤面料使你的颜色变暗。</p>
+            </div>
+
+            <h2>常见的图像准备错误</h2>
+            <ul>
+                <li><strong>使用低分辨率网络图像：</strong>72 DPI 的图像放大到 T 恤尺寸会产生块状、像素化的半色调网点。始终从至少 300 DPI（以你的预期印刷尺寸为准）开始。</li>
+                <li><strong>跳过对比度调整：</strong>一张平淡、中间调为主的图像会产生大小几乎相同的半色调网点——印刷品看起来浑浊且不清晰。</li>
+                <li><strong>LPI 与网版不匹配：</strong>在粗网版（如 T 恤用的 110 目）上使用高 LPI（小网点）会导致网点脱落或模糊。使 LPI 与你的网目数相匹配。</li>
+                <li><strong>不检查底片：</strong>在曝光前务必将底片拿到光线下检查。如果此时网点看起来模糊、过度饱和或不完整，它们在网版上只会更糟。</li>
+                <li><strong>忽略承印物：</strong>织物会吸收并扩散油墨（网点增大）。纸张能保持更清晰的网点。相应调整你的半色调设置——织物使用较大的网点和较低的 LPI，纸张使用较小的网点和较高的 LPI。</li>
+            </ul>
+
+            <h2>印刷就绪检查清单</h2>
+            <ul>
+                <li>最终印刷尺寸下图像分辨率为 <strong>300 DPI 或更高</strong></li>
+                <li>对比度已调整——白色区域被压暗，黑色区域被加深</li>
+                <li>图像已转换为灰度图（单色）或正确进行了颜色分色（多色）</li>
+                <li>半色调 LPI 与你的网版目数匹配</li>
+                <li>底片已在光线下检查——网点清晰，无填充</li>
+                <li>LPI 和网点大小已根据你的承印物（织物 vs. 纸张）进行调整</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>准备好准备你的图像了吗？</h3>
+                <p>跳过手动步骤——使用我们的免费在线半色调滤镜，在几秒钟内转换、调整和下载丝网印刷就绪的图像。无需注册，无需上传，所有处理都在你的浏览器中完成。</p>
+                <a href="/" class="cta-button">试试半色调工具 →</a>
+            </div>
+
+            <h2>常见问题解答</h2>
+
+            <h3>我可以用 72 DPI 的图像进行丝网印刷吗？</h3>
+            <p>任何需要精细细节的内容都不行。72 DPI 的图像在合理尺寸下印刷时会产生可见的像素化和锯齿状的半色调网点。如果你只有这种图像，请保持印刷尺寸非常小（这样有效 DPI 会提高），或者在处理前使用 AI 放大工具。</p>
+
+            <h3>110 目网版应该使用什么 LPI？</h3>
+            <p>对于 110 目网版（常见于 T 恤），使用 35 到 45 LPI。经验法则是 LPI 应为网目数的三分之一到一半。使用更高的 LPI 会有网点丢失或堵塞的风险。</p>
+
+            <h3>我总是需要转换为灰度图吗？</h3>
+            <p>仅适用于单色印刷。如果你使用模拟分色印刷多种颜色，你需要分别处理每个颜色通道——但在应用半色调滤镜之前，每个通道实际上都会变成灰度图像。</p>
+
+            <h3>ScreenPrintFilter.online 支持颜色分色吗？</h3>
+            <p>我们的工具专注于单图像半色调转换，可完全控制网点大小、间距、对比度和形状。对于多色分色，我们建议先在图像编辑器中进行通道分离，然后对每个通道应用半色调滤镜。所有处理都在你的浏览器中本地完成——<a href="/" style="color:#FF4500;">在这里试试</a>。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/privacy-policy.html">隐私政策</a> | <a href="/">返回工具</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>

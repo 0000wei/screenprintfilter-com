@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スクリーン印刷用画像の準備方法 - 完全ガイド - ScreenPrintFilter.online</title>
+    <meta name="description" content="スクリーン印刷用の画像準備方法を学びます。解像度設定、コントラスト調整、色分解、ハーフトーン変換までをステップバイステップで解説する完全ガイド。">
+    <meta name="keywords" content="スクリーン印刷 画像準備, スクリーン印刷 画像解像度, 色分解 スクリーン印刷, ハーフトーン変換, スクリーン印刷 画像加工, 網点 作成">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="スクリーン印刷用画像の準備方法 - 完全ガイド">
+    <meta property="og:description" content="スクリーン印刷用の画像準備方法を学びます。解像度設定、コントラスト調整、色分解、ハーフトーン変換までをステップバイステップで解説する完全ガイド。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/ja/guides/prepare-images-screen-printing/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .resolution-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .resolution-table th,
+        .resolution-table td {
+            border: 1px solid #333;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+        .resolution-table th {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+        .resolution-table td {
+            color: #a0a0a0;
+        }
+        .resolution-table tr:nth-child(even) td {
+            background: #111;
+        }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/prepare-images-screen-printing/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/prepare-images-screen-printing/" />
+    <link rel="canonical" href="https://screenprintfilter.online/ja/guides/prepare-images-screen-printing/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/ja/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/ja/">ツールを試す</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="言語を切り替え">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja" selected>日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/ja/">ホーム</a><span class="separator">›</span><a href="https://screenprintfilter.online/ja/guides/">ガイド</a><span class="separator">›</span><span class="current">スクリーン印刷用画像の準備</span></div>
+
+            <h1>スクリーン印刷用画像の準備方法</h1>
+            <p class="byline">公開日: 2026年7月15日 &bull; 8分で読める</p>
+
+            <p>画像準備は、スクリーン印刷のワークフローにおいて最も重要なステップです。スクリーンの品質や印刷機の精度がどれだけ高くても、画像の準備が不十分だと常に残念な結果になります。ぼやけたエッジ、濁ったトーン、スクリーンの詰まり — これらのよくある問題はすべて、スクリーンに焼き付ける前の画像準備に起因します。</p>
+
+            <p>この完全ガイドでは、スクリーン印刷用の画像準備のすべてのステップを解説します：適切な解像度の選択、コントラスト調整、ハーフトーン効果の適用、マルチカラー印刷のための色分解まで。これらの手順に従えば、印刷は毎回シャープで鮮やか、プロフェッショナルな仕上がりになります。</p>
+
+            <div class="highlight-box">
+                <p><strong>要約:</strong> 画像は<strong>最低300 DPI</strong>（理想は600 DPI）から始めます。コントラストを調整して白に近い部分を潰し、黒に近い部分を深めます。単色印刷の場合はグレースケールに変換し、ハーフトーンフィルターを適用します。マルチカラーデザインの場合は、各色を個別のレイヤーに分離します。<strong><a href="/ja/" style="color:#FF4500;">無料のハーフトーンツールを試す</a></strong>と、画像を瞬時に準備できます。</p>
+            </div>
+
+            <h2>適切な解像度から始める</h2>
+            <p>解像度は印刷では<strong>DPI</strong>（Dots Per Inch）、デジタル画像では<strong>PPI</strong>（Pixels Per Inch）で測定されます。スクリーン印刷では、画面で見るのに適した解像度よりもはるかに高い解像度が必要です。</p>
+
+            <p>スクリーン印刷で推奨される解像度のガイドラインは以下の通りです：</p>
+
+            <table class="resolution-table">
+                <thead>
+                    <tr>
+                        <th>DPI / PPI</th>
+                        <th>品質レベル</th>
+                        <th>最適な用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>150 DPI</td>
+                        <td>最低許容レベル</td>
+                        <td>大判ポスター、シンプルで大胆なデザイン</td>
+                    </tr>
+                    <tr>
+                        <td>300 DPI</td>
+                        <td>良好</td>
+                        <td>標準的なTシャツ印刷、ほとんどのスクリーン印刷作業</td>
+                    </tr>
+                    <tr>
+                        <td>600 DPI+</td>
+                        <td>理想的</td>
+                        <td>細かいディテール、小さな文字、高品質なアートプリント</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>なぜ解像度がそれほど重要なのですか？</strong>低解像度の画像にハーフトーンフィルターを適用すると、個々のピクセルがブロック状のアーティファクトとして見えるようになります。ハーフトーンドット自体が滑らかで丸く見えるためには、十分なソースディテールが必要です。72 DPIのWeb画像を印刷サイズに拡大すると、常に品質の低い結果になります。</p>
+
+            <h3>画像の解像度を確認・調整する方法</h3>
+            <ul>
+                <li><strong>Photoshop</strong>の場合：<em>画像 &gt; 画像サイズ</em>に進み、解像度フィールドを確認します。「リサンプル」のチェックを外してから拡大すると品質が維持されます。</li>
+                <li><strong>GIMP</strong>（無料）の場合：<em>画像 &gt; 印刷サイズ</em>で実効DPIを確認します。<em>画像 &gt; 画像の拡大・縮小</em>で調整します。</li>
+                <li><strong>Photopea</strong>（オンライン・無料）の場合：画像を開き、<em>画像 &gt; 画像サイズ</em>で解像度を300+ PPIに設定します。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>プロのヒント:</strong> 元の画像が小さすぎる場合、単にピクセルを引き伸ばして無理に大きくしないでください。代わりに、AIアップスケーラー（Real-ESRGANやTopaz Gigapixelなど）を使用して実際のディテールを追加するか、画像が自然に300 DPIを維持できるように印刷サイズを小さく保ちます。</p>
+            </div>
+
+            <h2>コントラストと明るさを調整する</h2>
+            <p>スクリーン印刷のインクは、インクジェットやレーザー印刷のように混ざり合いません。各スクリーンは単一の単色を印刷します。シェードやトーンの錯覚を作り出すために、ハーフトーンドットに依存します。インクのベタ領域から基材（布地・紙）への移行は、シャープで意図的でなければなりません。</p>
+
+            <p>ここでコントラスト調整が重要になります。正しく行う方法は以下の通りです：</p>
+
+            <h3>ステップ1：白い部分を潰す</h3>
+            <p>画像エディターで、白点スライダーを内側に引き、最も明るい灰色の領域が純白になるようにします。純白の領域はインクが印刷されない — 素の基材が露出します。これにより、ハイライト領域に不要な薄いドットが発生し、ゴーストや濁ったハイライトの原因となるのを防ぎます。</p>
+
+            <h3>ステップ2：黒い部分を深くする</h3>
+            <p>黒点スライダーを内側に押し込み、最も暗い中間トーンが純黒になるようにします。純黒の領域は完全なインク被覆として印刷されます。これにより、影に深みと豊かさが生まれ、 washed-out（色褪せた）に見えるのを防ぎます。</p>
+
+            <h3>ステップ3：中間トーンのコントラストを調整する</h3>
+            <p>レベル補正またはカーブツールで微妙なS字カーブを使用します：影をわずかに暗くし、ハイライトをわずかに明るくします。これによりトーン間の区別が強調され、よりクリーンなハーフトーンドットが生成され、印刷時の濁った遷移を防ぎます。</p>
+
+            <h2>グレースケールに変換する（単色印刷の場合）</h2>
+            <p>単色インクで印刷する場合、ハーフトーンフィルターを適用する前に画像をグレースケールに変換する必要があります。ハーフトーンドットは輝度（各ピクセルの明るさ）に基づいているため、色情報は必要なく、むしろ変換に干渉する可能性があります。</p>
+
+            <p><strong>正しい変換方法：</strong></p>
+            <ul>
+                <li><strong>してはいけないこと：</strong> 単に画像エディターをグレースケールモードに設定するだけ — これでは画像に適さない汎用的な計算式で色データが破棄されます。</li>
+                <li><strong>すべきこと：</strong> 白黒調整レイヤー（Photoshop）またはチャンネルミキサー（GIMP）を使用して、各色チャンネルがグレースケール結果にどのように寄与するかを制御します。これにより、強調するトーンを細かく制御できます。</li>
+                <li><strong>別の方法：</strong> <a href="/ja/" style="color:#FF4500;">無料のハーフトーンツール</a>を使用する — グレースケール変換はフィルターパイプラインに組み込まれており、スクリーン印刷用に最適化されています。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>経験則：</strong> スクリーン印刷に適したグレースケール変換は、純白のピクセル（0%インク）がなく、最も深い影で純黒に達する健康的な範囲の暗い中間トーンを持つ必要があります。ヒストグラムが中央に集中している場合、ハーフトーンドットはすべてほぼ同じサイズに見え、印刷は平坦になります。</p>
+            </div>
+
+            <h2>ハーフトーン効果を適用する</h2>
+            <p>画像が高解像度で、コントラストが良好で、グレースケールになったら、ハーフトーンフィルターを適用する時です。ハーフトーン効果は灰色の階調を様々なサイズのドットに変換します — これがスクリーン印刷可能なアートワークの基礎です。</p>
+
+            <h3>調整すべき主要なハーフトーン設定</h3>
+            <ul>
+                <li><strong>ドットサイズ：</strong> 最大ドット径を制御します。布地の場合は中〜大のドットから始めます（布地はインクを吸収し、小さなドットはぼやける可能性があります）。紙の場合は小さなドットで十分です。</li>
+                <li><strong>ドット間隔 / 周波数（LPI）：</strong> 1インチあたりの線数で測定されます。布地では低いLPI（35-55）、紙では高いLPI（55-85）。LPIが高いほどディテールが増しますが、より細かいメッシュスクリーンが必要です。</li>
+                <li><strong>コントラスト：</strong> ドットが生成される前に明暗領域の差を増幅します。ここで少し余分なコントラストを加えると、読みやすさが向上します。</li>
+                <li><strong>ドット形状：</strong> 円形が最も一般的で確実に再現できます。四角や菱形はよりスタイリッシュでビンテージ風の外観を作り出します。</li>
+            </ul>
+
+            <p><strong>推奨ワークフロー：</strong></p>
+            <ol>
+                <li><strong>低いLPI</strong>（Tシャツの場合は約45）と適度なドットサイズから始めます。</li>
+                <li>結果をプレビューし、最も明るいハイライトが非常に小さなドットであるか（完全に透明であるか）確認します。</li>
+                <li>ディテールと印刷適性の最適なバランスが見つかるまで、徐々にLPIを上げていきます。</li>
+                <li>本番前に小規模なテスト印刷を行います。</li>
+            </ol>
+
+            <h2>マルチカラー印刷のための色分解</h2>
+            <p>マルチカラースクリーン印刷では、各色に専用のスクリーンが必要です。色分解とは、フルカラー画像を各インク色ごとに別々のチャンネルに分解するプロセスです。</p>
+
+            <h3>シミュレーテッドプロセス vs. スポットカラー分解</h3>
+            <p>主に2つのアプローチがあります：</p>
+            <ul>
+                <li><strong>シミュレーテッドプロセス分解：</strong> 限られたパレット（通常4〜6色、例：ライトグレー、白、黄、赤、青、黒）を使用し、各色のハーフトーンドットを互いに隣接して配置することでフルカラー画像の錯覚を作り出します。暗い衣服のフォトリアリスティックなデザインに最適です。</li>
+                <li><strong>スポットカラー分解：</strong> 各色領域は重なり合うハーフトーンのないソリッドでフラットな形状です。ロゴデザイン、ベクターアート、明確な色領域を持つイラストに最適です。</li>
+            </ul>
+
+            <h3>色分解の方法（ステップバイステップ）</h3>
+            <ol>
+                <li><strong>複製</strong> — 使用する各インク色ごとに画像を個別のレイヤーに複製します。</li>
+                <li><strong>分離</strong> — レベル補正またはカーブを使用して、その色のトーン範囲を分離します。例えば、「黒」レイヤーでは最も暗い影だけを残し、「ハイライト」レイヤーでは最も明るい領域だけを残します。</li>
+                <li><strong>ハーフトーンフィルターを適用</strong> — 各レイヤーに個別に適用します。各レイヤーが独自のスクリーンになります。</li>
+                <li><strong>重なりを確認</strong> — 2つの色レイヤーが重なる部分では、ハーフトーンドットが光学的に混ざり合います。組み合わせた効果が意図した色を生成することを確認します。</li>
+                <li><strong>各レイヤーを出力</strong> — 各レイヤーを個別の白黒画像（スクリーンごとに1つ）として出力します。</li>
+            </ol>
+
+            <div class="highlight-box">
+                <p><strong>プロのヒント:</strong> 暗いTシャツのシミュレーテッドプロセス分解では、必ず<strong>白ベース</strong>レイヤーを含めてください。白ベースが最初に印刷され、不透明な土台を提供します。色付きのハーフトーンレイヤーは白の上に印刷されます — これにより、暗いシャツの布地が色をくすませるのを防ぎます。</p>
+            </div>
+
+            <h2>よくある画像準備のミス</h2>
+            <ul>
+                <li><strong>低解像度のWeb画像を使用する：</strong> 72 DPIの画像をTシャツサイズに拡大すると、ブロック状でピクセル化したハーフトーンドットが生成されます。必ず印刷サイズで最低300 DPIから始めてください。</li>
+                <li><strong>コントラスト調整を省略する：</strong> 平坦で中間トーンが多い画像は、すべてがほぼ同じサイズのハーフトーンドットを生成し、印刷が濁って不明瞭になります。</li>
+                <li><strong>メッシュに合わないLPI：</strong> 粗いメッシュスクリーン（Tシャツ用の110メッシュなど）に高いLPI（小さなドット）を使用すると、ドットが落ちたりにじんだりします。LPIをメッシュ数に合わせてください。</li>
+                <li><strong>フィルムポジティブを確認しない：</strong> 露光前に必ずフィルムポジティブを光にかざして確認してください。この段階でドットがぼやけていたり、飽和しすぎていたり、不完全に見える場合、スクリーン上ではさらに悪化します。</li>
+                <li><strong>基材を無視する：</strong> 布地はインクを吸収して広げます（ドットゲイン）。紙はよりシャープなドットを保持します。これに応じてハーフトーン設定を調整してください — 布地では大きなドットと低いLPI、紙では小さなドットと高いLPI。</li>
+            </ul>
+
+            <h2>印刷準備完了チェックリスト</h2>
+            <ul>
+                <li>画像解像度が最終印刷サイズで<strong>300 DPI以上</strong>である</li>
+                <li>コントラストが調整されている — 白は潰れ、黒は深くなっている</li>
+                <li>画像がグレースケールに変換されている（単色の場合）、または適切に色分解されている（マルチカラーの場合）</li>
+                <li>ハーフトーンのLPIがスクリーンメッシュ数に合っている</li>
+                <li>フィルムポジティブを光の下で確認 — ドットが鮮明で、埋まりがない</li>
+                <li>LPIとドットサイズが基材（布地 vs. 紙）に合わせて調整されている</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>画像を準備してみませんか？</h3>
+                <p>手動の手順をスキップ — 無料のオンラインハーフトーン変換ツールを使って、数秒でスクリーン印刷対応の画像に変換、調整、ダウンロード。サインアップ不要、アップロード不要、すべてブラウザ内で処理されます。</p>
+                <a href="/ja/" class="cta-button">ハーフトーンツールを試す →</a>
+            </div>
+
+            <h2>よくある質問</h2>
+
+            <h3>72 DPIの画像をスクリーン印刷に使用できますか？</h3>
+            <p>細かいディテールが必要な場合は使用できません。72 DPIの画像は、妥当なサイズで印刷すると目に見えるピクセル化とギザギザのハーフトーンドットを生成します。それが唯一の画像である場合は、印刷サイズを非常に小さくするか（実効DPIが上がる）、処理前にAIアップスケーラーを使用してください。</p>
+
+            <h3>110メッシュスクリーンにはどのLPIを使用すればよいですか？</h3>
+            <p>110メッシュスクリーン（Tシャツに一般的）の場合、35〜45 LPIを使用します。経験則として、LPIはメッシュ数の約3分の1から2分の1にします。それ以上にすると、ドット損失や埋まりのリスクがあります。</p>
+
+            <h3>常にグレースケールに変換する必要がありますか？</h3>
+            <p>単色印刷の場合のみです。シミュレーテッドプロセス分解を使用して複数色を印刷する場合は、各色チャンネルを個別に処理します — ただし、各チャンネルはハーフトーンフィルターが適用される前に実質的にグレースケール画像になります。</p>
+
+            <h3>ScreenPrintFilter.onlineは色分解に対応していますか？</h3>
+            <p>当ツールは、ドットサイズ、間隔、コントラスト、形状を完全に制御できる単一画像のハーフトーン変換に特化しています。マルチカラー分解には、画像エディターでチャンネル分離を行った後、各チャンネルにハーフトーンフィルターを適用することをお勧めします。すべての処理はブラウザ内でローカルに行われます — <a href="/ja/" style="color:#FF4500;">こちらからお試しください</a>。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/ja/privacy-policy.html">プライバシーポリシー</a> | <a href="/ja/">ツールに戻る</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>

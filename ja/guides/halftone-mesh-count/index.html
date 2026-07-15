@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スクリーン印刷のメッシュ数別・最適なハーフトーンドットサイズ - ScreenPrintFilter.online</title>
+    <meta name="description" content="スクリーン印刷のメッシュ数別に最適なハーフトーンドットサイズを解説。110、156、200、230、305、355メッシュ対応のドットサイズ早見表付き完全ガイド。">
+    <meta name="keywords" content="ハーフトーンドットサイズ, スクリーン印刷メッシュ数, メッシュ数ガイド, ハーフトーンスクリーン印刷, メッシュサイズ表, スクリーン印刷ハーフトーンドット">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="スクリーン印刷のメッシュ数別・最適なハーフトーンドットサイズ">
+    <meta property="og:description" content="スクリーン印刷のメッシュ数別に最適なハーフトーンドットサイズを解説。110、156、200、230、305、355メッシュ対応のドットサイズ早見表付き完全ガイド。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/ja/guides/halftone-mesh-count/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .mesh-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .mesh-table th {
+            background: #222;
+            color: #e0e0e0;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 2px solid #FF4500;
+            font-weight: 600;
+        }
+        .mesh-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #2a2a2a;
+            color: #a0a0a0;
+        }
+        .mesh-table tr:hover td {
+            background: #1a1a1a;
+        }
+        .mesh-table .dot-range {
+            color: #FF4500;
+            font-weight: 600;
+        }
+        .mesh-table .mesh-name {
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .example-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .example-card .dot-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            background: radial-gradient(circle at 30% 30%, #FF4500, #000);
+        }
+        .example-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .example-card .desc { color: #666; font-size: 0.75rem; }
+    </style>
+    <link rel="canonical" href="https://screenprintfilter.online/ja/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="ja" href="https://screenprintfilter.online/ja/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="de" href="https://screenprintfilter.online/de/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="fr" href="https://screenprintfilter.online/fr/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="es" href="https://screenprintfilter.online/es/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="pt" href="https://screenprintfilter.online/pt/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="ar" href="https://screenprintfilter.online/ar/guides/halftone-mesh-count/" />
+    <link rel="alternate" hreflang="x-default" href="https://screenprintfilter.online/guides/halftone-mesh-count/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/ja/">ツールを試す</a>
+            <style>
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <div class="lang-switcher">
+        <select onchange="switchLanguage(this.value)" aria-label="言語を切り替え">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja" selected>日本語</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <script>
+    function switchLanguage(code) {
+        var paths = {"en": "https://screenprintfilter.online/", "zh": "https://screenprintfilter.online/zh/", "ja": "https://screenprintfilter.online/ja/", "de": "https://screenprintfilter.online/de/", "fr": "https://screenprintfilter.online/fr/", "es": "https://screenprintfilter.online/es/", "pt": "https://screenprintfilter.online/pt/", "ar": "https://screenprintfilter.online/ar/"};
+        var path = window.location.pathname;
+        var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+        if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+        var baseUrl = paths[code];
+        if (cleanPath === '/' || cleanPath === '/index.html') {
+            window.location.href = baseUrl;
+        } else {
+            window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+        }
+    }
+    </script>
+</header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/ja/">ホーム</a><span class="separator">›</span><a href="https://screenprintfilter.online/ja/guides/">ガイド</a><span class="separator">›</span><span class="current">メッシュ数別ハーフトーンドットサイズ</span></div>
+
+            <h1>メッシュ数別・最適なハーフトーンドットサイズ</h1>
+            <p class="byline">公開日: 2026年7月15日 &bull; 読了時間: 7分</p>
+
+            <p>スクリーン印刷でハーフトーンドットを適切に設定するには、ある重要な関係性を理解する必要があります。それは、ドットのサイズとスクリーンのメッシュ数との関係です。大きすぎるドットを使うとディテールが失われ、小さすぎるドットを使うとインクがメッシュを通り抜けてにじみ、印刷が台無しになります。この2つを適切に組み合わせることが、プロフェッショナルな仕上がりと、スクリーンやインクの無駄な廃棄を分ける分岐点です。</p>
+
+            <p>このガイドでは、一般的なメッシュ数ごとに最適なハーフトーンドットサイズ、セットアップのテスト方法、そして避けるべきミスについて詳しく解説します。</p>
+
+            <div class="highlight-box">
+                <p><strong>ポイント:</strong> メッシュ数が高いほど、より小さく細かいハーフトーンドットが使用できます。110メッシュのスクリーンでは8～12pxのドットが必要ですが、355メッシュでは1～3pxのドットまで扱えます。<strong><a href="/ja/" style="color:#FF4500;">無料のオンラインハーフトーンツール</a></strong>を使って、お使いのメッシュスクリーンに最適なサイズのドットを正確に生成しましょう。</p>
+            </div>
+
+            <h2>メッシュ数とは</h2>
+            <p>メッシュ数とは、スクリーン印刷用メッシュの1インチあたりの糸の本数を指します。110メッシュのスクリーンは1インチあたり110本の糸があり、305メッシュのスクリーンは1インチあたり305本の糸があります。メッシュ数が高いほどメッシュの開口部が細かくなり、スクリーンが保持できる詳細度が高まります。</p>
+
+            <p>メッシュ数によって用途が異なります：</p>
+            <ul>
+                <li><strong>低メッシュ（40-86）：</strong> グリッター、パフ、または厚手の特殊インクに使用。ハーフトーンには適していません。</li>
+                <li><strong>中メッシュ（110-156）：</strong> 標準的なテキスタイル印刷。大胆なデザインや、濃色生地での基本的なハーフトーンに適しています。</li>
+                <li><strong>高メッシュ（200-230）：</strong> 詳細なデザイン、淡色生地、繊細なハーフトーン作業に使用。</li>
+                <li><strong>超高メッシュ（305-355）：</strong> CMYKプロセス印刷、アート作品の複製、超微細ハーフトーンドットに使用。</li>
+            </ul>
+
+            <p>ハーフトーンを印刷する際、メッシュの開口部は最小のドットがきれいに通過できる大きさが必要です。ドットがメッシュの開口部よりも小さいと、ドットが落ちたり歪んだりして、ぼやけたにじみのあるエッジの原因になります。</p>
+
+            <div class="highlight-box">
+                <p><strong>重要なルール:</strong> 一般的な目安として、最小のハーフトーンドットはメッシュ開口部の幅の少なくとも2～3倍以上必要です。これにより、ドットがメッシュの糸にしっかりと乗り、被印刷物にきれいに転写されます。</p>
+            </div>
+
+            <h2>メッシュ数別ドットサイズ</h2>
+            <p>以下の表は、一般的なスクリーン印刷メッシュ数ごとに推奨されるハーフトーンドットサイズの範囲（300 DPI時のピクセル数）を示しています。これらは出発点であり、最終的なドットサイズはインクの粘度、スキージの圧力、被印刷物の質感によって異なる場合があります。</p>
+
+            <table class="mesh-table">
+                <thead>
+                    <tr>
+                        <th>メッシュ数</th>
+                        <th>最適なドットサイズ（300 DPI時のpx）</th>
+                        <th>最適な用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="mesh-name">110 Mesh</td>
+                        <td class="dot-range">8 - 12 px</td>
+                        <td>厚手の生地、濃色インク、パーカーや厚手コットンへの大胆なハーフトーン</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">156 Mesh</td>
+                        <td class="dot-range">6 - 9 px</td>
+                        <td>汎用標準プリント、中間調ハーフトーン、一般的なテキスタイル作業</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">200 Mesh</td>
+                        <td class="dot-range">4 - 7 px</td>
+                        <td>詳細なデザイン、淡色生地、良好なインク流動性を伴う繊細なハーフトーン</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">230 Mesh</td>
+                        <td class="dot-range">3 - 5 px</td>
+                        <td>細密な作品、ハーフトーン写真、グラデーション主体のデザイン</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">305 Mesh</td>
+                        <td class="dot-range">2 - 4 px</td>
+                        <td>高精細プリント、CMYKプロセス印刷、滑らかな階調表現</td>
+                    </tr>
+                    <tr>
+                        <td class="mesh-name">355 Mesh</td>
+                        <td class="dot-range">1 - 3 px</td>
+                        <td>超微細なディテール、アート作品の複製、美術館品質のジークレースタイル</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>表の見方</h3>
+            <p>110メッシュのスクリーンで濃色Tシャツに印刷する場合、300 DPIで8～12ピクセルのハーフトーンドットを使用します。粗いメッシュはより多くのインクを通すため、形状を維持しにじみを防ぐには大きめのドットが必要です。より細かいメッシュに移行するにつれて、ドットは比例して小さくなります。</p>
+
+            <p>CMYKプロセス印刷の場合、305メッシュが業界標準です。各色チャンネル（シアン、マゼンタ、イエロー、ブラック）にそれぞれ2～4ピクセルのドットを使用し、モアレパターンを避けるために適切な角度でハーフトーンスクリーンが設定されます。</p>
+
+            <h2>ドットサイズのテスト方法</h2>
+            <p>本番印刷に取りかかる前に、必ずステップテストを行ってください。信頼性の高い方法は次の通りです：</p>
+            <ol>
+                <li><strong>テストストリップを作成</strong> — 1pxから15pxまでのハーフトーンドットを1px刻みで並べて配置します。</li>
+                <li><strong>テストストリップを焼き付け・露光</strong> — 通常の露光時間でスクリーンに転写します。</li>
+                <li><strong>スクリーンを洗い出し</strong>、良好な光の下で検査します。完全に洗い出され、歪みのない最小のドットを確認します。</li>
+                <li><strong>テスト印刷</strong> — 実際のインクと被印刷物を使用して印刷します。シャープなエッジ、にじみ、ドットゲインをチェックします。</li>
+                <li><strong>ルーペで比較</strong> — 10倍または20倍の拡大鏡を使うと、各ドットサイズが実際の印刷でどのように機能したかが正確にわかります。</li>
+            </ol>
+            <p>使用するメッシュ数とインクの組み合わせごとに結果を記録しておきましょう。時間が経つにつれて、ご自身の乳化剤、露光装置、印刷機のセットアップに対応したカスタマイズされた参考表が構築できます。</p>
+
+            <div class="highlight-box">
+                <p><strong>プロのヒント:</strong> 多くの印刷業者は、露光時のドットゲインや印刷時のインク拡がりの影響で、実際に使用可能なドットサイズは理論上の推奨値よりも1～2ピクセル大きくなることに気づいています。推奨範囲の大きい方から始めて、徐々に小さくしていくことをお勧めします。</p>
+            </div>
+
+            <h2>避けるべきよくあるミス</h2>
+            <p>経験豊富な印刷業者でもこれらのミスを犯すことがあります。注意すべき点は以下の通りです：</p>
+            <ul>
+                <li><strong>メッシュに対してドットが小さすぎる：</strong> 最も頻繁に発生するミスです。110メッシュのスクリーンに2pxのドットを使用すると、メッシュの開口部からドットが落ちてしまい、インクのにじみ、エッジのぼやけ、印刷不良の原因になります。最初にメッシュとドットの比率を必ず確認しましょう。</li>
+                <li><strong>すべてのメッシュ数で同じドットサイズを使用する：</strong> メッシュ数ごとに適切なドット範囲は異なります。230メッシュで美しく機能するサイズも、110メッシュでは目詰まりしたりにじんだりします。</li>
+                <li><strong>インクの粘度を無視する：</strong> 濃厚なインク（白、不透明、特殊インク）は、メッシュ数に関係なく大きめのドットが必要です。薄く透明なインクはより細かいドットを保持できます。</li>
+                <li><strong>スクリーンを過剰露光する：</strong> 過度な露光時間は、意図したドットの境界を超えて乳化剤を硬化させ、ハーフトーンドットを縮小させたり完全に閉塞させたりします。ステップウェッジを使用して露光を微調整しましょう。</li>
+                <li><strong>ドットゲインを考慮しない：</strong> デジタルファイル上の4pxのドットが、機械的なドットゲインにより布地では6pxで印刷されることがあります。目標より少し小さめにデザインして調整しましょう。</li>
+            </ul>
+
+            <h2>理論から実践へ</h2>
+            <p>印刷所ごとに条件は異なります。使用するインクのブランド、乳化剤の種類、露光装置、スキージの硬度、さらには工場の湿度までもが最適なドットサイズに影響します。このガイドの表を出発点として、テストを通じて微調整を行ってください。</p>
+
+            <p>適切なハーフトーンドットサイズを試す最も速い方法は、ドットの寸法を完全にコントロールできるツールを使って、元の画像からドットを生成することです。ScreenPrintFilter.onlineでは、正確なピクセルサイズを設定し、リアルタイムで効果をプレビューし、任意の解像度でエクスポートできます。推測は必要ありません。</p>
+
+            <div class="cta-box">
+                <h3>完璧なサイズのハーフトーンを作成</h3>
+                <p>無料のオンラインハーフトーンフィルターを使って、1pxの超微細から15pxの大胆なドットまで、あらゆるサイズのドットを生成できます。即座にプレビューし、フル解像度でダウンロード。登録は不要です。</p>
+                <a href="/ja/" class="cta-button">ハーフトーンツールを試す →</a>
+            </div>
+
+            <h2>よくある質問（FAQ）</h2>
+
+            <h3>110メッシュでハーフトーン印刷はできますか？</h3>
+            <p>はい、ただし大きめのドット（8～12px）に限ります。110メッシュは、濃色やテクスチャーのある布地に大胆なハーフトーン効果を出すのに最適で、濃いインク被覆が必要な場合に向いています。写真のような細かいディテールには適していません。</p>
+
+            <h3>ハーフトーンに最適な万能メッシュ数は？</h3>
+            <p>156メッシュが最も汎用性が高いです。6～9ピクセルのドットサイズを快適に処理でき、ほとんどのインクタイプに対応し、淡色・濃色の両方の布地でクリーンな結果が得られます。多くの印刷所が156メッシュを標準として採用しています。</p>
+
+            <h3>CMYKハーフトーン印刷には別のメッシュが必要ですか？</h3>
+            <p>はい。CMYKプロセス印刷では通常、各色チャンネルに305メッシュのスクリーンが必要です。細かいメッシュ開口部（約48ミクロン）により、2～4pxの小さなドットが、スクリーンを適切な角度に設定することでモアレ干渉なく滑らかな写真調の階調を再現できます。</p>
+
+            <h3>ドットサイズをピクセルからミクロンに変換するには？</h3>
+            <p>300 DPIの場合、1ピクセルは約85ミクロンに相当します。つまり、4pxのハーフトーンドットは約340ミクロンです。これをメッシュ開口部のサイズと比較します：305メッシュ（開口部48ミクロン）の場合、340ミクロンのドットは開口部の約7倍の大きさとなり、安全範囲内です。</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/ja/privacy-policy.html">プライバシーポリシー</a> | <a href="/ja/">ツールに戻る</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>
