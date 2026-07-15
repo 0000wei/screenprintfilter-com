@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Halftone Patterns - Shapes, Textures and Creative Effects Beyond Dots - ScreenPrintFilter.online</title>
+    <meta name="description" content="Explore custom halftone patterns beyond basic dots. Learn how to create line halftones, circular patterns, wavy textures, and artistic effects for unique screen printing designs.">
+    <meta name="keywords" content="custom halftone patterns, line halftone, circular halftone, wavy halftone texture, halftone shapes, creative halftone, screen printing patterns">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Custom Halftone Patterns — Beyond Basic Dots">
+    <meta property="og:description" content="Explore custom halftone patterns beyond basic dots. Learn how to create line halftones, circular patterns, wavy textures, and artistic effects for unique screen printing designs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://screenprintfilter.online/guides/custom-halftone-patterns/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Agent Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/.well-known/llms.txt">
+    <link rel="ai-plugin" href="/.well-known/ai-plugin.json">
+
+    <!-- Bing -->
+    <meta name="msvalidate.01" content="F2859D0614981562217BF497BEF4002A" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .header a { color: #a0a0a0; text-decoration: none; font-size: 0.9rem; }
+        .header a:hover { color: #FF4500; }
+        .header .logo { font-size: 1.1rem; font-weight: 700; color: #e0e0e0; }
+        .header .logo span { color: #FF4500; }
+        main { padding: 3rem 0; }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #FF4500;
+        }
+        .breadcrumb .separator {
+            color: #d1d5db;
+            user-select: none;
+        }
+        .breadcrumb .current {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        h1 { font-size: 2rem; margin-bottom: 1rem; color: #f1f5f9; line-height: 1.3; }
+        .byline { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+        h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; color: #e0e0e0; }
+        h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #c0c0c0; }
+        p { color: #a0a0a0; margin-bottom: 1.2rem; }
+        ul, ol { color: #a0a0a0; margin-left: 1.5rem; margin-bottom: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight-box {
+            background: #1a1a1a;
+            border-left: 4px solid #FF4500;
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .highlight-box p { color: #c0c0c0; margin-bottom: 0; }
+        .highlight-box strong { color: #FF4500; }
+        .cta-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .cta-box h3 { color: #f1f5f9; margin: 0 0 0.5rem; }
+        .cta-box p { color: #999; margin-bottom: 1.5rem; }
+        .cta-button {
+            display: inline-block;
+            background: #FF4500;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #FF5722; }
+        .footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        .footer a { color: #777; text-decoration: none; }
+        .footer a:hover { color: #FF4500; }
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .pattern-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .pattern-card .pattern-preview {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 0.75rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .pattern-card .label { color: #a0a0a0; font-size: 0.85rem; font-weight: 600; }
+        .pattern-card .desc { color: #666; font-size: 0.75rem; }
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-switcher select {
+            appearance: none; -webkit-appearance: none;
+            background: transparent;
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 6px;
+            padding: 0.375rem 2rem 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-color, #374151);
+            cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.5rem center;
+            background-size: 12px; min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher select {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            }
+        }
+        .lang-switcher select:hover { border-color: var(--primary-color, #2563eb); }
+        [dir="rtl"] .lang-switcher select {
+            background-position: left 0.5rem center;
+            padding: 0.375rem 0.75rem 0.375rem 2rem;
+        }
+    </style>
+    <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/guides/custom-halftone-patterns/" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo">ScreenPrint<span>Filter</span>.online</a>
+            <a href="/">Try the Tool</a>
+            <div class="lang-switcher">
+                <select onchange="switchLanguage(this.value)" aria-label="Switch language">
+                    <option value="en" selected>English</option>
+                </select>
+            </div>
+            <script>
+            function switchLanguage(code) {
+                var paths = {"en": "https://screenprintfilter.online/"};
+                var path = window.location.pathname;
+                var cleanPath = path.replace(/^\/(zh|ja|de|fr|es|pt|ar)\//, '/');
+                if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+                var baseUrl = paths[code];
+                if (cleanPath === '/' || cleanPath === '/index.html') {
+                    window.location.href = baseUrl;
+                } else {
+                    window.location.href = baseUrl.replace(/\/$/, '') + cleanPath;
+                }
+            }
+            </script>
+        </header>
+
+        <main>
+            <div class="breadcrumb"><a href="https://screenprintfilter.online/">Home</a><span class="separator">›</span><a href="/guides/">Guides</a><span class="separator">›</span><span class="current">Custom Halftone Patterns</span></div>
+
+            <h1>Custom Halftone Patterns — Beyond Basic Dots</h1>
+            <p class="byline">Published: July 15, 2026 &bull; 7 min read</p>
+
+            <p>Traditional halftone has always been about dots — circles of varying sizes arranged in a grid to simulate tone and shading. It is the industry standard for screen printing, and for good reason: it works beautifully. But modern digital tools and creative screen printers have pushed far beyond the humble dot. Today, you can use lines, concentric rings, wavy distortions, and blended textures to build arresting visual effects that stand out from anything a simple dot grid can produce.</p>
+
+            <p>This guide explores the world of custom halftone patterns — what they are, how they work, and how you can use them to bring a fresh, distinctive look to your screen printing projects.</p>
+
+            <div class="highlight-box">
+                <p><strong>TL;DR:</strong> Custom halftone patterns replace or augment the classic dot grid with alternative shapes and textures: lines, radial circles, waves, and multi-pattern blends. They give you more creative freedom for branding, posters, and art prints. <strong><a href="/" style="color:#FF4500;">Try our free online halftone tool</a></strong> with 4 built-in dot shapes to get started.</p>
+            </div>
+
+            <h2>What Makes a Halftone Pattern "Custom"?</h2>
+            <p>A standard halftone uses a simple repeating grid of circular dots. A <em>custom</em> halftone pattern changes the fundamental building block — the mark — that represents tone. Instead of a circle, the mark might be a line, a crescent, a ring, or a wavy stroke. The same core math applies: larger marks represent darker areas, smaller marks represent lighter ones. But the <em>shape</em> of the mark completely changes the visual character of the output.</p>
+
+            <p>Some custom patterns also alter the <em>arrangement</em> of marks — radiating outward from a center point, for example, or following a sine-wave curve. These structural changes create entirely new textures that would be impossible with a conventional grid.</p>
+
+            <div class="pattern-grid">
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-linear-gradient(90deg, #FF4500 0px, #FF4500 3px, #000 3px, #000 6px);"></div>
+                    <div class="label">Line Halftone</div>
+                    <div class="desc">Thin vertical stripes</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: radial-gradient(circle at 50% 50%, #FF4500 0%, #000 40%, #FF4500 40%, #000 60%, #FF4500 60%, #000 80%, #FF4500 80%, #000 100%);"></div>
+                    <div class="label">Radial Pattern</div>
+                    <div class="desc">Concentric rings</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-linear-gradient(45deg, #FF4500 0px, #FF4500 4px, #000 4px, #000 8px);"></div>
+                    <div class="label">Diagonal Lines</div>
+                    <div class="desc">Angled texture</div>
+                </div>
+                <div class="pattern-card">
+                    <div class="pattern-preview" style="background: repeating-radial-gradient(circle at 30% 30%, #FF4500 0%, #000 20%, #FF4500 20%, #000 40%);"></div>
+                    <div class="label">Radial Burst</div>
+                    <div class="desc">Star-like texture</div>
+                </div>
+            </div>
+
+            <h2>1. Line Halftone Patterns</h2>
+            <p>The line halftone is the most popular alternative to the classic dot. Instead of circles, the image is rendered as a series of parallel lines whose <strong>thickness</strong> varies with the brightness of the underlying image. Dark regions become thick lines; light regions become thin lines — or even disappear entirely, leaving white space.</p>
+
+            <h3>How Line Halftones Work</h3>
+            <p>Like a dot halftone, a line halftone begins by converting the image to grayscale. A grid of horizontal (or vertical, or angled) scan lines is then applied. For each scan line, the filter samples the brightness along its path and adjusts the line stroke width proportionally: stronger signals (darker pixels) produce wider strokes, and weaker signals produce narrower strokes.</p>
+
+            <p>The result resembles an engraving or a wireframe drawing. It is especially striking for portraits, architectural photography, and text-heavy designs where the line direction can reinforce the composition.</p>
+
+            <h3>Direction Matters</h3>
+            <p>The orientation of the lines dramatically changes the feel of the output:</p>
+            <ul>
+                <li><strong>Horizontal lines</strong> create a calm, wide-screen cinematic feel. They work well for landscapes and panoramas.</li>
+                <li><strong>Vertical lines</strong> suggest height, structure, and formality. Great for portraits of people standing and architectural subjects.</li>
+                <li><strong>Diagonal lines</strong> add energy, motion, and tension. Use them for action shots, sports imagery, and dynamic compositions.</li>
+                <li><strong>Curved lines</strong> — lines that follow a subtle arc or wave — can echo natural forms like flowing water or rolling hills.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Pro Tip:</strong> When using line halftones for screen printing on fabric, keep the line thickness at least 0.5pt to ensure the ink transfers cleanly through the mesh. Thinner lines can break apart under pressure, especially on textured garments.</p>
+            </div>
+
+            <h2>2. Circular and Radial Patterns</h2>
+            <p>Circular and radial halftone patterns move the center of the grid to a focal point. Instead of a rectangular array of marks, the pattern radiates outward from a chosen center — like ripples in a pond or rings on a target.</p>
+
+            <h3>Concentric Ring Halftones</h3>
+            <p>In a concentric ring pattern, the marks are circular bands centered on a single point. As the image brightness changes, the thickness and spacing of the rings vary. This creates a hypnotic, target-like effect that draws the viewer's eye toward the center. It is a powerful tool for branding, logos, and any design where you want to emphasize a focal element.</p>
+
+            <h3>Radial Line Halftones</h3>
+            <p>Instead of rings, radial line halftones use spokes radiating from the center, like a bicycle wheel or a sunburst. The spokes vary in thickness according to image brightness. This pattern works beautifully for round compositions — like record labels, badges, and circular logos — and for images with natural radial symmetry, such as close-up flowers or architecture shot from a central perspective.</p>
+
+            <h3>Offset / Multi-Center Patterns</h3>
+            <p>More advanced implementations allow you to place <em>multiple</em> radial centers. Each region of the image can have its own focal point, creating a patchwork of radiating textures. This is especially effective for abstract art and poster design where you want visual tension between different areas of the composition.</p>
+
+            <div class="highlight-box">
+                <p><strong>Pro Tip:</strong> Radial patterns work best on high-contrast images with clear subjects. A simple silhouette or a logo with bold shapes will produce much better results than a busy, low-contrast photograph, which can turn into a muddy mess of overlapping rings.</p>
+            </div>
+
+            <h2>3. Wavy and Distorted Textures</h2>
+            <p>Wavy and distorted halftone textures take the conventional dot grid and apply a <strong>displacement</strong> — the position of each dot is shifted based on a mathematical function (sine, cosine, or a more complex wave). The dots themselves may also change shape, stretching or compressing to follow the wave.</p>
+
+            <h3>Sine-Wave Halftones</h3>
+            <p>A sine-wave halftone displaces each dot along a sinusoidal curve. Instead of sitting on neat rows and columns, the dots undulate across the image. This creates a fluid, organic feel. It is a fantastic choice for designs with natural themes — ocean scenes, fabric textures, foliage — or anywhere you want to soften the rigid mechanical look of a standard halftone.</p>
+
+            <h3>Ripple and Vortex Effects</h3>
+            <p>More dramatic distortions include circular ripples (the dots are displaced in a wave spreading outward from a point) and vortex swirls (dots are rotated around a center by an angle proportional to their distance). A ripple effect mimics the surface of water disturbed by a drop; a vortex effect feels like a whirlpool pulling the image inward. Both are show-stopping visual techniques for album covers, concert posters, and experimental prints.</p>
+
+            <h3>Noise-Based Textures</h3>
+            <p>Rather than a clean mathematical wave, you can use Perlin noise or a similar random-but-smooth function to displace the dots. The result is a halftone that looks hand-made — like stippling done by an artist, or the natural grain of a photograph printed on textured paper. Noise-based displacement is excellent for fine art prints and designs that aim for an organic, imperfect quality.</p>
+
+            <div class="highlight-box">
+                <p><strong>Pro Tip:</strong> When printing distorted halftones, test a small area first. Extreme displacement can create gaps or overlaps that may not print cleanly. A 10-20% displacement amplitude relative to dot spacing is a safe starting point.</p>
+            </div>
+
+            <h2>4. Combining Multiple Patterns</h2>
+            <p>The most exciting creative territory opens up when you begin mixing patterns within a single image. Instead of committing to just dots or just lines, you can use different halftone patterns for different regions, creating contrast and variety that makes each section of the design feel unique.</p>
+
+            <h3>Region-Based Blending</h3>
+            <p>In region-based blending, you divide your image into zones — by color, brightness, or a drawn mask — and assign a different halftone pattern to each zone. For example:</p>
+            <ul>
+                <li>The <strong>sky</strong> in a landscape could use a radial pattern centered on the sun.</li>
+                <li>The <strong>mountains</strong> in the midground could use a diagonal line halftone.</li>
+                <li>The <strong>foreground</strong> foliage could use a standard dot halftone with a wavy displacement.</li>
+            </ul>
+            <p>The transitions between zones can be hard-edged (for a collage look) or softly blended (for a more seamless appearance).</p>
+
+            <h3>Cross-Fade Between Patterns</h3>
+            <p>A more subtle approach is a cross-fade: one pattern gradually morphs into another across the image. The top-left corner might start with dots, which slowly stretch into lines by the bottom-right corner. This technique creates motion and flow. It works especially well for banners, headers, and any design where you want to suggest a journey or progression.</p>
+
+            <h3>Overlay and Multiply</h3>
+            <p>You can also layer two halftone patterns on top of each other — for example, a coarse dot pattern overlaid with a fine line pattern. Use the multiply or screen blend modes to let both patterns show through. The interaction of the two grids creates moiré interference patterns that can be visually stunning when deliberate, but chaotic when accidental. Apply this technique with intention and test on your target substrate beforehand.</p>
+
+            <div class="highlight-box">
+                <p><strong>Pro Tip:</strong> When combining patterns, keep the LPI (lines per inch) of each pattern different by at least 20% to avoid unintended moiré. For example, use 40 LPI for the base pattern and 55 LPI for the overlay.</p>
+            </div>
+
+            <h2>5. When to Use Custom Patterns</h2>
+            <p>Custom halftone patterns are not a replacement for classic dots in every situation — they are a deliberate artistic choice. Here is when they shine brightest:</p>
+
+            <h3>Branding and Logos</h3>
+            <p>A brand that wants to stand out on merchandise can use a custom halftone pattern as its signature texture. Imagine a coffee brand whose logo always appears with a radial sunburst halftone, or a music label that uses wavy, distorted textures across all its album art. A distinctive halftone becomes part of the visual identity.</p>
+
+            <h3>Art Prints and Limited Editions</h3>
+            <p>Buyers of limited-edition screen prints are looking for something unique. A custom halftone pattern — especially a multi-pattern blend or a noise-based texture — gives each print an artisan, handcrafted feel that standard mechanical halftones cannot match. Galleries and collectors respond well to visible, thoughtful technique.</p>
+
+            <h3>Posters and Event Promotion</h3>
+            <p>Concert posters, festival announcements, and movie posters are competitive visual spaces. A striking custom halftone can be the difference between a poster that gets ignored and one that gets framed. Line halftones, in particular, give posters a classic screen-printed aesthetic that feels both retro and contemporary.</p>
+
+            <h3>Fashion and Apparel</h3>
+            <p>Custom halftone patterns on t-shirts and hoodies can make a simple graphic feel rich and detailed. A portrait with a vertical line halftone has a completely different energy than one with standard dots. Fashion brands use these techniques to create signature looks that customers can identify at a glance.</p>
+
+            <h3>When to Stick with Classic Dots</h3>
+            <p>Custom patterns are powerful, but they are not always the right choice. Stick with the classic circular dot halftone when:</p>
+            <ul>
+                <li>You need the most accurate tonal reproduction possible (e.g., photographic realism)</li>
+                <li>You are printing at very high LPI on smooth paper</li>
+                <li>Your client specifically expects a traditional print look</li>
+                <li>You are printing very small details where custom shapes lose clarity</li>
+            </ul>
+
+            <h2>Getting Started with Custom Halftone Patterns</h2>
+            <p>You do not need expensive software to experiment with custom halftone patterns. Many modern online tools and vector editors offer pattern presets beyond the basic circle. Here is how to start:</p>
+
+            <ol>
+                <li><strong>Pick your pattern type</strong> — Start with one: lines, radial, or wavy. Master one before layering.</li>
+                <li><strong>Choose a high-contrast image</strong> — Custom patterns exaggerate edges and textures. Start with a simple subject (a silhouette, a logo, a bold portrait).</li>
+                <li><strong>Tweak the LPI and thickness</strong> — Lower LPI (30-50) gives more visible pattern texture; higher LPI (55-80) gives finer detail but less pattern character.</li>
+                <li><strong>Preview at actual print size</strong> — Patterns that look amazing on screen can be disappointing when printed small. Always simulate the final print dimensions.</li>
+                <li><strong>Print a test</strong> — Run a small sample through your screen printing setup before committing to a full run. Check that all details transfer and that no moiré patterns appear.</li>
+            </ol>
+
+            <div class="cta-box">
+                <h3>Try Custom Halftone Patterns Free</h3>
+                <p>Our free online halftone filter supports 4 dot shapes including circles, squares, diamonds, and lines — perfect for experimenting with different halftone looks right in your browser.</p>
+                <a href="/" class="cta-button">Open Halftone Tool →</a>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Can I create line halftone patterns with ScreenPrintFilter.online?</h3>
+            <p>Yes! Our tool includes a <strong>line</strong> dot shape option that produces a parallel-line halftone effect. You can adjust the spacing, thickness, and angle to get the look you want. Future updates will add radial and wavy patterns.</p>
+
+            <h3>What LPI should I use for a line halftone on a t-shirt?</h3>
+            <p>For line halftones on fabric, use a slightly lower LPI than you would with dots — around 25-40 LPI. Lines need more space between them to avoid ink bleeding together, especially on dark garments printed with white ink.</p>
+
+            <h3>Can I combine multiple halftone patterns in one design?</h3>
+            <p>Yes, though you will need to use image editing software to mask different regions. Apply one halftone effect to one layer, another to a different layer, then composite them. Our tool applies one pattern at a time, but you can run the same image through multiple times with different masks.</p>
+
+            <h3>Are custom halftone patterns harder to print than dots?</h3>
+            <p>Not necessarily. The same screen printing principles apply: mesh count, ink viscosity, and squeegee pressure. However, some patterns (like very thin lines or extreme wavy distortions) require more careful setup. Always run a test print before mass production.</p>
+        </main>
+
+        <footer class="footer">
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/">Back to Tool</a></p>
+            <p style="margin-top: 0.5rem;">&copy; 2026 ScreenPrintFilter.online</p>
+        </footer>
+    </div>
+</body>
+</html>
