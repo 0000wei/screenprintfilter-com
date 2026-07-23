@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <title>ScreenPrintFilter.online - Free Online Halftone Dot Filter for Images</title>
+    <title>Free Online Halftone Dot Filter for Images — No Upload Required</title>
     <meta name="description" content="Transform your images into stunning halftone dot patterns for screen printing. Free online tool with customizable dot size, spacing, and shapes.">
     <meta name="keywords" content="halftone, screen print, dot filter, image filter, silk screen, halftone pattern, online tool">
     <meta name="author" content="ScreenPrintFilter">
     <link rel="canonical" href="https://screenprintfilter.online/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="ScreenPrintFilter.online - Free Halftone Dot Filter">
+    <meta property="og:title" content="Free Online Halftone Dot Filter for Images — No Upload Required">
     <meta property="og:description" content="Create professional halftone effects for screen printing directly in your browser. Free, fast, and no upload required.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://screenprintfilter.online/">
@@ -987,6 +987,21 @@
         .moon-icon { display: none; }
         html[data-theme="dark"] .sun-icon { display: none; }
         html[data-theme="dark"] .moon-icon { display: inline; }
+
+        /* Magnifier */
+        .magnifier {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background-color: var(--bg-primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            pointer-events: none;
+            display: none;
+            image-rendering: pixelated;
+            z-index: 100;
+        }
     </style>
     <link rel="alternate" hreflang="en" href="https://screenprintfilter.online/" />
     <link rel="alternate" hreflang="zh" href="https://screenprintfilter.online/zh/" />
@@ -1186,6 +1201,7 @@
                                 <div class="placeholder-hint">Supports JPG, PNG, WebP • Max 10MB</div>
                             </div>
                             <canvas id="mainCanvas" style="display:none"></canvas>
+                            <canvas class="magnifier" id="magnifier" width="80" height="80"></canvas>
                             <div class="canvas-dimensions" id="canvasDimensions" style="display:none"></div>
                             <div class="processing-status" id="processingStatus">Processing...</div>
                             <button class="canvas-download-btn" id="canvasDownloadBtn" title="Download PNG" style="display:none">
@@ -1289,6 +1305,9 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const resetBtn = document.getElementById('resetBtn');
         const mainCanvas = document.getElementById('mainCanvas');
+        const magnifier = document.getElementById('magnifier');
+        const magCtx = magnifier.getContext('2d');
+        magCtx.imageSmoothingEnabled = false;
         const canvasWrapper = document.getElementById('canvasWrapper');
         const canvasPlaceholder = document.getElementById('canvasPlaceholder');
         const canvasDimensions = document.getElementById('canvasDimensions');
@@ -1442,6 +1461,11 @@
             canvasWrapper.addEventListener('mousemove', handlePanMove);
             canvasWrapper.addEventListener('mouseup', handlePanEnd);
             canvasWrapper.addEventListener('mouseleave', handlePanEnd);
+
+            // Magnifier
+            mainCanvas.addEventListener('mouseenter', handleMagnifierEnter);
+            mainCanvas.addEventListener('mousemove', handleMagnifierMove);
+            mainCanvas.addEventListener('mouseleave', handleMagnifierLeave);
         }
 
         function handlePanStart(e) {
@@ -1463,6 +1487,58 @@
         function handlePanEnd() {
             isPanning = false;
             canvasWrapper.classList.remove('grabbing');
+        }
+
+        function handleMagnifierEnter() {
+            if (currentImage) {
+                magnifier.style.display = 'block';
+            }
+        }
+
+        function handleMagnifierLeave() {
+            magnifier.style.display = 'none';
+        }
+
+        function handleMagnifierMove(e) {
+            if (!currentImage || isPanning) {
+                magnifier.style.display = 'none';
+                return;
+            }
+            magnifier.style.display = 'block';
+
+            // Draw magnified area
+            magCtx.fillStyle = backgroundColorInput.value;
+            magCtx.fillRect(0, 0, 80, 80);
+
+            const rect = mainCanvas.getBoundingClientRect();
+            // Offset inside canvas (in CSS pixels)
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+
+            // Scale to actual canvas bitmap coordinates
+            const scaleX = mainCanvas.width / rect.width;
+            const scaleY = mainCanvas.height / rect.height;
+
+            const pixelX = offsetX * scaleX;
+            const pixelY = offsetY * scaleY;
+
+            // 3x zoom -> source size is 80 / 3
+            const zoomLevel = 3;
+            const srcSize = 80 / zoomLevel;
+
+            magCtx.drawImage(
+                mainCanvas,
+                pixelX - srcSize / 2, pixelY - srcSize / 2, srcSize, srcSize,
+                0, 0, 80, 80
+            );
+
+            // Position magnifier relative to canvasWrapper
+            const wrapperRect = canvasWrapper.getBoundingClientRect();
+            const wrapperX = e.clientX - wrapperRect.left + canvasWrapper.scrollLeft;
+            const wrapperY = e.clientY - wrapperRect.top + canvasWrapper.scrollTop;
+
+            magnifier.style.left = (wrapperX + 5) + 'px';
+            magnifier.style.top = (wrapperY - 85) + 'px';
         }
 
         function setZoom(value) {
@@ -1796,12 +1872,8 @@ function loadImage(file) {
             let outputWidth = originalCanvas.width;
             let outputHeight = originalCanvas.height;
 
-            // Handle custom output size
-            if (!useOriginalSizeCheckbox.checked) {
-                // Use custom dimensions if provided, otherwise fall back to original dimensions
-                outputWidth = outputWidthInput.value ? parseInt(outputWidthInput.value) : originalWidth;
-                outputHeight = outputHeightInput.value ? parseInt(outputHeightInput.value) : originalHeight;
-            }
+            // Handle custom output size ONLY for display values, but render to originalCanvas dimensions for preview
+            // (The actual custom size rendering happens in downloadImage)
             mainCanvas.width = outputWidth;
             mainCanvas.height = outputHeight;
 
@@ -2056,12 +2128,21 @@ function loadImage(file) {
             try {
                 let canvasToExport = mainCanvas;
 
-                // If output size equals preview size, export existing canvas directly
-                if (useOriginalSizeCheckbox.checked && originalWidth > 0 && originalHeight > 0 &&
-                    (originalWidth !== mainCanvas.width || originalHeight !== mainCanvas.height)) {
+                // Determine final export size
+                let outputWidth = originalWidth;
+                let outputHeight = originalHeight;
+
+                if (!useOriginalSizeCheckbox.checked) {
+                    outputWidth = outputWidthInput.value ? parseInt(outputWidthInput.value) : originalWidth;
+                    outputHeight = outputHeightInput.value ? parseInt(outputHeightInput.value) : originalHeight;
+                }
+
+                // If output size differs from preview canvas, export a new high-res canvas
+                if (outputWidth > 0 && outputHeight > 0 &&
+                    (outputWidth !== mainCanvas.width || outputHeight !== mainCanvas.height)) {
                     const tempCanvas = document.createElement('canvas');
-                    tempCanvas.width = originalWidth;
-                    tempCanvas.height = originalHeight;
+                    tempCanvas.width = outputWidth;
+                    tempCanvas.height = outputHeight;
                     const tempCtx = tempCanvas.getContext('2d');
 
                     const dotSize = parseInt(dotSizeSlider.value);
@@ -2073,9 +2154,6 @@ function loadImage(file) {
                     const foregroundColor = foregroundColorInput.value;
                     const backgroundColor = backgroundColorInput.value;
                     const useOriginalColors = useOriginalColorsCheckbox.checked;
-
-                    const outputWidth = originalWidth;
-                    const outputHeight = originalHeight;
 
                     tempCtx.fillStyle = backgroundColor;
                     tempCtx.fillRect(0, 0, outputWidth, outputHeight);
