@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Free Screen Printing & Prepress Tools</title>
+    <meta name="description" content="Free online tools for screen printing, DTF, and garment decoration. DPI calculator, gang sheet optimizer, halftone LPI previewer.">
+    <link rel="canonical" href="https://screenprintfilter.online/tools/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Screen Printing & Prepress Tools">
+    <meta property="og:description" content="Free online tools for screen printing, DTF, and garment decoration. DPI calculator, gang sheet optimizer, halftone LPI previewer.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://screenprintfilter.online/tools/">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <!-- AI Discovery Links -->
+    <link rel="llms.txt" href="/llms.txt" type="text/plain">
+    <link rel="mcp.txt" href="/mcp.txt" type="text/plain">
+    <link rel="ai-plugin.json" href="/ai-plugin.json" type="application/json">
+
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-disabled: #9ca3af;
+            --accent: #FF4500;
+            --accent-hover: #FF5722;
+            --border: #e5e7eb;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
+            --transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1f2937;
+            --bg-secondary: #111827;
+            --bg-tertiary: #374151;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --text-disabled: #6b7280;
+            --border: #374151;
+            --shadow: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo svg { width: 40px; height: 40px; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        #themeToggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 8px 12px;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        #themeToggle:hover {
+            background: var(--bg-tertiary);
+        }
+
+        main {
+            padding: 60px 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .tool-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .tool-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            align-self: flex-start;
+        }
+
+        .tool-card a:hover {
+            background: var(--accent-hover);
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="4" fill="currentColor"/>
+                    <circle cx="10" cy="10" r="2" fill="currentColor"/>
+                    <circle cx="30" cy="10" r="2" fill="currentColor"/>
+                    <circle cx="10" cy="30" r="2" fill="currentColor"/>
+                    <circle cx="30" cy="30" r="2" fill="currentColor"/>
+                </svg>
+                <span class="logo-text">ScreenPrint<span class="logo-accent">Filter</span></span>
+            </a>
+            <button id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        </header>
+
+        <main>
+            <h1>Free Screen Printing & Prepress Tools</h1>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h2>DPI Calculator</h2>
+                    <p>Calculate image DPI from pixels and print size, or determine required pixels for your target print dimensions.</p>
+                    <a href="/tools/dpi-calculator.html">Open Tool →</a>
+                </div>
+
+                <div class="tool-card">
+                    <h2>Gang Sheet Calculator</h2>
+                    <p>Optimize your DTF gang sheet layouts. Calculate how many designs fit on a sheet and minimize waste.</p>
+                    <a href="/tools/gang-sheet-calculator.html">Open Tool →</a>
+                </div>
+
+                <div class="tool-card">
+                    <h2>Halftone LPI Previewer</h2>
+                    <p>Preview how different LPI settings affect halftone appearance. Interactive tool for screen printing education.</p>
+                    <a href="/tools/halftone-lpi-previewer.html">Open Tool →</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/">← Back to Halftone Tool</a></p>
+        </footer>
+    </div>
+
+    <script>
+    (function(){
+        var btn = document.getElementById('themeToggle');
+        if(!btn) return;
+        var t = localStorage.getItem('spf_theme');
+        if(t){
+            document.documentElement.setAttribute('data-theme', t);
+        }
+        else if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('spf_theme', 'dark');
+        }
+        btn.onclick = function(){
+            var cur = document.documentElement.getAttribute('data-theme');
+            var next = cur === 'dark' ? '' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('spf_theme', next || 'light');
+            btn.textContent = next === 'dark' ? '☀️' : '🌙';
+        };
+        btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+    })();
+    </script>
+</body>
+</html>

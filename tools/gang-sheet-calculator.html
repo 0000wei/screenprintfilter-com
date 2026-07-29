@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>Gang Sheet Calculator — Optimize DTF Transfer Sheet Layouts | ScreenPrintFilter</title>
+    <meta name="description" content="Free online gang sheet calculator for DTF printers and garment decorators. Calculate how many designs fit on a transfer sheet, visualize grid layout, and optimize sheet utilization.">
+    <meta name="keywords" content="gang sheet calculator, DTF layout, transfer sheet optimizer, print layout calculator, DTF gang sheet, garment decoration layout">
+    <meta name="author" content="ScreenPrintFilter">
+    <link rel="canonical" href="https://screenprintfilter.online/tools/gang-sheet-calculator.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gang Sheet Calculator — Optimize DTF Transfer Sheet Layouts">
+    <meta property="og:description" content="Calculate how many designs fit on a transfer sheet, visualize grid layout, and optimize utilization for DTF printing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://screenprintfilter.online/tools/gang-sheet-calculator.html">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- AI Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/mcp.txt">
+    <link rel="ai-plugin.json" href="/ai-plugin.json">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <style>
+        :root {
+            /* Light mode (default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-disabled: #9ca3af;
+            --accent: #FF4500;
+            --accent-hover: #FF5722;
+            --border: #e5e7eb;
+            --border-hover: #d1d5db;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --error: #f44336;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark mode support */
+        html[data-theme="dark"] {
+            --bg-primary: #0D0D0D;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #2A2A2A;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --text-disabled: #666;
+            --accent: #FF5722;
+            --accent-hover: #FF7043;
+            --border: #2A2A2A;
+            --border-hover: #555;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --error: #f44336;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon::before {
+            content: '◉';
+            color: white;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .panels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .panel {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .panel h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .input-group input {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.1);
+        }
+
+        .input-hint {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .output-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .output-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .result-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .result-value.highlight {
+            color: var(--success);
+        }
+
+        .preview-container {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .preview-header h4 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .preview-note {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .svg-preview {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+
+        .warning-box {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid var(--error);
+            border-radius: var(--radius);
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+
+        .warning-box p {
+            color: var(--error);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .utilization-bar {
+            width: 100%;
+            height: 24px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .utilization-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            transition: width 0.3s ease;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .theme-toggle span {
+            font-size: 1.25rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 0.75rem;
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .panels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">
+                <div class="logo-icon"></div>
+                <span>ScreenPrintFilter</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon" style="display: none;">🌙</span>
+            </button>
+        </header>
+
+        <main>
+            <h1>Gang Sheet Calculator</h1>
+            <p class="subtitle">Calculate how many designs fit on a DTF transfer sheet and optimize your layout</p>
+
+            <div class="panels-grid">
+                <!-- Panel 1: Sheet Size -->
+                <div class="panel">
+                    <h3>1. Sheet Size</h3>
+                    <div class="input-group">
+                        <label for="sheet-width">Sheet Width (inches)</label>
+                        <input type="number" id="sheet-width" min="1" step="0.1" value="13" placeholder="e.g., 13">
+                        <span class="input-hint">Common DTF: 13×19, 22×24, or custom roll width</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="sheet-height">Sheet Height (inches)</label>
+                        <input type="number" id="sheet-height" min="1" step="0.1" value="19" placeholder="e.g., 19">
+                    </div>
+                </div>
+
+                <!-- Panel 2: Design Size -->
+                <div class="panel">
+                    <h3>2. Design Size</h3>
+                    <div class="input-group">
+                        <label for="design-width">Design Width (inches)</label>
+                        <input type="number" id="design-width" min="0.1" step="0.1" value="3" placeholder="e.g., 3">
+                    </div>
+                    <div class="input-group">
+                        <label for="design-height">Design Height (inches)</label>
+                        <input type="number" id="design-height" min="0.1" step="0.1" value="3" placeholder="e.g., 3">
+                    </div>
+                    <div class="input-group">
+                        <label for="quantity">Quantity Needed</label>
+                        <input type="number" id="quantity" min="1" value="12" placeholder="e.g., 12">
+                        <span class="input-hint">Total number of designs to print</span>
+                    </div>
+                </div>
+
+                <!-- Panel 3: Margin / Gap -->
+                <div class="panel">
+                    <h3>3. Margin / Spacing</h3>
+                    <div class="input-group">
+                        <label for="margin">Margin Around Sheet (inches)</label>
+                        <input type="number" id="margin" min="0" step="0.05" value="0.25" placeholder="e.g., 0.25">
+                        <span class="input-hint">Safe zone from sheet edge</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="gap">Gap Between Designs (inches)</label>
+                        <input type="number" id="gap" min="0" step="0.05" value="0.25" placeholder="e.g., 0.25">
+                        <span class="input-hint">Spacing between designs for cutting</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <section class="output-section">
+                <h3>Layout Results</h3>
+
+                <!-- Warning Box (hidden by default) -->
+                <div class="warning-box" id="warning-box" style="display: none;">
+                    <p>Design dimensions exceed available sheet area. Reduce design size or use larger sheets.</p>
+                </div>
+
+                <!-- Result Summary -->
+                <div class="result-summary">
+                    <div class="result-card">
+                        <div class="result-label">Fits Per Sheet</div>
+                        <div class="result-value" id="fits-per-sheet">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Sheets Needed</div>
+                        <div class="result-value highlight" id="sheets-needed">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Sheet Utilization</div>
+                        <div class="result-value" id="utilization-value">-</div>
+                        <div class="utilization-bar">
+                            <div class="utilization-fill" id="utilization-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SVG Preview -->
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <h4>Grid Layout Preview</h4>
+                        <span class="preview-note" id="preview-note">First sheet shown</span>
+                    </div>
+                    <svg class="svg-preview" id="svg-preview" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Dynamic content will be rendered here -->
+                    </svg>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/">← Back to Halftone Tool</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Algorithm implementation
+        function calculateLayout() {
+            // Get input values
+            const sheetWidth = parseFloat(document.getElementById('sheet-width').value) || 0;
+            const sheetHeight = parseFloat(document.getElementById('sheet-height').value) || 0;
+            const designWidth = parseFloat(document.getElementById('design-width').value) || 0;
+            const designHeight = parseFloat(document.getElementById('design-height').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            const margin = parseFloat(document.getElementById('margin').value) || 0;
+            const gap = parseFloat(document.getElementById('gap').value) || 0;
+
+            const warningBox = document.getElementById('warning-box');
+
+            // Validate inputs
+            if (sheetWidth <= 0 || sheetHeight <= 0 || designWidth <= 0 || designHeight <= 0 || quantity <= 0) {
+                document.getElementById('fits-per-sheet').textContent = '-';
+                document.getElementById('sheets-needed').textContent = '-';
+                document.getElementById('utilization-value').textContent = '-';
+                document.getElementById('utilization-fill').style.width = '0%';
+                warningBox.style.display = 'none';
+                clearSVG();
+                return;
+            }
+
+            // Check if design fits on sheet
+            const availableWidth = sheetWidth - 2 * margin;
+            const availableHeight = sheetHeight - 2 * margin;
+
+            if (designWidth > availableWidth || designHeight > availableHeight) {
+                // Design too large
+                document.getElementById('fits-per-sheet').textContent = '0';
+                document.getElementById('sheets-needed').textContent = '∞';
+                document.getElementById('utilization-value').textContent = 'N/A';
+                document.getElementById('utilization-fill').style.width = '0%';
+                warningBox.style.display = 'flex';
+                clearSVG();
+                return;
+            }
+
+            warningBox.style.display = 'none';
+
+            // Calculate fits per row and rows per sheet
+            const fitsPerRow = Math.floor((availableWidth + gap) / (designWidth + gap));
+            const rowsPerSheet = Math.floor((availableHeight + gap) / (designHeight + gap));
+            const perSheet = fitsPerRow * rowsPerSheet;
+            const sheetsNeeded = Math.ceil(quantity / perSheet);
+
+            // Calculate utilization percentage
+            const usedArea = quantity * designWidth * designHeight;
+            const totalSheetArea = sheetsNeeded * sheetWidth * sheetHeight;
+            const utilization = totalSheetArea > 0 ? (usedArea / totalSheetArea * 100) : 0;
+
+            // Update results
+            document.getElementById('fits-per-sheet').textContent = perSheet;
+            document.getElementById('sheets-needed').textContent = sheetsNeeded;
+            document.getElementById('utilization-value').textContent = utilization.toFixed(1) + '%';
+            document.getElementById('utilization-fill').style.width = Math.min(utilization, 100) + '%';
+
+            // Update preview note if more than 1 sheet
+            const previewNote = document.getElementById('preview-note');
+            if (sheetsNeeded > 1) {
+                previewNote.textContent = `First sheet shown · ${sheetsNeeded - 1} more sheet${sheetsNeeded > 2 ? 's' : ''} needed`;
+            } else {
+                previewNote.textContent = 'All designs fit on one sheet';
+            }
+
+            // Render SVG preview
+            renderSVGPreview(sheetWidth, sheetHeight, designWidth, designHeight, margin, gap, fitsPerRow, rowsPerSheet, Math.min(quantity, perSheet));
+        }
+
+        function clearSVG() {
+            const svg = document.getElementById('svg-preview');
+            svg.innerHTML = `
+                <rect x="0" y="0" width="400" height="520" fill="var(--bg-secondary)" />
+                <text x="200" y="260" text-anchor="middle" fill="var(--text-secondary)" font-size="16">
+                    Enter dimensions to preview
+                </text>
+            `;
+        }
+
+        function renderSVGPreview(sheetWidth, sheetHeight, designWidth, designHeight, margin, gap, fitsPerRow, rowsPerSheet, designsToShow) {
+            const svg = document.getElementById('svg-preview');
+            const svgWidth = 400;
+            const svgHeight = 520;
+
+            // Calculate scale to fit sheet in SVG
+            const scaleX = svgWidth / sheetWidth;
+            const scaleY = svgHeight / sheetHeight;
+            const scale = Math.min(scaleX, scaleY) * 0.9; // 90% for padding
+
+            // Calculate offsets to center the sheet
+            const sheetPixelWidth = sheetWidth * scale;
+            const sheetPixelHeight = sheetHeight * scale;
+            const offsetX = (svgWidth - sheetPixelWidth) / 2;
+            const offsetY = (svgHeight - sheetPixelHeight) / 2;
+
+            // Generate colors for designs
+            const colors = [
+                '#FF4500', '#4CAF50', '#2196F3', '#FF9800', '#9C27B0',
+                '#00BCD4', '#E91E63', '#3F51B5', '#009688', '#FFEB3B'
+            ];
+
+            let svgContent = '';
+
+            // Draw sheet background
+            svgContent += `<rect x="${offsetX}" y="${offsetY}" width="${sheetPixelWidth}" height="${sheetPixelHeight}" fill="var(--bg-primary)" stroke="var(--accent)" stroke-width="2" />`;
+
+            // Draw margin area (dashed)
+            const marginPixel = margin * scale;
+            if (marginPixel > 0) {
+                svgContent += `<rect x="${offsetX + marginPixel}" y="${offsetY + marginPixel}" width="${sheetPixelWidth - 2 * marginPixel}" height="${sheetPixelHeight - 2 * marginPixel}" fill="none" stroke="var(--text-disabled)" stroke-width="1" stroke-dasharray="5,3" />`;
+            }
+
+            // Draw designs
+            const designPixelWidth = designWidth * scale;
+            const designPixelHeight = designHeight * scale;
+            const gapPixel = gap * scale;
+
+            let designCount = 0;
+            for (let row = 0; row < rowsPerSheet && designCount < designsToShow; row++) {
+                for (let col = 0; col < fitsPerRow && designCount < designsToShow; col++) {
+                    const x = offsetX + marginPixel + col * (designPixelWidth + gapPixel);
+                    const y = offsetY + marginPixel + row * (designPixelHeight + gapPixel);
+                    const color = colors[designCount % colors.length];
+
+                    svgContent += `<rect x="${x}" y="${y}" width="${designPixelWidth}" height="${designPixelHeight}" fill="${color}" fill-opacity="0.7" stroke="${color}" stroke-width="2" />`;
+
+                    // Add label if design is large enough
+                    if (designPixelWidth > 20 && designPixelHeight > 15) {
+                        svgContent += `<text x="${x + designPixelWidth / 2}" y="${y + designPixelHeight / 2 + 4}" text-anchor="middle" fill="white" font-size="12" font-weight="600">${designCount + 1}</text>`;
+                    }
+
+                    designCount++;
+                }
+            }
+
+            // Add scale reference
+            svgContent += `<text x="${offsetX}" y="${svgHeight - 5}" fill="var(--text-secondary)" font-size="11">Sheet: ${sheetWidth}" × ${sheetHeight}"</text>`;
+
+            svg.innerHTML = svgContent;
+        }
+
+        // Attach event listeners to all inputs
+        const inputs = ['sheet-width', 'sheet-height', 'design-width', 'design-height', 'quantity', 'margin', 'gap'];
+        inputs.forEach(id => {
+            const element = document.getElementById(id);
+            element.addEventListener('input', calculateLayout);
+        });
+
+        // Initial calculation
+        calculateLayout();
+    </script>
+
+    <script>
+        (function(){
+            var btn = document.getElementById('themeToggle');
+            if(!btn) return;
+            var t = localStorage.getItem('spf_theme');
+            if(t) {
+                document.documentElement.setAttribute('data-theme', t);
+            } else if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('spf_theme', 'dark');
+            }
+            btn.onclick = function(){
+                var cur = document.documentElement.getAttribute('data-theme');
+                var next = cur === 'dark' ? '' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('spf_theme', next || 'light');
+            };
+        })();
+    </script>
+</body>
+</html>

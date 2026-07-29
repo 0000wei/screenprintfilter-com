@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>DPI Calculator — Convert Image Pixels to Print Resolution | ScreenPrintFilter</title>
+    <meta name="description" content="Free online DPI calculator. Convert image pixels to print resolution, calculate required pixels for print size, and use common format presets (A4, A3, Letter, and more).">
+    <meta name="keywords" content="DPI calculator, pixel calculator, print resolution, image to print, DPI to pixels, A4 pixels, A3 pixels">
+    <meta name="author" content="ScreenPrintFilter">
+    <link rel="canonical" href="https://screenprintfilter.online/tools/dpi-calculator.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="DPI Calculator — Convert Image Pixels to Print Resolution">
+    <meta property="og:description" content="Free online DPI calculator. Convert between pixels, inches, and DPI for screen printing and graphic design.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://screenprintfilter.online/tools/dpi-calculator.html">
+    <meta property="og:image" content="https://screenprintfilter.online/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- AI Discovery -->
+    <link rel="llms.txt" href="/llms.txt">
+    <link rel="mcp.txt" href="/mcp.txt">
+    <link rel="ai-plugin.json" href="/ai-plugin.json">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72N80TEBW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-H72N80TEBW');
+    </script>
+
+    <style>
+        :root {
+            /* Light mode (default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-disabled: #9ca3af;
+            --accent: #FF4500;
+            --accent-hover: #FF5722;
+            --border: #e5e7eb;
+            --border-hover: #d1d5db;
+            --success: #4CAF50;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark mode support */
+        html[data-theme="dark"] {
+            --bg-primary: #0D0D0D;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #2A2A2A;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --text-disabled: #666;
+            --accent: #FF5722;
+            --accent-hover: #FF7043;
+            --border: #2A2A2A;
+            --border-hover: #555;
+            --success: #4CAF50;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon::before {
+            content: '◉';
+            color: white;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .input-group input {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.1);
+        }
+
+        .result-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .quality-rating {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .quality-excellent {
+            background: var(--success);
+            color: white;
+        }
+
+        .quality-good {
+            background: #2196F3;
+            color: white;
+        }
+
+        .quality-fair {
+            background: #FF9800;
+            color: white;
+        }
+
+        .quality-poor {
+            background: #f44336;
+            color: white;
+        }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .preset-btn {
+            padding: 0.75rem 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .preset-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .preset-btn:active {
+            transform: translateY(0);
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .theme-toggle span {
+            font-size: 1.25rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 0.75rem;
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">
+                <div class="logo-icon"></div>
+                <span>ScreenPrintFilter</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon" style="display: none;">🌙</span>
+            </button>
+        </header>
+
+        <main>
+            <h1>DPI Calculator</h1>
+            <p class="subtitle">Convert between pixels, inches, and DPI for screen printing and graphic design</p>
+
+            <!-- Section 1: Image → Print -->
+            <section class="section">
+                <h2>1. Image → Print (Calculate DPI)</h2>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="img-width">Image Width (px)</label>
+                        <input type="number" id="img-width" min="1" value="1920" placeholder="e.g., 1920">
+                    </div>
+                    <div class="input-group">
+                        <label for="img-height">Image Height (px)</label>
+                        <input type="number" id="img-height" min="1" value="1080" placeholder="e.g., 1080">
+                    </div>
+                    <div class="input-group">
+                        <label for="print-width">Target Print Width (inches)</label>
+                        <input type="number" id="print-width" min="0.1" step="0.1" value="8" placeholder="e.g., 8">
+                    </div>
+                    <div class="input-group">
+                        <label for="print-height">Target Print Height (inches)</label>
+                        <input type="number" id="print-height" min="0.1" step="0.1" value="4.5" placeholder="e.g., 4.5">
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-row">
+                        <span class="result-label">DPI (X):</span>
+                        <span class="result-value" id="dpi-x">240</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">DPI (Y):</span>
+                        <span class="result-value" id="dpi-y">240</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Quality Rating:</span>
+                        <div style="text-align: right;">
+                            <span class="quality-rating quality-good" id="quality-rating">Good (≥200 DPI)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Print → Image -->
+            <section class="section">
+                <h2>2. Print → Image (Calculate Required Pixels)</h2>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="req-print-width">Print Width (inches)</label>
+                        <input type="number" id="req-print-width" min="0.1" step="0.1" value="11" placeholder="e.g., 11">
+                    </div>
+                    <div class="input-group">
+                        <label for="req-print-height">Print Height (inches)</label>
+                        <input type="number" id="req-print-height" min="0.1" step="0.1" value="17" placeholder="e.g., 17">
+                    </div>
+                    <div class="input-group">
+                        <label for="target-dpi">Target DPI</label>
+                        <input type="number" id="target-dpi" min="72" max="600" value="300" placeholder="e.g., 300">
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-row">
+                        <span class="result-label">Required Width (px):</span>
+                        <span class="result-value" id="req-px-width">3300</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Required Height (px):</span>
+                        <span class="result-value" id="req-px-height">5100</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Total Pixels:</span>
+                        <span class="result-value" id="total-pixels">16.8 MP</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Common Format Presets -->
+            <section class="section">
+                <h2>3. Common Format Presets</h2>
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">Click a preset to auto-fill Section 2:</p>
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-width="8.27" data-height="11.69">A4 (210×297mm)</button>
+                    <button class="preset-btn" data-width="11.69" data-height="16.54">A3 (297×420mm)</button>
+                    <button class="preset-btn" data-width="8.5" data-height="11">Letter (8.5×11")</button>
+                    <button class="preset-btn" data-width="12" data-height="18">12×18"</button>
+                    <button class="preset-btn" data-width="18" data-height="24">18×24"</button>
+                    <button class="preset-btn" data-width="24" data-height="36">24×36"</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/">← Back to Halftone Tool</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Section 1: Image → Print
+        function calculateDPI() {
+            const imgWidth = parseFloat(document.getElementById('img-width').value) || 0;
+            const imgHeight = parseFloat(document.getElementById('img-height').value) || 0;
+            const printWidth = parseFloat(document.getElementById('print-width').value) || 0;
+            const printHeight = parseFloat(document.getElementById('print-height').value) || 0;
+
+            let dpiX = 0, dpiY = 0;
+
+            if (printWidth > 0) {
+                dpiX = imgWidth / printWidth;
+            }
+            if (printHeight > 0) {
+                dpiY = imgHeight / printHeight;
+            }
+
+            document.getElementById('dpi-x').textContent = dpiX > 0 ? dpiX.toFixed(1) : '-';
+            document.getElementById('dpi-y').textContent = dpiY > 0 ? dpiY.toFixed(1) : '-';
+
+            // Quality rating
+            const avgDPI = (dpiX + dpiY) / 2;
+            let ratingText = '';
+            let ratingClass = '';
+
+            if (avgDPI >= 300) {
+                ratingText = 'Excellent (≥300 DPI)';
+                ratingClass = 'quality-excellent';
+            } else if (avgDPI >= 200) {
+                ratingText = 'Good (≥200 DPI)';
+                ratingClass = 'quality-good';
+            } else if (avgDPI >= 150) {
+                ratingText = 'Fair (≥150 DPI)';
+                ratingClass = 'quality-fair';
+            } else if (avgDPI > 0) {
+                ratingText = 'Poor (<150 DPI)';
+                ratingClass = 'quality-poor';
+            } else {
+                ratingText = 'Enter values';
+                ratingClass = 'quality-fair';
+            }
+
+            const ratingEl = document.getElementById('quality-rating');
+            ratingEl.textContent = ratingText;
+            ratingEl.className = 'quality-rating ' + ratingClass;
+        }
+
+        // Section 2: Print → Image
+        function calculatePixels() {
+            const printWidth = parseFloat(document.getElementById('req-print-width').value) || 0;
+            const printHeight = parseFloat(document.getElementById('req-print-height').value) || 0;
+            const targetDPI = parseFloat(document.getElementById('target-dpi').value) || 300;
+
+            const pxWidth = Math.round(printWidth * targetDPI);
+            const pxHeight = Math.round(printHeight * targetDPI);
+            const totalPixels = pxWidth * pxHeight;
+            const megapixels = (totalPixels / 1000000).toFixed(1);
+
+            document.getElementById('req-px-width').textContent = pxWidth.toLocaleString();
+            document.getElementById('req-px-height').textContent = pxHeight.toLocaleString();
+            document.getElementById('total-pixels').textContent = megapixels + ' MP';
+        }
+
+        // Preset buttons
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.getElementById('req-print-width').value = this.dataset.width;
+                document.getElementById('req-print-height').value = this.dataset.height;
+                calculatePixels();
+            });
+        });
+
+        // Attach listeners to all inputs
+        const section1Inputs = ['img-width', 'img-height', 'print-width', 'print-height'];
+        section1Inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateDPI);
+        });
+
+        const section2Inputs = ['req-print-width', 'req-print-height', 'target-dpi'];
+        section2Inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', calculatePixels);
+        });
+
+        // Initial calculation
+        calculateDPI();
+        calculatePixels();
+    </script>
+
+    <script>
+        (function(){
+            var btn = document.getElementById('themeToggle');
+            if(!btn) return;
+            var t = localStorage.getItem('spf_theme');
+            if(t) {
+                document.documentElement.setAttribute('data-theme', t);
+            } else if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('spf_theme', 'dark');
+            }
+            btn.onclick = function(){
+                var cur = document.documentElement.getAttribute('data-theme');
+                var next = cur === 'dark' ? '' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('spf_theme', next || 'light');
+            };
+        })();
+    </script>
+</body>
+</html>
