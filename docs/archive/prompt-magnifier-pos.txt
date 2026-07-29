@@ -1,0 +1,15 @@
+BUG FIX: /home/wu/screenprintfilter-com/index.html
+
+## Change: Magnifier should follow the cursor, not be positioned at a fixed offset
+
+Currently the magnifier might be positioned at some offset from the cursor. It should appear right next to the cursor pointer (slightly offset so it doesn't block the cursor, like top-right or bottom-right of the cursor position).
+
+Find the magnifier positioning code (likely in the mousemove handler for the result canvas). It probably sets `magnifier.style.left` and `magnifier.style.top`.
+
+Fix: Position the magnifier at `cursorX + 15` and `cursorY - 50` (slightly to the right and above the cursor) so it's visible but doesn't cover the area being inspected.
+
+Make the magnifier follow the cursor smoothly. The magnifier should be positioned relative to the canvas-wrapper container (its parent should have `position: relative`).
+
+Also reduce magnifier size from 100px to 80px for cleaner UX.
+
+CRITICAL: Do NOT modify GA, SEO meta, AI agent files, or core halftone algorithm.

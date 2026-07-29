@@ -1,0 +1,91 @@
+BUG FIXES: /home/wu/screenprintfilter-com/index.html
+
+Read the full file first, then fix these issues with targeted edits.
+
+## Bug 1: Performance — processing freezes the browser
+The halftone processing loop is synchronous and blocks the main thread. For large images or small dot sizes, this creates thousands of grid cells, causing the browser to freeze. 
+
+Fix: Add a time-sliced processing approach:
+- Split the applyHalftone() grid loop into chunks using requestAnimationFrame
+- Process N rows at a time (e.g. 20), then yield to the browser
+- Show a progress indicator during processing
+- Cancel previous processing if a new change comes in (use a processingId counter)
+
+Implementation approach:
+```js
+let processingId = 0;
+
+function applyHalftone() {
+  if (!originalImageData) return;
+  
+  const currentId = ++processingId;
+  // ... setup code (same as before up to the grid loop) ...
+  
+  // Replace the nested for loop with chunked processing
+  const rows = [];
+  for (let y = -gridSize; y < gridHeight + gridSize; y += gridSize) {
+    rows.push(y);
+  }
+  
+  let rowIndex = 0;
+  const CHUNK_SIZE = 20;
+  
+  function processChunk() {
+    if (currentId !== processingId) return; // cancelled by new change
+    if (rowIndex >= rows.length) {
+      isProcessing = false;
+      processingStatus.classList.remove('active');
+      return;
+    }
+    
+    const endRow = Math.min(rowIndex + CHUNK_SIZE, rows.length);
+    for (let ri = rowIndex; ri < endRow; ri++) {
+      const y = rows[ri];
+      for (let x = -gridSize; x < gridWidth + gridSize; x += gridSize) {
+        // ... existing dot drawing logic ...
+      }
+    }
+    rowIndex = endRow;
+    requestAnimationFrame(processChunk);
+  }
+  
+  requestAnimationFrame(processChunk);
+}
+```
+
+Important: The chunked processing MUST correctly handle all the existing logic including rotation, color sampling, and shape drawing. Don't lose any functionality.
+
+## Bug 2: Color logic is confusing
+Current behavior has 3 color modes that conflict:
+1. "Original Colors" checkbox → uses image colors
+2. Foreground/Background color pickers → used when Original Colors is OFF
+3. But Brightness/Contrast sliders still grayscale the image even in Original Colors mode
+
+Simplify the behavior:
+
+When **Original Colors is ON** (default):
+- Brightness/Contrast sliders should affect the SOURCE IMAGE colors (brighten/darken, increase contrast of the actual image before halftone processing)
+- The dots should show the adjusted colors
+- Foreground/Background pickers should be DISABLED (grayed out)
+
+When **Original Colors is OFF**:
+- Brightness/Contrast sliders should affect the GRAYSCALE conversion as they do now
+- Foreground/Background pickers are active
+- Output is monochrome dots on background
+
+Implementation:
+- In `createElement('canvas')` for `originalCanvasCopy`: apply brightness/contrast to the COLOR image data (keep RGB, not just gray)
+- In the drawing loop: when `useOriginalColors` is true, sample the ADJUSTED color, not the raw original
+
+## Bug 3: HandleControlChange fires too many times
+Currently every slider fires `input` events (debounced 100ms) AND `change` events. The `input` event fires on every slider movement, causing excessive saves to the undo stack. Fix:
+- Use `change` event (fires on mouseup/slider release) for saving undo state
+- Use `input` event for updating value displays and triggering processing
+- Only save state to undo stack on `change`, not on every `input`
+
+## What to keep unchanged
+- GA, SEO meta, AI agent files
+- The core halftone math (getPixelBrightness, drawShape, getPixelColor)
+- All HTML structure (header, toolbar layout, canvas, gallery, FAQ, footer)
+
+Make targeted edits only. Do NOT rewrite the entire file.

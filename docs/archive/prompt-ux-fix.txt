@@ -1,0 +1,62 @@
+You must rewrite /home/wu/screenprintfilter-com/index.html completely. The current version has poor UX. Fix all these issues:
+
+## UX Problems to Fix
+
+### 1. Upload Area Redesign
+- Show a proper drag-and-drop zone with dashed border that highlights on hover/drag
+- Replace the generic "选择文件" with a styled English button
+- Show preview of dragged image BEFORE processing
+- Add a "Upload an image to get started" CTA button
+
+### 2. Layout: Upload → Edit → Result Flow
+Current: everything is hidden until upload, then appears.
+Fix: Show the full layout always, with placeholders before upload.
+- Left panel: original image (shows placeholder icon before upload)
+- Right panel: result (shows "upload an image to see preview" before upload)
+- Controls panel below the images (always visible, but grayed/disabled before upload)
+- Controls should be wider and more spaced out
+
+### 3. Controls Panel UX
+- Make sliders thicker and easier to grab
+- Show real-time values next to each slider (already done, keep it)
+- Color pickers: show a small swatch of the current color next to the color label
+- Output size: don't use placeholder text; show "Original" checkbox that auto-fills width/height
+- Group controls into logical sections with subtitles:
+  - "Dot Settings" (size, spacing, shape, angle)
+  - "Image Adjustments" (contrast, brightness)
+  - "Colors" (foreground, background)
+  - "Output" (width, height)
+
+### 4. Before/After Comparison
+- Side-by-side (desktop) or stacked (mobile)
+- Better labels: "Original" and "Halftone Result" instead of just headers
+- Show image dimensions below each canvas
+
+### 5. Angle Rotation Fix
+The angle variable is read but NOT applied to the grid! Fix the halftone algorithm so that the dot grid actually rotates by the angle. Currently cosAngle/sinAngle are computed but unused. The grid should rotate using these rotation values, offsetting x/y by the angle.
+
+### 6. Performance
+- Process on a web worker or use requestAnimationFrame for smooth slider interaction
+- Debounce processing on slider change (wait 100ms after last change)
+- Show a loading spinner during processing for large images
+
+### 7. Visual Polish
+- Add smooth transitions between states
+- Better responsive design for mobile
+- The logo SVG should be rendered as an actual SVG element, not an image
+- Add a small "upload new image" button near the result area (not just in controls)
+
+### 8. Language Consistency
+- All UI text must be English (no browser-translated Chinese)
+- File input button: use a custom styled button, not browser default
+
+## Technical Notes
+- Keep everything in ONE HTML file (CSS + JS inline)
+- Keep Google Analytics G-H72N80TEBW
+- Keep AI agent files unchanged (llms.txt, .well-known/)
+- Keep SEO meta tags
+- Keep all 8 gallery examples with canvas-generated previews
+- Use Inter font from Google Fonts
+- Logo: "ScreenPrint" in Space Grotesk + "Filter" in Inter, with a simple SVG dot icon
+
+Output ONLY the complete index.html file (no explanation, no conversation).
