@@ -1152,6 +1152,28 @@
                         Original
                     </label>
                 </div>
+
+                <!-- DPI Group -->
+                <div class="toolbar-group" id="dpiGroup">
+                    <span class="toolbar-label">DPI</span>
+                    <select class="select-sm" id="dpiSelect" disabled>
+                        <option value="72">72</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="300" selected>300</option>
+                        <option value="400">400</option>
+                        <option value="600">600</option>
+                    </select>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-sm" id="useInchesCheckbox" disabled>
+                        Usar pulgadas
+                    </label>
+                    <input type="number" class="input-sm" id="printWidthInches"
+                        placeholder="Ancho pulg" min="0.1" step="0.1" disabled style="display:none">
+                    <input type="number" class="input-sm" id="printHeightInches"
+                        placeholder="Alto pulg" min="0.1" step="0.1" disabled style="display:none">
+                    <span class="value-sm" id="computedPixels" style="display:none"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -1303,6 +1325,11 @@
         const useOriginalSizeCheckbox = document.getElementById('useOriginalSize');
         const outputWidthInput = document.getElementById('outputWidth');
         const outputHeightInput = document.getElementById('outputHeight');
+        const dpiSelect = document.getElementById('dpiSelect');
+        const useInchesCheckbox = document.getElementById('useInchesCheckbox');
+        const printWidthInches = document.getElementById('printWidthInches');
+        const printHeightInches = document.getElementById('printHeightInches');
+        const computedPixels = document.getElementById('computedPixels');
 
         // Value displays
         const dotSizeValue = document.getElementById('dotSizeValue');
@@ -1331,6 +1358,10 @@
         let isPanning = false;
         let panStartX = 0, panStartY = 0;
         let panX = 0, panY = 0;
+        // DPI and inches state
+        let selectedDPI = 300;
+        let savedWidth = '';
+        let savedHeight = '';
 
         // Initialize is called at the end of the script
 
@@ -1395,6 +1426,39 @@
                     handleControlChange.call(this);
                 }
             });
+
+            // DPI and inches controls
+            dpiSelect.addEventListener('change', function() {
+                selectedDPI = parseInt(dpiSelect.value);
+                // If inches mode is on, recalculate computed pixels
+                if (useInchesCheckbox.checked) {
+                    updateComputedPixels();
+                }
+                scheduleProcessing();
+            });
+
+            useInchesCheckbox.addEventListener('change', function() {
+                const enabled = useInchesCheckbox.checked;
+                // Show/hide inch inputs
+                printWidthInches.style.display = enabled ? 'inline-block' : 'none';
+                printHeightInches.style.display = enabled ? 'inline-block' : 'none';
+                computedPixels.style.display = enabled ? 'inline' : 'none';
+                // Disable/enable Size group inputs
+                outputWidthInput.disabled = enabled;
+                outputHeightInput.disabled = enabled;
+                if (!enabled) {
+                    // Restore previous Size group values
+                    outputWidthInput.value = savedWidth;
+                    outputHeightInput.value = savedHeight;
+                } else {
+                    // Save current values before overriding
+                    savedWidth = outputWidthInput.value;
+                    savedHeight = outputHeightInput.value;
+                }
+            });
+
+            printWidthInches.addEventListener('input', updateComputedPixels);
+            printHeightInches.addEventListener('input', updateComputedPixels);
 
             // Buttons
             undoBtn.addEventListener('click', undo);
@@ -1738,6 +1802,11 @@ function loadImage(file) {
                 undoBtn, redoBtn, downloadBtn, resetBtn
             ];
             controls.forEach(control => control.disabled = !enabled);
+            // DPI controls
+            dpiSelect.disabled = !enabled;
+            useInchesCheckbox.disabled = !enabled;
+            printWidthInches.disabled = !enabled;
+            printHeightInches.disabled = !enabled;
             if (enabled) {
                 updateColorPickerStates();
             }
@@ -1792,9 +1861,15 @@ function loadImage(file) {
             mainCanvas.width = outputWidth;
             mainCanvas.height = outputHeight;
 
-            // Fill background
-            mainCtx.fillStyle = backgroundColor;
-            mainCtx.fillRect(0, 0, outputWidth, outputHeight);
+            // Fill background conditionally based on transparency
+            if (hasTransparency && useOriginalColors) {
+                // Transparent background — use clearRect
+                mainCtx.clearRect(0, 0, outputWidth, outputHeight);
+            } else {
+                // Existing behavior
+                mainCtx.fillStyle = backgroundColor;
+                mainCtx.fillRect(0, 0, outputWidth, outputHeight);
+            }
 
             // Set foreground color (will be overridden when using original colors)
             mainCtx.fillStyle = foregroundColor;
@@ -1817,7 +1892,11 @@ function loadImage(file) {
             const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
             const data = imageData.data;
 
+            let hasTransparency = false;
             for (let i = 0; i < data.length; i += 4) {
+                const alpha = data[i + 3];
+                if (alpha < 255) hasTransparency = true;
+
                 if (useOriginalColors) {
                     // Apply brightness/contrast to RGB channels directly for original colors
                     for (let channel = 0; channel < 3; channel++) {
@@ -1912,7 +1991,28 @@ function loadImage(file) {
                                 const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
                                 const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
                                 const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
-                                drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
+
+                                // Sample alpha for transparency
+                                if (hasTransparency) {
+                                    const alphaSample = sampleAlpha(originalImageData, colorSampleX, colorSampleY,
+                                        originalCanvas.width, originalCanvas.height);
+
+                                    if (alphaSample < 5) {
+                                        // Nearly fully transparent — skip dot entirely
+                                        continue;
+                                    }
+
+                                    if (alphaSample < 255) {
+                                        mainCtx.save();
+                                        mainCtx.globalAlpha = alphaSample / 255;
+                                        drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                        mainCtx.restore();
+                                    } else {
+                                        drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                    }
+                                } else {
+                                    drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                }
                             } else {
                                 drawShape(mainCtx, centerX, centerY, dotRadius, shape);
                             }
@@ -2020,16 +2120,142 @@ function loadImage(file) {
                 'rgb(128, 128, 128)';
         }
 
-        function downloadImage() {
+        // DPI Metadata Injection Helper Functions
+        function readUint32BE(view, offset) {
+            return (view[offset] << 24) | (view[offset + 1] << 16) |
+                   (view[offset + 2] << 8) | view[offset + 3];
+        }
+
+        function writeUint32BE(view, offset, value) {
+            view[offset] = (value >> 24) & 0xFF;
+            view[offset + 1] = (value >> 16) & 0xFF;
+            view[offset + 2] = (value >> 8) & 0xFF;
+            view[offset + 3] = value & 0xFF;
+        }
+
+        function crc32(data) {
+            let crc = 0xFFFFFFFF;
+            for (let i = 0; i < data.length; i++) {
+                crc ^= data[i];
+                for (let j = 0; j < 8; j++) {
+                    crc = (crc >>> 1) ^ (crc & 1 ? 0xEDB88320 : 0);
+                }
+            }
+            return (crc ^ 0xFFFFFFFF) >>> 0;
+        }
+
+        async function injectDPI(blob, dpi) {
+            const arrayBuffer = await blob.arrayBuffer();
+            const bytes = new Uint8Array(arrayBuffer);
+
+            // Validate PNG signature
+            const pngSig = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+            for (let i = 0; i < 8; i++) {
+                if (bytes[i] !== pngSig[i]) throw new Error('Not a valid PNG');
+            }
+
+            // Read chunk length and type at position 8 (after signature)
+            let offset = 8;
+            const ihdrLength = readUint32BE(bytes, offset);
+            const ihdrType = String.fromCharCode(...bytes.slice(offset + 4, offset + 8));
+            if (ihdrType !== 'IHDR') throw new Error('Expected IHDR chunk');
+
+            // Skip IHDR: length(4) + type(4) + data(ihdrLength) + CRC(4)
+            offset += 4 + 4 + ihdrLength + 4;
+
+            // Check if pHYs already exists at this position
+            const existingType = String.fromCharCode(...bytes.slice(offset + 4, offset + 8));
+            if (existingType === 'pHYs') {
+                // Overwrite existing pHYs data (skip type, write data at offset+8)
+                const ppm = Math.round(dpi / 0.0254);
+                writeUint32BE(bytes, offset + 8, ppm);
+                writeUint32BE(bytes, offset + 12, ppm);
+                bytes[offset + 16] = 1; // meter
+                // Recalculate CRC for modified pHYs
+                const crc = crc32(bytes.slice(offset + 4, offset + 17)); // type(4) + data(9)
+                writeUint32BE(bytes, offset + 17, crc);
+                return new Blob([bytes], { type: 'image/png' });
+            }
+
+            // Insert new pHYs chunk before the next chunk
+            const ppm = Math.round(dpi / 0.0254);
+            const physData = new Uint8Array(17); // length(4) + type(4) + data(9)
+            writeUint32BE(physData, 0, 9); // 9 bytes of data
+            physData[4] = 0x70; physData[5] = 0x48; // p H
+            physData[6] = 0x59; physData[7] = 0x73; // Y s
+            writeUint32BE(physData, 8, ppm);
+            writeUint32BE(physData, 12, ppm);
+            physData[16] = 1; // meter
+
+            // Calculate CRC over type(4) + data(9)
+            const crc = crc32(physData.slice(4, 17)); // "pHYs" + 9 data bytes
+            const physWithCrc = new Uint8Array(21); // length(4) + type(4) + data(9) + CRC(4)
+            physWithCrc.set(physData, 0);
+            writeUint32BE(physWithCrc, 17, crc);
+
+            // Insert between IHDR and the next chunk
+            const result = new Uint8Array(bytes.length + physWithCrc.length);
+            result.set(bytes.slice(0, offset), 0);
+            result.set(physWithCrc, offset);
+            result.set(bytes.slice(offset), offset + physWithCrc.length);
+
+            return new Blob([result], { type: 'image/png' });
+        }
+
+        function sampleAlpha(imageData, x, y, width, height) {
+            const sampleSize = 3;
+            const sx = Math.max(0, Math.min(Math.floor(x - sampleSize/2), width - sampleSize));
+            const sy = Math.max(0, Math.min(Math.floor(y - sampleSize/2), height - sampleSize));
+            const sw = Math.min(sampleSize, width - sx);
+            const sh = Math.min(sampleSize, height - sy);
+
+            let sum = 0, count = 0;
+            const data = imageData.data;
+            for (let dy = 0; dy < sh; dy++) {
+                for (let dx = 0; dx < sw; dx++) {
+                    const idx = ((sy + dy) * width + (sx + dx)) * 4 + 3;
+                    sum += data[idx];
+                    count++;
+                }
+            }
+            return count > 0 ? sum / count : 0;
+        }
+
+        function fallbackDownload(canvas) {
+            const link = document.createElement('a');
+            link.download = 'halftone-' + Date.now() + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = url;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function downloadImage() {
             try {
                 let canvasToExport = mainCanvas;
 
-                // If output size equals preview size, export existing canvas directly
-                if (useOriginalSizeCheckbox.checked && originalWidth > 0 && originalHeight > 0 &&
-                    (originalWidth !== mainCanvas.width || originalHeight !== mainCanvas.height)) {
+                // Determine final export size
+                let outputWidth = originalWidth;
+                let outputHeight = originalHeight;
+
+                if (!useOriginalSizeCheckbox.checked) {
+                    outputWidth = outputWidthInput.value ? parseInt(outputWidthInput.value) : originalWidth;
+                    outputHeight = outputHeightInput.value ? parseInt(outputHeightInput.value) : originalHeight;
+                }
+
+                // If output size differs from preview canvas, export a new high-res canvas
+                if (outputWidth > 0 && outputHeight > 0 &&
+                    (outputWidth !== mainCanvas.width || outputHeight !== mainCanvas.height)) {
                     const tempCanvas = document.createElement('canvas');
-                    tempCanvas.width = originalWidth;
-                    tempCanvas.height = originalHeight;
+                    tempCanvas.width = outputWidth;
+                    tempCanvas.height = outputHeight;
                     const tempCtx = tempCanvas.getContext('2d');
 
                     const dotSize = parseInt(dotSizeSlider.value);
@@ -2042,12 +2268,14 @@ function loadImage(file) {
                     const backgroundColor = backgroundColorInput.value;
                     const useOriginalColors = useOriginalColorsCheckbox.checked;
 
-                    const outputWidth = originalWidth;
-                    const outputHeight = originalHeight;
-
-                    tempCtx.fillStyle = backgroundColor;
-                    tempCtx.fillRect(0, 0, outputWidth, outputHeight);
-                    tempCtx.fillStyle = foregroundColor;
+                    // Conditional background fill
+                    if (hasTransparency && useOriginalColors) {
+                        tempCtx.clearRect(0, 0, outputWidth, outputHeight);
+                    } else {
+                        tempCtx.fillStyle = backgroundColor;
+                        tempCtx.fillRect(0, 0, outputWidth, outputHeight);
+                        tempCtx.fillStyle = foregroundColor;
+                    }
 
                     const tempCanvas2 = document.createElement('canvas');
                     tempCanvas2.width = originalCanvas.width;
@@ -2064,16 +2292,30 @@ function loadImage(file) {
                     const imageData = tempCtx2.getImageData(0, 0, tempCanvas2.width, tempCanvas2.height);
                     const data = imageData.data;
 
+                    let hasTransparency = false;
+                    for (let i = 0; i < data.length; i += 4) {
+                        const alpha = data[i + 3];
+                        if (alpha < 255) hasTransparency = true;
+
+                        if (useOriginalColors) {
+                            // Apply brightness/contrast to RGB channels directly for original colors
+                            for (let channel = 0; channel < 3; channel++) {
+                                let value = data[i + channel];
+                                value += brightness * 2.55;
+                                value = ((value / 255 - 0.5) * contrast + 0.5) * 255;
+                                data[i + channel] = Math.max(0, Math.min(255, value));
+                            }
+                        } else {
+                            let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                            gray += brightness * 2.55;
+                            gray = ((gray / 255 - 0.5) * contrast + 0.5) * 255;
+                            gray = Math.max(0, Math.min(255, gray));
+                            data[i] = data[i + 1] = data[i + 2] = gray;
+                        }
+                    }
+
                     // Pre-compute brightness array for performance
                     const brightnessArray = precomputeBrightness(imageData);
-
-                    for (let i = 0; i < data.length; i += 4) {
-                        let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
-                        gray += brightness * 2.55;
-                        gray = ((gray / 255 - 0.5) * contrast + 0.5) * 255;
-                        gray = Math.max(0, Math.min(255, gray));
-                        data[i] = data[i + 1] = data[i + 2] = gray;
-                    }
 
                     tempCtx2.putImageData(imageData, 0, 0);
 
@@ -2118,7 +2360,28 @@ function loadImage(file) {
                                         const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
                                         const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
                                         const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
-                                        drawShape(tempCtx, centerX, centerY, dotRadius, shape, originalColor);
+
+                                        // Sample alpha for transparency
+                                        if (hasTransparency) {
+                                            const alphaSample = sampleAlpha(originalImageData, colorSampleX, colorSampleY,
+                                                originalCanvas.width, originalCanvas.height);
+
+                                            if (alphaSample < 5) {
+                                                // Nearly fully transparent — skip dot entirely
+                                                continue;
+                                            }
+
+                                            if (alphaSample < 255) {
+                                                tempCtx.save();
+                                                tempCtx.globalAlpha = alphaSample / 255;
+                                                drawShape(tempCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                                tempCtx.restore();
+                                            } else {
+                                                drawShape(tempCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                            }
+                                        } else {
+                                            drawShape(tempCtx, centerX, centerY, dotRadius, shape, originalColor);
+                                        }
                                     } else {
                                         drawShape(tempCtx, centerX, centerY, dotRadius, shape);
                                     }
@@ -2130,12 +2393,33 @@ function loadImage(file) {
                     canvasToExport = tempCanvas;
                 }
 
-                const link = document.createElement('a');
-                link.download = 'halftone-' + Date.now() + '.png';
-                link.href = canvasToExport.toDataURL('image/png');
-                link.click();
+                // Download with DPI metadata injection
+                try {
+                    if (typeof canvasToExport.toBlob === 'function') {
+                        const blob = await new Promise(resolve => canvasToExport.toBlob(resolve, 'image/png'));
+                        const dpiBlob = await injectDPI(blob, selectedDPI);
+                        downloadBlob(dpiBlob, 'halftone-' + Date.now() + '.png');
+                    } else {
+                        // Fallback for browsers without toBlob (old Safari)
+                        fallbackDownload(canvasToExport);
+                    }
+                } catch (e) {
+                    console.warn('DPI injection failed, falling back to default PNG:', e);
+                    fallbackDownload(canvasToExport);
+                }
             } catch (error) {
                 showNotification('Error al descargar. La imagen puede ser de una fuente restringida.');
+            }
+        }
+
+        function updateComputedPixels() {
+            const w = parseFloat(printWidthInches.value) || 0;
+            const h = parseFloat(printHeightInches.value) || 0;
+            const dpi = parseInt(dpiSelect.value) || 300;
+            if (w > 0 && h > 0) {
+                computedPixels.textContent = `→ ${Math.round(w * dpi)} × ${Math.round(h * dpi)} px`;
+            } else {
+                computedPixels.textContent = '';
             }
         }
 
@@ -2215,7 +2499,11 @@ function loadImage(file) {
                 useOriginalColors: useOriginalColorsCheckbox.checked,
                 useOriginalSize: useOriginalSizeCheckbox.checked,
                 outputW: outputWidthInput.value,
-                outputH: outputHeightInput.value
+                outputH: outputHeightInput.value,
+                dpi: dpiSelect.value,
+                useInches: useInchesCheckbox.checked,
+                printW: printWidthInches.value,
+                printH: printHeightInches.value
             };
         }
 
@@ -2232,6 +2520,22 @@ function loadImage(file) {
             useOriginalSizeCheckbox.checked = state.useOriginalSize;
             outputWidthInput.value = state.outputW;
             outputHeightInput.value = state.outputH;
+            dpiSelect.value = state.dpi || '300';
+            useInchesCheckbox.checked = state.useInches || false;
+            printWidthInches.value = state.printW || '';
+            printHeightInches.value = state.printH || '';
+
+            // Update selectedDPI global variable
+            selectedDPI = parseInt(dpiSelect.value) || 300;
+
+            // Update inches mode UI
+            const inchesEnabled = useInchesCheckbox.checked;
+            printWidthInches.style.display = inchesEnabled ? 'inline-block' : 'none';
+            printHeightInches.style.display = inchesEnabled ? 'inline-block' : 'none';
+            computedPixels.style.display = inchesEnabled ? 'inline' : 'none';
+            if (inchesEnabled) {
+                updateComputedPixels();
+            }
 
             if (state.useOriginalSize) {
                 outputWidthInput.disabled = true;
