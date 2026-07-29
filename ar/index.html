@@ -997,6 +997,76 @@
         [data-theme="dark"] .sun-icon { display: none; }
         [data-theme="dark"] .moon-icon { display: inline; }
 
+        /* Metric Toggle Group (Segmented Control) */
+        .metric-toggle-group {
+            display: flex;
+            gap: 0;
+        }
+
+        .metric-toggle {
+            border-radius: 0;
+            margin: 0;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .metric-toggle:first-child {
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        .metric-toggle:last-child {
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .metric-toggle:not(:first-child) {
+            border-left: none;
+        }
+
+        .metric-toggle.btn-primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .metric-toggle.btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+
+        .metric-toggle:hover:not(.btn-primary) {
+            background: var(--border);
+        }
+
+        /* Split View */
+        .split-container {
+            display: flex;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .split-pane {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .split-divider {
+            width: 2px;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+
+        /* LPI Reference Guide */
+        .lpi-ref {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
         /* Magnifier */
         .magnifier {
             position: absolute;
@@ -1114,14 +1184,26 @@
                 <!-- Dot Group -->
                 <div class="toolbar-group">
                     <span class="toolbar-label">النقاط</span>
-                    <div class="toolbar-control">
+                    <!-- Metric Mode Toggle -->
+                    <div class="toolbar-control metric-toggle-group">
+                        <button class="btn-sm btn-primary metric-toggle active" data-metric="dot">Dot Size</button>
+                        <button class="btn-sm btn-secondary metric-toggle" data-metric="lpi">LPI</button>
+                    </div>
+                    <!-- Dot Size Mode Controls -->
+                    <div class="toolbar-control dot-mode-control">
                         <input type="range" class="slider-sm" id="dotSize" min="2" max="30" value="4" disabled>
                         <span class="value-sm" id="dotSizeValue">4px</span>
                     </div>
-                    <div class="toolbar-control">
+                    <div class="toolbar-control dot-mode-control">
                         <input type="range" class="slider-sm" id="spacing" min="1.0" max="2.0" step="0.1" value="1.0" disabled>
                         <span class="value-sm" id="spacingValue">1.0x</span>
                     </div>
+                    <!-- LPI Mode Controls -->
+                    <div class="toolbar-control lpi-mode-control" style="display:none">
+                        <input type="range" class="slider-sm" id="lpiSlider" min="20" max="120" step="1" value="45" disabled>
+                        <span class="value-sm" id="lpiValueDisplay">45 LPI</span>
+                    </div>
+                    <div class="lpi-ref" id="lpiRef" style="display:none;font-size:0.7rem;color:var(--text-secondary);white-space:nowrap;">35-55 LPI: Textile | 55-85: Paper | 85+: Fine Art</div>
                     <select class="select-sm" id="dotShape" disabled>
                         <option value="circle">دائرة</option>
                         <option value="square">مربع</option>
@@ -1230,6 +1312,7 @@
                             <button class="zoom-btn" data-zoom="1.5">150%</button>
                             <button class="zoom-btn" data-zoom="2">200%</button>
                             <button class="zoom-btn" data-zoom="fit">ملاءمة</button>
+                            <button class="zoom-btn" id="splitViewBtn" title="Split View">⊞ Split</button>
                             <span class="zoom-label" id="zoomLabel">100%</span>
                         </div>
                     </div>
@@ -1351,6 +1434,12 @@
         const printHeightInches = document.getElementById('printHeightInches');
         const computedPixels = document.getElementById('computedPixels');
 
+        // LPI Preset Mode controls
+        const lpiSlider = document.getElementById('lpiSlider');
+        const lpiValueDisplay = document.getElementById('lpiValueDisplay');
+        const lpiRef = document.getElementById('lpiRef');
+        const splitViewBtn = document.getElementById('splitViewBtn');
+
         // Value displays
         const dotSizeValue = document.getElementById('dotSizeValue');
         const spacingValue = document.getElementById('spacingValue');
@@ -1382,6 +1471,11 @@
         let selectedDPI = 300;
         let savedWidth = '';
         let savedHeight = '';
+        // LPI Preset Mode state
+        let metricMode = 'dot'; // 'dot' or 'lpi'
+        let lpiValue = 45;
+        // Split View state
+        let splitViewActive = false;
 
         // Initialize is called at the end of the script
 
@@ -1479,6 +1573,32 @@
 
             printWidthInches.addEventListener('input', updateComputedPixels);
             printHeightInches.addEventListener('input', updateComputedPixels);
+
+            // LPI Preset Mode controls
+            lpiSlider.addEventListener('input', function() {
+                lpiValue = parseInt(lpiSlider.value);
+                lpiValueDisplay.textContent = lpiValue + ' LPI';
+                const newDotSize = lpiToDotSize(lpiValue);
+                dotSizeSlider.value = newDotSize;
+                spacingSlider.value = 1.0;
+                updateValueDisplays();
+                scheduleProcessing();
+            });
+
+            lpiSlider.addEventListener('change', function() {
+                pushUndoState();
+                currentState = getCurrentParams();
+            });
+
+            document.querySelectorAll('.metric-toggle').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mode = this.dataset.metric;
+                    toggleMetric(mode);
+                });
+            });
+
+            // Split View button
+            splitViewBtn.addEventListener('click', toggleSplitView);
 
             // Buttons
             undoBtn.addEventListener('click', undo);
@@ -2315,6 +2435,143 @@ function loadImage(file) {
             URL.revokeObjectURL(url);
         }
 
+        // LPI Preset Mode Functions
+        function lpiToDotSize(lpi) {
+            return Math.round((72 / lpi) * 2);
+        }
+
+        function dotSizeToLPI(dotSize, spacing) {
+            const lpi = 72 / (dotSize * spacing * 0.5);
+            return Math.max(20, Math.min(120, Math.round(lpi)));
+        }
+
+        function toggleMetric(mode) {
+            if (metricMode === mode) return;
+
+            pushUndoState();
+            metricMode = mode;
+
+            // Update toggle button states
+            document.querySelectorAll('.metric-toggle').forEach(btn => {
+                if (btn.dataset.metric === mode) {
+                    btn.classList.remove('btn-secondary');
+                    btn.classList.add('btn-primary', 'active');
+                } else {
+                    btn.classList.remove('btn-primary', 'active');
+                    btn.classList.add('btn-secondary');
+                }
+            });
+
+            const dotModeControls = document.querySelectorAll('.dot-mode-control');
+            const lpiModeControls = document.querySelectorAll('.lpi-mode-control');
+
+            if (mode === 'lpi') {
+                // Switch to LPI mode
+                const currentDotSize = parseInt(dotSizeSlider.value);
+                const currentSpacing = parseFloat(spacingSlider.value);
+                lpiValue = dotSizeToLPI(currentDotSize, currentSpacing);
+                lpiSlider.value = lpiValue;
+                lpiValueDisplay.textContent = lpiValue + ' LPI';
+
+                // Hide dot controls, show LPI controls
+                dotModeControls.forEach(el => el.style.display = 'none');
+                lpiModeControls.forEach(el => el.style.display = 'flex');
+                lpiRef.style.display = 'block';
+
+                // Compute and apply dotSize/spacing from LPI
+                const newDotSize = lpiToDotSize(lpiValue);
+                dotSizeSlider.value = newDotSize;
+                spacingSlider.value = 1.0;
+            } else {
+                // Switch to Dot Size mode
+                lpiModeControls.forEach(el => el.style.display = 'none');
+                lpiRef.style.display = 'none';
+                dotModeControls.forEach(el => el.style.display = 'flex');
+            }
+
+            updateValueDisplays();
+            currentState = getCurrentParams();
+            scheduleProcessing();
+        }
+
+        // Split View Functions
+        function toggleSplitView() {
+            splitViewActive = !splitViewActive;
+            splitViewBtn.classList.toggle('active', splitViewActive);
+            updateSplitView();
+        }
+
+        function updateSplitView() {
+            if (!originalImageData) return;
+
+            if (splitViewActive) {
+                // Create split view container
+                const wrapper = canvasWrapper;
+                const existingContainer = wrapper.querySelector('.split-container');
+
+                if (existingContainer) {
+                    existingContainer.remove();
+                }
+
+                const splitContainer = document.createElement('div');
+                splitContainer.className = 'split-container';
+                splitContainer.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                `;
+
+                // Left pane - original image
+                const leftPane = document.createElement('div');
+                leftPane.className = 'split-pane';
+                leftPane.style.cssText = 'flex: 1; overflow: hidden;';
+
+                const originalCanvas = document.createElement('canvas');
+                originalCanvas.width = mainCanvas.width;
+                originalCanvas.height = mainCanvas.height;
+                originalCanvas.style.cssText = 'max-width: 100%; height: auto; display: block;';
+                const originalCtx = originalCanvas.getContext('2d');
+                originalCtx.putImageData(originalImageData, 0, 0);
+
+                leftPane.appendChild(originalCanvas);
+
+                // Divider
+                const divider = document.createElement('div');
+                divider.className = 'split-divider';
+
+                // Right pane - halftone result
+                const rightPane = document.createElement('div');
+                rightPane.className = 'split-pane';
+                rightPane.style.cssText = 'flex: 1; overflow: hidden;';
+
+                const halftoneClone = mainCanvas.cloneNode(true);
+                halftoneClone.style.cssText = 'max-width: 100%; height: auto; display: block;';
+                const halftoneCtx = halftoneClone.getContext('2d');
+                halftoneCtx.drawImage(mainCanvas, 0, 0);
+
+                rightPane.appendChild(halftoneClone);
+
+                splitContainer.appendChild(leftPane);
+                splitContainer.appendChild(divider);
+                splitContainer.appendChild(rightPane);
+
+                // Hide main canvas temporarily
+                mainCanvas.style.display = 'none';
+                canvasWrapper.appendChild(splitContainer);
+            } else {
+                // Remove split view
+                const wrapper = canvasWrapper;
+                const existingContainer = wrapper.querySelector('.split-container');
+                if (existingContainer) {
+                    existingContainer.remove();
+                }
+                mainCanvas.style.display = 'block';
+            }
+        }
+
         async function downloadImage() {
             try {
                 let canvasToExport = mainCanvas;
@@ -2566,7 +2823,9 @@ function loadImage(file) {
                 useOriginalColors: useOriginalColorsCheckbox.checked,
                 useOriginalSize: useOriginalSizeCheckbox.checked,
                 outputW: outputWidthInput.value,
-                outputH: outputHeightInput.value
+                outputH: outputHeightInput.value,
+                metricMode: metricMode,
+                lpiValue: lpiValue
             };
         }
 
@@ -2594,6 +2853,39 @@ function loadImage(file) {
 
             updateColorPickerStates();
             updateValueDisplays();
+
+            // Restore metric mode and LPI value
+            metricMode = state.metricMode || 'dot';
+            lpiValue = state.lpiValue || 45;
+
+            // Update metric toggle UI
+            document.querySelectorAll('.metric-toggle').forEach(btn => {
+                if (btn.dataset.metric === metricMode) {
+                    btn.classList.remove('btn-secondary');
+                    btn.classList.add('btn-primary', 'active');
+                } else {
+                    btn.classList.remove('btn-primary', 'active');
+                    btn.classList.add('btn-secondary');
+                }
+            });
+
+            // Update LPI slider and display
+            lpiSlider.value = lpiValue;
+            lpiValueDisplay.textContent = lpiValue + ' LPI';
+
+            // Show/hide controls based on metric mode
+            const dotModeControls = document.querySelectorAll('.dot-mode-control');
+            const lpiModeControls = document.querySelectorAll('.lpi-mode-control');
+
+            if (metricMode === 'lpi') {
+                dotModeControls.forEach(el => el.style.display = 'none');
+                lpiModeControls.forEach(el => el.style.display = 'flex');
+                lpiRef.style.display = 'block';
+            } else {
+                dotModeControls.forEach(el => el.style.display = 'flex');
+                lpiModeControls.forEach(el => el.style.display = 'none');
+                lpiRef.style.display = 'none';
+            }
 
             // Clear any pending processing to avoid unwanted state saves
             if (processingTimeout) {
