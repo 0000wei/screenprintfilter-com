@@ -10,6 +10,9 @@ Use this folder for current user-facing behavior specs.
 - `test-system-spec.md` — Comprehensive user-flow test specification
 - `test-remaining-spec.md` — Remaining test cases after partial fixes
 - `ai-friendly-mcp-spec.md` — AI-friendly page config + local MCP Server spec
+- `tools-prepress-toolkit-spec.md` — **NEW** Free prepress tool pages (DPI calculator, Gang Sheet, LPI previewer)
+- `dpi-metadata-alpha-spec.md` — **NEW** DPI metadata writing + alpha channel protection
+- `lpi-preset-spec.md` — **NEW** LPI preset mode + split view comparison
 
 ## Rules
 
