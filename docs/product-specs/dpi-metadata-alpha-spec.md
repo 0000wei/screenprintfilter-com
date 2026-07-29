@@ -177,14 +177,82 @@ function downloadBlob(blob, filename) {
 
 **Controls** (append to Size group, after `useOriginalSize` checkbox):
 
+```html
+<div class="toolbar-group" id="dpiGroup">
+    <span class="toolbar-label">DPI</span>
+    <select class="select-sm" id="dpiSelect">
+        <option value="72">72</option>
+        <option value="150">150</option>
+        <option value="200">200</option>
+        <option value="300" selected>300</option>
+        <option value="400">400</option>
+        <option value="600">600</option>
+    </select>
+    <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-sm" id="useInchesCheckbox">
+        Use inches
+    </label>
+    <input type="number" class="input-sm" id="printWidthInches"
+        placeholder="W in" min="0.1" step="0.1" disabled style="display:none">
+    <input type="number" class="input-sm" id="printHeightInches"
+        placeholder="H in" min="0.1" step="0.1" disabled style="display:none">
+    <span class="value-sm" id="computedPixels" style="display:none"></span>
+</div>
 ```
-[DPI: 300 ▼]  [☐ Use inches]
-```
+
 - DPI dropdown: 72, 150, 200, 300, 400, 600 (default 300)
-- "Use inches" checkbox: when checked, reveals two inline number inputs:
-  - Width (inches), Height (inches)
-  - The Size group width/height inputs become disabled
-  - Calculated pixel dimensions shown as read-only text: "→ 2400 × 3600 px"
+- "Use inches" checkbox: when checked, reveals Width/Height inch inputs + computed pixel display
+- Size group width/height inputs become disabled when inches mode is on
+- Inch inputs: type=number, min=0.1, step=0.1, placeholder "W in" / "H in"
+
+**Event handlers**:
+
+```javascript
+dpiSelect.addEventListener('change', () => {
+    selectedDPI = parseInt(dpiSelect.value);
+    // If inches mode is on, recalculate computed pixels
+    if (useInchesCheckbox.checked) updateComputedPixels();
+    scheduleProcessing(); // re-render with current state
+});
+
+useInchesCheckbox.addEventListener('change', () => {
+    const enabled = useInchesCheckbox.checked;
+    // Show/hide inch inputs
+    printWidthInches.style.display = enabled ? 'inline-block' : 'none';
+    printHeightInches.style.display = enabled ? 'inline-block' : 'none';
+    computedPixels.style.display = enabled ? 'inline' : 'none';
+    // Disable/enable Size group inputs
+    outputWidthInput.disabled = enabled;
+    outputHeightInput.disabled = enabled;
+    if (!enabled) {
+        // Restore previous Size group values
+        outputWidthInput.value = savedWidth;
+        outputHeightInput.value = savedHeight;
+    } else {
+        // Save current values before overriding
+        savedWidth = outputWidthInput.value;
+        savedHeight = outputHeightInput.value;
+    }
+});
+
+function updateComputedPixels() {
+    const w = parseInt(printWidthInches.value) || 0;
+    const h = parseInt(printHeightInches.value) || 0;
+    const dpi = parseInt(dpiSelect.value) || 300;
+    if (w > 0 && h > 0) {
+        computedPixels.textContent = `→ ${w * dpi} × ${h * dpi} px`;
+    }
+}
+```
+
+**State variables to add**:
+- `let selectedDPI = 300;`
+- `let savedWidth = '';`
+- `let savedHeight = '';`
+
+**Undo/Redo**:
+- DPI and inches state are captured in `getCurrentParams()` / `applyState()` alongside existing parameters
+- Add `dpi: dpiSelect.value`, `useInches: useInchesCheckbox.checked`, `printW: printWidthInches.value`, `printH: printHeightInches.value` to the state object
 
 ### Acceptance Criteria
 - [ ] Downloaded PNG has correct DPI metadata (verify with `identify -verbose` or browser-based test)
@@ -260,7 +328,7 @@ if (hasTransparency && useOriginalColors) {
 }
 ```
 
-#### Dot rendering with proportional opacity
+#### Dot rendering with proportional opacity (using save/restore)
 
 In the dot rendering loop, when `useOriginalColors` is true and `hasTransparency`:
 
@@ -274,19 +342,20 @@ if (alphaSample < 5) {
     continue;
 }
 
-// Set globalAlpha for semi-transparent dots
 if (alphaSample < 255) {
+    mainCtx.save();
     mainCtx.globalAlpha = alphaSample / 255;
+    drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
+    mainCtx.restore(); // restores globalAlpha AND other state
 } else {
-    mainCtx.globalAlpha = 1;
+    drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
 }
-
-// ... draw dot with current globalAlpha ...
-drawShape(mainCtx, centerX, centerY, dotRadius, shape, originalColor);
-
-// Reset globalAlpha for next dot
-mainCtx.globalAlpha = 1;
 ```
+
+`save()` / `restore()` is preferred over manual `globalAlpha = 1` reset because it:
+- Restores ALL canvas state, not just globalAlpha
+- Prevents state leakage from any future state changes in drawShape()
+- Cleans up even if drawShape() throws
 
 Helper function:
 ```javascript
@@ -315,7 +384,82 @@ function sampleAlpha(imageData, x, y, width, height) {
 - **Image with partial transparency** → proportional opacity preserves anti-aliased edges
 - **Fully transparent image** → all dots skipped → output is fully transparent canvas
 - **Toggling "Original Colors" off** → `clearRect` not used, dots always opaque (correct for monochrome)
-- **`globalAlpha` state cleanup** → always reset to 1 after each dot to avoid state leakage across shapes
+- **`globalAlpha` state cleanup** → `save()` / `restore()` handles this, no manual reset needed
+
+#### Critical: downloadImage() must duplicate alpha + useOriginalColors logic
+
+`downloadImage()` (line ~2127) contains its own pixel loop and dot rendering for high-resolution export. This code **must** be updated to match `applyHalftone()`:
+
+1. **Alpha detection** inside the pixel loop (~2180-2186):
+   ```javascript
+   for (let i = 0; i < data.length; i += 4) {
+       const alpha = data[i + 3];
+       if (alpha < 255) hasTransparency = true;
+       // ... existing grayscale/brightness/contrast logic ...
+   }
+   ```
+
+2. **useOriginalColors branch** — the existing download loop only does grayscale conversion. Add the `useOriginalColors` branch identical to `applyHalftone()`:
+   ```javascript
+   for (let i = 0; i < data.length; i += 4) {
+       const alpha = data[i + 3];
+       if (alpha < 255) hasTransparency = true;
+
+       if (useOriginalColors) {
+           for (let channel = 0; channel < 3; channel++) {
+               let value = data[i + channel];
+               value += brightness * 2.55;
+               value = ((value / 255 - 0.5) * contrast + 0.5) * 255;
+               data[i + channel] = Math.max(0, Math.min(255, value));
+           }
+       } else {
+           let gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+           gray += brightness * 2.55;
+           gray = ((gray / 255 - 0.5) * contrast + 0.5) * 255;
+           gray = Math.max(0, Math.min(255, gray));
+           data[i] = data[i + 1] = data[i + 2] = gray;
+       }
+   }
+   ```
+
+3. **Background fill** — conditionally use `clearRect`:
+   ```javascript
+   if (hasTransparency && useOriginalColors) {
+       tempCtx.clearRect(0, 0, outputWidth, outputHeight);
+   } else {
+       tempCtx.fillStyle = backgroundColor;
+       tempCtx.fillRect(0, 0, outputWidth, outputHeight);
+       tempCtx.fillStyle = foregroundColor;
+   }
+   ```
+
+4. **Dot rendering** — add proportional opacity in the dot loop using `save()`/`restore()` as in `applyHalftone()`
+
+**Note**: This is the most error-prone part of the implementation. The implementer must carefully parallel the two render paths (preview in `applyHalftone()` and export in `downloadImage()`). Any divergence creates a "preview looks correct, download is wrong" bug.
+
+#### useOriginalColors independence
+
+The alpha/transparency logic is controlled ONLY by `useOriginalColors` checkbox and the source image's alpha channel. It is independent of all size controls:
+- **DPI dropdown + inches**: no effect on alpha behavior
+- **Size group width/height**: no effect on alpha behavior
+- **Original checkbox**: no effect on alpha behavior
+- **Only `useOriginalColors` + source alpha** controls transparency preservation
+
+#### fallbackDownload() implementation
+
+```javascript
+function fallbackDownload(canvas) {
+    // Legacy download path — no DPI metadata
+    const link = document.createElement('a');
+    link.download = 'halftone-' + Date.now() + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+}
+```
+
+Used in:
+- DPI injection try/catch fallback
+- Browsers without `canvas.toBlob()` (Safari < 15) — detect with `typeof canvas.toBlob !== 'function'`
 
 ### Acceptance Criteria
 - [ ] Transparent PNG input → output preserves transparency with smooth edges
