@@ -106,19 +106,28 @@
             color: var(--accent);
         }
 
-        #themeToggle {
-            background: var(--bg-secondary);
+        .theme-toggle {
+            background: none;
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 8px 12px;
             cursor: pointer;
-            color: var(--text-primary);
-            transition: var(--transition);
+            padding: 0.375rem 0.5rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+            line-height: 1;
+            font-size: 1rem;
         }
-
-        #themeToggle:hover {
-            background: var(--bg-tertiary);
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
+        .sun-icon { display: inline; }
+        .moon-icon { display: none; }
+        html[data-theme="dark"] .sun-icon { display: none; }
+        html[data-theme="dark"] .moon-icon { display: inline; }
 
         main {
             padding: 60px 0;
@@ -216,7 +225,10 @@
                 </svg>
                 <span class="logo-text">ScreenPrint<span class="logo-accent">Filter</span></span>
             </a>
-            <button id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
         </header>
 
         <main>
@@ -265,9 +277,7 @@
             var next = cur === 'dark' ? '' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('spf_theme', next || 'light');
-            btn.textContent = next === 'dark' ? '☀️' : '🌙';
         };
-        btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
     })();
     </script>
 </body>
