@@ -13,6 +13,7 @@ This file is the entry point for AI agents working with this repository.
 | Completed Work | `docs/exec-plans/completed/index.md` |
 | Tech Debt | `docs/exec-plans/tech-debt-tracker.md` |
 | Generated Artifacts | `docs/generated/index.md` |
+| Historical Archive | `docs/archive/` |
 
 ## Repository Structure
 
@@ -23,10 +24,10 @@ screenprintfilter/
 ├── index.html            ← Main single-page application
 ├── server.js             ← Dev HTTP server
 ├── scripts/              ← Test + benchmark scripts
-├── docs/                 ← All documentation (specs, plans, designs)
-├── guides/               ← Multilingual usage guides
-├── images/               ← Static images (favicons, OG)
-├── .well-known/          ← AI plugin metadata
+| `docs/`                 | ← All documentation (specs, plans, designs, archive)
+| `guides/`               | ← Multilingual usage guides
+| `images/`               | ← Static images (favicons, OG)
+| `.well-known/`          | ← AI plugin metadata
 ├── sitemap.xml           ← SEO
 ├── robots.txt            ← SEO
 ├── privacy-policy.html   ← Compliance
@@ -41,4 +42,4 @@ screenprintfilter/
 3. Move completed execution plans to `docs/exec-plans/completed/`.
 4. Tech debt must be tracked in `docs/exec-plans/tech-debt-tracker.md`.
 5. Regenerate `docs/generated/` artifacts when the source changes.
-6. Clean up root-level files — scripts go to `scripts/`, specs go to `docs/`.
+6. Clean up root-level files — scripts go to `scripts/`, specs go to `docs/`, historical prompts go to `docs/archive/`.

@@ -4,14 +4,15 @@ Use this folder for generated or derived artifacts that agents should be able to
 
 ## Current Artifacts
 
-*(Add generated artifacts here as they are produced — e.g., sitemap analysis, SEO audit results, test results aggregated from scripts/.)*
-
-## Source
-
-- Generated from: `[command or source path]`
-- Last refreshed: `YYYY-MM-DD`
+| Artifact | Source | Last Refreshed | Notes |
+|----------|--------|----------------|-------|
+| `sitemap.xml` | SEO crawl | 2026-07-23 | Auto-generated sitemap for search engines |
+| `scripts/test-results.json` | `run-systematic-tests.mjs` | 2026-05-29 | Aggregated test results |
+| `docs/exec-plans/completed/FINAL-TEST-REPORT.html` | `test_comprehensive.js` | 2026-05-21 | Final comprehensive test report |
+| `docs/exec-plans/completed/test-report.html` | `run-systematic-tests.mjs` | 2026-05-21 | Systematic test report |
 
 ## Notes
 
-- Do not hand-edit generated sections.
-- Regenerate this file when the underlying schema changes.
+- Do not hand-edit generated sections without updating the source.
+- Regenerate entries in this index when the underlying schema or reports change.
+- For performance benchmarks, see `scripts/perf-benchmark.js` and `scripts/perf-benchmark-puppeteer.mjs`.

@@ -29,6 +29,10 @@ node scripts/run-systematic-tests.mjs # Systematic test suite
 # Benchmarks
 node scripts/perf-benchmark-puppeteer.mjs
 node scripts/perf-benchmark.js
+
+# MCP Server (local halftone API via MCP protocol)
+cd mcp-server && npm start             # Start MCP Server on stdio
+cd mcp-server && node test-mcp.js      # Run MCP Server tests
 ```
 
 ## Document Structure

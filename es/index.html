@@ -1961,25 +1961,6 @@ function loadImage(file) {
             return count > 0 ? sum / count : 128;
         }
 
-        function getPixelBrightnessFromContext(ctx, x, y, width, height) {
-            // Fallback for color sampling when using original colors
-            const sampleSize = 3;
-            const sx = Math.max(0, Math.min(Math.floor(x - sampleSize/2), width - sampleSize));
-            const sy = Math.max(0, Math.min(Math.floor(y - sampleSize/2), height - sampleSize));
-            const sw = Math.min(sampleSize, width - sx);
-            const sh = Math.min(sampleSize, height - sy);
-
-            const imageData = ctx.getImageData(sx, sy, sw, sh);
-            const data = imageData.data;
-            let sum = 0;
-            let count = 0;
-            for (let i = 0; i < data.length; i += 4) {
-                sum += data[i];
-                count++;
-            }
-            return count > 0 ? sum / count : 128;
-        }
-
         function drawShape(ctx, x, y, radius, shape, color = null) {
             ctx.beginPath();
 
@@ -2157,7 +2138,7 @@ function loadImage(file) {
             }
         }
 
-                        function resetParameters() {
+        function resetParameters() {
             pushUndoState();
             dotSizeSlider.value = 4;
             spacingSlider.value = 1.0;

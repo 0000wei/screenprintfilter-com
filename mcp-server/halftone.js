@@ -1,4 +1,5 @@
 import { createCanvas, loadImage } from 'canvas';
+import fs from 'fs/promises';
 
 /**
  * Precompute brightness array for performance
@@ -292,5 +293,5 @@ export async function convertToHalftone(inputPath, outputPath, params = {}) {
 
     // Save output
     const pngData = canvas.toBuffer('image/png');
-    await import('fs/promises').then(fs => fs.writeFile(outputPath, pngData));
+    await fs.writeFile(outputPath, pngData);
 }
