@@ -1857,17 +1857,6 @@ function loadImage(file) {
             mainCanvas.width = outputWidth;
             mainCanvas.height = outputHeight;
 
-            // Fill background conditionally based on transparency
-            let hasTransparency = false;
-            if (hasTransparency && useOriginalColors) {
-                // Transparent background — use clearRect
-                mainCtx.clearRect(0, 0, outputWidth, outputHeight);
-            } else {
-                // Existing behavior
-                mainCtx.fillStyle = backgroundColor;
-                mainCtx.fillRect(0, 0, outputWidth, outputHeight);
-            }
-
             // Set foreground color (will be overridden when using original colors)
             mainCtx.fillStyle = foregroundColor;
 
@@ -1889,6 +1878,7 @@ function loadImage(file) {
             const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
             const data = imageData.data;
 
+            let hasTransparency = false;
             for (let i = 0; i < data.length; i += 4) {
                 const alpha = data[i + 3];
                 if (alpha < 255) hasTransparency = true;
@@ -1922,6 +1912,16 @@ function loadImage(file) {
             }
 
             tempCtx.putImageData(imageData, 0, 0);
+
+            // Fill background based on detected transparency
+            if (hasTransparency && useOriginalColors) {
+                // Transparent background — use clearRect
+                mainCtx.clearRect(0, 0, outputWidth, outputHeight);
+            } else {
+                // Existing behavior
+                mainCtx.fillStyle = backgroundColor;
+                mainCtx.fillRect(0, 0, outputWidth, outputHeight);
+            }
 
             // Pre-compute brightness array for performance
             const brightnessArray = precomputeBrightness(imageData);
@@ -2264,16 +2264,6 @@ function loadImage(file) {
                     const backgroundColor = backgroundColorInput.value;
                     const useOriginalColors = useOriginalColorsCheckbox.checked;
 
-                    let hasTransparency = false;
-                    // Conditional background fill
-                    if (hasTransparency && useOriginalColors) {
-                        tempCtx.clearRect(0, 0, outputWidth, outputHeight);
-                    } else {
-                        tempCtx.fillStyle = backgroundColor;
-                        tempCtx.fillRect(0, 0, outputWidth, outputHeight);
-                        tempCtx.fillStyle = foregroundColor;
-                    }
-
                     const tempCanvas2 = document.createElement('canvas');
                     tempCanvas2.width = originalCanvas.width;
                     tempCanvas2.height = originalCanvas.height;
@@ -2308,6 +2298,16 @@ function loadImage(file) {
                             gray = Math.max(0, Math.min(255, gray));
                             data[i] = data[i + 1] = data[i + 2] = gray;
                         }
+                    }
+
+                    // Fill background based on detected transparency
+                    if (hasTransparency && useOriginalColors) {
+                        // Transparent background — use clearRect
+                        tempCtx.clearRect(0, 0, outputWidth, outputHeight);
+                    } else {
+                        // Existing behavior
+                        tempCtx.fillStyle = backgroundColor;
+                        tempCtx.fillRect(0, 0, outputWidth, outputHeight);
                     }
 
                     // Pre-compute brightness array for performance
