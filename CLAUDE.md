@@ -45,16 +45,24 @@ cd mcp-server && node test-mcp.js      # Run MCP Server tests
 
 ## Architecture
 
-- **Single-file SPA**: All HTML, CSS, and JS in `index.html`
+- **Modular ES modules**: Component-based architecture with separated concerns
+  - `css/main.css` — Stylesheets
+  - `js/app.js` — Main application entry point
+  - `js/core/` — Core modules (config, state, halftoneProcessor, eventBus)
+  - `js/components/` — UI components
+  - `js/services/` — Worker, memory, and rendering services
+  - `js/utils/` — Utilities (debounce, validator, errorHandler)
+  - `js/workers/` — Web workers for background processing
+  - `js/i18n/` — Internationalization
 - **Canvas 2D API**: Halftone rendering pipeline in browser
 - **Node.js server** (`server.js`): Dev HTTP server with MIME type support
 - **MCP Server** (`mcp-server/`): Local Node Canvas halftone via MCP protocol
-- **No build step**: Pure vanilla JS, no framework
+- **No build step**: Pure vanilla JS, ES modules, no framework
 
 ## Key Patterns
 
-- No build tools — pure HTML/CSS/JS single file
+- No build tools — pure HTML/CSS/JS with ES modules
 - Canvas rendering pipeline: Image → Grayscale → Halftone grid → Dot rendering
-- Performance-sensitive: worker-like chunked rendering for responsive sliders
+- Performance-sensitive: Web Worker for background processing, chunked rendering for responsive sliders
 - Multilingual: localized `guides/` and per-language index pages
 - SEO-first: sitemap.xml, robots.txt, canonical URLs, hreflang tags, Open Graph

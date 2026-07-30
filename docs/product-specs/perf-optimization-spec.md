@@ -1,7 +1,9 @@
 # ScreenPrintFilter Performance Optimization Spec
 
+> **Note:** This spec was written for the previous single-file architecture. The application has since been refactored to modular ES modules (see commit 152b4d1), but the performance optimization principles described here remain relevant.
+
 ## Overview
-Optimize index.html (SPA, single-file) to achieve ~4x speedup in halftone rendering.
+Optimize the halftone rendering pipeline to achieve ~4x speedup.
 Current code has performance issues that make it feel sluggish when adjusting sliders.
 
 ## Benchmark Results (Baseline)
@@ -60,10 +62,12 @@ After changes, verify:
 6. Reset returns to defaults
 
 ## Files to Modify
-- `index.html` (single file, ~1964 lines)
+- `js/core/halftoneProcessor.js` — Core halftone rendering logic
+- `js/services/progressiveRenderer.js` — Chunked rendering service
+- `js/utils/debounce.js` — Debounce utility
 
 ## Files to Create
-- None. Everything goes in index.html.
+- None. Optimizations are applied within the existing modular structure.
 
 ## Implementation Order
 1. P1: Pre-compute brightness → biggest perf win

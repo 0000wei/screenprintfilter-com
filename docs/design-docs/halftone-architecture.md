@@ -46,6 +46,7 @@ User Image → Canvas (loaded) → Grayscale conversion → Halftone grid genera
 | Decision | Rationale |
 |----------|-----------|
 | Canvas 2D API (not WebGL) | Simpler, sufficient for 2D dot patterns; no shader complexity |
-| Single-file SPA | Zero build step, easy deployment, fast iteration |
+| Modular ES modules | Separated concerns, maintainable architecture, zero build step |
 | Client-side only | No upload latency, privacy-friendly, works offline after first load |
-| Chunked rendering | Prevents UI freeze on large images; slider feels responsive |
+| Web Worker processing | Prevents UI freeze on large images; slider stays responsive |
+| Chunked rendering | Additional progressive rendering for responsive feedback |

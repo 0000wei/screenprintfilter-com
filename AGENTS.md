@@ -21,7 +21,17 @@ This file is the entry point for AI agents working with this repository.
 screenprintfilter/
 ├── AGENTS.md             ← You are here (entry point)
 ├── CLAUDE.md             ← Project overview + commands
-├── index.html            ← Main single-page application
+├── index.html            ← Main HTML page (loads modular JS/CSS)
+├── css/                  ← Stylesheets
+│   └── main.css         ← Main stylesheet
+├── js/                   ← Modular JavaScript application
+│   ├── app.js           ← Main application entry point
+│   ├── components/      ← UI components
+│   ├── core/            ← Core modules (config, state, halftoneProcessor, eventBus)
+│   ├── i18n/            ← Internationalization
+│   ├── services/        ← Worker, memory, and rendering services
+│   ├── utils/           ← Utilities (debounce, validator, errorHandler)
+│   └── workers/         ← Web workers for background processing
 ├── server.js             ← Dev HTTP server
 ├── scripts/              ← Test + benchmark scripts
 | `docs/`                 | ← All documentation (specs, plans, designs, archive)
