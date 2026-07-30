@@ -943,9 +943,9 @@ function loadImage(file) {
 
                             // Get original color if using original colors mode
                             if (useOriginalColors) {
-                                const colorSampleX = (rotatedX / outputWidth) * originalCanvasCopy.width;
-                                const colorSampleY = (rotatedY / outputHeight) * originalCanvasCopy.height;
-                                const originalColor = getPixelColor(originalCtxCopy, colorSampleX, colorSampleY);
+                                const colorSampleX = (rotatedX / outputWidth) * originalCanvas.width;
+                                const colorSampleY = (rotatedY / outputHeight) * originalCanvas.height;
+                                const originalColor = getPixelColor(originalCtx, colorSampleX, colorSampleY);
 
                                 // Sample alpha for transparency
                                 if (hasTransparency) {
@@ -1250,6 +1250,7 @@ function loadImage(file) {
                     const imageData = tempCtx2.getImageData(0, 0, tempCanvas2.width, tempCanvas2.height);
                     const data = imageData.data;
 
+                    let hasTransparency = false;
                     for (let i = 0; i < data.length; i += 4) {
                         const alpha = data[i + 3];
                         if (alpha < 255) hasTransparency = true;
